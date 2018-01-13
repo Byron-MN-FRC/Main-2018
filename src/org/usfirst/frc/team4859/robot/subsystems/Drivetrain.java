@@ -27,7 +27,7 @@ public class Drivetrain extends Subsystem {
 	
 	
 
-	public static DifferentialDrive drivetrain = new DifferentialDrive(null, null);
+	public static DifferentialDrive drivetrain = new DifferentialDrive(drivetrainLeft, drivetrainRight);
 	
 	public static DigitalOutput lightStrip = new DigitalOutput(0);
 	public static AnalogInput gearSensor = new AnalogInput(0);
@@ -35,8 +35,7 @@ public class Drivetrain extends Subsystem {
 	
 	public Drivetrain() {
 		
-		drivetrain.setSafetyEnabled(true);
-		drivetrain.setExpiration(3);
+		drivetrain.setSafetyEnabled(false);
 	}
 	
 	public void initDefaultCommand () {
@@ -61,7 +60,7 @@ public class Drivetrain extends Subsystem {
 		
 		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
 		
-		drivetrain.arcadeDrive(x, twist);
+		drivetrain.arcadeDrive(y, twist);
 	}
 	
 	public void driveStraight(double inputSpeed) {
