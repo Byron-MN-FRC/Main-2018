@@ -60,6 +60,11 @@ public class Drivetrain extends Subsystem {
 		
 		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
 		
+		SmartDashboard.putNumber("Left 1", motorFrontLeft.getOutputCurrent());
+		SmartDashboard.putNumber("Left 2", motorBackLeft.getOutputCurrent());
+		SmartDashboard.putNumber("Right 1", motorFrontRight.getOutputCurrent());
+		SmartDashboard.putNumber("Right 2", motorBackRight.getOutputCurrent());
+		
 		drivetrain.arcadeDrive(y, twist);
 	}
 	
