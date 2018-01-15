@@ -7,18 +7,18 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class PneumaticShiftUp extends Command {
+public class PneumaticShiftDown extends Command {
 
 	private double time;
 	
-    public PneumaticShiftUp(double d) {
+    public PneumaticShiftDown(double d) {
     	requires(Robot.pneumatics);
     	time = d;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.pneumatics.pneumaticShiftUp();
+    	Robot.pneumatics.pneumaticShiftDown();
     	setTimeout(time);
     }
 
