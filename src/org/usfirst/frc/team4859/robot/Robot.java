@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team4859.robot.subsystems.Shifters;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,6 +26,7 @@ import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
 public class Robot extends TimedRobot {
 	public static final Drivetrain kDrivetrain = new Drivetrain();
 	public static OI m_oi;
+	public static Shifters pneumatics = new Shifters();
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
