@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
+import org.usfirst.frc.team4859.robot.autonomous.AutoStraight;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4859.robot.subsystems.Shifters;
 
@@ -27,7 +28,7 @@ public class Robot extends TimedRobot {
 	public static final Drivetrain kDrivetrain = new Drivetrain();
 	public static OI m_oi;
 	public static Shifters pneumatics = new Shifters();
-
+  
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -39,7 +40,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		m_oi = new OI();
 		m_chooser.addDefault("Default Auto", new AutoNothing());
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		m_chooser.addObject("Drive Straight", new AutoStraight());
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
 
