@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Pneumatics extends Subsystem {
+public class Shifters extends Subsystem {
 	DoubleSolenoid shifterLeft = new DoubleSolenoid(0, 1);
 	DoubleSolenoid shifterRight = new DoubleSolenoid(2, 3);
 
