@@ -40,9 +40,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		m_chooser.addDefault("Default Auto", new AutoNothing());
-		m_chooser.addObject("Drive Straight", new AutoStraight());
-		SmartDashboard.putData("Auto mode", m_chooser);
+		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "XXX");
+		SmartDashboard.putNumber("Auton Delay", 0.0);
+		SmartDashboard.putString("Target", "Switch");
 	}
 
 	/**
