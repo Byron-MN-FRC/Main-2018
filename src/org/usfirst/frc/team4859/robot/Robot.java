@@ -40,9 +40,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "XXX");
+		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "C");
+		SmartDashboard.putNumber("Target", 0);
 		SmartDashboard.putNumber("Auton Delay", 0.0);
-		SmartDashboard.putString("Target", "Switch");
+
 	}
 
 	/**
@@ -91,13 +92,15 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.start();
 		}
 		*/
+		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
+		char location = robotPos.charAt(0);
+		double autonDelaySeconds = SmartDashboard.getNumber("Auton Delay", 0);
+		int target = (int) SmartDashboard.getNumber("Target", 0);
 		
 		String gameData;
 		String selection = "No Selection";
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
-		int target = 0;
-		char location = 'C';
+		// (autonDelaySeconds);
 		switch (target){
 		case 0: // Switch
 			if(gameData.charAt(0) == 'L') {
