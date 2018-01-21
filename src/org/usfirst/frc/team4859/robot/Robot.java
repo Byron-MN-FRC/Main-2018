@@ -93,10 +93,9 @@ public class Robot extends TimedRobot {
 		}
 		*/
 		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
-		char location = robotPos.charAt(0);
+		char location = Character.toUpperCase(robotPos.charAt(0));
 		long autonDelaySeconds = (long) SmartDashboard.getNumber("Auton Delay", 0);
 		int target = (int) SmartDashboard.getNumber("Target", 0);
-		
 		String gameData;
 		String selection = "No Selection";
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
