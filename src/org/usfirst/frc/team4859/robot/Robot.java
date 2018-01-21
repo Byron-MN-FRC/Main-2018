@@ -94,13 +94,13 @@ public class Robot extends TimedRobot {
 		*/
 		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
 		char location = robotPos.charAt(0);
-		double autonDelaySeconds = SmartDashboard.getNumber("Auton Delay", 0);
+		long autonDelaySeconds = (long) SmartDashboard.getNumber("Auton Delay", 0);
 		int target = (int) SmartDashboard.getNumber("Target", 0);
 		
 		String gameData;
 		String selection = "No Selection";
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		// (autonDelaySeconds);
+	//	Thread.sleep(autonDelaySeconds*1000);
 		switch (target){
 		case 0: // Switch
 			if(gameData.charAt(0) == 'L') {
@@ -115,6 +115,8 @@ public class Robot extends TimedRobot {
 				case 'R':
 					selection = "Turn right, drive forward, turn left to go around switch, deliver cube to left side switch";
 					break;
+				default: 
+					break;
 				} 
 			} else {
 				selection = "Place Cube on right switch";
@@ -127,6 +129,8 @@ public class Robot extends TimedRobot {
 					break;
 				case 'R':
 					selection = "Drive forward, place cube on switch";
+					break;
+				default:
 					break;
 					
 				}
@@ -145,6 +149,8 @@ public class Robot extends TimedRobot {
 				case 'R':
 					selection = "Drive forward, turn left after passing switch, go forward, place cube on scale";
 					break;
+				default:
+					break;
 				}
 			} else {
 				selection = "Place Cube on right scale";
@@ -157,6 +163,8 @@ public class Robot extends TimedRobot {
 					break;
 				case 'R':
 					selection = "Go forward, deliver cube to scale";
+					break;
+				default:
 					break;
 				}
 			}
