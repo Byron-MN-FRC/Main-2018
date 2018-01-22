@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team4859.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -39,9 +40,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		m_chooser.addDefault("Default Auto", new AutoNothing());
-		m_chooser.addObject("Drive Straight", new AutoStraight());
-		SmartDashboard.putData("Auto mode", m_chooser);
+		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "C");
+		SmartDashboard.putNumber("Target", 0);
+		SmartDashboard.putNumber("Auton Delay", 0.0);
+
 	}
 
 	/**
@@ -72,25 +74,110 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
-
+		/* Disable as will get input from drive team on target
+		   in combination with FMS data to determine which 
+		   command to call
+		   
+		   m_autonomousCommand = m_chooser.getSelected();
+      */
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
+		 
 
 		// schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
-	}
+		*/
+		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
+		char location = Character.toUpperCase(robotPos.charAt(0));
+		long autonDelaySeconds = (long) SmartDashboard.getNumber("Auton Delay", 0);
+		int target = (int) SmartDashboard.getNumber("Target", 0);
+		String gameData;
+		String selection = "No Selection";
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+	//	Thread.sleep(autonDelaySeconds*1000);
+		switch (target){
+		case 0: // Switch
+			if(gameData.charAt(0) == 'L') {
+				selection = "Place Cube on left switch";
+				switch(location) {
+				case 'C':
+					selection = "Turn left, Drive forward, Turn right, Place cube on switch";
+					break;
+				case 'L':
+					selection = "Drive forward, place cube on switch";
+					break;
+				case 'R':
+					selection = "Turn right, drive forward, turn left to go around switch, deliver cube to left side switch";
+					break;
+				default: 
+					break;
+				} 
+			} else {
+				selection = "Place Cube on right switch";
+				switch(location){
+				case 'C':
+					selection = "Turn right, Drive forward, Place cube on switch";
+					break;
+				case 'L':
+					selection = "Go left, Drive forward, turn right to go around switch, deliver cube to switch";
+					break;
+				case 'R':
+					selection = "Drive forward, place cube on switch";
+					break;
+				default:
+					break;
+					
+				}
+			}
+			break;
+		case 1: // Scale
+			if(gameData.charAt(1) == 'L'){
+				selection = "Place Cube on left scale";
+				switch(location) {
+				case 'C':
+					selection = "Go left, Drive forward, Place cube on scale";
+					break;
+				case 'L':
+					selection = "Drive forward to scale, place cube";
+					break;
+				case 'R':
+					selection = "Drive forward, turn left after passing switch, go forward, place cube on scale";
+					break;
+				default:
+					break;
+				}
+			} else {
+				selection = "Place Cube on right scale";
+				switch(location) {
+				case 'C':
+					selection = "Go forward to get past other bots, go right, go forward, deliver cube to scale";
+					break;
+				case 'L':
+					selection = "Go forward past switch, turn right, go forward, deliver cube to scale";
+					break;
+				case 'R':
+					selection = "Go forward, deliver cube to scale";
+					break;
+				default:
+					break;
+				}
+			}
+			break;
+		default:
+			selection = "Drive forwards";
+			break;
+			
+			
+		}
+		
+		SmartDashboard.putString("Value from FMS", selection);
 
-	/**
-	 * This function is called periodically during autonomous.
-	 */
-	@Override
+	}
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
