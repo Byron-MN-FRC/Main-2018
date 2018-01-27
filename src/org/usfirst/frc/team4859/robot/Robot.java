@@ -203,6 +203,11 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 	}
 
+	public static double encoderUnitConversion(double inches) {
+		double encoderUnits = inches * RobotMap.encoderUnitsPerInch;
+		return encoderUnits;
+	}
+	
 	/**
 	 * This function is called periodically during test mode.
 	 */

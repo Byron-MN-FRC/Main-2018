@@ -1,6 +1,8 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
+import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -15,6 +17,8 @@ public class ShiftDown extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.shifters.pneumaticShiftDown();
+		Drivetrain.motorLeftMaster.configMotionAcceleration(2720, 10);
+		Drivetrain.motorRightMaster.configMotionCruiseVelocity(2720, 10);
     }
 
     // Called repeatedly when this Command is scheduled to run
