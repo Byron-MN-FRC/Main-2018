@@ -15,10 +15,12 @@ public class Drivetrain extends Subsystem {
 	
 	
 	public static WPI_TalonSRX motorLeftMaster = new WPI_TalonSRX(RobotMap.talonIDLeftMaster);
-	public static WPI_TalonSRX motorLeftFollower = new WPI_TalonSRX(RobotMap.talonIDLeftFollower);
+	public static WPI_TalonSRX motorLeftFollower1 = new WPI_TalonSRX(RobotMap.talonIDLeftFollower1);
+	public static WPI_TalonSRX motorLeftFollower2 = new WPI_TalonSRX(RobotMap.talonIDLeftFollower2);
 	
 	public static WPI_TalonSRX motorRightMaster = new WPI_TalonSRX(RobotMap.talonIDRightMaster);
-	public static WPI_TalonSRX motorRightFollower = new WPI_TalonSRX(RobotMap.talonIDRightFollower);
+	public static WPI_TalonSRX motorRightFollower1 = new WPI_TalonSRX(RobotMap.talonIDRightFollower1);
+	public static WPI_TalonSRX motorRightFollower2 = new WPI_TalonSRX(RobotMap.talonIDRightFollower2);
 	
 	public static SpeedControllerGroup drivetrainLeft = new SpeedControllerGroup(motorLeftMaster);
 	public static SpeedControllerGroup drivetrainRight = new SpeedControllerGroup(motorRightMaster);
@@ -26,8 +28,8 @@ public class Drivetrain extends Subsystem {
 	public static DifferentialDrive drivetrain = new DifferentialDrive(drivetrainLeft, drivetrainRight);
 	
 	public Drivetrain() {
-		motorLeftFollower.set(ControlMode.Follower, RobotMap.talonIDLeftMaster);
-		motorLeftFollower.set(ControlMode.Follower, RobotMap.talonIDRightMaster);
+		motorLeftFollower2.set(ControlMode.Follower, RobotMap.talonIDLeftMaster);
+		motorLeftFollower2.set(ControlMode.Follower, RobotMap.talonIDRightMaster);
 		drivetrain.setSafetyEnabled(false);
 	}
 	
@@ -60,8 +62,8 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void driveStraightDistance(double inputDistance) {
-		motorLeftMaster.set(ControlMode.Position, inputDistance);
-		motorRightMaster.set(ControlMode.Position, inputDistance);
+		motorLeftMaster.set(ControlMode.MotionMagic, inputDistance);
+		motorRightMaster.set(ControlMode.MotionMagic, inputDistance);
 	}
 	
 	public void driveBackwards(double inputSpeed) {
