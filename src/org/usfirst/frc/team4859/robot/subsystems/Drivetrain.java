@@ -59,6 +59,10 @@ public class Drivetrain extends Subsystem {
 		drivetrain.arcadeDrive(inputSpeed, 0);
 	}
 	
+	public void driveTurn(double inputSpeed) {
+		drivetrain.arcadeDrive(0, inputSpeed);
+	}
+	
 	public void driveBackwards(double inputSpeed) {
 		drivetrain.arcadeDrive(-inputSpeed, 0);
 	}
