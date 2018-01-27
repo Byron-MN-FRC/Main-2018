@@ -16,19 +16,13 @@ public class Shifters extends Subsystem {
 
     public void initDefaultCommand() {}
     
-    public void pneumaticShiftUp(){
-    	
+    public void pneumaticShiftUp() {
     	shifterLeft.set(Value.kForward);
     	shifterRight.set(Value.kForward);
-    	
     }
     
-    public void pneumaticShiftDown(){
-    	
+    public void pneumaticShiftDown() {	
     	shifterLeft.set(Value.kReverse);
-    	shifterRight.set(Value.kReverse);
-    	
-    }
-    
+    	shifterRight.set(Value.kReverse);	
+    }  
 }
-
