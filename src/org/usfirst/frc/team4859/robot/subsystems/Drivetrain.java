@@ -59,6 +59,11 @@ public class Drivetrain extends Subsystem {
 		drivetrain.arcadeDrive(inputSpeed, 0);
 	}
 	
+	public void driveStraightDistance(double inputDistance) {
+		motorLeftMaster.set(ControlMode.Position, inputDistance);
+		motorRightMaster.set(ControlMode.Position, inputDistance);
+	}
+	
 	public void driveBackwards(double inputSpeed) {
 		drivetrain.arcadeDrive(-inputSpeed, 0);
 	}
