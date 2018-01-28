@@ -27,13 +27,13 @@ public class AutoSelector extends CommandGroup {
 
 	public void driveToTarget() {
 		addSequential(new DriveStop(RobotMap.delayInSeconds));
+		
 		// Determine path to target based on starting position of robot
 		switch(location) {
 		case 'C':
 			addSequential(new DriveStraight(.2,2));
 			if (targetSide == 'L') {
 				addSequential(new DriveTurn(-.2,2));
-				addSequential(new DriveTurn(.2,2));
 				
 				if(RobotMap.targetScale) addSequential(new DriveStraight(.2,8));
 				else addSequential(new DriveStraight(0.2, 3));
@@ -41,7 +41,6 @@ public class AutoSelector extends CommandGroup {
 				addSequential(new DriveTurn(.2,5));
 			} else {
 				addSequential(new DriveTurn(.2,2));
-				addSequential(new DriveTurn(-.2,2));
 				
 				if(RobotMap.targetScale) addSequential(new DriveStraight(0.2,8));
 				else addSequential(new DriveStraight(0.2, 5));
@@ -52,12 +51,10 @@ public class AutoSelector extends CommandGroup {
 			break;
 		case 'L':
 			addSequential(new DriveTurn(-.2,5));
-			addSequential(new DriveTurn(.2,5));
+			
 			if (targetSide == 'L') {
-				
 				if(RobotMap.targetScale) addSequential(new DriveStraight(.2,8));
 				else addSequential(new DriveStraight(0.2, 5));
-				
 			} else {
 				addSequential(new DriveStop(0));
 				//driveAroundSwitch('R');
@@ -71,7 +68,6 @@ public class AutoSelector extends CommandGroup {
 			}
 		case 'R':
 			addSequential(new DriveTurn(.2,5));
-			addSequential(new DriveTurn(-.2,5));
 			if (targetSide == 'R') {
 				
 				if(RobotMap.targetScale) addSequential(new DriveStraight(.2,8));
@@ -93,7 +89,4 @@ public class AutoSelector extends CommandGroup {
 			break;
 		} 		
 	}
-
-
-	
 }

@@ -84,17 +84,24 @@ public class Robot extends TimedRobot {
 		
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
 		
-		String gameData;
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		
 	//MAKE SURE GAME DATA IS GOOD
-		char targetSide = gameData.charAt(0); // default to switch side
-		// String targetScale = SmartDashboard.getString("Target", "Non Received");  // ?? is there a boolean
-		if (targetScale.equalsIgnoreCase("Y")) { 
-			RobotMap.targetScale = true; 
-			targetSide = gameData.charAt(1);
+		// Please don't hurt me for this
+		if (!gameData.equalsIgnoreCase("RRR") || !gameData.equalsIgnoreCase("LLL") || !gameData.equalsIgnoreCase("RLR") || !gameData.equalsIgnoreCase("LRL") || !robotPos.equalsIgnoreCase("L") || !robotPos.equalsIgnoreCase("C") || !robotPos.equalsIgnoreCase("R") || (RobotMap.delayInSeconds >= 0 && RobotMap.delayInSeconds <= 15)) {
+			m_autonomousCommand = new AutoStraight();
+			m_autonomousCommand.start();
 		}
-		AutoSelector Selection = new AutoSelector(location,targetSide);
-		Selection.driveToTarget();
+		else {
+			char targetSide = gameData.charAt(0); // default to switch side
+			// String targetScale = SmartDashboard.getString("Target", "Non Received");  // ?? is there a boolean
+			if (targetScale.equalsIgnoreCase("Y")) { 
+				RobotMap.targetScale = true; 
+				targetSide = gameData.charAt(1);
+			}
+			AutoSelector Selection = new AutoSelector(location,targetSide);
+			Selection.driveToTarget();
+		}
 
 	}
 	public void autonomousPeriodic() {
