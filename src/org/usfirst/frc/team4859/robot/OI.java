@@ -13,6 +13,9 @@ public class OI {
 	
 	Button acquireIntake = new JoystickButton(joystick, 1);
 	Button acquireOuttake = new JoystickButton(joystick, 2);
+	
+	Button tunnelUp = new JoystickButton(joystick, 2);
+	Button tunnelDown = new JoystickButton(joystick, 2);
  
 	public OI() {
 
@@ -21,6 +24,9 @@ public class OI {
 		
 		acquireIntake.whileHeld(new AcquirerIntake());
 		acquireOuttake.whileHeld(new AcquirerOuttake());
+		
+		tunnelUp.whileHeld(new TunnelUp());
+		tunnelDown.whileHeld(new TunnelDown());
 	}
 	
 	public Joystick getJoystick() {
