@@ -16,6 +16,11 @@ public class OI {
 	
 	Button tunnelUp = new JoystickButton(joystick, 2);
 	Button tunnelDown = new JoystickButton(joystick, 2);
+
+	Button liftDown = new JoystickButton(joystick, 12);
+	Button liftSwitch = new JoystickButton(joystick, 11);
+	Button liftScale = new JoystickButton(joystick, 9);
+	Button liftClimb = new JoystickButton(joystick, 7);
  
 	public OI() {
 
@@ -27,6 +32,11 @@ public class OI {
 		
 		tunnelUp.whileHeld(new TunnelUp());
 		tunnelDown.whileHeld(new TunnelDown());
+
+		liftDown.whenPressed(new LiftDown());
+		liftSwitch.whenPressed(new LiftSwitch());
+		liftScale.whenPressed(new LiftScale());
+		liftClimb.whenPressed(new LiftClimb());
 	}
 	
 	public Joystick getJoystick() {
