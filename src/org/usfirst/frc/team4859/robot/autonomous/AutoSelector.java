@@ -26,7 +26,7 @@ public class AutoSelector extends CommandGroup {
 */
 
 	public void driveToTarget() {
-		
+		addSequential(new DriveStop(RobotMap.delayInSeconds));
 		// Determine path to target based on starting position of robot
 		switch(location) {
 		case 'C':
