@@ -13,12 +13,15 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraight;
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
+import org.usfirst.frc.team4859.robot.subsystems.Acquirer;
+import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team4859.robot.subsystems.Lifter;
 import org.usfirst.frc.team4859.robot.subsystems.Shifters;
+import org.usfirst.frc.team4859.robot.subsystems.Tunnel;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,10 +32,14 @@ import org.usfirst.frc.team4859.robot.subsystems.Shifters;
  */
 public class Robot extends TimedRobot {
 	public static final Drivetrain kDrivetrain = new Drivetrain();
+	public static Shifters shifters = new Shifters();
+	public static Acquirer acquirer = new Acquirer();
+	public static Climber climber = new Climber();
+	public static Tunnel tunnel = new Tunnel();
+	public static Lifter lifter = new Lifter();
 	public static OI m_oi;
-	public static Shifters pneumatics = new Shifters();
   
-	Command m_autonomousCommand;
+		Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
@@ -127,6 +134,11 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 	}
 
+	public static double encoderUnitConversion(double inches) {
+		double encoderUnits = inches * RobotMap.encoderUnitsPerInch;
+		return encoderUnits;
+	}
+	
 	/**
 	 * This function is called periodically during test mode.
 	 */
