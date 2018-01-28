@@ -63,6 +63,10 @@ public class Drivetrain extends Subsystem {
 		drivetrain.arcadeDrive(0, inputSpeed);
 	}
 	
+	public void driveToWall(double inputSpeed) {
+		drivetrain.arcadeDrive(0, inputSpeed);
+	}
+	
 	public void driveBackwards(double inputSpeed) {
 		drivetrain.arcadeDrive(-inputSpeed, 0);
 	}
@@ -70,4 +74,5 @@ public class Drivetrain extends Subsystem {
 	public void driveStop() {
 		drivetrain.arcadeDrive(0, 0);
 	}
+	
 }

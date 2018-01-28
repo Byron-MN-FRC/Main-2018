@@ -17,74 +17,79 @@ public class AutoSelector extends CommandGroup {
 		if (targetSide == 'L') { oppositeTargetSide = 'R'; }
 	}
 	
-	private void deliverCube() {
+/*	private void deliverCube() {
 		if (RobotMap.targetScale) {
 			System.out.println("Lift mechanism command");
 		} 
 		System.out.println("Deliver cube command");		
 	}
-	
-	private void driveForward() {
-		System.out.println("Drive to switch");	
-		if (RobotMap.targetScale) {
-			System.out.println("Driver further to scale");
-		} 
-	}
-
-	private void turn(char direction) {
-		System.out.println("Turn to " + direction);	
-	}
-
-	private void driveToWall() {
-		System.out.println("Drive toward wall");	
-		if (location == 'C') {
-			System.out.println("Drive further (started at center)");
-		}
-	}
-	
-	private void driveAroundSwitch(char direction) {
-		System.out.println("Drive Around Switch to " + direction);
-		if (RobotMap.targetScale) {
-			System.out.println("Driver further to scale");
-		} 
-	}
+*/
 
 	public void driveToTarget() {
 		
 		// Determine path to target based on starting position of robot
 		switch(location) {
 		case 'C':
-			turn(targetSide);
-			driveToWall();
-			turn(oppositeTargetSide);
-			driveForward();
-			deliverCube();
+			addSequential(new DriveStraight(.2,2));
+			if (targetSide == 'L') {
+				addSequential(new DriveTurn(-.2,2));
+				addSequential(new DriveTurn(.2,2));
+				
+				if(RobotMap.targetScale) addSequential(new DriveStraight(.2,8));
+				else addSequential(new DriveStraight(0.2, 3));
+				
+				addSequential(new DriveTurn(.2,5));
+			} else {
+				addSequential(new DriveTurn(.2,2));
+				addSequential(new DriveTurn(-.2,2));
+				
+				if(RobotMap.targetScale) addSequential(new DriveStraight(0.2,8));
+				else addSequential(new DriveStraight(0.2, 5));
+
+				addSequential(new DriveTurn(-.2,5));
+			}
+			//deliverCube();
 			break;
 		case 'L':
-			turn('L');
-			driveToWall();
-			turn('R');
+			addSequential(new DriveTurn(-.2,5));
+			addSequential(new DriveTurn(.2,5));
 			if (targetSide == 'L') {
-				driveForward();
+				
+				if(RobotMap.targetScale) addSequential(new DriveStraight(.2,8));
+				else addSequential(new DriveStraight(0.2, 5));
+				
 			} else {
-				driveAroundSwitch('R');
+				addSequential(new DriveStop(0));
+				//driveAroundSwitch('R');
+			/*OPPOSITE SIDE SCALE
+				if(RobotMap.targetScale) addSequential(new DriveStraight(.3,8));
+				else addSequential(new DriveStraight(0.3, 5));
 			}
-			deliverCube();
+			*/
+			//deliverCube();
 			break;
-		case 'R':
-			turn('R');
-			driveToWall();
-			turn('L');
-			if (targetSide == 'R') {
-				driveForward();
-			} else {
-				driveAroundSwitch('L');
 			}
-			deliverCube();
+		case 'R':
+			addSequential(new DriveTurn(.2,5));
+			addSequential(new DriveTurn(-.2,5));
+			if (targetSide == 'R') {
+				
+				if(RobotMap.targetScale) addSequential(new DriveStraight(.2,8));
+				else addSequential(new DriveStraight(0.2, 5));
+				
+			} else {
+				addSequential(new DriveStop(0));
+		/*OPPOSITE SIDE SCALE
+				//driveAroundSwitch('L');
+				addSequential(new DriveStraight(.3,5));
+				addSequential(new DriveTurn(.3,5));
+				*/
+			}
+			//deliverCube();
 			break;
 		default:
-			System.out.println("Do Nothing");
-	    	addSequential(new DriveStop(0));
+			System.out.println("Drive Forward");
+	    	addSequential(new DriveStraight(.3,5));
 			break;
 		} 		
 	}

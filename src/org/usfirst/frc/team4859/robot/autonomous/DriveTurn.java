@@ -9,8 +9,8 @@ public class DriveTurn extends Command {
 	private double speed;
 	
     public DriveTurn(double inputSpeed, double inputTime) {
+    	//turn right is positive, left is negative
         requires(Robot.kDrivetrain);
-        
         speed = inputSpeed;
         time = inputTime;
     }
