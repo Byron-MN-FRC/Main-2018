@@ -17,6 +17,7 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraight;
 import org.usfirst.frc.team4859.robot.subsystems.Acquirer;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team4859.robot.subsystems.Lifter;
 import org.usfirst.frc.team4859.robot.subsystems.Shifters;
 
 /**
@@ -30,6 +31,7 @@ public class Robot extends TimedRobot {
 	public static final Drivetrain kDrivetrain = new Drivetrain();
 	public static Shifters shifters = new Shifters();
 	public static Acquirer acquirer = new Acquirer();
+	public static Lifter lifter = new Lifter();
 	public static OI m_oi;
 	
 	Command m_autonomousCommand;

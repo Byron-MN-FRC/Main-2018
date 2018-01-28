@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Acquirer extends Subsystem {
+public class Lifter extends Subsystem {
 	// Create motors here
 
     // Put methods for controlling this subsystem
@@ -13,12 +13,18 @@ public class Acquirer extends Subsystem {
 
     public void initDefaultCommand() {}
     
-    public void acquireIntake() {
+    public void liftStop() {
     }
     
-    public void acquireOuttake() {
+    public void liftDown() {
     }
     
-    public void acquireStop() {
+    public void liftSwitch() {
+    }
+    
+    public void liftScale() {
+    }
+    
+    public void liftClimb() {
     }
 }
