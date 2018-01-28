@@ -14,6 +14,9 @@ public class OI {
 	Button acquireIntake = new JoystickButton(joystick, 1);
 	Button acquireOuttake = new JoystickButton(joystick, 2);
 	
+	Button tunnelUp = new JoystickButton(joystick, 2);
+	Button tunnelDown = new JoystickButton(joystick, 2);
+
 	Button liftDown = new JoystickButton(joystick, 12);
 	Button liftSwitch = new JoystickButton(joystick, 11);
 	Button liftScale = new JoystickButton(joystick, 9);
@@ -27,6 +30,9 @@ public class OI {
 		acquireIntake.whileHeld(new AcquirerIntake());
 		acquireOuttake.whileHeld(new AcquirerOuttake());
 		
+		tunnelUp.whileHeld(new TunnelUp());
+		tunnelDown.whileHeld(new TunnelDown());
+
 		liftDown.whenPressed(new LiftDown());
 		liftSwitch.whenPressed(new LiftSwitch());
 		liftScale.whenPressed(new LiftScale());

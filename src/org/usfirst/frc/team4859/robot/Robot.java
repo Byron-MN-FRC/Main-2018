@@ -19,6 +19,7 @@ import org.usfirst.frc.team4859.robot.subsystems.Acquirer;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4859.robot.subsystems.Lifter;
 import org.usfirst.frc.team4859.robot.subsystems.Shifters;
+import org.usfirst.frc.team4859.robot.subsystems.Tunnel;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,10 +32,11 @@ public class Robot extends TimedRobot {
 	public static final Drivetrain kDrivetrain = new Drivetrain();
 	public static Shifters shifters = new Shifters();
 	public static Acquirer acquirer = new Acquirer();
+	public static Tunnel tunnel = new Tunnel();
 	public static Lifter lifter = new Lifter();
 	public static OI m_oi;
-	
-	Command m_autonomousCommand;
+  
+		Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
