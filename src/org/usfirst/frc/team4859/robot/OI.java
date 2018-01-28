@@ -13,6 +13,9 @@ public class OI {
 	
 	Button acquireIntake = new JoystickButton(joystick, 1);
 	Button acquireOuttake = new JoystickButton(joystick, 2);
+	
+	Button climbStart = new JoystickButton(joystick, 12);
+	Button climbStop = new JoystickButton(joystick, 13);
  
 	public OI() {
 
