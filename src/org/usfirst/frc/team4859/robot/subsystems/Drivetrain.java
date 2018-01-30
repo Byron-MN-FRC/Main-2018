@@ -28,8 +28,12 @@ public class Drivetrain extends Subsystem {
 	public static DifferentialDrive drivetrain = new DifferentialDrive(drivetrainLeft, drivetrainRight);
 	
 	public Drivetrain() {
+		motorLeftFollower1.set(ControlMode.Follower, RobotMap.talonIDLeftMaster);
 		motorLeftFollower2.set(ControlMode.Follower, RobotMap.talonIDLeftMaster);
-		motorLeftFollower2.set(ControlMode.Follower, RobotMap.talonIDRightMaster);
+		
+		motorRightFollower1.set(ControlMode.Follower, RobotMap.talonIDRightMaster);
+		motorRightFollower2.set(ControlMode.Follower, RobotMap.talonIDRightMaster);
+		
 		drivetrain.setSafetyEnabled(false);
 	}
 	
