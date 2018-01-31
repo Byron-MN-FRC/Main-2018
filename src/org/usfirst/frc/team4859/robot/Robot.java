@@ -109,7 +109,6 @@ public class Robot extends TimedRobot {
 				targetSide = gameData.charAt(1);
 			RobotMap.location = location;
 			RobotMap.targetSide = targetSide;
-			
 			SmartDashboard.putString("location", String.valueOf(location));
 			SmartDashboard.putString("TargetSide", String.valueOf(targetSide));
 			m_autonomousCommand = new AutoSelector();

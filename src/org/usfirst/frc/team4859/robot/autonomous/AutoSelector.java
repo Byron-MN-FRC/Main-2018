@@ -21,7 +21,7 @@ public class AutoSelector extends CommandGroup {
 		if (RobotMap.targetScale) {
 			System.out.println("Lift mechanism command");
 		} 
-		System.out.println("Deliver cube command");		
+		System.out.println("Deliver cube command");	jfj	
 	}
 */
 	public void driveToTarget() {
