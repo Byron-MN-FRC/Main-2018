@@ -1,35 +1,46 @@
-*.class
+# WPILib
+bin/
+build/
+dist/
+sysProps.xml
+workbench.xmi
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# IDE
+*.ipr
+*.iml
+*.iws
+out/
+tmp/
+.settings/
+.loadpath
+/.idea
+*.class
+.classpath
 
 # Package Files #
 *.jar
 *.war
 *.ear
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# Toast/GradleRIO
+run/
+.gradle/
+gradle/.launch/
 
-# =========================
-# Operating System Files
-# =========================
+# Extra
+hs_err_pid*
+junit/
+.mtj.tmp/
+*~
 
 # OSX
-# =========================
-
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
 .AppleDouble
 .LSOverride
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
 .Trashes
-
-# Directories potentially created on remote AFP share
 .AppleDB
 .AppleDesktop
 Network Trash Folder
@@ -37,24 +48,13 @@ Temporary Items
 .apdisk
 
 # Windows
-# =========================
-
-# Windows image file caches
-Thumbs.db
 ehthumbs.db
-
-# Folder config file
+Thumbs.db
 Desktop.ini
-
-# Recycle Bin used on file shares
 $RECYCLE.BIN/
-
-# Windows Installer files
+*.lnk
+/bin/
 *.cab
 *.msi
 *.msm
 *.msp
-
-# Windows shortcuts
-*.lnk
-/bin/
