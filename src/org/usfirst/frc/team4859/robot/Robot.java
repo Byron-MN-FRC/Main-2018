@@ -97,20 +97,25 @@ public class Robot extends TimedRobot {
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 			boolean valid = Pattern.matches("[LR]{3}", gameData.toUpperCase());
-		 		if (!valid) {
-		 			System.out.println("gamedata is invalid");
+		 if (!valid) {
+		 	System.out.println("gamedata is invalid");
 			m_autonomousCommand = new AutoStraight();
 			m_autonomousCommand.start();
 		}
 		else {
 			char targetSide = gameData.charAt(0); // default to switch side
-			// String targetScale = SmartDashboard.getString("Target", "Non Received");  // ?? is there a boolean
 			if (targetScale.equalsIgnoreCase("Y")) { 
 				RobotMap.targetScale = true; 
 				targetSide = gameData.charAt(1);
+			RobotMap.location = location;
+			RobotMap.targetSide = targetSide;
+			
+			SmartDashboard.putString("location", String.valueOf(location));
+			SmartDashboard.putString("TargetSide", String.valueOf(targetSide));
+			m_autonomousCommand = new AutoSelector();
+			m_autonomousCommand.start();
 			}
-			AutoSelector Selection = new AutoSelector(location,targetSide);
-			Selection.driveToTarget();
+
 		}
 
 	}

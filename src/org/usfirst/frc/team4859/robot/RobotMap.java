@@ -14,6 +14,10 @@ public class RobotMap {
 	public static boolean fMode = false;
 	
 	public static boolean targetScale = false;
+	
+	public static char location = ' ';
+	public static char targetSide = ' ';
+	public static char oppositeTargetSide = ' ';
 	public static double delayInSeconds = 0;
   
 	//									wheel diameter * pi / encoder units per revolution / 2 (sprocket 2:1 reduction)
