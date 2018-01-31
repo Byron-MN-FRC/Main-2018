@@ -13,6 +13,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import java.util.regex.Pattern;
+
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraight;
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
@@ -93,9 +96,9 @@ public class Robot extends TimedRobot {
 		
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
-	//MAKE SURE GAME DATA IS GOOD
-		// Please don't hurt me for this
-		if (!gameData.equalsIgnoreCase("RRR") || !gameData.equalsIgnoreCase("LLL") || !gameData.equalsIgnoreCase("RLR") || !gameData.equalsIgnoreCase("LRL") || !robotPos.equalsIgnoreCase("L") || !robotPos.equalsIgnoreCase("C") || !robotPos.equalsIgnoreCase("R") || (RobotMap.delayInSeconds >= 0 && RobotMap.delayInSeconds <= 15)) {
+			boolean valid = Pattern.matches("[LR]{3}", gameData.toUpperCase());
+		 		if (!valid) {
+		 			System.out.println("gamedata is invalid");
 			m_autonomousCommand = new AutoStraight();
 			m_autonomousCommand.start();
 		}
