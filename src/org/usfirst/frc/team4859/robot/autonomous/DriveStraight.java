@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4859.robot.autonomous;
 
 import org.usfirst.frc.team4859.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveStraight extends Command {
@@ -13,6 +14,8 @@ public class DriveStraight extends Command {
         
         speed = inputSpeed;
         time = inputTime;
+		System.out.printf("DriveStraight called with Speed %f, Time %f%n", 
+			inputSpeed, inputTime);
     }
 
     protected void initialize() {

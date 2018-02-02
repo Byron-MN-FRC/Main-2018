@@ -1,22 +1,15 @@
 package org.usfirst.frc.team4859.robot.autonomous;
-
 import org.usfirst.frc.team4859.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AutoSelector extends CommandGroup {
 
 	private char location = ' ';
 	private char targetSide = ' ';
-	private char oppositeTargetSide = ' ';
 
 	public AutoSelector() { 
-		System.out.println("instance created");
-
 		location = RobotMap.location;
 		targetSide = RobotMap.targetSide;
-		if (targetSide == 'L') { oppositeTargetSide = 'R'; }
 		driveToTarget();
 	}
 	
@@ -24,8 +17,8 @@ public class AutoSelector extends CommandGroup {
 
 	public void driveToTarget() {
 		addSequential(new DriveStop(RobotMap.delayInSeconds));
-		System.out.printf("Autonomous--> [Location %s] [Target %s] [Target side %s]%n", 
-				location, targetSide, RobotMap.targetScale);
+		System.out.printf("Autonomous--> [Location=%c] [Target=%s] [Target Side=%c]%n", 
+				location, RobotMap.targetName);
 		
 		// Determine path to target based on starting position of robot
 		switch(location) {

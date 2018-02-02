@@ -14,6 +14,7 @@ public class RobotMap {
 	public static boolean fMode = false;
 	
 	public static boolean targetScale = false;
+	public static String targetName = "Switch";
 	
 	public static char location = ' ';
 	public static char targetSide = ' ';

@@ -17,8 +17,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.regex.Pattern;
 
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
-import org.usfirst.frc.team4859.robot.autonomous.AutoStraight;
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
+import org.usfirst.frc.team4859.robot.autonomous.DriveStraight;
 import org.usfirst.frc.team4859.robot.subsystems.Acquirer;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
@@ -99,7 +99,7 @@ public class Robot extends TimedRobot {
 			boolean valid = Pattern.matches("[LR]{3}", gameData.toUpperCase());
 		 if (!valid) {
 		 	System.out.println("gamedata is invalid");
-			m_autonomousCommand = new AutoStraight();
+			m_autonomousCommand = new DriveStraight(0.4, 4);
 			m_autonomousCommand.start();
 		}
 		else {
@@ -107,6 +107,7 @@ public class Robot extends TimedRobot {
 			char targetSide = gameData.charAt(0); // default to switch side
 			if (targetScale.equalsIgnoreCase("Y")) { 
 				RobotMap.targetScale = true; 
+				RobotMap.targetName = "Scale";
 				targetSide = gameData.charAt(1);
 				System.out.println("Auton else Here");
 			

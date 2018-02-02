@@ -11,6 +11,8 @@ public class DriveStop extends Command {
         requires(Robot.kDrivetrain);
         
         time = inputTime;
+		System.out.printf("DriveStop called with Time %f%n", inputTime);
+
     }
 
     protected void initialize() {

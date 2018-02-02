@@ -13,6 +13,9 @@ public class DriveStraightDistance extends Command {
         
         distance = Robot.encoderUnitConversion(inputDistance);
         time = inputTime;
+		System.out.printf("DriveStraight called with inputDistance %f, calculated Distancce %f, Time %f%n", 
+				inputDistance, distance, inputTime);
+
     }
 
     protected void initialize() {
