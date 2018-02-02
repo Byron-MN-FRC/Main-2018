@@ -11,7 +11,7 @@ public class AutoSelector extends CommandGroup {
 	private char targetSide = ' ';
 	private char oppositeTargetSide = ' ';
 
-	public AutoSelector() {
+	public AutoSelector() { 
 		System.out.println("instance created");
 
 		location = RobotMap.location;
