@@ -65,6 +65,14 @@ public class Drivetrain extends Subsystem {
 		drivetrain.arcadeDrive(inputSpeed, 0);
 	}
 	
+	public void driveTurn(double inputSpeed) {
+		drivetrain.arcadeDrive(0, inputSpeed);
+	}
+	
+	public void driveToWall(double inputSpeed) {
+		drivetrain.arcadeDrive(0, inputSpeed);
+  }
+  
 	public void driveStraightDistance(double inputDistance) {
 		motorLeftMaster.set(ControlMode.MotionMagic, inputDistance);
 		motorRightMaster.set(ControlMode.MotionMagic, inputDistance);
@@ -77,4 +85,5 @@ public class Drivetrain extends Subsystem {
 	public void driveStop() {
 		drivetrain.arcadeDrive(0, 0);
 	}
+	
 }

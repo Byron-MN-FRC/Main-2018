@@ -13,6 +13,9 @@ public class RobotMap {
 	public static boolean pMode = false;
 	public static boolean fMode = false;
 	
+	public static boolean targetScale = false;
+	public static double delayInSeconds = 0;
+  
 	//									wheel diameter * pi / encoder units per revolution / 2 (sprocket 2:1 reduction)
 	public static double encoderUnitsPerInch = ((6 * 3.141592654) / 4096) / 2;
 }
