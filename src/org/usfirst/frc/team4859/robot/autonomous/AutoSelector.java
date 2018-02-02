@@ -12,24 +12,23 @@ public class AutoSelector extends CommandGroup {
 	private char oppositeTargetSide = ' ';
 
 	public AutoSelector() {
+		System.out.println("instance created");
+
 		location = RobotMap.location;
 		targetSide = RobotMap.targetSide;
 		if (targetSide == 'L') { oppositeTargetSide = 'R'; }
+		driveToTarget();
 	}
 	
 /*	private void deliverCube() {
 		if (RobotMap.targetScale) {
 			System.out.println("Lift mechanism command");
 		} 
-		System.out.println("Deliver cube command");	jfj	
+		System.out.println("Deliver cube command");	
 	}
 */
-	public void driveToTarget() {
-		addSequential(new DriveTurn(.4,4));
-		
-	}
 
-	public void driveToTarget1() {
+	public void driveToTarget() {
 		addSequential(new DriveStop(RobotMap.delayInSeconds));
 		
 		SmartDashboard.putString("Indrivetotargetloc", String.valueOf(location));
@@ -39,6 +38,7 @@ public class AutoSelector extends CommandGroup {
 		// Determine path to target based on starting position of robot
 		switch(location) {
 		case 'C':
+			System.out.println("In case c");
 			addSequential(new DriveStraight(.4,4));
 			if (targetSide == 'L') {
 				addSequential(new DriveTurn(-.4,4));
@@ -58,6 +58,7 @@ public class AutoSelector extends CommandGroup {
 			//deliverCube();
 			break;
 		case 'L':
+			System.out.println("In case l");
 			addSequential(new DriveTurn(-.4,5));
 			
 			if (targetSide == 'L') {
@@ -75,6 +76,8 @@ public class AutoSelector extends CommandGroup {
 			break;
 			}
 		case 'R':
+			System.out.println("In case r");
+
 			addSequential(new DriveTurn(.4,5));
 			if (targetSide == 'R') {
 				
