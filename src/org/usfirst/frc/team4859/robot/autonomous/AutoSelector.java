@@ -59,16 +59,18 @@ public class AutoSelector extends CommandGroup {
 				if(RobotMap.targetScale) addSequential(new DriveStraight(.4,8));
 				else addSequential(new DriveStraight(0.4, 5));
 			} else {
-				addSequential(new DriveStop(0));
-				//driveAroundSwitch('R');
-			/*OPPOSITE SIDE SCALE
-				if(RobotMap.targetScale) addSequential(new DriveStraight(.3,8));
-				else addSequential(new DriveStraight(0.3, 5));
-			}
-			*/
-			//deliverCube();
-			break;
-			}
+				if(RobotMap.targetScale) {
+					addSequential(new DriveTurn(.3,7));
+					addSequential(new DriveTurn(-.3,8));
+					addSequential(new DriveStraight(.3,3));
+				}else{ 
+					addSequential(new DriveTurn(0.3, 6));
+					addSequential(new DriveTurn(.3,7));
+					}
+				
+				}
+				break;
+			
 		case 'R':
 			System.out.println("In case r");
 
@@ -79,12 +81,14 @@ public class AutoSelector extends CommandGroup {
 				else addSequential(new DriveStraight(0.4, 5));
 				
 			} else {
-				addSequential(new DriveStop(0));
-		/*OPPOSITE SIDE SCALE
-				//driveAroundSwitch('L');
-				addSequential(new DriveStraight(.3,5));
-				addSequential(new DriveTurn(.3,5));
-				*/
+				if(RobotMap.targetScale) {
+					addSequential(new DriveTurn(.3,7));
+					addSequential(new DriveTurn(-.3,7));
+				}else{ 
+					addSequential(new DriveTurn(-0.3, 8));
+					addSequential(new DriveTurn(.3,7));
+					addSequential(new DriveStraight(.3,3));
+					}
 			}
 			//deliverCube();
 			break;
