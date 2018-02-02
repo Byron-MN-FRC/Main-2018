@@ -24,17 +24,15 @@ public class AutoSelector extends CommandGroup {
 
 	public void driveToTarget() {
 		addSequential(new DriveStop(RobotMap.delayInSeconds));
-		
-		SmartDashboard.putString("Indrivetotargetloc", String.valueOf(location));
-		SmartDashboard.putString("InDrivetotargettarget", String.valueOf(targetSide));
-
+		System.out.printf("Autonomous--> [Location %s] [Target %s] [Target side %s]%n", 
+				location, targetSide, RobotMap.targetScale);
 		
 		// Determine path to target based on starting position of robot
 		switch(location) {
 		case 'C':
-			System.out.println("In case c");
 			addSequential(new DriveStraight(.4,4));
 			if (targetSide == 'L') {
+				System.out.println("Location C, Target L");
 				addSequential(new DriveTurn(-.4,4));
 				
 				if(RobotMap.targetScale) addSequential(new DriveStraight(.4,8));
