@@ -154,6 +154,11 @@ public class Robot extends TimedRobot {
 		return encoderUnits;
 	}
 	
+	public static double angleToDistance(double angle) {
+		double arcLength = (Math.PI * RobotMap.robotWidth) * (angle/360);
+		return encoderUnitConversion(arcLength);
+	}
+	
 	/**
 	 * This function is called periodically during test mode.
 	 */

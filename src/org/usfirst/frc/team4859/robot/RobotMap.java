@@ -22,6 +22,8 @@ public class RobotMap {
 	public static double delayInSeconds = 0;
 	
   
+	public static double robotWidth = 25.25;
+	
 	//									wheel diameter * pi / encoder units per revolution / 2 (sprocket 2:1 reduction)
 	public static double encoderUnitsPerInch = ((6 * 3.141592654) / 4096) / 2;
 }
