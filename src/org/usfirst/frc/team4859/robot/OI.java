@@ -30,8 +30,8 @@ public class OI {
 		shiftUp.whenPressed(new ShiftUp());
 		shiftDown.whenPressed(new ShiftDown());
 		
-		acquireIntake.whileHeld(new AcquirerIntake());
-		acquireOuttake.whileHeld(new AcquirerOuttake());
+		acquireIntake.whileHeld(new AcquirerIntake(RobotMap.acquireIntakeSpeed));
+		acquireOuttake.whileHeld(new AcquirerOuttake(RobotMap.acquireOuttakeSpeed));
 		
 		tunnelUp.whileHeld(new TunnelUp());
 		tunnelDown.whileHeld(new TunnelDown());
