@@ -117,7 +117,7 @@ public class Robot extends TimedRobot {
 				}
 			
 			RobotMap.targetScale = true; 
-			RobotMap.location = location;
+			RobotMap.location = location.charAt(0);
 			RobotMap.targetSide = targetSide;
 			m_autonomousCommand = new AutoSelector();
 			m_autonomousCommand.start();

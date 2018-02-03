@@ -15,7 +15,7 @@ public class RobotMap {
 	
 	public static boolean targetScale = false;
 	
-	public static String location = " ";
+	public static char location = ' ';
 	public static char targetSide = ' ';
 	public static char oppositeTargetSide = ' ';
 	public static double delayInSeconds = 0;

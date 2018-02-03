@@ -12,7 +12,7 @@ public class AutoSelector extends CommandGroup {
 	private char oppositeTargetSide = ' ';
 
 	public AutoSelector() {
-		location = RobotMap.location.charAt(0);
+		location = RobotMap.location;
 		targetSide = RobotMap.targetSide;
 		if (targetSide == 'L') { oppositeTargetSide = 'R'; }
 	}
