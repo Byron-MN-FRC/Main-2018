@@ -108,12 +108,10 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = new DriveStraight(0.4, 4);
 			m_autonomousCommand.start();
 		} else {
-			System.out.println("Auton else Here");
 			char targetSide = gameData.charAt(0); // default to switch side
 			if (targetScale.equalsIgnoreCase("Y")) { 
 				RobotMap.targetName = "Scale";
 				targetSide = gameData.charAt(1);
-				System.out.println("Auton else Here");
 
 				SmartDashboard.putString("location", String.valueOf(location));
 				SmartDashboard.putString("TargetSide", String.valueOf(targetSide));

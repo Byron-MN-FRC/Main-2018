@@ -42,8 +42,8 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void driveWithJoystick(Joystick joystickP0) {
-		double y = joystickP0.getY();
-		double x = joystickP0.getX();
+		double y = -joystickP0.getY();
+		double x = -joystickP0.getX();
 		double twist = joystickP0.getTwist();
 		
 		// Apply translations to the values from the controller

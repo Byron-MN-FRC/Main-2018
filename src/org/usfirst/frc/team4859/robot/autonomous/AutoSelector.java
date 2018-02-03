@@ -1,4 +1,7 @@
 package org.usfirst.frc.team4859.robot.autonomous;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.usfirst.frc.team4859.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -17,7 +20,8 @@ public class AutoSelector extends CommandGroup {
 
 	public void driveToTarget() {
 		addSequential(new DriveStop(RobotMap.delayInSeconds));
-		System.out.printf("Autonomous--> [Location=%c] [Target=%s] [Target Side=%c]%n", 
+		System.out.printf("%s Autonomous--> [Location=%c] [Target=%s] [Target Side=%c]%n", 
+				new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()),
 				location, RobotMap.targetName, targetSide);
 		
 		// Determine path to target based on starting position of robot
@@ -25,7 +29,6 @@ public class AutoSelector extends CommandGroup {
 		case 'C':
 			addSequential(new DriveStraight(.4,4));
 			if (targetSide == 'L') {
-				System.out.println("Location C, Target L");
 				addSequential(new DriveTurn(-.4,4));
 				
 				if(RobotMap.targetScale) addSequential(new DriveStraight(.4,8));
@@ -43,7 +46,6 @@ public class AutoSelector extends CommandGroup {
 			//deliverCube();
 			break;
 		case 'L':
-			System.out.println("In case l");
 			addSequential(new DriveTurn(-.4,5));
 			
 			if (targetSide == 'L') {
@@ -61,8 +63,6 @@ public class AutoSelector extends CommandGroup {
 			break;
 			}
 		case 'R':
-			System.out.println("In case r");
-
 			addSequential(new DriveTurn(.4,5));
 			if (targetSide == 'R') {
 				
@@ -80,7 +80,7 @@ public class AutoSelector extends CommandGroup {
 			//deliverCube();
 			break;
 		default:
-			System.out.println("Drive Forward");
+			System.out.println("SHOULD NOT EVER GET HERE:Drive Forward");
 	    	addSequential(new DriveStraight(.3,5));
 			break;
 		} 		
