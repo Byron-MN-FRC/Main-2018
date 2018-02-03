@@ -72,11 +72,13 @@ public class Drivetrain extends Subsystem {
   }
   
 	public void driveStraightDistance(double inputDistance) {
+		System.out.println("driveStraightDistance = " + inputDistance);
 		motorLeftMaster.set(ControlMode.MotionMagic, inputDistance);
 		motorRightMaster.set(ControlMode.MotionMagic, inputDistance);
 	}
 	
 	public void driveTurnDistance(double inputDistance) {
+		System.out.println("driveTurnDistance = " + inputDistance);
 		motorLeftMaster.set(ControlMode.MotionMagic, inputDistance);
 		motorRightMaster.set(ControlMode.MotionMagic, -inputDistance);
 	}
@@ -137,6 +139,7 @@ public class Drivetrain extends Subsystem {
 		// Zero encoder
 		Drivetrain.motorLeftMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		Drivetrain.motorRightMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+		
+		System.out.println("Motor configuration ran");
 	}
-	
 }
