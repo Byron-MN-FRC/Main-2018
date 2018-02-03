@@ -80,15 +80,18 @@ public class AutoSelector extends CommandGroup {
 				
 			} else {
 					if(RobotMap.targetScale) {
-					 		addSequential(new DriveTurnDistance(90,2));
-					 		addSequential(new DriveTurnDistance(-90,2));
-					 		addSequential(new DriveStraightDistance(48,4));
+						addSequential(new DriveStraightDistance(150,9));
+						addSequential(new DriveTurnDistance(90,5));
+						addSequential(new DriveStraightDistance(96,6));
+						addSequential(new DriveTurnDistance(-90,5));
 					 } else{ 
-					 		addSequential(new DriveTurnDistance(90, 6));
-					 		addSequential(new DriveTurnDistance(90,7));
+						addSequential(new DriveStraightDistance(150,9));
+						addSequential(new DriveTurnDistance(90,5));
+						addSequential(new DriveStraightDistance(96,6));
+						addSequential(new DriveTurnDistance(90,5));
 					 }
 			}
-			addSequential(new DriveStraightDistance(12,.5));
+			addSequential(new DriveStraightDistance(6,1));
 			//addSequential(new DriveStraight(speed, 1.5));
 			break;
 		case 'R':
@@ -104,17 +107,19 @@ public class AutoSelector extends CommandGroup {
 				addSequential(new DriveTurnDistance(90,2));
 				//addSequential(new DriveTurn(-turnspeed,2.05));
 			} else {
-				addSequential(new DriveStop(0));
 				if(RobotMap.targetScale) {
-					addSequential(new DriveTurnDistance(90,7));
-					addSequential(new DriveTurnDistance(-90,7));
+					addSequential(new DriveStraightDistance(150,9));
+					addSequential(new DriveTurnDistance(-90,5));
+					addSequential(new DriveStraightDistance(96,6));
+					addSequential(new DriveTurnDistance(90,5));
 				}else{ 
-					addSequential(new DriveTurnDistance(-90, 8));
-					addSequential(new DriveTurnDistance(90,7));
-					addSequential(new DriveStraightDistance(12,3));
+					addSequential(new DriveStraightDistance(150,9));
+					addSequential(new DriveTurnDistance(-90,5));
+					addSequential(new DriveStraightDistance(96,6));
+					addSequential(new DriveTurnDistance(-90,5));
 					 					}
 			}
-			addSequential(new DriveStraightDistance(12,.5));
+			addSequential(new DriveStraightDistance(6,1));
 			//addSequential(new DriveStraight(speed, 1.5));
 			//deliverCube();
 			break;
