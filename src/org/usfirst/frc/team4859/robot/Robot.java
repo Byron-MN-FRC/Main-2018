@@ -147,7 +147,7 @@ System.out.println("location=" + location);
 	}
 
 	public static double encoderUnitConversion(double inches) {
-		double encoderUnits = inches * RobotMap.encoderUnitsPerInch;
+		double encoderUnits = inches / RobotMap.encoderUnitsPerInch;
 		return encoderUnits;
 	}
 	
