@@ -1,6 +1,8 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
+import org.usfirst.frc.team4859.robot.subsystems.Lifter;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -8,13 +10,24 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class LiftScale extends Command {
 	
-    public LiftScale() {
+	private double distance = Lifter.motorLifter.getSelectedSensorPosition(0);
+	private double time = 0;
+	
+    public LiftScale(double inputDistance) {
     	requires(Robot.lifter);
+    	distance = inputDistance;
+    }
+    
+    public LiftScale(double inputDistance, double inputTime) {
+    	requires(Robot.lifter);
+    	distance = inputDistance;
+    	time = inputTime;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.lifter.liftScale();
+    	setTimeout(time);
+    	Robot.lifter.liftScale(distance);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -23,12 +36,13 @@ public class LiftScale extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	if (time <= 0) return false;
+    	else return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.lifter.liftStop();
+    	Robot.lifter.liftScale(distance);
     }
 
     // Called when another command which requires one or more of the same
