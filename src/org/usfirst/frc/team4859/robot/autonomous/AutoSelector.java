@@ -24,32 +24,40 @@ public class AutoSelector extends CommandGroup {
 				new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()),
 				location, RobotMap.targetName, targetSide);
 		
+		double speed = 0.56D;
+		double turnspeed = 0.49D;
 		// Determine path to target based on starting position of robot
 		switch(location) {
 		case 'C':
-			//addSequential(new DriveStraight(.4,4));
-			addSequential(new DriveStraightDistance(96,6));
+			//driving forward from wall
+			addSequential(new DriveStraight(speed,4));
+			//addSequential(new DriveStraightDistance(96,6));
 			if (targetSide == 'L') {
-				//addSequential(new DriveTurn(-.4,4));
-				addSequential(new DriveTurnDistance(-90,2));
+				//First left turn
+				addSequential(new DriveTurn(-turnspeed,2.05));
+				//addSequential(new DriveTurnDistance(-90,2));
 				
-				if(RobotMap.targetScale) addSequential(new DriveStraight(.4,8));
+				if(RobotMap.targetScale) addSequential(new DriveStraight(speed,8));
 				else{ 
-					//Going to the switch
-					//addSequential(new DriveStraight(0.4, 3));
-					addSequential(new DriveStraightDistance(54, 4));
+					//Going to the wall
+					addSequential(new DriveStraight(speed, 3.2));
+					//addSequential(new DriveStraightDistance(54, 4));
 				}
 				//Turns toward target (switch and scale)
-				addSequential(new DriveTurnDistance(90,2));
+				//addSequential(new DriveTurnDistance(90,2));
+				addSequential(new DriveTurn(turnspeed,2.05));
+				addSequential(new DriveStraight(speed,1.5));
 			} else {
-				addSequential(new DriveTurnDistance(90,2));
-				
+				//addSequential(new DriveTurnDistance(90,2));
+				addSequential(new DriveTurn(.5,5));
 				if(RobotMap.targetScale) addSequential(new DriveStraight(0.4,8));
 				else{
-					addSequential(new DriveStraightDistance(54, 4));
+					//addSequential(new DriveStraightDistance(54, 4));
+					addSequential(new DriveStraight(.5,5));
 				}
 
-				addSequential(new DriveTurnDistance(-90,2));
+				//addSequential(new DriveTurnDistance(-90,2));
+				addSequential(new DriveTurn(.5,5));
 			}
 			//deliverCube();
 			break;

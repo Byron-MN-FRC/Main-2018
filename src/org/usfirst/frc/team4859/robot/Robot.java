@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		m_oi = new OI();
 		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "C");
-		SmartDashboard.putString("Target", "Y");
+		SmartDashboard.putString("Scale", "N");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 
 	}
@@ -108,18 +108,17 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = new DriveStraight(0.4, 4);
 			m_autonomousCommand.start();
 		} else {
-			char targetSide = gameData.charAt(0); // default to switch side
+			RobotMap.targetSide = gameData.charAt(0); //default to switch side
+			RobotMap.location = location.charAt(0);
 			if (targetScale.equalsIgnoreCase("Y")) { 
 				RobotMap.targetName = "Scale";
-				targetSide = gameData.charAt(1);
+				RobotMap.targetScale = true; 
+				RobotMap.targetSide = gameData.charAt(1);
 
-				SmartDashboard.putString("location", String.valueOf(location));
-				SmartDashboard.putString("TargetSide", String.valueOf(targetSide));
+				//SmartDashboard.putString("location", String.valueOf(location));
+				//SmartDashboard.putString("TargetSide", String.valueOf(targetSide));
 				}
 			
-			RobotMap.targetScale = true; 
-			RobotMap.location = location.charAt(0);
-			RobotMap.targetSide = targetSide;
 			m_autonomousCommand = new AutoSelector();
 			m_autonomousCommand.start();
 		}
