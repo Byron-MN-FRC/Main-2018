@@ -88,7 +88,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 
 		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
-		char location = Character.toUpperCase(robotPos.charAt(0));
+		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
 		
 		String targetScale = SmartDashboard.getString("Target", "Y");
 		
@@ -96,32 +96,35 @@ public class Robot extends TimedRobot {
 		
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
-			boolean valid = Pattern.matches("[LR]{3}", gameData.toUpperCase());
-		 if (!valid) {
-		 	System.out.println("gamedata is invalid");
+		boolean validGameString = Pattern.matches("[LR]{3}", gameData.toUpperCase());
+		boolean validRobotPos = Pattern.matches("[LCR]{1}", location);
+		boolean validDelay = false;
+		
+		if(RobotMap.delayInSeconds >= 0 && RobotMap.delayInSeconds < 15) validDelay = true;
+		else validDelay = false;
+		
+		if (!validGameString || !validRobotPos || !validDelay) {
+		 	System.out.println("Gamedata is invalid! Running AutoStraight routine.");
 			m_autonomousCommand = new DriveStraight(0.4, 4);
 			m_autonomousCommand.start();
-		}
-		else {
+		} else {
 			System.out.println("Auton else Here");
 			char targetSide = gameData.charAt(0); // default to switch side
 			if (targetScale.equalsIgnoreCase("Y")) { 
-				RobotMap.targetScale = true; 
 				RobotMap.targetName = "Scale";
 				targetSide = gameData.charAt(1);
 				System.out.println("Auton else Here");
-			
-				RobotMap.location = location;
-				RobotMap.targetSide = targetSide;
+
 				SmartDashboard.putString("location", String.valueOf(location));
 				SmartDashboard.putString("TargetSide", String.valueOf(targetSide));
-				m_autonomousCommand = new AutoSelector();
-
-				m_autonomousCommand.start();
-			}
-
+				}
+			
+			RobotMap.targetScale = true; 
+			RobotMap.location = location.charAt(0);
+			RobotMap.targetSide = targetSide;
+			m_autonomousCommand = new AutoSelector();
+			m_autonomousCommand.start();
 		}
-
 	}
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
