@@ -78,6 +78,11 @@ public class Drivetrain extends Subsystem {
 		motorRightMaster.set(ControlMode.MotionMagic, inputDistance);
 	}
 	
+	public void driveTurnDistance(double inputDistance) {
+		motorLeftMaster.set(ControlMode.MotionMagic, inputDistance);
+		motorRightMaster.set(ControlMode.MotionMagic, -inputDistance);
+	}
+	
 	public void driveBackwards(double inputSpeed) {
 		drivetrain.arcadeDrive(-inputSpeed, 0);
 	}

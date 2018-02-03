@@ -1,60 +1,54 @@
 package org.usfirst.frc.team4859.robot.autonomous;
-
 import org.usfirst.frc.team4859.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoSelector extends CommandGroup {
 
 	private char location = ' ';
 	private char targetSide = ' ';
-	private char oppositeTargetSide = ' ';
 
-	public AutoSelector(char inputLocation, char inputTargetSide) {
-		location = inputLocation;
-		targetSide = inputTargetSide;
-		oppositeTargetSide = 'L'; // default
-		if (targetSide == 'L') { oppositeTargetSide = 'R'; }
+	public AutoSelector() { 
+		location = RobotMap.location;
+		targetSide = RobotMap.targetSide;
+		driveToTarget();
 	}
 	
-/*	private void deliverCube() {
-		if (RobotMap.targetScale) {
-			System.out.println("Lift mechanism command");
-		} 
-		System.out.println("Deliver cube command");		
-	}
-*/
+
 
 	public void driveToTarget() {
 		addSequential(new DriveStop(RobotMap.delayInSeconds));
+		System.out.printf("Autonomous--> [Location=%c] [Target=%s] [Target Side=%c]%n", 
+				location, RobotMap.targetName, targetSide);
 		
 		// Determine path to target based on starting position of robot
 		switch(location) {
 		case 'C':
-			addSequential(new DriveStraight(.2,2));
+			addSequential(new DriveStraight(.4,4));
 			if (targetSide == 'L') {
-				addSequential(new DriveTurn(-.2,2));
+				System.out.println("Location C, Target L");
+				addSequential(new DriveTurn(-.4,4));
 				
-				if(RobotMap.targetScale) addSequential(new DriveStraight(.2,8));
-				else addSequential(new DriveStraight(0.2, 3));
+				if(RobotMap.targetScale) addSequential(new DriveStraight(.4,8));
+				else addSequential(new DriveStraight(0.4, 3));
 				
-				addSequential(new DriveTurn(.2,5));
+				addSequential(new DriveTurn(.4,5));
 			} else {
-				addSequential(new DriveTurn(.2,2));
+				addSequential(new DriveTurn(.4,2));
 				
-				if(RobotMap.targetScale) addSequential(new DriveStraight(0.2,8));
-				else addSequential(new DriveStraight(0.2, 5));
+				if(RobotMap.targetScale) addSequential(new DriveStraight(0.4,8));
+				else addSequential(new DriveStraight(0.4, 5));
 
-				addSequential(new DriveTurn(-.2,5));
+				addSequential(new DriveTurn(-.4,5));
 			}
 			//deliverCube();
 			break;
 		case 'L':
-			addSequential(new DriveTurn(-.2,5));
+			System.out.println("In case l");
+			addSequential(new DriveTurn(-.4,5));
 			
 			if (targetSide == 'L') {
-				if(RobotMap.targetScale) addSequential(new DriveStraight(.2,8));
-				else addSequential(new DriveStraight(0.2, 5));
+				if(RobotMap.targetScale) addSequential(new DriveStraight(.4,8));
+				else addSequential(new DriveStraight(0.4, 5));
 			} else {
 				addSequential(new DriveStop(0));
 				//driveAroundSwitch('R');
@@ -67,11 +61,13 @@ public class AutoSelector extends CommandGroup {
 			break;
 			}
 		case 'R':
-			addSequential(new DriveTurn(.2,5));
+			System.out.println("In case r");
+
+			addSequential(new DriveTurn(.4,5));
 			if (targetSide == 'R') {
 				
-				if(RobotMap.targetScale) addSequential(new DriveStraight(.2,8));
-				else addSequential(new DriveStraight(0.2, 5));
+				if(RobotMap.targetScale) addSequential(new DriveStraight(.4,8));
+				else addSequential(new DriveStraight(0.4, 5));
 				
 			} else {
 				addSequential(new DriveStop(0));

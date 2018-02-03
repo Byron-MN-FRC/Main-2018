@@ -13,9 +13,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import java.util.regex.Pattern;
+
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
-import org.usfirst.frc.team4859.robot.autonomous.AutoStraight;
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
+import org.usfirst.frc.team4859.robot.autonomous.DriveStraight;
 import org.usfirst.frc.team4859.robot.subsystems.Acquirer;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
@@ -85,7 +88,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 
 		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
-		char location = Character.toUpperCase(robotPos.charAt(0));
+		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
 		
 		String targetScale = SmartDashboard.getString("Target", "Y");
 		
@@ -93,23 +96,35 @@ public class Robot extends TimedRobot {
 		
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
-	//MAKE SURE GAME DATA IS GOOD
-		// Please don't hurt me for this
-		if (!gameData.equalsIgnoreCase("RRR") || !gameData.equalsIgnoreCase("LLL") || !gameData.equalsIgnoreCase("RLR") || !gameData.equalsIgnoreCase("LRL") || !robotPos.equalsIgnoreCase("L") || !robotPos.equalsIgnoreCase("C") || !robotPos.equalsIgnoreCase("R") || (RobotMap.delayInSeconds >= 0 && RobotMap.delayInSeconds <= 15)) {
-			m_autonomousCommand = new AutoStraight();
+		boolean validGameString = Pattern.matches("[LR]{3}", gameData.toUpperCase());
+		boolean validRobotPos = Pattern.matches("[LCR]{1}", location);
+		boolean validDelay = false;
+		
+		if(RobotMap.delayInSeconds >= 0 && RobotMap.delayInSeconds < 15) validDelay = true;
+		else validDelay = false;
+		
+		if (!validGameString || !validRobotPos || !validDelay) {
+		 	System.out.println("Gamedata is invalid! Running AutoStraight routine.");
+			m_autonomousCommand = new DriveStraight(0.4, 4);
+			m_autonomousCommand.start();
+		} else {
+			System.out.println("Auton else Here");
+			char targetSide = gameData.charAt(0); // default to switch side
+			if (targetScale.equalsIgnoreCase("Y")) { 
+				RobotMap.targetName = "Scale";
+				targetSide = gameData.charAt(1);
+				System.out.println("Auton else Here");
+
+				SmartDashboard.putString("location", String.valueOf(location));
+				SmartDashboard.putString("TargetSide", String.valueOf(targetSide));
+				}
+			
+			RobotMap.targetScale = true; 
+			RobotMap.location = location.charAt(0);
+			RobotMap.targetSide = targetSide;
+			m_autonomousCommand = new AutoSelector();
 			m_autonomousCommand.start();
 		}
-		else {
-			char targetSide = gameData.charAt(0); // default to switch side
-			// String targetScale = SmartDashboard.getString("Target", "Non Received");  // ?? is there a boolean
-			if (targetScale.equalsIgnoreCase("Y")) { 
-				RobotMap.targetScale = true; 
-				targetSide = gameData.charAt(1);
-			}
-			AutoSelector Selection = new AutoSelector(location,targetSide);
-			Selection.driveToTarget();
-		}
-
 	}
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
@@ -137,6 +152,11 @@ public class Robot extends TimedRobot {
 	public static double encoderUnitConversion(double inches) {
 		double encoderUnits = inches * RobotMap.encoderUnitsPerInch;
 		return encoderUnits;
+	}
+	
+	public static double angleToDistance(double angle) {
+		double arcLength = (Math.PI * RobotMap.robotWidth) * (angle/360);
+		return encoderUnitConversion(arcLength);
 	}
 	
 	/**

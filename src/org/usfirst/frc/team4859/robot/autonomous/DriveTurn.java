@@ -13,7 +13,9 @@ public class DriveTurn extends Command {
         requires(Robot.kDrivetrain);
         speed = inputSpeed;
         time = inputTime;
-    }
+		System.out.printf("DriveTurn called with Speed %f, Time %f%n", 
+				inputSpeed, inputTime);
+}
 
     protected void initialize() {
     	setTimeout(time);
