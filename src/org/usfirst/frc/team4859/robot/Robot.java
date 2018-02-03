@@ -65,7 +65,7 @@ public class Robot extends TimedRobot {
 		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
 	}
 
-	
+
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
 	 * You can use it to reset any subsystem information you want to clear when
