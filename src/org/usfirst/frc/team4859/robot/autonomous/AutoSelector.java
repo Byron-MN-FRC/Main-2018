@@ -46,47 +46,62 @@ public class AutoSelector extends CommandGroup {
 				//Turns toward target (switch and scale)
 				//addSequential(new DriveTurnDistance(90,2));
 				addSequential(new DriveTurn(turnspeed,2.05));
-				addSequential(new DriveStraight(speed,1.5));
 			} else {
 				//addSequential(new DriveTurnDistance(90,2));
-				addSequential(new DriveTurn(.5,5));
+				addSequential(new DriveTurn(turnspeed,2.05));
 				if(RobotMap.targetScale) addSequential(new DriveStraight(0.4,8));
 				else{
 					//addSequential(new DriveStraightDistance(54, 4));
-					addSequential(new DriveStraight(.5,5));
+					addSequential(new DriveStraight(speed,3.2));
 				}
 
 				//addSequential(new DriveTurnDistance(-90,2));
-				addSequential(new DriveTurn(.5,5));
+				addSequential(new DriveTurn(-turnspeed,2.05));
 			}
+			addSequential(new DriveStraight(speed,1.5));
 			//deliverCube();
 			break;
 		case 'L':
 			//addSequential(new DriveTurn(-.4,5));
 			
 			if (targetSide == 'L') {
-				if(RobotMap.targetScale) addSequential(new DriveStraightDistance(162,12));
-				else addSequential(new DriveStraightDistance(84, 4));
+				if(RobotMap.targetScale) {
+					//addSequential(new DriveStraightDistance(162,12));
+					addSequential(new DriveStraight(speed,12));
+				} else {
+					//addSequential(new DriveStraightDistance(84, 4));
+					addSequential(new DriveStraight(speed, 8));
+				}
+				//addSequential(new DriveTurnDistance(-90,2));
+				addSequential(new DriveTurn(turnspeed,2.05));
+				
 			} else {
 				addSequential(new DriveStop(0));
 					if(RobotMap.targetScale) {
 					 		addSequential(new DriveTurn(.3,7));
 					 		addSequential(new DriveTurn(-.3,8));
 					 		addSequential(new DriveStraight(.3,3));
-					 }else{ 
+					 } else{ 
 					 		addSequential(new DriveTurn(0.3, 6));
 					 		addSequential(new DriveTurn(.3,7));
-					 		}
-				
-			break;
+					 }
 			}
+			//addSequential(new DriveStraightDistance(12,.5));
+			addSequential(new DriveStraight(speed, 1.5));
+			break;
 		case 'R':
 			//addSequential(new DriveTurn(.4,5));
 			if (targetSide == 'R') {
 				
-				if(RobotMap.targetScale) addSequential(new DriveStraightDistance(162,12));
-				else addSequential(new DriveStraightDistance(84, 4));
-				
+				if(RobotMap.targetScale) {
+					//addSequential(new DriveStraightDistance(162,12));
+					addSequential(new DriveStraight(speed,12));
+				} else{
+					//addSequential(new DriveStraightDistance(84, 4));
+					addSequential(new DriveStraight(speed, 8));
+				}
+				//addSequential(new DriveTurnDistance(90,2));
+				addSequential(new DriveTurn(-turnspeed,2.05));
 			} else {
 				addSequential(new DriveStop(0));
 				if(RobotMap.targetScale) {
@@ -98,6 +113,8 @@ public class AutoSelector extends CommandGroup {
 					addSequential(new DriveStraight(.3,3));
 					 					}
 			}
+			//addSequential(new DriveStraightDistance(12,.5));
+			addSequential(new DriveStraight(speed, 1.5));
 			//deliverCube();
 			break;
 		default:

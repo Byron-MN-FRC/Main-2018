@@ -89,8 +89,8 @@ public class Robot extends TimedRobot {
 
 		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
 		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
-		
-		String targetScale = SmartDashboard.getString("Target", "Y");
+System.out.println("location=" + location);		
+		String targetScale = SmartDashboard.getString("Scale", "N");
 		
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
 		
