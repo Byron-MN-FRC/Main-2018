@@ -7,6 +7,9 @@
 
 package org.usfirst.frc.team4859.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -56,8 +59,13 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Scale", "N");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 
+		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
+		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
+		UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
+		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
 	}
 
+	
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
 	 * You can use it to reset any subsystem information you want to clear when
