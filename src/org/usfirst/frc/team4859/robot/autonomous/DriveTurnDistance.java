@@ -24,10 +24,11 @@ public class DriveTurnDistance extends Command {
     	setTimeout(time);
     	Drivetrain.motorLeftMaster.setSelectedSensorPosition(0, 0, 10);
 		Drivetrain.motorRightMaster.setSelectedSensorPosition(0, 0, 10);
+    	Robot.kDrivetrain.driveTurnDistance(distance);
     }
 
     protected void execute() {
-    	Robot.kDrivetrain.driveTurnDistance(distance);
+
     }
 
     protected boolean isFinished() {

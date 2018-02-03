@@ -74,13 +74,13 @@ public class Drivetrain extends Subsystem {
 	public void driveStraightDistance(double inputDistance) {
 		System.out.println("driveStraightDistance = " + inputDistance);
 		motorLeftMaster.set(ControlMode.MotionMagic, inputDistance);
-		motorRightMaster.set(ControlMode.MotionMagic, inputDistance);
+		motorRightMaster.set(ControlMode.MotionMagic, -inputDistance);
 	}
 	
 	public void driveTurnDistance(double inputDistance) {
 		System.out.println("driveTurnDistance = " + inputDistance);
 		motorLeftMaster.set(ControlMode.MotionMagic, inputDistance);
-		motorRightMaster.set(ControlMode.MotionMagic, -inputDistance);
+		motorRightMaster.set(ControlMode.MotionMagic, inputDistance);
 	}
 	
 	public void driveBackwards(double inputSpeed) {

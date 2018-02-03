@@ -31,15 +31,16 @@ public class AutoSelector extends CommandGroup {
 		case 'C':
 			//driving forward from wall
 			//addSequential(new DriveStraight(speed,4));
-			addSequential(new DriveStraightDistance(96,6));
+			System.out.println("Case C here");
+			addSequential(new DriveStraightDistance(96,3));
 			if (targetSide == 'L') {
 				//First left turn
 				//addSequential(new DriveTurn(-turnspeed,2.05));
-				addSequential(new DriveTurnDistance(-90,2));
+				addSequential(new DriveTurnDistance(-90,1));
 				
 				//Going to the wall
 				//addSequential(new DriveStraight(speed, 3.2));
-				addSequential(new DriveStraightDistance(54, 4));
+				addSequential(new DriveStraightDistance(66, 2));
 				
 				if(RobotMap.targetScale) {
 					//addSequential(new DriveStraight(speed,3));
