@@ -18,7 +18,7 @@ public class AutoSelector extends CommandGroup {
 	public void driveToTarget() {
 		addSequential(new DriveStop(RobotMap.delayInSeconds));
 		System.out.printf("Autonomous--> [Location=%c] [Target=%s] [Target Side=%c]%n", 
-				location, RobotMap.targetName);
+				location, RobotMap.targetName, targetSide);
 		
 		// Determine path to target based on starting position of robot
 		switch(location) {
