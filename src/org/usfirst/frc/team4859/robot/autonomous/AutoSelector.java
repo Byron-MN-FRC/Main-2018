@@ -27,30 +27,38 @@ public class AutoSelector extends CommandGroup {
 		// Determine path to target based on starting position of robot
 		switch(location) {
 		case 'C':
-			addSequential(new DriveStraight(.4,4));
+			//addSequential(new DriveStraight(.4,4));
+			addSequential(new DriveStraightDistance(96,6));
 			if (targetSide == 'L') {
-				addSequential(new DriveTurn(-.4,4));
+				//addSequential(new DriveTurn(-.4,4));
+				addSequential(new DriveTurnDistance(-90,2));
 				
 				if(RobotMap.targetScale) addSequential(new DriveStraight(.4,8));
-				else addSequential(new DriveStraight(0.4, 3));
-				
-				addSequential(new DriveTurn(.4,5));
+				else{ 
+					//Going to the switch
+					//addSequential(new DriveStraight(0.4, 3));
+					addSequential(new DriveStraightDistance(54, 4));
+				}
+				//Turns toward target (switch and scale)
+				addSequential(new DriveTurnDistance(90,2));
 			} else {
-				addSequential(new DriveTurn(.4,2));
+				addSequential(new DriveTurnDistance(90,2));
 				
 				if(RobotMap.targetScale) addSequential(new DriveStraight(0.4,8));
-				else addSequential(new DriveStraight(0.4, 5));
+				else{
+					addSequential(new DriveStraightDistance(54, 4));
+				}
 
-				addSequential(new DriveTurn(-.4,5));
+				addSequential(new DriveTurnDistance(-90,2));
 			}
 			//deliverCube();
 			break;
 		case 'L':
-			addSequential(new DriveTurn(-.4,5));
+			//addSequential(new DriveTurn(-.4,5));
 			
 			if (targetSide == 'L') {
-				if(RobotMap.targetScale) addSequential(new DriveStraight(.4,8));
-				else addSequential(new DriveStraight(0.4, 5));
+				if(RobotMap.targetScale) addSequential(new DriveStraightDistance(162,12));
+				else addSequential(new DriveStraightDistance(84, 4));
 			} else {
 				addSequential(new DriveStop(0));
 					if(RobotMap.targetScale) {
@@ -61,17 +69,15 @@ public class AutoSelector extends CommandGroup {
 					 		addSequential(new DriveTurn(0.3, 6));
 					 		addSequential(new DriveTurn(.3,7));
 					 		}
-								
-
 				
 			break;
 			}
 		case 'R':
-			addSequential(new DriveTurn(.4,5));
+			//addSequential(new DriveTurn(.4,5));
 			if (targetSide == 'R') {
 				
-				if(RobotMap.targetScale) addSequential(new DriveStraight(.4,8));
-				else addSequential(new DriveStraight(0.4, 5));
+				if(RobotMap.targetScale) addSequential(new DriveStraightDistance(162,12));
+				else addSequential(new DriveStraightDistance(84, 4));
 				
 			} else {
 				addSequential(new DriveStop(0));
