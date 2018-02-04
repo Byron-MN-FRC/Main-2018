@@ -20,7 +20,6 @@ public class OI {
 //	Button acquireOuttake = new JoystickButton(joystick, 2);
 //	
 //	Button climbStart = new JoystickButton(joystick, 12);
-//	Button climbStop = new JoystickButton(joystick, 13);
 //
 //	Button tunnelUp = new JoystickButton(joystick, 2);
 //	Button tunnelDown = new JoystickButton(joystick, 2);
@@ -39,6 +38,8 @@ public class OI {
 		turnRight90.whenPressed(new DriveTurnRight90());
 		turnLeft90.whenPressed(new DriveTurnLeft90());
 		
+//		climbStart.whileHeld(new ClimbStart(RobotMap.kClimbSpeed));
+
 //		acquireIntake.whileHeld(new AcquirerIntake(RobotMap.acquireIntakeSpeed));
 //		acquireOuttake.whileHeld(new AcquirerOuttake(RobotMap.acquireOuttakeSpeed));
 //		
