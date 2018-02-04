@@ -7,12 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ClimbStart extends Command {
+public class ClimbUp extends Command {
 	
-	private double time = 0;
+	private double speed = 0;
 	
-    public ClimbStart() {
+    public ClimbUp(double inputSpeed) {
     	requires(Robot.climber);
+    	speed = inputSpeed;
     }
 
     // Called just before this Command runs the first time
@@ -21,13 +22,12 @@ public class ClimbStart extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climber.climbStart();
+    	Robot.climber.climbUp(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (time <= 0) return false;
-    	else return isTimedOut();
+    	return false;
     }
 
     // Called once after isFinished returns true
@@ -38,6 +38,6 @@ public class ClimbStart extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	//Robot.climber.climbStop();
+    	Robot.climber.climbStop();
     }
 }

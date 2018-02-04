@@ -22,7 +22,7 @@ public class RobotMap {
 	public static double acquireIntakeSpeed = 0.5;
 	public static double acquireOuttakeSpeed = 0.5;
 	
-	public static double climbUp = 0.5;
+	public static double climbSpeed = 0.5;
 	
 	public static double liftAcquireHeight = 0.5;
 	public static double liftDefaultHeight = 0.5;

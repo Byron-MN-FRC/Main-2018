@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Climber extends Subsystem {
-	public static Talon motorClimbUp = new Talon(RobotMap.talonIDClimbUp);
+	public static Talon motorClimb = new Talon(RobotMap.talonIDClimbUp);
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -16,26 +16,11 @@ public class Climber extends Subsystem {
     public void initDefaultCommand() {}
     
     
-    public void climbStart(double inputSpeed){
-    	motorClimbUp.set(inputSpeed);
+    public void climbUp(double inputSpeed){
+    	motorClimb.set(inputSpeed);
     }
 
-	public void climbStop(double inputSpeed) {
-		
-		
-	}
-
-
-	public void climbStart() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 	public void climbStop() {
-		// TODO Auto-generated method stub
-		
+		motorClimb.set(0);
 	}
-
-    
 }
