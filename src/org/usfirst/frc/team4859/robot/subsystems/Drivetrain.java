@@ -99,46 +99,68 @@ public class Drivetrain extends Subsystem {
 		motorRightFollower1.set(ControlMode.Follower, RobotMap.talonIDRightMaster);
 		motorRightFollower2.set(ControlMode.Follower, RobotMap.talonIDRightMaster);
 		
+		// Set current limits
+		motorLeftMaster.configContinuousCurrentLimit(RobotMap.kContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		motorLeftFollower1.configContinuousCurrentLimit(RobotMap.kContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		motorLeftFollower2.configContinuousCurrentLimit(RobotMap.kContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		motorRightMaster.configContinuousCurrentLimit(RobotMap.kContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		motorRightFollower1.configContinuousCurrentLimit(RobotMap.kContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		motorRightFollower2.configContinuousCurrentLimit(RobotMap.kContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		
+		motorLeftMaster.configPeakCurrentDuration(RobotMap.kCurrentPeakDuration, RobotMap.kTimeoutMs);
+		motorLeftFollower1.configPeakCurrentDuration(RobotMap.kCurrentPeakDuration, RobotMap.kTimeoutMs);
+		motorLeftFollower2.configPeakCurrentDuration(RobotMap.kCurrentPeakDuration, RobotMap.kTimeoutMs);
+		motorRightMaster.configPeakCurrentDuration(RobotMap.kCurrentPeakDuration, RobotMap.kTimeoutMs);
+		motorRightFollower1.configPeakCurrentDuration(RobotMap.kCurrentPeakDuration, RobotMap.kTimeoutMs);
+		motorRightFollower2.configPeakCurrentDuration(RobotMap.kCurrentPeakDuration, RobotMap.kTimeoutMs);
+		
+		motorLeftMaster.enableCurrentLimit(true);
+		motorLeftFollower1.enableCurrentLimit(true);
+		motorLeftFollower2.enableCurrentLimit(true);
+		motorRightMaster.enableCurrentLimit(true);
+		motorRightFollower1.enableCurrentLimit(true);
+		motorRightFollower2.enableCurrentLimit(true);
+		
 		// Configure feedback devices
-		Drivetrain.motorLeftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
-		Drivetrain.motorRightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
+		motorLeftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
+		motorRightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
 
 		// Set relevant frame periods to be at least as fast as periodic rate
-		Drivetrain.motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
-		Drivetrain.motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
-		Drivetrain.motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 10, RobotMap.kTimeoutMs);
+		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
+		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
+		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 10, RobotMap.kTimeoutMs);
 		
-		Drivetrain.motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
-		Drivetrain.motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
-		Drivetrain.motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 10, RobotMap.kTimeoutMs);
+		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
+		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
+		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 10, RobotMap.kTimeoutMs);
 
 		// Set closed loop gains in slot 0
-		Drivetrain.motorLeftMaster.selectProfileSlot(RobotMap.kPIDSlot, 0);
-		Drivetrain.motorLeftMaster.config_kF(0, RobotMap.kF, RobotMap.kTimeoutMs);
-		Drivetrain.motorLeftMaster.config_kP(0, RobotMap.kP, RobotMap.kTimeoutMs);
-		Drivetrain.motorLeftMaster.config_kI(0, RobotMap.kI, RobotMap.kTimeoutMs);
-		Drivetrain.motorLeftMaster.config_kD(0, RobotMap.kD, RobotMap.kTimeoutMs);
-		Drivetrain.motorLeftMaster.config_IntegralZone(0, 0, RobotMap.kTimeoutMs);
-		Drivetrain.motorLeftMaster.configAllowableClosedloopError(RobotMap.kPIDSlot, RobotMap.kAllowableError, RobotMap.kTimeoutMs);
+		motorLeftMaster.selectProfileSlot(RobotMap.kPIDSlot, 0);
+		motorLeftMaster.config_kF(0, RobotMap.kF, RobotMap.kTimeoutMs);
+		motorLeftMaster.config_kP(0, RobotMap.kP, RobotMap.kTimeoutMs);
+		motorLeftMaster.config_kI(0, RobotMap.kI, RobotMap.kTimeoutMs);
+		motorLeftMaster.config_kD(0, RobotMap.kD, RobotMap.kTimeoutMs);
+		motorLeftMaster.config_IntegralZone(0, 0, RobotMap.kTimeoutMs);
+		motorLeftMaster.configAllowableClosedloopError(RobotMap.kPIDSlot, RobotMap.kAllowableError, RobotMap.kTimeoutMs);
 		
-		Drivetrain.motorRightMaster.selectProfileSlot(RobotMap.kPIDSlot, 0);
-		Drivetrain.motorRightMaster.config_kF(0, RobotMap.kF, RobotMap.kTimeoutMs);
-		Drivetrain.motorRightMaster.config_kP(0, RobotMap.kP, RobotMap.kTimeoutMs);
-		Drivetrain.motorRightMaster.config_kI(0, RobotMap.kI, RobotMap.kTimeoutMs);
-		Drivetrain.motorRightMaster.config_kD(0, RobotMap.kD, RobotMap.kTimeoutMs);
-		Drivetrain.motorRightMaster.config_IntegralZone(0, 0, RobotMap.kTimeoutMs);
-		Drivetrain.motorRightMaster.configAllowableClosedloopError(RobotMap.kPIDSlot, RobotMap.kAllowableError, RobotMap.kTimeoutMs);
+		motorRightMaster.selectProfileSlot(RobotMap.kPIDSlot, 0);
+		motorRightMaster.config_kF(0, RobotMap.kF, RobotMap.kTimeoutMs);
+		motorRightMaster.config_kP(0, RobotMap.kP, RobotMap.kTimeoutMs);
+		motorRightMaster.config_kI(0, RobotMap.kI, RobotMap.kTimeoutMs);
+		motorRightMaster.config_kD(0, RobotMap.kD, RobotMap.kTimeoutMs);
+		motorRightMaster.config_IntegralZone(0, 0, RobotMap.kTimeoutMs);
+		motorRightMaster.configAllowableClosedloopError(RobotMap.kPIDSlot, RobotMap.kAllowableError, RobotMap.kTimeoutMs);
 
 		// Set acceleration and cruise velocity
-		Drivetrain.motorLeftMaster.configMotionCruiseVelocity(RobotMap.kHighGearCruiseVelocity, RobotMap.kTimeoutMs);
-		Drivetrain.motorLeftMaster.configMotionAcceleration(RobotMap.kHighGearAcceleration, RobotMap.kTimeoutMs);
+		motorLeftMaster.configMotionCruiseVelocity(RobotMap.kHighGearCruiseVelocity, RobotMap.kTimeoutMs);
+		motorLeftMaster.configMotionAcceleration(RobotMap.kHighGearAcceleration, RobotMap.kTimeoutMs);
 		
-		Drivetrain.motorRightMaster.configMotionCruiseVelocity(RobotMap.kHighGearCruiseVelocity, RobotMap.kTimeoutMs);
-		Drivetrain.motorRightMaster.configMotionAcceleration(RobotMap.kHighGearAcceleration, RobotMap.kTimeoutMs);
+		motorRightMaster.configMotionCruiseVelocity(RobotMap.kHighGearCruiseVelocity, RobotMap.kTimeoutMs);
+		motorRightMaster.configMotionAcceleration(RobotMap.kHighGearAcceleration, RobotMap.kTimeoutMs);
 
 		// Zero encoder
-		Drivetrain.motorLeftMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
-		Drivetrain.motorRightMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+		motorLeftMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+		motorRightMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		
 		System.out.println("Motor configuration ran");
 	}
