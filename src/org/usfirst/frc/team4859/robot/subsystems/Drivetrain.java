@@ -130,11 +130,11 @@ public class Drivetrain extends Subsystem {
 		Drivetrain.motorRightMaster.configAllowableClosedloopError(RobotMap.kPIDSlot, RobotMap.kAllowableError, RobotMap.kTimeoutMs);
 
 		// Set acceleration and cruise velocity
-		Drivetrain.motorLeftMaster.configMotionCruiseVelocity(RobotMap.kCruiseVelocity, RobotMap.kTimeoutMs);
-		Drivetrain.motorLeftMaster.configMotionAcceleration(RobotMap.kAcceleration, RobotMap.kTimeoutMs);
+		Drivetrain.motorLeftMaster.configMotionCruiseVelocity(RobotMap.kHighGearCruiseVelocity, RobotMap.kTimeoutMs);
+		Drivetrain.motorLeftMaster.configMotionAcceleration(RobotMap.kHighGearAcceleration, RobotMap.kTimeoutMs);
 		
-		Drivetrain.motorRightMaster.configMotionCruiseVelocity(RobotMap.kCruiseVelocity, RobotMap.kTimeoutMs);
-		Drivetrain.motorRightMaster.configMotionAcceleration(RobotMap.kAcceleration, RobotMap.kTimeoutMs);
+		Drivetrain.motorRightMaster.configMotionCruiseVelocity(RobotMap.kHighGearCruiseVelocity, RobotMap.kTimeoutMs);
+		Drivetrain.motorRightMaster.configMotionAcceleration(RobotMap.kHighGearAcceleration, RobotMap.kTimeoutMs);
 
 		// Zero encoder
 		Drivetrain.motorLeftMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
