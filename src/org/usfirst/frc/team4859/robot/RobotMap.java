@@ -30,14 +30,14 @@ public class RobotMap {
 	public static int kTimeoutMs = 10;
 	public static int kPIDSlot = 0;
 	
-	public static double kP = 0.250;
+	public static double kP = 0.22;
 	public static double kI = 0.002;
 	public static double kD = 2.000;
 	public static double kF = 0.085;
-	public static int kAllowableError = 75;
+	public static int kAllowableError = 90;
 	
 	public static int kHighGearAcceleration = 9025;
-	public static int kHighGearCruiseVelocity = 9025;
+	public static int kHighGearCruiseVelocity = 8000;
 	
 	public static int kLowGearAcceleration = 2720;
 	public static int kLowGearCruiseVelocity = 2720;

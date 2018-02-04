@@ -24,10 +24,11 @@ public class DriveStraightDistance extends Command {
     	setTimeout(time);
 		Drivetrain.motorLeftMaster.setSelectedSensorPosition(0, 0, 10);
 		Drivetrain.motorRightMaster.setSelectedSensorPosition(0, 0, 10);
+    	Robot.kDrivetrain.driveStraightDistance(distance);
     }
 
     protected void execute() {
-    	Robot.kDrivetrain.driveStraightDistance(distance);
+
     }
 
     protected boolean isFinished() {
