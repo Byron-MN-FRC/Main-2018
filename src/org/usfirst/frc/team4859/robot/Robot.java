@@ -7,6 +7,9 @@
 
 package org.usfirst.frc.team4859.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -56,7 +59,12 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Scale", "N");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 
+		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
+		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
+		UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
+		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
 	}
+
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -89,7 +97,7 @@ public class Robot extends TimedRobot {
 
 		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
 		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
-System.out.println("location=" + location);		
+		System.out.println("location=" + location);		
 		String targetScale = SmartDashboard.getString("Scale", "N");
 		
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
@@ -125,6 +133,11 @@ System.out.println("location=" + location);
 	}
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		
+		SmartDashboard.putNumber("Left Position", Drivetrain.motorLeftMaster.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("Right Position", Drivetrain.motorRightMaster.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("Left Error", Drivetrain.motorLeftMaster.getClosedLoopError(0));
+		SmartDashboard.putNumber("Right Error", Drivetrain.motorRightMaster.getClosedLoopError(0));
 	}
 
 	@Override
@@ -147,7 +160,7 @@ System.out.println("location=" + location);
 	}
 
 	public static double encoderUnitConversion(double inches) {
-		double encoderUnits = inches / RobotMap.encoderUnitsPerInch;
+		double encoderUnits = inches * RobotMap.encoderUnitsPerInch;
 		return encoderUnits;
 	}
 	
