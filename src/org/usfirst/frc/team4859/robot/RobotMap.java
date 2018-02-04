@@ -16,6 +16,9 @@ public class RobotMap {
 	public static int talonIDAquireLeft = 0;
 	public static int talonIDAquireRight = 1;
 	
+	public static int talonIDTunnelLeft = 3;
+	public static int talonIDTunnelRight = 2;
+	
 	// Command numbers
 	public static double acquireIntakeSpeed = 0.5;
 	public static double acquireOuttakeSpeed = 0.5;
