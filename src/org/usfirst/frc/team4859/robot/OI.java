@@ -21,8 +21,8 @@ public class OI {
 //	
 //	Button climbStart = new JoystickButton(joystick, 12);
 //
-//	Button tunnelUp = new JoystickButton(joystick, 2);
-//	Button tunnelDown = new JoystickButton(joystick, 2);
+//	Button tunnelIntake = new JoystickButton(joystick, 2);
+//	Button tunnelShoot = new JoystickButton(joystick, 2);
 //
 //	Button liftAcquire = new JoystickButton(joystick, 12);
 //	Button liftDefault = new JoystickButton(joystick, 12);
@@ -43,8 +43,8 @@ public class OI {
 //		acquireIntake.whileHeld(new AcquirerIntake(RobotMap.acquireIntakeSpeed));
 //		acquireOuttake.whileHeld(new AcquirerOuttake(RobotMap.acquireOuttakeSpeed));
 //		
-//		tunnelUp.whileHeld(new TunnelUp());
-//		tunnelDown.whileHeld(new TunnelDown());
+//		tunnelIntake.whileHeld(new TunnelIntake(RobotMap.tunnelIntakeSpeed));
+//		tunnelShoot.whileHeld(new TunnelShoot(RobotMap.tunnelIntakeSpeed));
 //
 //		liftAcquire.whenPressed(new LiftAcquire(RobotMap.liftAcquireHeight));
 //		liftDefault.whenPressed(new LiftDefault(RobotMap.liftDefaultHeight));
