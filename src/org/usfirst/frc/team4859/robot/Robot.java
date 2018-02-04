@@ -89,7 +89,7 @@ public class Robot extends TimedRobot {
 
 		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
 		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
-System.out.println("location=" + location);		
+		System.out.println("location=" + location);		
 		String targetScale = SmartDashboard.getString("Scale", "N");
 		
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
@@ -125,6 +125,11 @@ System.out.println("location=" + location);
 	}
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		
+		SmartDashboard.putNumber("Left Position", Drivetrain.motorLeftMaster.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("Right Position", Drivetrain.motorRightMaster.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("Left Error", Drivetrain.motorLeftMaster.getClosedLoopError(0));
+		SmartDashboard.putNumber("Right Error", Drivetrain.motorRightMaster.getClosedLoopError(0));
 	}
 
 	@Override
@@ -147,7 +152,7 @@ System.out.println("location=" + location);
 	}
 
 	public static double encoderUnitConversion(double inches) {
-		double encoderUnits = inches / RobotMap.encoderUnitsPerInch;
+		double encoderUnits = inches * RobotMap.encoderUnitsPerInch;
 		return encoderUnits;
 	}
 	

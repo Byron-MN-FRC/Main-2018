@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class LiftSwitch extends Command {
 	
-	private double distance = Lifter.motorLifter.getSelectedSensorPosition(0);
+	private double distance = 0;
 	private double time = 0;
 	
     public LiftSwitch(double inputDistance) {

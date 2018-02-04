@@ -70,7 +70,7 @@ public class AutoSelector extends CommandGroup {
 			
 			if (targetSide == 'L') {
 				if(RobotMap.targetScale) {
-					addSequential(new DriveStraightDistance(162,12));
+					addSequential(new DriveStraightDistance(324,18));
 					//addSequential(new DriveStraight(speed,12));
 				} else {
 					addSequential(new DriveStraightDistance(84, 4));
