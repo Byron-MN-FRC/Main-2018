@@ -36,6 +36,9 @@ public class OI {
 		
 		tunnelUp.whileHeld(new TunnelUp());
 		tunnelDown.whileHeld(new TunnelDown());
+		
+		climbStart.whileHeld(new ClimbStart());
+		climbStop.whileHeld(new ClimbStop());
 
 		liftAcquire.whenPressed(new LiftAcquire(RobotMap.liftAcquireHeight));
 		liftDefault.whenPressed(new LiftDefault(RobotMap.liftDefaultHeight));

@@ -16,9 +16,13 @@ public class RobotMap {
 	public static int talonIDAquireLeft = 0;
 	public static int talonIDAquireRight = 1;
 	
+	public static int talonIDClimbUp = 8;
+	
 	// Command numbers
 	public static double acquireIntakeSpeed = 0.5;
 	public static double acquireOuttakeSpeed = 0.5;
+	
+	public static double climbUp = 0.5;
 	
 	public static double liftAcquireHeight = 0.5;
 	public static double liftDefaultHeight = 0.5;

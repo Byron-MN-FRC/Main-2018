@@ -8,22 +8,26 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ClimbStop extends Command {
 	
+	private double time = 0;
+	
     public ClimbStop() {
     	requires(Robot.climber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.climber.climbStop();
+    	setTimeout(time);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climber.climbStart();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	if (time <= 0) return false;
+    	else return isTimedOut();
     }
 
     // Called once after isFinished returns true
