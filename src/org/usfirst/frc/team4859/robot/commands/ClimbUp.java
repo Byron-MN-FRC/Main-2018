@@ -1,15 +1,19 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ClimbStart extends Command {
+public class ClimbUp extends Command {
 	
-    public ClimbStart() {
+	private double speed = 0;
+	
+    public ClimbUp(double inputSpeed) {
     	requires(Robot.climber);
+    	speed = inputSpeed;
     }
 
     // Called just before this Command runs the first time
@@ -18,12 +22,12 @@ public class ClimbStart extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climber.climbStart();
+    	Robot.climber.climbUp(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	return false;
     }
 
     // Called once after isFinished returns true
