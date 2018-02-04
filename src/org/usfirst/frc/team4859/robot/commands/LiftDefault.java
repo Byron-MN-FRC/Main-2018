@@ -8,17 +8,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LiftSwitch extends Command {
+public class LiftDefault extends Command {
 	
 	private double distance = Lifter.motorLifter.getSelectedSensorPosition(0);
 	private double time = 0;
 	
-    public LiftSwitch(double inputDistance) {
+    public LiftDefault(double inputDistance) {
     	requires(Robot.lifter);
     	distance = inputDistance;
     }
     
-    public LiftSwitch(double inputDistance, double inputTime) {
+    public LiftDefault(double inputDistance, double inputTime) {
     	requires(Robot.lifter);
     	distance = inputDistance;
     	time = inputTime;
@@ -27,7 +27,7 @@ public class LiftSwitch extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	setTimeout(time);
-    	Robot.lifter.liftSwitch(distance);
+    	Robot.lifter.liftDefault(distance);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -42,7 +42,7 @@ public class LiftSwitch extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.lifter.liftSwitch(distance);
+    	Robot.lifter.liftDefault(distance);
     }
 
     // Called when another command which requires one or more of the same

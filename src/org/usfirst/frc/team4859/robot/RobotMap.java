@@ -11,12 +11,20 @@ public class RobotMap {
 	public static int talonIDLeftFollower1 = 5;
 	public static int talonIDLeftFollower2 = 6;
 	
+	public static int talonIDLifter = 7;
+	
 	public static int talonIDAquireLeft = 0;
 	public static int talonIDAquireRight = 1;
 	
-	// Command speed numbers
+	// Command numbers
 	public static double acquireIntakeSpeed = 0.5;
 	public static double acquireOuttakeSpeed = 0.5;
+	
+	public static double liftAcquireHeight = 0.5;
+	public static double liftDefaultHeight = 0.5;
+	public static double liftSwitchHeight = 0.5;
+	public static double liftScaleHeight = 0.5;
+	public static double liftClimbHeight = 0.5;
 	
 	// Closed loop values
 	public static int kTimeoutMs = 10;
@@ -27,8 +35,15 @@ public class RobotMap {
 	public static double kD = 2.000;
 	public static double kF = 0.085;
 	public static int kAllowableError = 75;
-	public static int kAcceleration = 9025;
-	public static int kCruiseVelocity = 9025;
+	
+	public static int kHighGearAcceleration = 9025;
+	public static int kHighGearCruiseVelocity = 9025;
+	
+	public static int kLowGearAcceleration = 2720;
+	public static int kLowGearCruiseVelocity = 2720;
+	
+	public static int kLifterAcceleration = 2720;
+	public static int kLifterCruiseVelocity = 2720;
 	
 	// Robot numbers for closed loop (in inches)
 	public static double robotWidth = 25.25;
