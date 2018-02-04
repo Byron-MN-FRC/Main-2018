@@ -1,27 +1,38 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
-	public class TunnelUp extends Command {
+	public class TunnelIntake extends Command {
 		
-	    public TunnelUp () {
+		private double speed = 0;
+		private double time = 0;
+		
+	    public TunnelIntake (double inputSpeed) {
 	    	requires(Robot.tunnel);
+	    	speed = inputSpeed;
+	    }
+	    
+	    public TunnelIntake (double inputSpeed, double inputTime) {
+	    	requires(Robot.tunnel);
+	    	speed = inputSpeed;
+	    	time = inputTime;
 	    }
 
 	    // Called just before this Command runs the first time
 	    protected void initialize() {
+	    	setTimeout(time);
 	    }
 
 	    // Called repeatedly when this Command is scheduled to run
 	    protected void execute() {
-	    	Robot.tunnel.tunnelUp();
+	    	Robot.tunnel.tunnelIntake(speed);
 	    }
 
 	    // Make this return true when this Command no longer needs to run execute()
 	    protected boolean isFinished() {
-	        return false;
+	    	if (time <= 0) return false;
+	    	else return isTimedOut();
 	    }
 
 	    // Called once after isFinished returns true

@@ -6,21 +6,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Tunnel extends Subsystem {
-	// Create motors here
-		//public static Talon motorTunnelLeft = new Talon(RobotMap.talonIDAquireRight);
-		//public static Talon motorTunnelRight = new Talon(RobotMap.talonIDAquireRight);
-		
-	    // Put methods for controlling this subsystem
-	    // here. Call these from Commands.
+	//public static Talon motorTunnelLeft = new Talon(RobotMap.talonIDTunnelLeft);
+	//public static Talon motorTunnelRight = new Talon(RobotMap.talonIDTunnelRight);
 
     public void initDefaultCommand() {}
     
-    public void tunnelUp() {
+    public void tunnelIntake(double inputSpeed) {
     	//motorTunnelLeft.set(-inputSpeed);
     	//motorTunnelLeft.set(inputSpeed);
     }
     
-    public void tunnelDown() {
+    public void tunnelShoot(double inputSpeed) {
     	//motorTunnelLeft.set(inputSpeed);
     	//motorTunnelLeft.set(-inputSpeed);
     }
@@ -28,6 +24,5 @@ public class Tunnel extends Subsystem {
     public void tunnelStop() {
     	//motorTunnelLeft.set(0);
     	//motorTunnelLeft.set(0);
-    }
-    
+    }  
 }
