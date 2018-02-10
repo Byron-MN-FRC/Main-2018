@@ -16,9 +16,8 @@ public class ShiftDown extends Command {
     	Robot.shifters.pneumaticShiftDown();
 		Drivetrain.motorLeftMaster.configMotionAcceleration(RobotMap.kLowGearAcceleration, RobotMap.kTimeoutMs);
 		Drivetrain.motorRightMaster.configMotionCruiseVelocity(RobotMap.kLowGearCruiseVelocity, RobotMap.kTimeoutMs);
-
 		System.out.println("ShiftDown command ran");
-		SmartDashboard.putString("Shift", "Low Gear");
+		SmartDashboard.putBoolean("Shifted Up", false);
     }
 
     protected void execute() {
