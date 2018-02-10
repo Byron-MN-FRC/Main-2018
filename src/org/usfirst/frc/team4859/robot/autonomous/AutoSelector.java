@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.usfirst.frc.team4859.robot.RobotMap;
+import org.usfirst.frc.team4859.robot.commands.ShiftDown;
 import org.usfirst.frc.team4859.robot.commands.ShiftUp;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
