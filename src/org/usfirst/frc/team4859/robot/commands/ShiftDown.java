@@ -5,6 +5,7 @@ import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -20,6 +21,7 @@ public class ShiftDown extends Command {
     	Robot.shifters.pneumaticShiftDown();
 		Drivetrain.motorLeftMaster.configMotionAcceleration(RobotMap.kLowGearAcceleration, RobotMap.kTimeoutMs);
 		Drivetrain.motorRightMaster.configMotionCruiseVelocity(RobotMap.kLowGearCruiseVelocity, RobotMap.kTimeoutMs);
+		SmartDashboard.putString("Shift", "Low Gear");
     }
 
     // Called repeatedly when this Command is scheduled to run
