@@ -3,6 +3,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.usfirst.frc.team4859.robot.RobotMap;
+import org.usfirst.frc.team4859.robot.commands.ShiftDown;
+import org.usfirst.frc.team4859.robot.commands.ShiftUp;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoSelector extends CommandGroup {
@@ -19,6 +22,7 @@ public class AutoSelector extends CommandGroup {
 
 
 	public void driveToTarget() {
+		addParallel(new ShiftDown());
 		addSequential(new DriveStop(RobotMap.delayInSeconds));
 		System.out.printf("%s Autonomous--> [Location=%c] [Target=%s] [Target Side=%c]%n", 
 				new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()),
