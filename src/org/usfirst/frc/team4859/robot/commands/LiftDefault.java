@@ -1,8 +1,6 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
-import org.usfirst.frc.team4859.robot.subsystems.Lifter;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -16,6 +14,7 @@ public class LiftDefault extends Command {
     public LiftDefault(double inputDistance) {
     	requires(Robot.lifter);
     	distance = inputDistance;
+    	time = 0;
     }
     
     public LiftDefault(double inputDistance, double inputTime) {

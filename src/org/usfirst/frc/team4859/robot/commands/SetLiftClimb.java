@@ -1,33 +1,21 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
-import org.usfirst.frc.team4859.robot.subsystems.Lifter;
-
+import org.usfirst.frc.team4859.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class LiftScale extends Command {
-	
-	private double distance = 0;
-	private double time = 0;
-	
-    public LiftScale(double inputDistance) {
-    	requires(Robot.lifter);
-    	distance = inputDistance;
-    }
+public class SetLiftClimb extends Command {
     
-    public LiftScale(double inputDistance, double inputTime) {
+    public SetLiftClimb() {
     	requires(Robot.lifter);
-    	distance = inputDistance;
-    	time = inputTime;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	setTimeout(time);
-    	Robot.lifter.liftScale(distance);
+    	RobotMap.liftSetHeight = Robot.liftEncoderUnitConversion(RobotMap.liftClimbHeight);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -36,18 +24,15 @@ public class LiftScale extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (time <= 0) return false;
-    	else return isTimedOut();
+    	return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.lifter.liftScale(distance);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.lifter.liftStop();
     }
 }

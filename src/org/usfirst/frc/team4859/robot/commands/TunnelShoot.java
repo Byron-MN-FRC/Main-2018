@@ -14,6 +14,7 @@ public class TunnelShoot extends Command {
     public TunnelShoot(double inputSpeed) {
     	requires(Robot.tunnel);
     	speed = inputSpeed;
+    	time = 0;
     }
     
     public TunnelShoot(double inputSpeed, double inputTime) {

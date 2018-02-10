@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 	    public TunnelIntake (double inputSpeed) {
 	    	requires(Robot.tunnel);
 	    	speed = inputSpeed;
+	    	time = 0;
 	    }
 	    
 	    public TunnelIntake (double inputSpeed, double inputTime) {

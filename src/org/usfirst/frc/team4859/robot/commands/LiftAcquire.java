@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
-import org.usfirst.frc.team4859.robot.subsystems.Lifter;
+import org.usfirst.frc.team4859.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -16,6 +16,7 @@ public class LiftAcquire extends Command {
     public LiftAcquire(double inputDistance) {
     	requires(Robot.lifter);
     	distance = inputDistance;
+    	time = 0;
     }
     
     public LiftAcquire(double inputDistance, double inputTime) {
@@ -36,7 +37,7 @@ public class LiftAcquire extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (time <= 0) return false;
+    	if (time <= 0) return RobotMap.powerCubeInBox;
     	else return isTimedOut();
     }
 

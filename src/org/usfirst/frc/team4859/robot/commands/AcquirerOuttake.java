@@ -14,6 +14,7 @@ public class AcquirerOuttake extends Command {
     public AcquirerOuttake(double inputSpeed) {
     	requires(Robot.acquirer);
     	speed = inputSpeed;
+    	time = 0;
     }
     
     public AcquirerOuttake(double inputSpeed, double inputTime) {
