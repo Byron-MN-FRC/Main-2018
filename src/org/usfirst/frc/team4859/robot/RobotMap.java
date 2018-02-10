@@ -37,7 +37,7 @@ public class RobotMap {
 	public static double liftSetHeight = 0;
 	
 	// Power cube detection
-	public static boolean powerCubeInBox = false;
+	public static boolean isPowerCubeInBox = false;
 	
 	// Current limiting
 	public static int kContinuousCurrentLimit = 16; // Amps

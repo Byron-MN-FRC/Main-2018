@@ -17,7 +17,7 @@ public class OI {
 	Button shiftUp = new JoystickButton(joystick, 5);
 	Button shiftDown = new JoystickButton(joystick, 3);
 	
-//	Button liftAcquire = new JoystickButton(joystick2, 1);
+//	Button acquire = new JoystickButton(joystick, 1);
 //	Button setLiftSwitch = new JoystickButton(joystick2, 3);
 //	Button setLiftScale = new JoystickButton(joystick2, 4);
 //	Button setLiftClimb = new JoystickButton(joystick2, 5);
@@ -42,7 +42,9 @@ public class OI {
 		turnRight90.whenPressed(new DriveTurnRight90());
 		turnLeft90.whenPressed(new DriveTurnLeft90());
 		
-//		liftAcquire.whenPressed(new LiftAcquire());
+//		acquire.whenPressed(new Acquire(RobotMap.liftAcquireHeight, RobotMap.acquireIntakeSpeed));
+//		acquire.whenReleased(new AcquireStop(RobotMap.liftDefaultHeight))
+//		
 //		setLiftSwitch.whenPressed(new LiftSwitch(RobotMap.liftSwitchHeight));
 //		setLiftScale.whenPressed(new LiftScale(RobotMap.liftScaleHeight));
 //		setLiftClimb.whenPressed(new LiftClimb(RobotMap.liftClimbHeight));

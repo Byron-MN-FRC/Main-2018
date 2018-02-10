@@ -142,8 +142,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Left Error", Drivetrain.motorLeftMaster.getClosedLoopError(0));
 		SmartDashboard.putNumber("Right Error", Drivetrain.motorRightMaster.getClosedLoopError(0));
 		
-		if (boxSensor.getVoltage() < 0.15) RobotMap.powerCubeInBox = true;
-        else RobotMap.powerCubeInBox = false;
+		if (boxSensor.getVoltage() < 0.15) RobotMap.isPowerCubeInBox = true;
+        else RobotMap.isPowerCubeInBox = false;
 	}
 
 	@Override
@@ -164,8 +164,8 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-		if (boxSensor.getVoltage() < 0.15) RobotMap.powerCubeInBox = true;
-        else RobotMap.powerCubeInBox = false;
+		if (boxSensor.getVoltage() < 0.15) RobotMap.isPowerCubeInBox = true;
+        else RobotMap.isPowerCubeInBox = false;
 		
 		System.out.println(Drivetrain.motorLeftMaster.getSelectedSensorVelocity(0));
 	}
