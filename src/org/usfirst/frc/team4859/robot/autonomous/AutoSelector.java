@@ -21,7 +21,7 @@ public class AutoSelector extends CommandGroup {
 
 
 	public void driveToTarget() {
-		addParallel(new ShiftUp());
+		addParallel(new ShiftDown());
 		addSequential(new DriveStop(RobotMap.delayInSeconds));
 		System.out.printf("%s Autonomous--> [Location=%c] [Target=%s] [Target Side=%c]%n", 
 				new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()),
