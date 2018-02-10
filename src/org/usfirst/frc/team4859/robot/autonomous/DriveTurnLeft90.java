@@ -16,6 +16,7 @@ public class DriveTurnLeft90 extends Command {
     	Drivetrain.motorLeftMaster.setSelectedSensorPosition(0, 0, 10);
 		Drivetrain.motorRightMaster.setSelectedSensorPosition(0, 0, 10);
     	Robot.kDrivetrain.driveTurnDistance(-27200);
+    	Robot.kDrivetrain.driveTurnDistance(-35000);
     }
 
     protected void execute() {
