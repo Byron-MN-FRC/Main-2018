@@ -9,6 +9,8 @@ package org.usfirst.frc.team4859.robot;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -16,9 +18,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import java.util.regex.Pattern;
-
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
 import org.usfirst.frc.team4859.robot.autonomous.DriveStraight;
@@ -44,6 +44,9 @@ public class Robot extends TimedRobot {
 	public static Tunnel tunnel = new Tunnel();
 	public static Lifter lifter = new Lifter();
 	public static OI m_oi;
+	
+	public static AnalogInput boxSensor = new AnalogInput(0);
+	public static AnalogOutput boxLED = new AnalogOutput(1);
   
 		Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -138,6 +141,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Right Position", Drivetrain.motorRightMaster.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("Left Error", Drivetrain.motorLeftMaster.getClosedLoopError(0));
 		SmartDashboard.putNumber("Right Error", Drivetrain.motorRightMaster.getClosedLoopError(0));
+		
+		if (boxSensor.getVoltage() < 0.15) RobotMap.isPowerCubeInBox = true;
+        else RobotMap.isPowerCubeInBox = false;
 	}
 
 	@Override
@@ -157,16 +163,26 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
+		if (boxSensor.getVoltage() < 0.15) RobotMap.isPowerCubeInBox = true;
+        else RobotMap.isPowerCubeInBox = false;
+		
+		System.out.println(Drivetrain.motorLeftMaster.getSelectedSensorVelocity(0));
 	}
 
-	public static double encoderUnitConversion(double inches) {
-		double encoderUnits = inches * RobotMap.encoderUnitsPerInch;
+	public static double driveEncoderUnitConversion(double inches) {
+		double encoderUnits = inches * RobotMap.driveEncoderUnitsPerInch;
 		return encoderUnits;
 	}
 	
 	public static double angleToDistance(double angle) {
 		double arcLength = (Math.PI * RobotMap.robotWidth) * (angle/360);
-		return encoderUnitConversion(arcLength);
+		return driveEncoderUnitConversion(arcLength);
+	}
+	
+	public static double liftEncoderUnitConversion(double inches) {
+		double encoderUnits = inches * RobotMap.liftEncoderUnitsPerInch;
+		return encoderUnits;
 	}
 	
 	/**

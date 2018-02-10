@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {	
 	private final Joystick joystick = new Joystick(0);
+	private final Joystick joystick2 = new Joystick(1);
 	
 	Button turnRight90 = new JoystickButton(joystick, 12);
 	Button turnLeft90 = new JoystickButton(joystick, 11);
@@ -16,6 +17,13 @@ public class OI {
 	Button shiftUp = new JoystickButton(joystick, 5);
 	Button shiftDown = new JoystickButton(joystick, 3);
 	
+//	Button acquire = new JoystickButton(joystick, 1);
+//	Button setLiftSwitch = new JoystickButton(joystick2, 3);
+//	Button setLiftScale = new JoystickButton(joystick2, 4);
+//	Button setLiftClimb = new JoystickButton(joystick2, 5);
+//	
+//	Button liftToHeight = new JoystickButton(joystick, 7);
+//	
 //	Button acquireIntake = new JoystickButton(joystick, 1);
 //	Button acquireOuttake = new JoystickButton(joystick, 2);
 //	
@@ -24,11 +32,7 @@ public class OI {
 //	Button tunnelIntake = new JoystickButton(joystick, 2);
 //	Button tunnelShoot = new JoystickButton(joystick, 2);
 //
-//	Button liftAcquire = new JoystickButton(joystick, 12);
-//	Button liftDefault = new JoystickButton(joystick, 12);
-//	Button liftSwitch = new JoystickButton(joystick, 11);
-//	Button liftScale = new JoystickButton(joystick, 9);
-//	Button liftClimb = new JoystickButton(joystick, 7);
+
  
 	public OI() {
 
@@ -38,19 +42,23 @@ public class OI {
 		turnRight90.whenPressed(new DriveTurnRight90());
 		turnLeft90.whenPressed(new DriveTurnLeft90());
 		
+//		acquire.whenPressed(new Acquire(RobotMap.liftAcquireHeight, RobotMap.acquireIntakeSpeed));
+//		acquire.whenReleased(new AcquireStop(RobotMap.liftDefaultHeight))
+//		
+//		setLiftSwitch.whenPressed(new LiftSwitch(RobotMap.liftSwitchHeight));
+//		setLiftScale.whenPressed(new LiftScale(RobotMap.liftScaleHeight));
+//		setLiftClimb.whenPressed(new LiftClimb(RobotMap.liftClimbHeight));
+//		
+//		liftToHeight.whenPressed(new LiftToHeight(RobotMap.liftSetHeight);
+//		
 //		climbStart.whileHeld(new ClimbStart(RobotMap.kClimbSpeed));
-
+//
 //		acquireIntake.whileHeld(new AcquirerIntake(RobotMap.acquireIntakeSpeed));
 //		acquireOuttake.whileHeld(new AcquirerOuttake(RobotMap.acquireOuttakeSpeed));
 //		
 //		tunnelIntake.whileHeld(new TunnelIntake(RobotMap.tunnelIntakeSpeed));
 //		tunnelShoot.whileHeld(new TunnelShoot(RobotMap.tunnelIntakeSpeed));
-//
-//		liftAcquire.whenPressed(new LiftAcquire(RobotMap.liftAcquireHeight));
-//		liftDefault.whenPressed(new LiftDefault(RobotMap.liftDefaultHeight));
-//		liftSwitch.whenPressed(new LiftSwitch(RobotMap.liftSwitchHeight));
-//		liftScale.whenPressed(new LiftScale(RobotMap.liftScaleHeight));
-//		liftClimb.whenPressed(new LiftClimb(RobotMap.liftClimbHeight));
+
 	}
 	
 	public Joystick getJoystick() {

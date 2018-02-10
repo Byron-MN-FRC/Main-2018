@@ -1,31 +1,29 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
+import org.usfirst.frc.team4859.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class LiftStop extends Command {
-	
-    public LiftStop() {
-    	requires(Robot.lifter);
+public class SetLiftClimb extends Command {
+    
+    public SetLiftClimb() {
     }
 
     protected void initialize() {
-    	Robot.lifter.liftStop();
-    	System.out.println("LiftStop command ran");
+    	RobotMap.liftSetHeight = Robot.liftEncoderUnitConversion(RobotMap.liftClimbHeight);
+    	System.out.println("SetLiftClimb command ran");
     }
 
     protected void execute() {
     }
 
     protected boolean isFinished() {
-        return false;
+    	return false;
     }
 
     protected void end() {
-    	Robot.lifter.liftStop();
     }
 
     protected void interrupted() {
-    	Robot.lifter.liftStop();
     }
 }

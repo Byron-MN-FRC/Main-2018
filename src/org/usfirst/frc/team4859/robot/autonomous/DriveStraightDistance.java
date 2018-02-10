@@ -13,7 +13,7 @@ public class DriveStraightDistance extends Command {
     public DriveStraightDistance(double inputDistance, double inputTime) {
         requires(Robot.kDrivetrain);
         
-        distance = Robot.encoderUnitConversion(inputDistance);
+        distance = Robot.driveEncoderUnitConversion(inputDistance);
         time = inputTime;
 		System.out.printf("DriveStraight called with inputDistance %f, calculated Distancce %f, Time %f%n", 
 				inputDistance, distance, inputTime);
