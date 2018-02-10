@@ -50,6 +50,8 @@ public class Drivetrain extends Subsystem {
 		twist = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowT", twist) : ThrottleLookup.calcJoystickCorrection("NormT", twist);
 		
 		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
+		SmartDashboard.putNumber("Forward Backword", y);
+		SmartDashboard.putNumber("Left Right", twist);
 		
 //		SmartDashboard.putNumber("Left 1", motorLeftMaster.getOutputCurrent());
 //		SmartDashboard.putNumber("Left 2", motorLeftFollower.getOutputCurrent());

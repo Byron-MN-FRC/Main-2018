@@ -93,10 +93,13 @@ public class RobotMap {
 	
 	// Autonomous selector variables
 	public static boolean targetScale = false;
-	public static String targetName = "Switch";
 	
 	public static char location = ' ';
 	public static char targetSide = ' ';
 	public static char oppositeTargetSide = ' ';
 	public static double delayInSeconds = 0;
+	
+	// Turn Ratio for encoder ticks
+	public static double decoderTurnRatio = 34500 / 90;
+	public static double secondsRatio = 40;
 }

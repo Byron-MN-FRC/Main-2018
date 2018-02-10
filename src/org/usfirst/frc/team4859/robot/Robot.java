@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                         */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -19,9 +19,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.regex.Pattern;
-import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
-import org.usfirst.frc.team4859.robot.autonomous.DriveStraight;
+//import org.usfirst.frc.team4859.robot.autonomous.DriveStraight;
+import org.usfirst.frc.team4859.robot.autonomous.DriveStraightDistance;
 import org.usfirst.frc.team4859.robot.subsystems.Acquirer;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
@@ -100,7 +100,6 @@ public class Robot extends TimedRobot {
 
 		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
 		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
-		System.out.println("location=" + location);		
 		String targetScale = SmartDashboard.getString("Scale", "N");
 		
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
@@ -112,23 +111,18 @@ public class Robot extends TimedRobot {
 		boolean validDelay = false;
 		
 		if(RobotMap.delayInSeconds >= 0 && RobotMap.delayInSeconds < 15) validDelay = true;
-		else validDelay = false;
 		
 		if (!validGameString || !validRobotPos || !validDelay) {
 		 	System.out.println("Gamedata is invalid! Running AutoStraight routine.");
-			m_autonomousCommand = new DriveStraight(0.4, 4);
+			m_autonomousCommand = new DriveStraightDistance(96,3);
 			m_autonomousCommand.start();
 		} else {
 			RobotMap.targetSide = gameData.charAt(0); //default to switch side
 			RobotMap.location = location.charAt(0);
 			if (targetScale.equalsIgnoreCase("Y")) { 
-				RobotMap.targetName = "Scale";
 				RobotMap.targetScale = true; 
 				RobotMap.targetSide = gameData.charAt(1);
-
-				//SmartDashboard.putString("location", String.valueOf(location));
-				//SmartDashboard.putString("TargetSide", String.valueOf(targetSide));
-				}
+			}
 			
 			m_autonomousCommand = new AutoSelector();
 			m_autonomousCommand.start();
