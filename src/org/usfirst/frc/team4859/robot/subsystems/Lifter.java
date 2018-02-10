@@ -29,16 +29,6 @@ public class Lifter extends Subsystem {
     	//motorLiftStage2.set(0);
     }
     
-    public void liftAcquire(double inputDistance) {
-//    	motorLiftStage1.set(ControlMode.MotionMagic, inputDistance/2);
-//    	motorLiftStage2.set(ControlMode.MotionMagic, inputDistance/2);
-    }
-    
-    public void liftDefault(double inputDistance) {
-//    	motorLiftStage1.set(ControlMode.MotionMagic, inputDistance/2);
-//    	motorLiftStage2.set(ControlMode.MotionMagic, inputDistance/2);
-    }
-    
     public void liftToHeight(double inputDistance) {
 //    	motorLiftStage1.set(ControlMode.MotionMagic, inputDistance/2);
 //    	motorLiftStage2.set(ControlMode.MotionMagic, inputDistance/2);

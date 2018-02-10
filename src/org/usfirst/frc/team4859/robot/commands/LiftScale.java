@@ -3,23 +3,19 @@ package org.usfirst.frc.team4859.robot.commands;
 import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class AcquireStop extends Command {
+public class LiftScale extends Command {
 	
 	private double distance = 0;
 	private double time = 0;
 	
-    public AcquireStop(double inputDistance) {
+    public LiftScale(double inputDistance) {
     	requires(Robot.lifter);
-    	requires(Robot.acquirer);
-    	requires(Robot.tunnel);
     	distance = inputDistance;
     	time = 0;
     }
-	
-    public AcquireStop(double inputDistance, double inputTime) {
+    
+    public LiftScale(double inputDistance, double inputTime) {
     	requires(Robot.lifter);
-    	requires(Robot.acquirer);
-    	requires(Robot.tunnel);
     	distance = inputDistance;
     	time = inputTime;
     }
@@ -27,12 +23,10 @@ public class AcquireStop extends Command {
     protected void initialize() {
     	setTimeout(time);
     	Robot.lifter.liftToHeight(distance);
-    	System.out.println("AcquireStop command ran");
+    	System.out.println("LiftScale command ran");
     }
 
     protected void execute() {
-    	Robot.acquirer.acquireStop();
-    	Robot.tunnel.tunnelStop();
     }
 
     protected boolean isFinished() {
@@ -42,13 +36,9 @@ public class AcquireStop extends Command {
 
     protected void end() {
     	Robot.lifter.liftToHeight(distance);
-    	Robot.acquirer.acquireStop();
-    	Robot.tunnel.tunnelStop();
     }
 
     protected void interrupted() {
     	Robot.lifter.liftStop();
-    	Robot.acquirer.acquireStop();
-    	Robot.tunnel.tunnelStop();
     }
 }

@@ -22,7 +22,7 @@ public class LiftDefault extends Command {
 
     protected void initialize() {
     	setTimeout(time);
-    	Robot.lifter.liftDefault(distance);
+    	Robot.lifter.liftToHeight(distance);
     	System.out.println("LiftDefault command ran");
     }
 
@@ -35,7 +35,7 @@ public class LiftDefault extends Command {
     }
 
     protected void end() {
-    	Robot.lifter.liftDefault(distance);
+    	Robot.lifter.liftToHeight(distance);
     }
 
     protected void interrupted() {

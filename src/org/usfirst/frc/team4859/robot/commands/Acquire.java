@@ -33,7 +33,7 @@ public class Acquire extends Command {
 
     protected void initialize() {
     	setTimeout(time);
-    	Robot.lifter.liftDefault(distance);
+    	Robot.lifter.liftToHeight(distance);
     	System.out.println("Acquire command ran");
     }
 
@@ -48,7 +48,7 @@ public class Acquire extends Command {
     }
 
     protected void end() {
-    	Robot.lifter.liftDefault(distance);
+    	Robot.lifter.liftToHeight(distance);
     	Robot.acquirer.acquireStop();
     	Robot.tunnel.tunnelStop();
     }
