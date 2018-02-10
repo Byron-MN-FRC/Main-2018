@@ -17,13 +17,11 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.regex.Pattern;
 
-import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
+//import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
-import org.usfirst.frc.team4859.robot.autonomous.DriveStraight;
+//import org.usfirst.frc.team4859.robot.autonomous.DriveStraight;
 import org.usfirst.frc.team4859.robot.autonomous.DriveStraightDistance;
 import org.usfirst.frc.team4859.robot.subsystems.Acquirer;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;

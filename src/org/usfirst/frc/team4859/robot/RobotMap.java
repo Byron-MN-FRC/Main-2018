@@ -43,10 +43,10 @@ public class RobotMap {
 	public static int kPIDSlot = 0;
 	
 	// Drivetrain values
-	public static double kP = 0.22;
-	public static double kI = 0.0015;
+	public static double kP = 0.25;
+	public static double kI = 0.00015;
 	public static double kD = 0.000;
-	public static double kF = 0.09;
+	public static double kF = 0.12;
 	public static int kAllowableError = 90;
 	
 	public static int kHighGearAcceleration = 9000;
