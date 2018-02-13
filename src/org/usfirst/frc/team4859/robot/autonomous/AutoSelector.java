@@ -3,6 +3,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.usfirst.frc.team4859.robot.RobotMap;
+import org.usfirst.frc.team4859.robot.commands.AcquirerOuttake;
+import org.usfirst.frc.team4859.robot.commands.LiftScale;
+import org.usfirst.frc.team4859.robot.commands.LiftSwitch;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -26,25 +29,29 @@ public class AutoSelector extends CommandGroup {
 		// Drive to same side target (scale is 2x distance of switch & 1/2 distance in)
 		double multiplier = RobotMap.targetScale ? 1.5 : 1 ; 
 		// Driving forward from wall in all conditions
-		addSequential(new DriveStraightDistance(75,2));
+		addSequential(new DriveStraightDistance(45,1));
 		turn(targetSide, 90);
 		addSequential(new DriveStraightDistance(75*multiplier, 1.5*multiplier)); // toward outside wall
 		if (targetSide == 'L') turn('R', 90);
 		else turn('L', 90);
-
 		if(RobotMap.targetScale) {
-			addSequential(new DriveStraightDistance(225,4.5));
+			addParallel(new LiftScale(RobotMap.liftScaleHeight,0));
+			addSequential(new DriveStraightDistance(205,4.25));
 			if (targetSide == 'L') turn('R', 90);
 			else turn('L', 90);
-		} else
-			addSequential(new DriveStraightDistance(12,.25));	
+		} else {
+			addParallel(new LiftSwitch(RobotMap.liftSwitchHeight,0));
+			addSequential(new DriveStraightDistance(50,1));	
+		}
 	}
 	
 	public void driveSameSide() {
 		if (RobotMap.targetScale) {
-			addSequential(new DriveStraightDistance(275,5));
+			addParallel(new LiftScale(RobotMap.liftScaleHeight,0));
+			addSequential(new DriveStraightDistance(205,4.25));
 			turn(oppositeSide,45);
 		} else {
+			addParallel(new LiftSwitch(RobotMap.liftSwitchHeight,0));
 			addSequential(new DriveStraightDistance(150,3));
 			turn(oppositeSide,90);
 			addSequential(new DriveStraightDistance(12,0.25));	
@@ -62,11 +69,12 @@ public class AutoSelector extends CommandGroup {
 		double height = RobotMap.targetScale ? 36 : 12;
 		System.out.println("Lift cube to switch" + height);
 		System.out.println("Shoot cube out front");
+		addSequential(new AcquirerOuttake(RobotMap.acquireOuttakeSpeed, 5));
 	}
 	
 	public void driveOppositeSide() {
 		// Drive past switch
-		addSequential(new DriveStraightDistance(225, 225/RobotMap.secondsRatio));
+		addSequential(new DriveStraightDistance(205, 205/RobotMap.secondsRatio));
 		turn(oppositeSide,90); // Turn away from starting side
 		// Cross the field
 		addSequential(new DriveStraightDistance(200, 200/RobotMap.secondsRatio));
@@ -74,9 +82,12 @@ public class AutoSelector extends CommandGroup {
 		// Go to scale or switch 
 		if(RobotMap.targetScale) {
 			turn(location,90);
+			addParallel(new LiftScale(RobotMap.liftScaleHeight,0));
+			addSequential(new DriveStraightDistance(24,.5));
 		} else {
-			turn(oppositeSide,90);
-			addSequential(new DriveStraightDistance(12,.5));
+			addParallel(new LiftSwitch(RobotMap.liftSwitchHeight,0));
+			turn(oppositeSide,135);
+			//addSequential(new DriveStraightDistance(12,.5));
 		}
 	}
 	
@@ -93,17 +104,17 @@ public class AutoSelector extends CommandGroup {
 		switch(location) {
 		case 'C':
 			driveFromCenter();
-			//deliverCube();
+			deliverCube();
 			break;
 		case 'L':
 			if (targetSide == 'L') driveSameSide();
 			else driveOppositeSide();
-			//deliverCube();
+			deliverCube();
 			break;
 		case 'R':
 			if (targetSide == 'R') driveSameSide();
 			else driveOppositeSide();
-			//deliverCube();
+			deliverCube();
 			break;
 		default:
 			System.out.println("SHOULD NOT EVER GET HERE:Drive Forward");
