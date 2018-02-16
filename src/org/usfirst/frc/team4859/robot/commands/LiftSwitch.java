@@ -21,6 +21,7 @@ public class LiftSwitch extends Command {
     }
 
     protected void initialize() {
+    	System.out.println("LiftSwitch command started");
     	setTimeout(time);
     	Robot.lifter.liftToHeight(distance);
     	System.out.println("LiftSwitch command ran");
