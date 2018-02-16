@@ -29,9 +29,9 @@ public class AutoSelector extends CommandGroup {
 		// Drive to same side target (scale is 2x distance of switch & 1/2 distance in)
 		double multiplier = RobotMap.targetScale ? 1.5 : 1 ; 
 		// Driving forward from wall in all conditions
-		addSequential(new DriveStraightDistance(45,1));
+		addSequential(new DriveStraightDistance(45,3));
 		turn(targetSide, 90);
-		addSequential(new DriveStraightDistance(75*multiplier, 1.5*multiplier)); // toward outside wall
+		addSequential(new DriveStraightDistance(65*multiplier, 3.5*multiplier)); // toward outside wall
 		if (targetSide == 'L') turn('R', 90);
 		else turn('L', 90);
 		if(RobotMap.targetScale) {
@@ -41,20 +41,21 @@ public class AutoSelector extends CommandGroup {
 			else turn('L', 90);
 		} else {
 			addParallel(new LiftSwitch(RobotMap.liftSwitchHeight,0));
-			addSequential(new DriveStraightDistance(50,1));	
+			addSequential(new DriveStraightDistance(50,3));	
 		}
 	}
 	
 	public void driveSameSide() {
 		if (RobotMap.targetScale) {
 			addParallel(new LiftScale(RobotMap.liftScaleHeight,0));
-			addSequential(new DriveStraightDistance(205,4.25));
+			addSequential(new DriveStraightDistance(275,5.5));
 			turn(oppositeSide,45);
+			addSequential(new DriveStraightDistance(20,.5));
 		} else {
 			addParallel(new LiftSwitch(RobotMap.liftSwitchHeight,0));
 			addSequential(new DriveStraightDistance(150,3));
 			turn(oppositeSide,90);
-			addSequential(new DriveStraightDistance(12,0.25));	
+			addSequential(new DriveStraightDistance(32,1));	
 		}
     }
 	
@@ -83,7 +84,7 @@ public class AutoSelector extends CommandGroup {
 		if(RobotMap.targetScale) {
 			turn(location,90);
 			addParallel(new LiftScale(RobotMap.liftScaleHeight,0));
-			addSequential(new DriveStraightDistance(24,.5));
+			addSequential(new DriveStraightDistance(24,2));
 		} else {
 			addParallel(new LiftSwitch(RobotMap.liftSwitchHeight,0));
 			turn(oppositeSide,135);
