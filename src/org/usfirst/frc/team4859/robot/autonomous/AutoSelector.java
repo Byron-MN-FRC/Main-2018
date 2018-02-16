@@ -29,33 +29,37 @@ public class AutoSelector extends CommandGroup {
 		// Drive to same side target (scale is 2x distance of switch & 1/2 distance in)
 		double multiplier = RobotMap.targetScale ? 1.5 : 1 ; 
 		// Driving forward from wall in all conditions
-		addSequential(new DriveStraightDistance(45,3));
+		addSequential(new DriveStraightDistance(45,45/RobotMap.secondsRatio));
 		turn(targetSide, 90);
-		addSequential(new DriveStraightDistance(65*multiplier, 3.5*multiplier)); // toward outside wall
+		addSequential(new DriveStraightDistance(65*multiplier, 65/RobotMap.secondsRatio*multiplier)); // toward outside wall
 		if (targetSide == 'L') turn('R', 90);
 		else turn('L', 90);
 		if(RobotMap.targetScale) {
+			System.out.println("lift to scale height");
 			addParallel(new LiftScale(RobotMap.liftScaleHeight,0));
-			addSequential(new DriveStraightDistance(205,4.25));
+			addSequential(new DriveStraightDistance(205,205/RobotMap.secondsRatio));
 			if (targetSide == 'L') turn('R', 90);
 			else turn('L', 90);
 		} else {
+			System.out.println("lift to switch height");
 			addParallel(new LiftSwitch(RobotMap.liftSwitchHeight,0));
-			addSequential(new DriveStraightDistance(50,3));	
+			addSequential(new DriveStraightDistance(50,50/RobotMap.secondsRatio));	
 		}
 	}
 	
 	public void driveSameSide() {
 		if (RobotMap.targetScale) {
+			System.out.println("Lift to scale height");
 			addParallel(new LiftScale(RobotMap.liftScaleHeight,0));
-			addSequential(new DriveStraightDistance(275,5.5));
+			addSequential(new DriveStraightDistance(275,275/RobotMap.secondsRatio));
 			turn(oppositeSide,45);
-			addSequential(new DriveStraightDistance(20,.5));
+			addSequential(new DriveStraightDistance(20,20/RobotMap.secondsRatio));
 		} else {
+			System.out.println("Lift to switch height");
 			addParallel(new LiftSwitch(RobotMap.liftSwitchHeight,0));
-			addSequential(new DriveStraightDistance(150,3));
+			addSequential(new DriveStraightDistance(150,150/RobotMap.secondsRatio));
 			turn(oppositeSide,90);
-			addSequential(new DriveStraightDistance(32,1));	
+			addSequential(new DriveStraightDistance(32,32/RobotMap.secondsRatio));	
 		}
     }
 	
@@ -68,7 +72,6 @@ public class AutoSelector extends CommandGroup {
 	
 	public void deliverCube () {
 		double height = RobotMap.targetScale ? 36 : 12;
-		System.out.println("Lift cube to switch" + height);
 		System.out.println("Shoot cube out front");
 		addSequential(new AcquirerOuttake(RobotMap.acquireOuttakeSpeed, 5));
 	}
@@ -83,9 +86,11 @@ public class AutoSelector extends CommandGroup {
 		// Go to scale or switch 
 		if(RobotMap.targetScale) {
 			turn(location,90);
+			System.out.println("lift to scale height");
 			addParallel(new LiftScale(RobotMap.liftScaleHeight,0));
-			addSequential(new DriveStraightDistance(24,2));
+			addSequential(new DriveStraightDistance(24,24/RobotMap.secondsRatio));
 		} else {
+			System.out.println("lift to switch height");
 			addParallel(new LiftSwitch(RobotMap.liftSwitchHeight,0));
 			turn(oppositeSide,135);
 			//addSequential(new DriveStraightDistance(12,.5));

@@ -101,5 +101,5 @@ public class RobotMap {
 	
 	// Turn Ratio for encoder ticks
 	public static double decoderTurnRatio = 25000 / 90;
-	public static double secondsRatio = 38;
+	public static double secondsRatio = 25;
 }
