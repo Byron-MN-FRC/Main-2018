@@ -48,6 +48,7 @@ public class Robot extends TimedRobot {
 	
 	public static AnalogInput boxSensor = new AnalogInput(0);
 	public static AnalogOutput boxLED = new AnalogOutput(1);
+	public static AnalogInput liftLimitSwitch = new AnalogInput(2);
 	
 	// Create offseason NetworkTable
 //	public static NetworkTableInstance offSeasonNetworkTable = NetworkTableInstance.create();
@@ -64,6 +65,7 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "C");
 		SmartDashboard.putString("Scale", "N");
+		SmartDashboard.putString("Deliver Cube", "Y");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 		
 		// Connect to offseason NetworkTable
@@ -108,6 +110,7 @@ public class Robot extends TimedRobot {
 		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
 		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
 		String targetScale = SmartDashboard.getString("Scale", "N");
+		String delivery = SmartDashboard.getString("Deliver Cube", "Y");
 		
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
 		
@@ -152,6 +155,14 @@ public class Robot extends TimedRobot {
 		
 		if (boxSensor.getVoltage() < 0.15) RobotMap.isPowerCubeInBox = true;
         else RobotMap.isPowerCubeInBox = false;
+		
+		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLimitSwitchTriggered = false;
+		else{
+			RobotMap.isLimitSwitchTriggered = true;
+			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+		}
+		
 	}
 
 	@Override
@@ -175,7 +186,14 @@ public class Robot extends TimedRobot {
 		if (boxSensor.getVoltage() < 0.15) RobotMap.isPowerCubeInBox = true;
         else RobotMap.isPowerCubeInBox = false;
 		
-		System.out.println(Drivetrain.motorLeftMaster.getSelectedSensorVelocity(0));
+		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLimitSwitchTriggered = false;
+		else{
+			RobotMap.isLimitSwitchTriggered = true;
+			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+		}
+		
+		System.out.println(RobotMap.isLimitSwitchTriggered);
 	}
 
 	public static double driveEncoderUnitConversion(double inches) {

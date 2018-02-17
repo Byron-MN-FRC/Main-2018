@@ -56,6 +56,8 @@ public class RobotMap {
 	
 	// Power cube detection
 	public static boolean isPowerCubeInBox = false;
+	public static boolean isLimitSwitchTriggered = false;
+	public static boolean isLiftDown = false;
 	
 	// Current limiting
 	public static int kDriveContinuousCurrentLimit = 30; // Amps
