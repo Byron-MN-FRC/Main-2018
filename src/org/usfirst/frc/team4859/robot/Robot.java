@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
 	
 	public static AnalogInput boxSensor = new AnalogInput(0);
 	public static AnalogOutput boxLED = new AnalogOutput(1);
-	public static AnalogInput liftLimitSwitch = new AnalogInput(2);
+	public static AnalogInput liftLimitSwitch = new AnalogInput(1);
 	
 	// Create offseason NetworkTable
 //	public static NetworkTableInstance offSeasonNetworkTable = NetworkTableInstance.create();
