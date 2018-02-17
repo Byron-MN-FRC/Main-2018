@@ -3,14 +3,14 @@ package org.usfirst.frc.team4859.robot.commands;
 import org.usfirst.frc.team4859.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SetLiftScale extends Command {
+public class SetLiftScaleHigh extends Command {
     
-    public SetLiftScale() {
+    public SetLiftScaleHigh() {
     }
 
     protected void initialize() {
-    	RobotMap.liftSetHeight = "scaleNorm";
-    	System.out.println("SetLiftScale command ran");
+    	RobotMap.liftSetHeight = "scaleHigh";
+    	System.out.println("SetLiftScaleHigh command ran");
     }
 
     protected void execute() {

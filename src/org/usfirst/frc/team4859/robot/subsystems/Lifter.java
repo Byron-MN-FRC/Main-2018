@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Lifter extends Subsystem {
 	// Create motors here
-//	public static WPI_TalonSRX motorLiftStage1 = new WPI_TalonSRX(RobotMap.talonIDLiftStage1);
-//	public static WPI_TalonSRX motorLiftStage2 = new WPI_TalonSRX(RobotMap.talonIDLiftStage2);
+	public static WPI_TalonSRX motorLiftStage1 = new WPI_TalonSRX(RobotMap.talonIDLiftStage1);
+	public static WPI_TalonSRX motorLiftStage2 = new WPI_TalonSRX(RobotMap.talonIDLiftStage2);
 	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -29,9 +29,19 @@ public class Lifter extends Subsystem {
     	//motorLiftStage2.set(0);
     }
     
-    public void liftToHeight(double inputDistance) {
-//    	motorLiftStage1.set(ControlMode.MotionMagic, inputDistance/2);
-//    	motorLiftStage2.set(ControlMode.MotionMagic, inputDistance/2);
+    public void liftDown() {
+//    	if(!RobotMap.isLiftDown) {
+//    		motorLiftStage1.set(RobotMap.liftDownSpeed);
+//        	motorLiftStage2.set(RobotMap.liftDownSpeed);
+//    	} else {
+//    		motorLiftStage1.set(0);
+//        	motorLiftStage2.set(0);
+//    	}
+    }
+    
+    public void liftToHeight(String position) {
+    	motorLiftStage1.set(ControlMode.MotionMagic, RobotMap.liftPosition.get(position)[0]);
+    	motorLiftStage2.set(ControlMode.MotionMagic, RobotMap.liftPosition.get(position)[1]);
     }
     
 	private void motorConfig() {

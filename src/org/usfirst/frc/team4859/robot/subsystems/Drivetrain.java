@@ -102,19 +102,19 @@ public class Drivetrain extends Subsystem {
 		motorRightFollower2.set(ControlMode.Follower, RobotMap.talonIDRightMaster);
 		
 		// Set current limits
-		motorLeftMaster.configContinuousCurrentLimit(RobotMap.kContinuousCurrentLimit, RobotMap.kTimeoutMs);
-		motorLeftFollower1.configContinuousCurrentLimit(RobotMap.kContinuousCurrentLimit, RobotMap.kTimeoutMs);
-		motorLeftFollower2.configContinuousCurrentLimit(RobotMap.kContinuousCurrentLimit, RobotMap.kTimeoutMs);
-		motorRightMaster.configContinuousCurrentLimit(RobotMap.kContinuousCurrentLimit, RobotMap.kTimeoutMs);
-		motorRightFollower1.configContinuousCurrentLimit(RobotMap.kContinuousCurrentLimit, RobotMap.kTimeoutMs);
-		motorRightFollower2.configContinuousCurrentLimit(RobotMap.kContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		motorLeftMaster.configContinuousCurrentLimit(RobotMap.kDriveContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		motorLeftFollower1.configContinuousCurrentLimit(RobotMap.kDriveContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		motorLeftFollower2.configContinuousCurrentLimit(RobotMap.kDriveContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		motorRightMaster.configContinuousCurrentLimit(RobotMap.kDriveContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		motorRightFollower1.configContinuousCurrentLimit(RobotMap.kDriveContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		motorRightFollower2.configContinuousCurrentLimit(RobotMap.kDriveContinuousCurrentLimit, RobotMap.kTimeoutMs);
 		
-		motorLeftMaster.configPeakCurrentDuration(RobotMap.kCurrentPeakDuration, RobotMap.kTimeoutMs);
-		motorLeftFollower1.configPeakCurrentDuration(RobotMap.kCurrentPeakDuration, RobotMap.kTimeoutMs);
-		motorLeftFollower2.configPeakCurrentDuration(RobotMap.kCurrentPeakDuration, RobotMap.kTimeoutMs);
-		motorRightMaster.configPeakCurrentDuration(RobotMap.kCurrentPeakDuration, RobotMap.kTimeoutMs);
-		motorRightFollower1.configPeakCurrentDuration(RobotMap.kCurrentPeakDuration, RobotMap.kTimeoutMs);
-		motorRightFollower2.configPeakCurrentDuration(RobotMap.kCurrentPeakDuration, RobotMap.kTimeoutMs);
+		motorLeftMaster.configPeakCurrentDuration(RobotMap.kDriveCurrentPeakDuration, RobotMap.kTimeoutMs);
+		motorLeftFollower1.configPeakCurrentDuration(RobotMap.kDriveCurrentPeakDuration, RobotMap.kTimeoutMs);
+		motorLeftFollower2.configPeakCurrentDuration(RobotMap.kDriveCurrentPeakDuration, RobotMap.kTimeoutMs);
+		motorRightMaster.configPeakCurrentDuration(RobotMap.kDriveCurrentPeakDuration, RobotMap.kTimeoutMs);
+		motorRightFollower1.configPeakCurrentDuration(RobotMap.kDriveCurrentPeakDuration, RobotMap.kTimeoutMs);
+		motorRightFollower2.configPeakCurrentDuration(RobotMap.kDriveCurrentPeakDuration, RobotMap.kTimeoutMs);
 		
 		motorLeftMaster.enableCurrentLimit(true);
 		motorLeftFollower1.enableCurrentLimit(true);

@@ -18,6 +18,7 @@ public class OI {
 	Button shiftDown = new JoystickButton(joystick, 3);
 	
 //	Button acquire = new JoystickButton(joystick, 1);
+	
 //	Button setLiftSwitch = new JoystickButton(joystick2, 3);
 //	Button setLiftScale = new JoystickButton(joystick2, 4);
 //	Button setLiftClimb = new JoystickButton(joystick2, 5);

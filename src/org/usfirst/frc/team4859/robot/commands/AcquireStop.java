@@ -5,28 +5,28 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class AcquireStop extends Command {
 	
-	private double distance = 0;
+	private String position = "";
 	private double time = 0;
 	
-    public AcquireStop(double inputDistance) {
+    public AcquireStop(String inputPosition) {
     	requires(Robot.lifter);
     	requires(Robot.acquirer);
     	requires(Robot.tunnel);
-    	distance = inputDistance;
+    	position = inputPosition;
     	time = 0;
     }
 	
-    public AcquireStop(double inputDistance, double inputTime) {
+    public AcquireStop(String inputPosition, double inputTime) {
     	requires(Robot.lifter);
     	requires(Robot.acquirer);
     	requires(Robot.tunnel);
-    	distance = inputDistance;
+    	position = inputPosition;
     	time = inputTime;
     }
 
     protected void initialize() {
     	setTimeout(time);
-    	Robot.lifter.liftToHeight(distance);
+    	Robot.lifter.liftToHeight(position);
     	System.out.println("AcquireStop command ran");
     }
 
@@ -41,7 +41,7 @@ public class AcquireStop extends Command {
     }
 
     protected void end() {
-    	Robot.lifter.liftToHeight(distance);
+    	Robot.lifter.liftToHeight(position);
     	Robot.acquirer.acquireStop();
     	Robot.tunnel.tunnelStop();
     }
