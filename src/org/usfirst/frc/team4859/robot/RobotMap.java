@@ -38,13 +38,13 @@ public class RobotMap {
         private static final long serialVersionUID = 1L;
 
     {	   //name                      stage1 stage2 (in inches)
-        put("acquire",   new Double[]  { 0.0, 0.0 } );
-        put("default",   new Double[]  { 6.0, 0.0 } );
-        put("switch",    new Double[]  { 0.0, 24.75 } );
-        put("scaleLow",  new Double[]  { 18.0, 39.5 } );
-        put("scaleNorm", new Double[]  { 30.0, 39.5 } );
-        put("scaleHigh", new Double[]  { 40.0, 39.5 } );
-        put("climb",     new Double[]  { 40.0, 39.5 } );        
+        put("acquire",   new Double[]  { 0.0	, 0.0 	  } ); // 0, 0
+        put("default",   new Double[]  { 8880.0 , 0.0 	  } ); // 8880, 0
+        put("switch",    new Double[]  { 0.0	, 23500.0 } ); // 0,
+        put("scaleLow",  new Double[]  { 17200.0, 35000.0 } ); // 17200, 
+        put("scaleNorm", new Double[]  { 27000.0, 35000.0 } ); // 27000, 39.5 
+        put("scaleHigh", new Double[]  { 36000.0, 35000.0 } ); // 40.0, 39.5
+        put("climb",     new Double[]  { 36000.0, 35000.0 } ); // 40.0, 39.5 
     }};
     
     /* Example of how to get values:
@@ -79,8 +79,8 @@ public class RobotMap {
 	public static double kLiftStage1F = 0.475;
 	public static int kLiftStage1AllowableError = 90;
 	
-	public static int kLiftStage1Acceleration = 2720;
-	public static int kLiftStage1CruiseVelocity = 2720;
+	public static int kLiftStage1Acceleration = 11200;
+	public static int kLiftStage1CruiseVelocity = 2800;
 	
 	public static double kLiftStage2P = 1.8;
 	public static double kLiftStage2I = 0.001;
@@ -88,10 +88,8 @@ public class RobotMap {
 	public static double kLiftStage2F = 0.53;
 	public static int kLiftStage2AllowableError = 40;
 	
-	public static int kLiftStage2Acceleration = 10000;
+	public static int kLiftStage2Acceleration = 9000;
 	public static int kLiftStage2CruiseVelocity = 2250;
-	
-	public static double liftEncoderUnitsPerInch = 0;
 	
 	// Drivetrain values
 	public static double kP = 0.25;

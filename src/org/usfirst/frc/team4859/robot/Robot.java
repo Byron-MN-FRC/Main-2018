@@ -9,6 +9,7 @@ package org.usfirst.frc.team4859.robot;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -47,6 +48,9 @@ public class Robot extends TimedRobot {
 	
 	public static AnalogInput boxSensor = new AnalogInput(0);
 	public static AnalogOutput boxLED = new AnalogOutput(1);
+	
+	// Create offseason NetworkTable
+	public static NetworkTableInstance offSeasonNetworkTable = NetworkTableInstance.create();
   
 		Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -61,6 +65,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "C");
 		SmartDashboard.putString("Scale", "N");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
+		
+		// Connect to offseason NetworkTable
+		offSeasonNetworkTable.startClient("10.0.100.5");
 
 		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
 		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
@@ -104,7 +111,14 @@ public class Robot extends TimedRobot {
 		
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
 		
-		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		// For normal FMS
+//		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		
+		// For offseason FMS
+		String gameData = offSeasonNetworkTable
+				.getTable("OffseasonFMSInfo")
+				.getEntry("GameData")
+				.getString("defaultValue");
 		
 		boolean validGameString = Pattern.matches("[LR]{3}", gameData.toUpperCase());
 		boolean validRobotPos = Pattern.matches("[LCR]{1}", location);
@@ -172,11 +186,6 @@ public class Robot extends TimedRobot {
 	public static double angleToDistance(double angle) {
 		double arcLength = (Math.PI * RobotMap.robotWidth) * (angle/360);
 		return driveEncoderUnitConversion(arcLength);
-	}
-	
-	public static double liftEncoderUnitConversion(double inches) {
-		double encoderUnits = inches * RobotMap.liftEncoderUnitsPerInch;
-		return encoderUnits;
 	}
 	
 	/**
