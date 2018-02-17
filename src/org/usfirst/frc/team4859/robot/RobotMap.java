@@ -27,7 +27,10 @@ public class RobotMap {
 	
 	// Command numbers
 	public static double acquireIntakeSpeed = 0.5;
-	public static double acquireOuttakeSpeed = 0.5;
+	public static double acquireOuttakeSpeed = -0.5;
+	
+	public static double tunnelIntakeSpeed = 0.5;
+	public static double tunnelOuttakeSpeed = -0.5;
 	
 	public static double climbSpeed = 0.5;
 	
