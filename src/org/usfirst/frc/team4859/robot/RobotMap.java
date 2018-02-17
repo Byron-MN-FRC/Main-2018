@@ -73,10 +73,10 @@ public class RobotMap {
 	public static int kPIDSlot = 0;
 	
 	// Lift values
-	public static double kLiftStage1P = 0.22;
-	public static double kLiftStage1I = 0.0015;
+	public static double kLiftStage1P = 1.6;
+	public static double kLiftStage1I = 0.0007;
 	public static double kLiftStage1D = 0.000;
-	public static double kLiftStage1F = 0.09;
+	public static double kLiftStage1F = 0.475;
 	public static int kLiftStage1AllowableError = 90;
 	
 	public static int kLiftStage1Acceleration = 2720;
