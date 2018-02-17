@@ -1,6 +1,5 @@
 package org.usfirst.frc.team4859.robot.commands;
 
-import org.usfirst.frc.team4859.robot.Robot;
 import org.usfirst.frc.team4859.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,7 +9,7 @@ public class SetLiftSwitch extends Command {
     }
 
     protected void initialize() {
-    	RobotMap.liftSetHeight = Robot.liftEncoderUnitConversion(RobotMap.liftSwitchHeight);
+    	RobotMap.liftSetHeight = "switch";
     	System.out.println("SetLiftSwitch command ran");
     }
 

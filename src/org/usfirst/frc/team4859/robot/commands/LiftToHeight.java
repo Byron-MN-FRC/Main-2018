@@ -5,24 +5,24 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class LiftToHeight extends Command {
 	
-	private double distance = 0;
+	private String position = "";
 	private double time = 0;
 	
-    public LiftToHeight(double inputDistance) {
+    public LiftToHeight(String inputPosition) {
     	requires(Robot.lifter);
-    	distance = inputDistance;
+    	position = inputPosition;
     	time = 0;
     }
     
-    public LiftToHeight(double inputDistance, double inputTime) {
+    public LiftToHeight(String inputPosition, double inputTime) {
     	requires(Robot.lifter);
-    	distance = inputDistance;
+    	position = inputPosition;
     	time = inputTime;
     }
 
     protected void initialize() {
     	setTimeout(time);
-    	Robot.lifter.liftToHeight(distance);
+    	Robot.lifter.liftToHeight(position);
     	System.out.println("LiftToHeight command ran");
     }
 
@@ -35,7 +35,7 @@ public class LiftToHeight extends Command {
     }
 
     protected void end() {
-    	Robot.lifter.liftToHeight(distance);
+    	Robot.lifter.liftToHeight(position);
     }
 
     protected void interrupted() {
