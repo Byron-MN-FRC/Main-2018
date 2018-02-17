@@ -99,7 +99,7 @@ public class AutoSelector extends CommandGroup {
 	public void driveToTarget() {
 		// Delay start based on drive team input
 		addSequential(new DriveStop(RobotMap.delayInSeconds));
-		
+		addSequential(new LiftToHeight("switch",0));
 		System.out.printf("%s Autonomous--> [Location=%c] [Scale=%b] [Target Side=%c]%n", 
 				new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()),
 				location, RobotMap.targetScale, targetSide);
