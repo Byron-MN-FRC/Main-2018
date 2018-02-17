@@ -52,6 +52,7 @@ public class RobotMap {
      */
     
     public static String liftSetHeight = "";
+    public static double liftDownSpeed = -0.5;
 	
 	// Power cube detection
 	public static boolean isPowerCubeInBox = false;

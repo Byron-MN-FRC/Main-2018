@@ -33,13 +33,13 @@ public class Acquire extends Command {
 
     protected void initialize() {
     	setTimeout(time);
-    	Robot.lifter.liftToHeight(position);
     	System.out.println("Acquire command ran");
     }
 
     protected void execute() {
     	Robot.acquirer.acquireIntake(acquireSpeed);
     	Robot.tunnel.tunnelIntake(tunnelSpeed);
+    	Robot.lifter.liftDown();
     }
 
     protected boolean isFinished() {

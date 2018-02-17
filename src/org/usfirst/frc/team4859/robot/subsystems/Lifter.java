@@ -29,6 +29,16 @@ public class Lifter extends Subsystem {
     	//motorLiftStage2.set(0);
     }
     
+    public void liftDown() {
+//    	if(!RobotMap.isLiftDown) {
+//    		motorLiftStage1.set(RobotMap.liftDownSpeed);
+//        	motorLiftStage2.set(RobotMap.liftDownSpeed);
+//    	} else {
+//    		motorLiftStage1.set(0);
+//        	motorLiftStage2.set(0);
+//    	}
+    }
+    
     public void liftToHeight(String position) {
     	motorLiftStage1.set(ControlMode.MotionMagic, RobotMap.liftPosition.get(position)[0]);
     	motorLiftStage2.set(ControlMode.MotionMagic, RobotMap.liftPosition.get(position)[1]);
