@@ -192,8 +192,6 @@ public class Robot extends TimedRobot {
 			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
-		
-		System.out.println(RobotMap.isLimitSwitchTriggered);
 	}
 
 	public static double driveEncoderUnitConversion(double inches) {
