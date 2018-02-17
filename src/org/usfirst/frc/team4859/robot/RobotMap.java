@@ -82,14 +82,14 @@ public class RobotMap {
 	public static int kLiftStage1Acceleration = 2720;
 	public static int kLiftStage1CruiseVelocity = 2720;
 	
-	public static double kLiftStage2P = 0.22;
-	public static double kLiftStage2I = 0.0015;
+	public static double kLiftStage2P = 1.8;
+	public static double kLiftStage2I = 0.001;
 	public static double kLiftStage2D = 0.000;
-	public static double kLiftStage2F = 0.09;
-	public static int kLiftStage2AllowableError = 90;
+	public static double kLiftStage2F = 0.53;
+	public static int kLiftStage2AllowableError = 40;
 	
-	public static int kLiftStage2Acceleration = 2720;
-	public static int kLiftStage2CruiseVelocity = 2720;
+	public static int kLiftStage2Acceleration = 10000;
+	public static int kLiftStage2CruiseVelocity = 2250;
 	
 	public static double liftEncoderUnitsPerInch = 0;
 	
