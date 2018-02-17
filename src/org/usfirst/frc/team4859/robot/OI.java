@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {	
 	private final Joystick joystick = new Joystick(0);
-	private final Joystick joystick2 = new Joystick(1);
+	private final Joystick xbox = new Joystick(1);
 	
 	Button turnRight90 = new JoystickButton(joystick, 12);
 	Button turnLeft90 = new JoystickButton(joystick, 11);
@@ -19,9 +19,11 @@ public class OI {
 	
 //	Button acquire = new JoystickButton(joystick, 1);
 	
-//	Button setLiftSwitch = new JoystickButton(joystick2, 3);
-//	Button setLiftScale = new JoystickButton(joystick2, 4);
-//	Button setLiftClimb = new JoystickButton(joystick2, 5);
+//	Button setLiftSwitch = new JoystickButton(xbox, 5);
+//	Button setLiftScaleLow = new JoystickButton(xbox, 1);
+//	Button setLiftScaleNorm = new JoystickButton(xbox, 2);
+//	Button setLiftScaleHigh = new JoystickButton(xbox, 4);
+//	Button setLiftClimb = new JoystickButton(xbox, 6);
 //	
 //	Button liftToHeight = new JoystickButton(joystick, 7);
 //	
@@ -43,12 +45,14 @@ public class OI {
 		turnRight90.whenPressed(new DriveTurnRight90());
 		turnLeft90.whenPressed(new DriveTurnLeft90());
 		
-//		acquire.whenPressed(new Acquire(RobotMap.liftAcquireHeight, RobotMap.acquireIntakeSpeed));
-//		acquire.whenReleased(new AcquireStop(RobotMap.liftDefaultHeight))
+//		acquire.whenPressed(new Acquire("acquire", RobotMap.acquireIntakeSpeed, RobotMap.tunnelIntakeSpeed));
+//		acquire.whenReleased(new AcquireStop("default"))
 //		
 //		setLiftSwitch.whenPressed(new LiftSwitch(RobotMap.liftSwitchHeight));
-//		setLiftScale.whenPressed(new LiftScale(RobotMap.liftScaleHeight));
-//		setLiftClimb.whenPressed(new LiftClimb(RobotMap.liftClimbHeight));
+//		setLiftScaleLow.whenPressed(new SetLiftScaleLow());
+//		setLiftScaleNorm.whenPressed(new SetLiftScale());
+//		setLiftScaleHigh.whenPressed(new SetLiftScaleHigh());
+//		setLiftClimb.whenPressed(new SetLiftClimb());
 //		
 //		liftToHeight.whenPressed(new LiftToHeight(RobotMap.liftSetHeight);
 //		
