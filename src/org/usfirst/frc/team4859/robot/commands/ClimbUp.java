@@ -9,6 +9,7 @@ public class ClimbUp extends Command {
 	
     public ClimbUp(double inputSpeed) {
     	requires(Robot.climber);
+    	requires(Robot.lifter);
     	speed = inputSpeed;
     }
 
@@ -18,6 +19,7 @@ public class ClimbUp extends Command {
 
     protected void execute() {
     	Robot.climber.climbUp(speed);
+    	Robot.lifter.liftDown(-speed/2);
     }
 
     protected boolean isFinished() {

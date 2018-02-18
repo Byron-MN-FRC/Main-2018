@@ -6,26 +6,26 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Acquire extends Command {
 	
-	private String position = "";
+	private double liftSpeed = 0;
 	private double acquireSpeed = 0;
 	private double tunnelSpeed = 0;
 	private double time = 0;
 	
-    public Acquire(String inputPosition, double inputAcquireSpeed, double inputTunnelSpeed) {
+    public Acquire(double inputLiftSpeed, double inputAcquireSpeed, double inputTunnelSpeed) {
     	requires(Robot.lifter);
     	requires(Robot.acquirer);
     	requires(Robot.tunnel);
-    	position = inputPosition;
+    	liftSpeed = inputLiftSpeed;
     	acquireSpeed = inputAcquireSpeed;
     	tunnelSpeed = inputTunnelSpeed;
     	time = 0;
     }
     
-    public Acquire(String inputPosition, double inputAcquireSpeed, double inputTunnelSpeed, double inputTime) {
+    public Acquire(double inputLiftSpeed, double inputAcquireSpeed, double inputTunnelSpeed, double inputTime) {
     	requires(Robot.lifter);
     	requires(Robot.acquirer);
     	requires(Robot.tunnel);
-    	position = inputPosition;
+    	liftSpeed = inputLiftSpeed;
     	acquireSpeed = inputAcquireSpeed;
     	tunnelSpeed = inputTunnelSpeed;
     	time = inputTime;
@@ -39,7 +39,7 @@ public class Acquire extends Command {
     protected void execute() {
     	Robot.acquirer.acquireIntake(acquireSpeed);
     	Robot.tunnel.tunnelIntake(tunnelSpeed);
-    	Robot.lifter.liftDown();
+    	Robot.lifter.liftDown(liftSpeed);
     }
 
     protected boolean isFinished() {
@@ -48,7 +48,7 @@ public class Acquire extends Command {
     }
 
     protected void end() {
-    	Robot.lifter.liftToHeight(position);
+    	Robot.lifter.liftStop();
     	Robot.acquirer.acquireStop();
     	Robot.tunnel.tunnelStop();
     }

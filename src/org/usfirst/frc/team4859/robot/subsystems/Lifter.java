@@ -29,10 +29,10 @@ public class Lifter extends Subsystem {
     	//motorLiftStage2.set(0);
     }
     
-    public void liftDown() {
+    public void liftDown(double inputSpeed) {
 //    	if(!RobotMap.isLiftDown) {
-//    		motorLiftStage1.set(RobotMap.liftDownSpeed);
-//        	motorLiftStage2.set(RobotMap.liftDownSpeed);
+//    		motorLiftStage1.set(inputSpeed);
+//        	motorLiftStage2.set(inputSpeed);
 //    	} else {
 //    		motorLiftStage1.set(0);
 //        	motorLiftStage2.set(0);
