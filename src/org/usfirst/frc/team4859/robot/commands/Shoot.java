@@ -5,22 +5,17 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Shoot extends Command {
 	
-	private double acquireSpeed = 0;
 	private double tunnelSpeed = 0;
 	private double time = 0;
 	
-    public Shoot(double inputAcquireShootSpeed, double inputTunnelShootSpeed) {
-    	requires(Robot.acquirer);
+    public Shoot(double inputTunnelShootSpeed) {
     	requires(Robot.tunnel);
-    	acquireSpeed = inputAcquireShootSpeed;
     	tunnelSpeed = inputTunnelShootSpeed;
     	time = 0;
     }
     
-    public Shoot(double inputAcquireShootSpeed, double inputTunnelShootSpeed, double inputTime) {
-    	requires(Robot.acquirer);
+    public Shoot(double inputTunnelShootSpeed, double inputTime) {
     	requires(Robot.tunnel);
-    	acquireSpeed = inputAcquireShootSpeed;
     	tunnelSpeed = inputTunnelShootSpeed;
     	time = inputTime;
     }
@@ -31,7 +26,6 @@ public class Shoot extends Command {
     }
 
     protected void execute() {
-    	Robot.acquirer.acquireOuttake(acquireSpeed);
     	Robot.tunnel.tunnelShoot(tunnelSpeed);
     }
 
@@ -41,12 +35,10 @@ public class Shoot extends Command {
     }
 
     protected void end() {
-    	Robot.acquirer.acquireStop();
     	Robot.tunnel.tunnelStop();
     }
 
     protected void interrupted() {
-    	Robot.acquirer.acquireStop();
     	Robot.tunnel.tunnelStop();
     }
 }

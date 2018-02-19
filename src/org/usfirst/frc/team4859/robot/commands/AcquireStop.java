@@ -10,7 +10,6 @@ public class AcquireStop extends Command {
 	
     public AcquireStop(String inputPosition) {
     	requires(Robot.lifter);
-    	requires(Robot.acquirer);
     	requires(Robot.tunnel);
     	position = inputPosition;
     	time = 0;
@@ -18,7 +17,6 @@ public class AcquireStop extends Command {
 	
     public AcquireStop(String inputPosition, double inputTime) {
     	requires(Robot.lifter);
-    	requires(Robot.acquirer);
     	requires(Robot.tunnel);
     	position = inputPosition;
     	time = inputTime;
@@ -31,7 +29,6 @@ public class AcquireStop extends Command {
     }
 
     protected void execute() {
-    	Robot.acquirer.acquireStop();
     	Robot.tunnel.tunnelStop();
     }
 
@@ -42,13 +39,11 @@ public class AcquireStop extends Command {
 
     protected void end() {
     	Robot.lifter.liftToHeight(position);
-    	Robot.acquirer.acquireStop();
     	Robot.tunnel.tunnelStop();
     }
 
     protected void interrupted() {
     	Robot.lifter.liftStop();
-    	Robot.acquirer.acquireStop();
     	Robot.tunnel.tunnelStop();
     }
 }

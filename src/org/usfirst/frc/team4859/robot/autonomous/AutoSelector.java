@@ -3,8 +3,9 @@ package org.usfirst.frc.team4859.robot.autonomous;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.usfirst.frc.team4859.robot.RobotMap;
-import org.usfirst.frc.team4859.robot.commands.AcquirerOuttake;
 import org.usfirst.frc.team4859.robot.commands.LiftToHeight;
+import org.usfirst.frc.team4859.robot.commands.Shoot;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoSelector extends CommandGroup {
@@ -71,7 +72,7 @@ public class AutoSelector extends CommandGroup {
 	public void deliverCube () {
 		double height = RobotMap.targetScale ? 36 : 12;
 		System.out.println("Shoot cube out front");
-		addSequential(new AcquirerOuttake(RobotMap.acquireShootSpeed, 5));
+		addSequential(new Shoot(RobotMap.tunnelShootSpeed, 5));
 	}
 	
 	public void driveOppositeSide() {

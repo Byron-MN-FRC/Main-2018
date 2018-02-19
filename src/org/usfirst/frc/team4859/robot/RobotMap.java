@@ -17,9 +17,6 @@ public class RobotMap {
 	public static int talonIDLiftStage1 = 7;
 	public static int talonIDLiftStage2 = 8;
 	
-	public static int talonIDAcquireLeft = 0;
-	public static int talonIDAcquireRight = 5;
-	
 	public static int talonIDTunnelLeft = 1;
 	public static int talonIDTunnelRight = 2;
 	public static int talonIDTunnelTop = 3;
@@ -28,8 +25,6 @@ public class RobotMap {
 	public static int talonIDClimbUp = 4;
 	
 	// Command numbers
-	public static double acquireIntakeSpeed = 0.5;
-	public static double acquireShootSpeed = -1;
 	
 	public static double tunnelIntakeSpeed = 0.5;
 	public static double tunnelShootSpeed = -0.5;
@@ -69,11 +64,11 @@ public class RobotMap {
 	public static int kDriveCurrentPeakDuration = 2000; // Milliseconds
 	
 	// Stage 1 is a Mini CIM
-	public static int kLiftStage1ContinuousCurrentLimit = 45;
+	public static int kLiftStage1ContinuousCurrentLimit = 40;
 	public static int kLiftStage1CurrentPeakDuration = 2000;
 	
 	// Stage 2 is a BAG Motor
-	public static int kLiftStage2ContinuousCurrentLimit = 35;
+	public static int kLiftStage2ContinuousCurrentLimit = 30;
 	public static int kLiftStage2CurrentPeakDuration = 2000;
 	
 	// Closed loop values

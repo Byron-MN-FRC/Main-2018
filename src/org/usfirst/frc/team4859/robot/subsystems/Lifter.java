@@ -73,6 +73,15 @@ public class Lifter extends Subsystem {
 		motorLiftStage2.config_kF(0, RobotMap.kLiftStage2F, RobotMap.kTimeoutMs);
 		motorLiftStage2.configAllowableClosedloopError(RobotMap.kPIDSlot, RobotMap.kLiftStage2AllowableError, RobotMap.kTimeoutMs);
 
+		
+		//Current limiting
+		motorLiftStage1.configContinuousCurrentLimit(RobotMap.kLiftStage1ContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		motorLiftStage1.configPeakCurrentDuration(RobotMap.kLiftStage1CurrentPeakDuration, RobotMap.kTimeoutMs);
+		
+		motorLiftStage2.configContinuousCurrentLimit(RobotMap.kLiftStage2ContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		motorLiftStage2.configPeakCurrentDuration(RobotMap.kLiftStage2CurrentPeakDuration, RobotMap.kTimeoutMs);
+		
+		
 		// Set acceleration and cruise velocity
 		motorLiftStage1.configMotionCruiseVelocity(RobotMap.kLiftStage1CruiseVelocity, RobotMap.kTimeoutMs);
 		motorLiftStage1.configMotionAcceleration(RobotMap.kLiftStage1Acceleration, RobotMap.kTimeoutMs);
