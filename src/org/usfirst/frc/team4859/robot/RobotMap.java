@@ -69,11 +69,11 @@ public class RobotMap {
 	public static int kDriveCurrentPeakDuration = 2000; // Milliseconds
 	
 	// Stage 1 is a Mini CIM
-	public static int kLiftStage1ContinuousCurrentLimit = 45;
+	public static int kLiftStage1ContinuousCurrentLimit = 40;
 	public static int kLiftStage1CurrentPeakDuration = 2000;
 	
 	// Stage 2 is a BAG Motor
-	public static int kLiftStage2ContinuousCurrentLimit = 35;
+	public static int kLiftStage2ContinuousCurrentLimit = 30;
 	public static int kLiftStage2CurrentPeakDuration = 2000;
 	
 	// Closed loop values
