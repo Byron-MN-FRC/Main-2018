@@ -112,6 +112,8 @@ public class RobotMap {
 	public static int kLowGearAcceleration = 9000;
 	public static int kLowGearCruiseVelocity = 9000;
 	
+	public static double kRampRate = 1.5;
+	
 	// Robot numbers for closed loop (in inches)
 	public static double robotWidth = 27;
 

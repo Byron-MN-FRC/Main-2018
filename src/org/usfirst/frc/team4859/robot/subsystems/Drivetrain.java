@@ -164,6 +164,9 @@ public class Drivetrain extends Subsystem {
 		motorLeftMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		motorRightMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		
+		motorLeftMaster.configOpenloopRamp(RobotMap.kRampRate,RobotMap.kTimeoutMs);
+		motorRightMaster.configOpenloopRamp(RobotMap.kRampRate,RobotMap.kTimeoutMs);
+		
 		System.out.println("Motor configuration ran");
 	}
 }
