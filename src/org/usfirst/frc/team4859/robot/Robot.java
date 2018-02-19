@@ -50,9 +50,6 @@ public class Robot extends TimedRobot {
 	public static AnalogInput boxSensor = new AnalogInput(0);
 	public static AnalogOutput boxLED = new AnalogOutput(1);
 	public static AnalogInput liftLimitSwitch = new AnalogInput(2);
-	
-	// Create offseason NetworkTable
-	public static NetworkTableInstance offSeasonNetworkTable = NetworkTableInstance.create();
   
 		Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -68,9 +65,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Scale", "N");
 		SmartDashboard.putString("Deliver Cube", "Y");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
-		
-		// Connect to offseason NetworkTable
-		offSeasonNetworkTable.startClient("10.0.100.5");
 
 		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
 		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
@@ -115,14 +109,7 @@ public class Robot extends TimedRobot {
 		
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
 		
-		// For normal FMS
-//		String gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
-		// For offseason FMS
-		String gameData = offSeasonNetworkTable
-				.getTable("OffseasonFMSInfo")
-				.getEntry("GameData")
-				.getString("defaultValue");
+		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		boolean validGameString = Pattern.matches("[LR]{3}", gameData.toUpperCase());
 		boolean validRobotPos = Pattern.matches("[LCR]{1}", location);
