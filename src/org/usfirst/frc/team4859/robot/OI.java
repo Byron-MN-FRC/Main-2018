@@ -27,8 +27,11 @@ public class OI {
 	Button setLiftScaleNorm = new JoystickButton(xbox, 2);
 	Button setLiftScaleHigh = new JoystickButton(xbox, 4);
 	Button setLiftClimb = new JoystickButton(xbox, 6);
-	
-	// Buttons for mechanism testing	
+		
+	// Buttons for mechanism testing
+//	Button liftUp = new JoystickButton(xbox, 5);
+//	Button liftDown = new JoystickButton(xbox, 6);
+
 //	Button climbStart = new JoystickButton(joystick, 12);
 //
 //	Button tunnelIntake = new JoystickButton(joystick, 8);
@@ -56,9 +59,15 @@ public class OI {
 		setLiftScaleHigh.whenPressed(new SetLiftScaleHigh());
 		setLiftClimb.whenPressed(new SetLiftClimb());
 		
-		liftToHeight.whenPressed(new LiftToHeight());
+		liftToHeight.whenPressed(new LiftToHeight(RobotMap.liftSetHeight));
 		
 		// Buttons for mechanism testing
+//		liftDown.whenPressed(new LiftDown());
+//		liftDown.whenReleased(new LiftStop());
+//		
+//		liftUp.whenPressed(new LiftUp());
+//		liftUp.whenReleased(new LiftStop());
+//		
 //		climbStart.whileHeld(new ClimbUp(RobotMap.climbSpeed));
 //		
 //		tunnelIntake.whenPressed(new TunnelIntake(RobotMap.tunnelIntakeSpeed));

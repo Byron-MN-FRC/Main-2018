@@ -38,6 +38,12 @@ public class Lifter extends Subsystem {
         	motorLiftStage2.set(0);
     	}
     }
+
+    public void liftUp(double inputSpeed) {
+    		motorLiftStage1.set(inputSpeed);
+        	motorLiftStage2.set(-inputSpeed);
+    }
+
     
     public void liftToHeight(String position) {
     	motorLiftStage1.set(ControlMode.MotionMagic, RobotMap.liftPosition.get(position)[0]);
