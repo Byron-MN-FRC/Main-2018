@@ -8,13 +8,11 @@ public class ShootStop extends Command {
 	private double time = 0;
 	
     public ShootStop() {
-    	requires(Robot.acquirer);
     	requires(Robot.tunnel);
     	time = 0;
     }
     
     public ShootStop(double inputTime) {
-    	requires(Robot.acquirer);
     	requires(Robot.tunnel);
     	time = inputTime;
     }
@@ -25,7 +23,6 @@ public class ShootStop extends Command {
     }
 
     protected void execute() {
-    	Robot.acquirer.acquireStop();
     	Robot.tunnel.tunnelStop();
     }
 
@@ -35,12 +32,10 @@ public class ShootStop extends Command {
     }
 
     protected void end() {
-    	Robot.acquirer.acquireStop();
     	Robot.tunnel.tunnelStop();
     }
 
     protected void interrupted() {
-    	Robot.acquirer.acquireStop();
     	Robot.tunnel.tunnelStop();
     }
 }

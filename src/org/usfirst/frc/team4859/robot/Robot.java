@@ -22,7 +22,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.regex.Pattern;
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
 import org.usfirst.frc.team4859.robot.autonomous.DriveStraightDistance;
-import org.usfirst.frc.team4859.robot.subsystems.Acquirer;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4859.robot.subsystems.Lifter;
@@ -40,7 +39,6 @@ import org.usfirst.frc.team4859.robot.subsystems.Tunnel;
 public class Robot extends TimedRobot {
 	public static final Drivetrain kDrivetrain = new Drivetrain();
 	public static Shifters shifters = new Shifters();
-	public static Acquirer acquirer = new Acquirer();
 	public static Climber climber = new Climber();
 	public static Tunnel tunnel = new Tunnel();
 	public static Lifter lifter = new Lifter();

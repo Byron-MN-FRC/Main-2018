@@ -46,10 +46,8 @@ public class OI {
 //		turnRight90.whenPressed(new DriveTurnRight90());
 //		turnLeft90.whenPressed(new DriveTurnLeft90());
 		
-		acquire.whenPressed(new Acquire(RobotMap.liftDownSpeed, RobotMap.acquireIntakeSpeed, RobotMap.tunnelIntakeSpeed));
-		acquire.whenReleased(new AcquireStop("default"));
 		
-		shoot.whenPressed(new Shoot(RobotMap.acquireShootSpeed, RobotMap.tunnelShootSpeed));
+		shoot.whenPressed(new Shoot(-1, RobotMap.tunnelShootSpeed));
 		shoot.whenReleased(new ShootStop());
 		
 		// Secondary Driver Buttons

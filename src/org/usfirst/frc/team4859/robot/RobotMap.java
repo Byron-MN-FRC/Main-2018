@@ -28,8 +28,6 @@ public class RobotMap {
 	public static int talonIDClimbUp = 4;
 	
 	// Command numbers
-	public static double acquireIntakeSpeed = 0.5;
-	public static double acquireShootSpeed = -1;
 	
 	public static double tunnelIntakeSpeed = 0.5;
 	public static double tunnelShootSpeed = -0.5;

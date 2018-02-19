@@ -10,7 +10,6 @@ public class Shoot extends Command {
 	private double time = 0;
 	
     public Shoot(double inputAcquireShootSpeed, double inputTunnelShootSpeed) {
-    	requires(Robot.acquirer);
     	requires(Robot.tunnel);
     	acquireSpeed = inputAcquireShootSpeed;
     	tunnelSpeed = inputTunnelShootSpeed;
@@ -18,7 +17,6 @@ public class Shoot extends Command {
     }
     
     public Shoot(double inputAcquireShootSpeed, double inputTunnelShootSpeed, double inputTime) {
-    	requires(Robot.acquirer);
     	requires(Robot.tunnel);
     	acquireSpeed = inputAcquireShootSpeed;
     	tunnelSpeed = inputTunnelShootSpeed;
@@ -31,7 +29,6 @@ public class Shoot extends Command {
     }
 
     protected void execute() {
-    	Robot.acquirer.acquireOuttake(acquireSpeed);
     	Robot.tunnel.tunnelShoot(tunnelSpeed);
     }
 
@@ -41,12 +38,10 @@ public class Shoot extends Command {
     }
 
     protected void end() {
-    	Robot.acquirer.acquireStop();
     	Robot.tunnel.tunnelStop();
     }
 
     protected void interrupted() {
-    	Robot.acquirer.acquireStop();
     	Robot.tunnel.tunnelStop();
     }
 }
