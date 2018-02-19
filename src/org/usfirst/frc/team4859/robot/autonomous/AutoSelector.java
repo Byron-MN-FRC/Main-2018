@@ -71,7 +71,7 @@ public class AutoSelector extends CommandGroup {
 	public void deliverCube () {
 		double height = RobotMap.targetScale ? 36 : 12;
 		System.out.println("Shoot cube out front");
-		addSequential(new AcquirerOuttake(RobotMap.acquireOuttakeSpeed, 5));
+		addSequential(new AcquirerOuttake(RobotMap.acquireShootSpeed, 5));
 	}
 	
 	public void driveOppositeSide() {

@@ -8,8 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Shifters extends Subsystem {
-	DoubleSolenoid shifterLeft = new DoubleSolenoid(0, 1);
-	DoubleSolenoid shifterRight = new DoubleSolenoid(2, 3);
+	DoubleSolenoid shifter = new DoubleSolenoid(0, 1);
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -17,12 +16,10 @@ public class Shifters extends Subsystem {
     public void initDefaultCommand() {}
     
     public void pneumaticShiftUp() {
-    	shifterLeft.set(Value.kForward);
-    	shifterRight.set(Value.kForward);
+    	shifter.set(Value.kForward);
     }
     
     public void pneumaticShiftDown() {	
-    	shifterLeft.set(Value.kReverse);
-    	shifterRight.set(Value.kReverse);	
+    	shifter.set(Value.kReverse);
     }  
 }

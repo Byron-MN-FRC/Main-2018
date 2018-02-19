@@ -3,30 +3,25 @@ package org.usfirst.frc.team4859.robot.commands;
 import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Acquire extends Command {
+public class Shoot extends Command {
 	
-	private double liftSpeed = 0;
 	private double acquireSpeed = 0;
 	private double tunnelSpeed = 0;
 	private double time = 0;
 	
-    public Acquire(double inputLiftSpeed, double inputAcquireSpeed, double inputTunnelSpeed) {
-    	requires(Robot.lifter);
+    public Shoot(double inputAcquireShootSpeed, double inputTunnelShootSpeed) {
     	requires(Robot.acquirer);
     	requires(Robot.tunnel);
-    	liftSpeed = inputLiftSpeed;
-    	acquireSpeed = inputAcquireSpeed;
-    	tunnelSpeed = inputTunnelSpeed;
+    	acquireSpeed = inputAcquireShootSpeed;
+    	tunnelSpeed = inputTunnelShootSpeed;
     	time = 0;
     }
     
-    public Acquire(double inputLiftSpeed, double inputAcquireSpeed, double inputTunnelSpeed, double inputTime) {
-    	requires(Robot.lifter);
+    public Shoot(double inputAcquireShootSpeed, double inputTunnelShootSpeed, double inputTime) {
     	requires(Robot.acquirer);
     	requires(Robot.tunnel);
-    	liftSpeed = inputLiftSpeed;
-    	acquireSpeed = inputAcquireSpeed;
-    	tunnelSpeed = inputTunnelSpeed;
+    	acquireSpeed = inputAcquireShootSpeed;
+    	tunnelSpeed = inputTunnelShootSpeed;
     	time = inputTime;
     }
 
@@ -36,9 +31,8 @@ public class Acquire extends Command {
     }
 
     protected void execute() {
-    	Robot.acquirer.acquireIntake(acquireSpeed);
-    	Robot.tunnel.tunnelIntake(tunnelSpeed);
-    	Robot.lifter.liftDown(liftSpeed);
+    	Robot.acquirer.acquireOuttake(acquireSpeed);
+    	Robot.tunnel.tunnelShoot(tunnelSpeed);
     }
 
     protected boolean isFinished() {
@@ -47,13 +41,11 @@ public class Acquire extends Command {
     }
 
     protected void end() {
-    	Robot.lifter.liftStop();
     	Robot.acquirer.acquireStop();
     	Robot.tunnel.tunnelStop();
     }
 
     protected void interrupted() {
-    	Robot.lifter.liftStop();
     	Robot.acquirer.acquireStop();
     	Robot.tunnel.tunnelStop();
     }
