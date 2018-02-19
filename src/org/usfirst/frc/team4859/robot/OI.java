@@ -59,7 +59,7 @@ public class OI {
 		setLiftScaleHigh.whenPressed(new SetLiftScaleHigh());
 		setLiftClimb.whenPressed(new SetLiftClimb());
 		
-		liftToHeight.whenPressed(new LiftToHeight(RobotMap.liftSetHeight));
+		liftToHeight.whenPressed(new LiftToHeight());
 		
 		// Buttons for mechanism testing
 //		climbStart.whileHeld(new ClimbUp(RobotMap.climbSpeed));
