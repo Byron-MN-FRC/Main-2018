@@ -29,10 +29,10 @@ public class RobotMap {
 	
 	// Command numbers
 	public static double acquireIntakeSpeed = 0.5;
-	public static double acquireOuttakeSpeed = -0.5;
+	public static double acquireShootSpeed = -1;
 	
 	public static double tunnelIntakeSpeed = 0.5;
-	public static double tunnelOuttakeSpeed = -0.5;
+	public static double tunnelShootSpeed = -0.5;
 	
 	public static double climbSpeed = 0.5;
 	
@@ -44,20 +44,20 @@ public class RobotMap {
 
     {	   //name                      stage1 stage2 (in inches)
         put("acquire",   new Double[]  { 0.0	, 0.0 	  } ); // 0, 0
-        put("default",   new Double[]  { 8880.0 , 0.0 	  } ); // 8880, 0
-        put("switch",    new Double[]  { 0.0	, 23500.0 } ); // 0,
-        put("scaleLow",  new Double[]  { 17200.0, 35000.0 } ); // 17200, 
-        put("scaleNorm", new Double[]  { 27000.0, 35000.0 } ); // 27000, 39.5 
-        put("scaleHigh", new Double[]  { 36000.0, 35000.0 } ); // 40.0, 39.5
-        put("climb",     new Double[]  { 36000.0, 35000.0 } ); // 40.0, 39.5 
+        put("default",   new Double[]  { -6000.0 , 0.0 	  } ); // 8880, 0
+        put("switch",    new Double[]  { 0.0	, 25500.0 } ); // 0,
+        put("scaleLow",  new Double[]  { -33250.0, 31250.0 } ); // 17200, 
+        put("scaleNorm", new Double[]  { -44850.0, 31250.0 } ); // 27000, 39.5 
+        put("scaleHigh", new Double[]  { -57250.0, 31250.0 } ); // 40.0, 39.5
+        put("climb",     new Double[]  { -57250.0, 31250.0 } ); // 40.0, 39.5 
     }};
     
     /* Example of how to get values:
      * liftPosition.get("switch")[0];
      */
     
-    public static String liftSetHeight = "";
-    public static double liftDownSpeed = -0.5;
+    public static String liftSetHeight = "switch";
+    public static double liftDownSpeed = -0.2;
 	
 	// Power cube detection
 	public static boolean isPowerCubeInBox = false;
@@ -81,14 +81,14 @@ public class RobotMap {
 	public static int kPIDSlot = 0;
 	
 	// Lift values
-	public static double kLiftStage1P = 1.6;
-	public static double kLiftStage1I = 0.0007;
+	public static double kLiftStage1P = 1.35; //1.6
+	public static double kLiftStage1I = 0.00075; //0.0007
 	public static double kLiftStage1D = 0.000;
-	public static double kLiftStage1F = 0.475;
+	public static double kLiftStage1F = 0.37; //0.475
 	public static int kLiftStage1AllowableError = 90;
 	
-	public static int kLiftStage1Acceleration = 11200;
-	public static int kLiftStage1CruiseVelocity = 2800;
+	public static int kLiftStage1Acceleration = 12600; //11200
+	public static int kLiftStage1CruiseVelocity = 3150; //2800
 	
 	public static double kLiftStage2P = 1.8;
 	public static double kLiftStage2I = 0.001;

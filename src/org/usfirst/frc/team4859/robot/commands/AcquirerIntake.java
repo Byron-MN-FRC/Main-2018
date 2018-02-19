@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
-import org.usfirst.frc.team4859.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class AcquirerIntake extends Command {
@@ -31,7 +30,7 @@ public class AcquirerIntake extends Command {
     }
 
     protected boolean isFinished() {
-    	if (time <= 0) return RobotMap.isPowerCubeInBox;
+    	if (time <= 0) return false;
     	else return isTimedOut();
     }
 

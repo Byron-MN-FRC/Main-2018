@@ -21,12 +21,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.regex.Pattern;
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
-//import org.usfirst.frc.team4859.robot.autonomous.DriveStraight;
 import org.usfirst.frc.team4859.robot.autonomous.DriveStraightDistance;
 import org.usfirst.frc.team4859.robot.subsystems.Acquirer;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4859.robot.subsystems.Lifter;
+import org.usfirst.frc.team4859.robot.subsystems.SetHeight;
 import org.usfirst.frc.team4859.robot.subsystems.Shifters;
 import org.usfirst.frc.team4859.robot.subsystems.Tunnel;
 
@@ -44,14 +44,12 @@ public class Robot extends TimedRobot {
 	public static Climber climber = new Climber();
 	public static Tunnel tunnel = new Tunnel();
 	public static Lifter lifter = new Lifter();
+	public static SetHeight setHeight = new SetHeight();
 	public static OI m_oi;
 	
 	public static AnalogInput boxSensor = new AnalogInput(0);
 	public static AnalogOutput boxLED = new AnalogOutput(1);
-	public static AnalogInput liftLimitSwitch = new AnalogInput(1);
-	
-	// Create offseason NetworkTable
-//	public static NetworkTableInstance offSeasonNetworkTable = NetworkTableInstance.create();
+	public static AnalogInput liftLimitSwitch = new AnalogInput(2);
   
 		Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -67,9 +65,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Scale", "N");
 		SmartDashboard.putString("Deliver Cube", "Y");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
-		
-		// Connect to offseason NetworkTable
-//		offSeasonNetworkTable.startClient("10.0.100.5");
 
 		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
 		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
@@ -114,14 +109,7 @@ public class Robot extends TimedRobot {
 		
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
 		
-		// For normal FMS
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
-		// For offseason FMS
-//		String gameData = offSeasonNetworkTable
-//				.getTable("OffseasonFMSInfo")
-//				.getEntry("GameData")
-//				.getString("defaultValue");
 		
 		boolean validGameString = Pattern.matches("[LR]{3}", gameData.toUpperCase());
 		boolean validRobotPos = Pattern.matches("[LCR]{1}", location);
@@ -192,6 +180,11 @@ public class Robot extends TimedRobot {
 			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
+		
+//		SmartDashboard.putBoolean("IR", RobotMap.isPowerCubeInBox);
+//		SmartDashboard.putNumber("IR Volt", boxSensor.getVoltage());
+//		SmartDashboard.putBoolean("limit switch", RobotMap.isLimitSwitchTriggered);
+		SmartDashboard.putString("liftSetHeight", RobotMap.liftSetHeight);
 	}
 
 	public static double driveEncoderUnitConversion(double inches) {

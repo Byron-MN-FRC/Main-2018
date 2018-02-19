@@ -3,30 +3,30 @@ package org.usfirst.frc.team4859.robot.commands;
 import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class LiftToHeight extends Command {
+public class ShootStop extends Command {
 	
-	private String position = "";
 	private double time = 0;
 	
-    public LiftToHeight(String inputPosition) {
-    	requires(Robot.lifter);
-    	position = inputPosition;
+    public ShootStop() {
+    	requires(Robot.acquirer);
+    	requires(Robot.tunnel);
     	time = 0;
     }
     
-    public LiftToHeight(String inputPosition, double inputTime) {
-    	requires(Robot.lifter);
-    	position = inputPosition;
+    public ShootStop(double inputTime) {
+    	requires(Robot.acquirer);
+    	requires(Robot.tunnel);
     	time = inputTime;
     }
 
     protected void initialize() {
     	setTimeout(time);
-    	Robot.lifter.liftToHeight("scaleHigh");
-    	System.out.println("LiftToHeight command ran");
+    	System.out.println("Acquire command ran");
     }
 
     protected void execute() {
+    	Robot.acquirer.acquireStop();
+    	Robot.tunnel.tunnelStop();
     }
 
     protected boolean isFinished() {
@@ -35,10 +35,12 @@ public class LiftToHeight extends Command {
     }
 
     protected void end() {
-    	Robot.lifter.liftToHeight("scaleHigh");
+    	Robot.acquirer.acquireStop();
+    	Robot.tunnel.tunnelStop();
     }
 
     protected void interrupted() {
-    	Robot.lifter.liftStop();
+    	Robot.acquirer.acquireStop();
+    	Robot.tunnel.tunnelStop();
     }
 }

@@ -3,30 +3,27 @@ package org.usfirst.frc.team4859.robot.commands;
 import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class LiftToHeight extends Command {
+public class AcquirerStop extends Command {
 	
-	private String position = "";
 	private double time = 0;
 	
-    public LiftToHeight(String inputPosition) {
-    	requires(Robot.lifter);
-    	position = inputPosition;
+    public AcquirerStop() {
+    	requires(Robot.acquirer);
     	time = 0;
     }
     
-    public LiftToHeight(String inputPosition, double inputTime) {
-    	requires(Robot.lifter);
-    	position = inputPosition;
+    public AcquirerStop(double inputTime) {
+    	requires(Robot.acquirer);
     	time = inputTime;
     }
 
     protected void initialize() {
     	setTimeout(time);
-    	Robot.lifter.liftToHeight("scaleHigh");
-    	System.out.println("LiftToHeight command ran");
+    	System.out.println("AcquirerStop command ran");
     }
 
     protected void execute() {
+    	Robot.acquirer.acquireStop();
     }
 
     protected boolean isFinished() {
@@ -35,10 +32,10 @@ public class LiftToHeight extends Command {
     }
 
     protected void end() {
-    	Robot.lifter.liftToHeight("scaleHigh");
+    	Robot.acquirer.acquireStop();
     }
 
     protected void interrupted() {
-    	Robot.lifter.liftStop();
+    	Robot.acquirer.acquireStop();
     }
 }
