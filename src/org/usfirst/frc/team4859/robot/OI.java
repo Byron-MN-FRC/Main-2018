@@ -15,6 +15,7 @@ public class OI {
 	
 	Button acquire = new JoystickButton(joystick, 1);
 	Button shoot = new JoystickButton(joystick, 2);
+	Button shootBackward = new JoystickButton(joystick,4);
 	
 	Button liftToHeight = new JoystickButton(joystick, 6);
 	
