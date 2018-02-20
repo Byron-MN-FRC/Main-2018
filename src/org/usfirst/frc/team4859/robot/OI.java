@@ -63,7 +63,6 @@ public class OI {
 //		liftDown.whenReleased(new LiftStop());
 //		
 //		liftUp.whenPressed(new LiftUp());
-//		liftUp.whenReleased(new LiftStop());
 //		
 //		climbStart.whileHeld(new ClimbUp(RobotMap.climbSpeed));
 //		
