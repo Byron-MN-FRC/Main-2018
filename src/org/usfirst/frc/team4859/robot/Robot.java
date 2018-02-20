@@ -13,6 +13,8 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -20,8 +22,11 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.regex.Pattern;
+
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
 import org.usfirst.frc.team4859.robot.autonomous.DriveStraightDistance;
+import org.usfirst.frc.team4859.robot.commands.Acquire;
+import org.usfirst.frc.team4859.robot.commands.AcquireStop;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4859.robot.subsystems.Lifter;
@@ -45,8 +50,8 @@ public class Robot extends TimedRobot {
 	public static SetHeight setHeight = new SetHeight();
 	public static OI m_oi;
 	
-	public static AnalogInput boxSensor = new AnalogInput(0);
-	public static AnalogOutput boxLED = new AnalogOutput(1);
+	public static DigitalInput boxSensor = new DigitalInput(0);
+	public static DigitalOutput boxLED = new DigitalOutput(1);
 	public static AnalogInput liftLimitSwitch = new AnalogInput(2);
   
 		Command m_autonomousCommand;
@@ -139,7 +144,12 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Left Error", Drivetrain.motorLeftMaster.getClosedLoopError(0));
 		SmartDashboard.putNumber("Right Error", Drivetrain.motorRightMaster.getClosedLoopError(0));
 		
-		if (boxSensor.getVoltage() < 0.15) RobotMap.isPowerCubeInBox = true;
+		if(boxSensor.get()) {
+			RobotMap.isPowerCubeInBox = true;
+			Tunnel.motorTunnelLeft.set(0);
+			Tunnel.motorTunnelRight.set(0);
+			Tunnel.motorTunnelTop.set(0);
+		}
         else RobotMap.isPowerCubeInBox = false;
 		
 		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLimitSwitchTriggered = false;
@@ -169,7 +179,12 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-		if (boxSensor.getVoltage() < 0.15) RobotMap.isPowerCubeInBox = true;
+		if(boxSensor.get()) {
+			RobotMap.isPowerCubeInBox = true;
+			Tunnel.motorTunnelLeft.set(0);
+			Tunnel.motorTunnelRight.set(0);
+			Tunnel.motorTunnelTop.set(0);
+		}
         else RobotMap.isPowerCubeInBox = false;
 		
 		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLimitSwitchTriggered = false;
