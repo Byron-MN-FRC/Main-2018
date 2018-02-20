@@ -29,6 +29,9 @@ public class OI {
 	Button setLiftClimb = new JoystickButton(xbox, 6);
 	
 	// Buttons for mechanism testing
+	Button liftUp = new JoystickButton(xbox, 5);
+	Button liftDown = new JoystickButton(xbox, 6);
+	
 //	Button acquireIntake = new JoystickButton(joystick, 7);
 //	Button acquireOuttake = new JoystickButton(joystick, 12);
 //	
@@ -60,6 +63,12 @@ public class OI {
 		liftToHeight.whenPressed(new LiftToHeight());
 		
 		// Buttons for mechanism testing
+		liftDown.whenPressed(new LiftDown());
+		liftDown.whenReleased(new LiftStop());
+		
+		liftUp.whenPressed(new LiftUp());
+		liftUp.whenReleased(new LiftStop());
+		
 //		climbStart.whileHeld(new ClimbUp(RobotMap.climbSpeed));
 
 //		acquireIntake.whenPressed(new AcquirerIntake(RobotMap.acquireIntakeSpeed));
