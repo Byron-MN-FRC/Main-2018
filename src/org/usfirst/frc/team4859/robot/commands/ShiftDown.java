@@ -16,6 +16,7 @@ public class ShiftDown extends Command {
     	Robot.shifters.pneumaticShiftDown();
 		Drivetrain.motorLeftMaster.configMotionAcceleration(RobotMap.kLowGearAcceleration, RobotMap.kTimeoutMs);
 		Drivetrain.motorRightMaster.configMotionCruiseVelocity(RobotMap.kLowGearCruiseVelocity, RobotMap.kTimeoutMs);
+		RobotMap.kRampRate = 0.4;
 		System.out.println("ShiftDown command ran");
 		SmartDashboard.putBoolean("Shifted Up", false);
     }
@@ -24,7 +25,7 @@ public class ShiftDown extends Command {
     }
 
     protected boolean isFinished() {
-    	return false;
+    	return true;
     }
 
     protected void end() {

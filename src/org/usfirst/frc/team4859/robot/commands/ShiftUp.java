@@ -16,6 +16,7 @@ public class ShiftUp extends Command {
     	Robot.shifters.pneumaticShiftUp();
     	Drivetrain.motorLeftMaster.configMotionAcceleration(RobotMap.kHighGearAcceleration, RobotMap.kTimeoutMs);
 		Drivetrain.motorRightMaster.configMotionCruiseVelocity(RobotMap.kHighGearCruiseVelocity, RobotMap.kTimeoutMs);
+		RobotMap.kRampRate = 0.2;
 		System.out.println("ShiftUp command ran");
 		SmartDashboard.putBoolean("Shifted Up", true);
     }
@@ -24,7 +25,7 @@ public class ShiftUp extends Command {
     }
 
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     protected void end() {

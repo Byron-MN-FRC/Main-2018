@@ -17,17 +17,17 @@ public class RobotMap {
 	public static int talonIDLiftStage1 = 7;
 	public static int talonIDLiftStage2 = 8;
 	
-	public static int talonIDTunnelLeft = 1;
+	public static int talonIDTunnelLeft = 3;
 	public static int talonIDTunnelRight = 2;
-	public static int talonIDTunnelTop = 3;
+	public static int talonIDTunnelTop = 1;
 	
 
 	public static int talonIDClimbUp = 4;
 	
 	// Command numbers
 	
-	public static double tunnelIntakeSpeed = 0.5;
-	public static double tunnelShootSpeed = -0.5;
+	public static double tunnelIntakeSpeed = 0.4;
+	public static double tunnelShootSpeed = 1;
 	
 	public static double climbSpeed = 0.5;
 	
@@ -39,12 +39,12 @@ public class RobotMap {
 
     {	   //name                      stage1 stage2 (in inches)
         put("acquire",   new Double[]  { 0.0	, 0.0 	  } ); // 0, 0
-        put("default",   new Double[]  { -6000.0 , 0.0 	  } ); // 8880, 0
+        put("default",   new Double[]  { 6000.0 , 0.0 	  } ); // 8880, 0
         put("switch",    new Double[]  { 0.0	, 25500.0 } ); // 0,
-        put("scaleLow",  new Double[]  { -33250.0, 31250.0 } ); // 17200, 
-        put("scaleNorm", new Double[]  { -44850.0, 31250.0 } ); // 27000, 39.5 
-        put("scaleHigh", new Double[]  { -57250.0, 31250.0 } ); // 40.0, 39.5
-        put("climb",     new Double[]  { -57250.0, 31250.0 } ); // 40.0, 39.5 
+        put("scaleLow",  new Double[]  { 33250.0, 31250.0 } ); // 17200, 
+        put("scaleNorm", new Double[]  { 44850.0, 31250.0 } ); // 27000, 39.5 
+        put("scaleHigh", new Double[]  { 55000.0, 31250.0 } ); // 40.0, 39.5
+        put("climb",     new Double[]  { 55000.0, 31250.0 } ); // 40.0, 39.5 
     }};
     
     /* Example of how to get values:
@@ -52,7 +52,7 @@ public class RobotMap {
      */
     
     public static String liftSetHeight = "switch";
-    public static double liftDownSpeed = -0.2;
+    public static double liftDownSpeed = -0.3;
 	
 	// Power cube detection
 	public static boolean isPowerCubeInBox = false;
@@ -101,13 +101,13 @@ public class RobotMap {
 	public static double kF = 0.12;
 	public static int kAllowableError = 90;
 	
-	public static int kHighGearAcceleration = 9000;
-	public static int kHighGearCruiseVelocity = 9000;
+	public static int kHighGearAcceleration = 5000;
+	public static int kHighGearCruiseVelocity = 8000;
 	
-	public static int kLowGearAcceleration = 9000;
-	public static int kLowGearCruiseVelocity = 9000;
+	public static int kLowGearAcceleration = 5000;
+	public static int kLowGearCruiseVelocity = 8000;
 	
-	public static double kRampRate = 1.5;
+	public static double kRampRate = 0.4;
 	
 	// Robot numbers for closed loop (in inches)
 	public static double robotWidth = 27;
@@ -128,5 +128,5 @@ public class RobotMap {
 	
 	// Turn Ratio for encoder ticks
 	public static double decoderTurnRatio = 25000 / 90;
-	public static double secondsRatio = 25;
+	public static double secondsRatio = 20;
 }

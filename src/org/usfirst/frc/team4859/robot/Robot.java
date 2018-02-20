@@ -99,6 +99,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+		Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 
 		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
 		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
@@ -157,9 +159,10 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
-		}
+		if (m_autonomousCommand != null) m_autonomousCommand.cancel();
+		
+		Lifter.motorLiftStage1.set(0);
+		Lifter.motorLiftStage2.set(0);
 	}
 
 	/**
@@ -173,7 +176,7 @@ public class Robot extends TimedRobot {
         else RobotMap.isPowerCubeInBox = false;
 		
 		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLimitSwitchTriggered = false;
-		else{
+		else {
 			RobotMap.isLimitSwitchTriggered = true;
 			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
@@ -181,7 +184,8 @@ public class Robot extends TimedRobot {
 		
 //		SmartDashboard.putBoolean("IR", RobotMap.isPowerCubeInBox);
 //		SmartDashboard.putNumber("IR Volt", boxSensor.getVoltage());
-//		SmartDashboard.putBoolean("limit switch", RobotMap.isLimitSwitchTriggered);
+		SmartDashboard.putBoolean("limit switch", RobotMap.isLimitSwitchTriggered);
+		SmartDashboard.putNumber("limit switch volt", liftLimitSwitch.getVoltage());
 		SmartDashboard.putString("liftSetHeight", RobotMap.liftSetHeight);
 	}
 

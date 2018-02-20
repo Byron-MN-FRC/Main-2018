@@ -28,10 +28,7 @@ public class OI {
 	Button setLiftScaleHigh = new JoystickButton(xbox, 4);
 	Button setLiftClimb = new JoystickButton(xbox, 6);
 	
-	// Buttons for mechanism testing
-//	Button acquireIntake = new JoystickButton(joystick, 7);
-//	Button acquireOuttake = new JoystickButton(joystick, 12);
-//	
+	// Buttons for mechanism testing	
 //	Button climbStart = new JoystickButton(joystick, 12);
 //
 //	Button tunnelIntake = new JoystickButton(joystick, 8);
@@ -46,8 +43,10 @@ public class OI {
 //		turnRight90.whenPressed(new DriveTurnRight90());
 //		turnLeft90.whenPressed(new DriveTurnLeft90());
 		
+		acquire.whenPressed(new Acquire(RobotMap.liftDownSpeed, RobotMap.tunnelIntakeSpeed));
+		acquire.whenReleased(new AcquireStop("default"));
 		
-		shoot.whenPressed(new Shoot(-1, RobotMap.tunnelShootSpeed));
+		shoot.whenPressed(new Shoot(RobotMap.tunnelShootSpeed));
 		shoot.whenReleased(new ShootStop());
 		
 		// Secondary Driver Buttons
@@ -61,12 +60,6 @@ public class OI {
 		
 		// Buttons for mechanism testing
 //		climbStart.whileHeld(new ClimbUp(RobotMap.climbSpeed));
-
-//		acquireIntake.whenPressed(new AcquirerIntake(RobotMap.acquireIntakeSpeed));
-//		acquireIntake.whenReleased(new AcquirerStop());
-//		
-//		acquireOuttake.whenPressed(new AcquirerOuttake(RobotMap.acquireShootSpeed));
-//		acquireOuttake.whenReleased(new AcquirerStop());
 //		
 //		tunnelIntake.whenPressed(new TunnelIntake(RobotMap.tunnelIntakeSpeed));
 //		tunnelIntake.whenReleased(new TunnelStop());

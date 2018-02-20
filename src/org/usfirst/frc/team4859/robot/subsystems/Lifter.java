@@ -31,8 +31,8 @@ public class Lifter extends Subsystem {
     
     public void liftDown(double inputSpeed) {
     	if(!RobotMap.isLimitSwitchTriggered) {
-    		motorLiftStage1.set(-inputSpeed);
-        	motorLiftStage2.set(inputSpeed);
+    		motorLiftStage1.set(inputSpeed);
+        	motorLiftStage2.set(-inputSpeed);
     	} else {
     		motorLiftStage1.set(0);
         	motorLiftStage2.set(0);
@@ -48,6 +48,8 @@ public class Lifter extends Subsystem {
 		// Configure feedback devices
 		motorLiftStage1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
 		motorLiftStage2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
+		
+		motorLiftStage1.setSensorPhase(true);
 
 		// Set relevant frame periods to be at least as fast as periodic rate
 		motorLiftStage1.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
@@ -80,6 +82,9 @@ public class Lifter extends Subsystem {
 		
 		motorLiftStage2.configContinuousCurrentLimit(RobotMap.kLiftStage2ContinuousCurrentLimit, RobotMap.kTimeoutMs);
 		motorLiftStage2.configPeakCurrentDuration(RobotMap.kLiftStage2CurrentPeakDuration, RobotMap.kTimeoutMs);
+		
+		motorLiftStage1.enableCurrentLimit(true);
+		motorLiftStage2.enableCurrentLimit(true);
 		
 		
 		// Set acceleration and cruise velocity
