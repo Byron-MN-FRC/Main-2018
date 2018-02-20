@@ -30,9 +30,15 @@ public class OI {
 	Button setLiftClimb = new JoystickButton(xbox, 6);
 		
 	// Buttons for mechanism testing
+<<<<<<< Upstream, based on origin/code_refactor
 //	Button liftUp = new JoystickButton(xbox, 5);
 //	Button liftDown = new JoystickButton(xbox, 6);
 
+=======
+	Button liftUp = new JoystickButton(xbox, 5);
+	Button liftDown = new JoystickButton(xbox, 6);
+	
+>>>>>>> 2ed34cf Fixed motors spinning wrong directions, tweaked speed values
 //	Button climbStart = new JoystickButton(joystick, 12);
 //
 //	Button tunnelIntake = new JoystickButton(joystick, 8);
@@ -63,12 +69,21 @@ public class OI {
 		liftToHeight.whenPressed(new LiftToHeight(RobotMap.liftSetHeight));
 		
 		// Buttons for mechanism testing
+<<<<<<< Upstream, based on origin/code_refactor
 //		liftDown.whenPressed(new LiftDown());
 //		liftDown.whenReleased(new LiftStop());
 //		
 //		liftUp.whenPressed(new LiftUp());
 //		liftUp.whenReleased(new LiftStop());
 //		
+=======
+		liftDown.whenPressed(new LiftDown());
+		liftDown.whenReleased(new LiftStop());
+		
+		liftUp.whenPressed(new LiftUp());
+		liftUp.whenReleased(new LiftStop());
+		
+>>>>>>> 2ed34cf Fixed motors spinning wrong directions, tweaked speed values
 //		climbStart.whileHeld(new ClimbUp(RobotMap.climbSpeed));
 //		
 //		tunnelIntake.whenPressed(new TunnelIntake(RobotMap.tunnelIntakeSpeed));
