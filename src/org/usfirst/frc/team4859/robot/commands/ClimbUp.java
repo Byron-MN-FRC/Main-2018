@@ -1,16 +1,13 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
+import org.usfirst.frc.team4859.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ClimbUp extends Command {
 	
-	private double speed = 0;
-	
-    public ClimbUp(double inputSpeed) {
-    	requires(Robot.climber);
+    public ClimbUp() {
     	requires(Robot.lifter);
-    	speed = inputSpeed;
     }
 
     protected void initialize() {
@@ -18,8 +15,7 @@ public class ClimbUp extends Command {
     }
 
     protected void execute() {
-    	Robot.climber.climbUp(speed);
-    	Robot.lifter.liftDown(-speed/2);
+    	Robot.lifter.liftDown(RobotMap.kClimbSpeed);
     }
 
     protected boolean isFinished() {
@@ -27,10 +23,10 @@ public class ClimbUp extends Command {
     }
 
     protected void end() {
-    	Robot.climber.climbStop();
+    	Robot.lifter.liftStop();
     }
 
     protected void interrupted() {
-    	Robot.climber.climbStop();
+    	Robot.lifter.liftStop();
     }
 }

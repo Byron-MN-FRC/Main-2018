@@ -17,12 +17,10 @@ public class Drivetrain extends Subsystem {
 	
 	
 	public static WPI_TalonSRX motorLeftMaster = new WPI_TalonSRX(RobotMap.talonIDLeftMaster);
-	public static WPI_TalonSRX motorLeftFollower1 = new WPI_TalonSRX(RobotMap.talonIDLeftFollower1);
-	public static WPI_TalonSRX motorLeftFollower2 = new WPI_TalonSRX(RobotMap.talonIDLeftFollower2);
+	public static WPI_TalonSRX motorLeftFollower = new WPI_TalonSRX(RobotMap.talonIDLeftFollower);
 	
 	public static WPI_TalonSRX motorRightMaster = new WPI_TalonSRX(RobotMap.talonIDRightMaster);
-	public static WPI_TalonSRX motorRightFollower1 = new WPI_TalonSRX(RobotMap.talonIDRightFollower1);
-	public static WPI_TalonSRX motorRightFollower2 = new WPI_TalonSRX(RobotMap.talonIDRightFollower2);
+	public static WPI_TalonSRX motorRightFollower = new WPI_TalonSRX(RobotMap.talonIDRightFollower);
 	
 	public static SpeedControllerGroup drivetrainLeft = new SpeedControllerGroup(motorLeftMaster);
 	public static SpeedControllerGroup drivetrainRight = new SpeedControllerGroup(motorRightMaster);
@@ -52,11 +50,6 @@ public class Drivetrain extends Subsystem {
 		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
 		SmartDashboard.putNumber("Forward Backword", y);
 		SmartDashboard.putNumber("Left Right", twist);
-		
-//		SmartDashboard.putNumber("Left 1", motorLeftMaster.getOutputCurrent());
-//		SmartDashboard.putNumber("Left 2", motorLeftFollower.getOutputCurrent());
-//		SmartDashboard.putNumber("Right 1", motorRightMaster.getOutputCurrent());
-//		SmartDashboard.putNumber("Right 2", motorRightFollower.getOutputCurrent());
 		
 		drivetrain.arcadeDrive(y, twist);
 	}
@@ -95,33 +88,24 @@ public class Drivetrain extends Subsystem {
 	
 	private void motorConfig() {
 		// Set followers
-		motorLeftFollower1.set(ControlMode.Follower, RobotMap.talonIDLeftMaster);
-		motorLeftFollower2.set(ControlMode.Follower, RobotMap.talonIDLeftMaster);
-		
-		motorRightFollower1.set(ControlMode.Follower, RobotMap.talonIDRightMaster);
-		motorRightFollower2.set(ControlMode.Follower, RobotMap.talonIDRightMaster);
+		motorLeftFollower.set(ControlMode.Follower, RobotMap.talonIDLeftMaster);
+		motorRightFollower.set(ControlMode.Follower, RobotMap.talonIDRightMaster);
 		
 		// Set current limits
 		motorLeftMaster.configContinuousCurrentLimit(RobotMap.kDriveContinuousCurrentLimit, RobotMap.kTimeoutMs);
-		motorLeftFollower1.configContinuousCurrentLimit(RobotMap.kDriveContinuousCurrentLimit, RobotMap.kTimeoutMs);
-		motorLeftFollower2.configContinuousCurrentLimit(RobotMap.kDriveContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		motorLeftFollower.configContinuousCurrentLimit(RobotMap.kDriveContinuousCurrentLimit, RobotMap.kTimeoutMs);
 		motorRightMaster.configContinuousCurrentLimit(RobotMap.kDriveContinuousCurrentLimit, RobotMap.kTimeoutMs);
-		motorRightFollower1.configContinuousCurrentLimit(RobotMap.kDriveContinuousCurrentLimit, RobotMap.kTimeoutMs);
-		motorRightFollower2.configContinuousCurrentLimit(RobotMap.kDriveContinuousCurrentLimit, RobotMap.kTimeoutMs);
+		motorRightFollower.configContinuousCurrentLimit(RobotMap.kDriveContinuousCurrentLimit, RobotMap.kTimeoutMs);
 		
 		motorLeftMaster.configPeakCurrentDuration(RobotMap.kDriveCurrentPeakDuration, RobotMap.kTimeoutMs);
-		motorLeftFollower1.configPeakCurrentDuration(RobotMap.kDriveCurrentPeakDuration, RobotMap.kTimeoutMs);
-		motorLeftFollower2.configPeakCurrentDuration(RobotMap.kDriveCurrentPeakDuration, RobotMap.kTimeoutMs);
+		motorLeftFollower.configPeakCurrentDuration(RobotMap.kDriveCurrentPeakDuration, RobotMap.kTimeoutMs);
 		motorRightMaster.configPeakCurrentDuration(RobotMap.kDriveCurrentPeakDuration, RobotMap.kTimeoutMs);
-		motorRightFollower1.configPeakCurrentDuration(RobotMap.kDriveCurrentPeakDuration, RobotMap.kTimeoutMs);
-		motorRightFollower2.configPeakCurrentDuration(RobotMap.kDriveCurrentPeakDuration, RobotMap.kTimeoutMs);
+		motorRightFollower.configPeakCurrentDuration(RobotMap.kDriveCurrentPeakDuration, RobotMap.kTimeoutMs);
 		
 		motorLeftMaster.enableCurrentLimit(true);
-		motorLeftFollower1.enableCurrentLimit(true);
-		motorLeftFollower2.enableCurrentLimit(true);
+		motorLeftFollower.enableCurrentLimit(true);
 		motorRightMaster.enableCurrentLimit(true);
-		motorRightFollower1.enableCurrentLimit(true);
-		motorRightFollower2.enableCurrentLimit(true);
+		motorRightFollower.enableCurrentLimit(true);
 		
 		// Configure feedback devices
 		motorLeftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
@@ -143,7 +127,7 @@ public class Drivetrain extends Subsystem {
 		motorLeftMaster.config_kI(0, RobotMap.kI, RobotMap.kTimeoutMs);
 		motorLeftMaster.config_kD(0, RobotMap.kD, RobotMap.kTimeoutMs);
 		motorLeftMaster.config_IntegralZone(0, 0, RobotMap.kTimeoutMs);
-		motorLeftMaster.configAllowableClosedloopError(RobotMap.kPIDSlot, RobotMap.kAllowableError, RobotMap.kTimeoutMs);
+		motorLeftMaster.configAllowableClosedloopError(RobotMap.kPIDSlot, RobotMap.kDriveAllowableError, RobotMap.kTimeoutMs);
 		
 		motorRightMaster.selectProfileSlot(RobotMap.kPIDSlot, 0);
 		motorRightMaster.config_kF(0, RobotMap.kF, RobotMap.kTimeoutMs);
@@ -151,19 +135,19 @@ public class Drivetrain extends Subsystem {
 		motorRightMaster.config_kI(0, RobotMap.kI, RobotMap.kTimeoutMs);
 		motorRightMaster.config_kD(0, RobotMap.kD, RobotMap.kTimeoutMs);
 		motorRightMaster.config_IntegralZone(0, 0, RobotMap.kTimeoutMs);
-		motorRightMaster.configAllowableClosedloopError(RobotMap.kPIDSlot, RobotMap.kAllowableError, RobotMap.kTimeoutMs);
+		motorRightMaster.configAllowableClosedloopError(RobotMap.kPIDSlot, RobotMap.kDriveAllowableError, RobotMap.kTimeoutMs);
 
 		// Set acceleration and cruise velocity
-		motorLeftMaster.configMotionCruiseVelocity(RobotMap.kHighGearCruiseVelocity, RobotMap.kTimeoutMs);
-		motorLeftMaster.configMotionAcceleration(RobotMap.kHighGearAcceleration, RobotMap.kTimeoutMs);
+		motorLeftMaster.configMotionAcceleration(RobotMap.kLowGearAcceleration, RobotMap.kTimeoutMs);
+		motorLeftMaster.configMotionCruiseVelocity(RobotMap.kLowGearCruiseVelocity, RobotMap.kTimeoutMs);
+		motorRightMaster.configMotionAcceleration(RobotMap.kLowGearAcceleration, RobotMap.kTimeoutMs);
+		motorRightMaster.configMotionCruiseVelocity(RobotMap.kLowGearCruiseVelocity, RobotMap.kTimeoutMs);
 		
-		motorRightMaster.configMotionCruiseVelocity(RobotMap.kHighGearCruiseVelocity, RobotMap.kTimeoutMs);
-		motorRightMaster.configMotionAcceleration(RobotMap.kHighGearAcceleration, RobotMap.kTimeoutMs);
-
 		// Zero encoder
 		motorLeftMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		motorRightMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		
+		// Set ramp rates
 		motorLeftMaster.configOpenloopRamp(RobotMap.kRampRate,RobotMap.kTimeoutMs);
 		motorRightMaster.configOpenloopRamp(RobotMap.kRampRate,RobotMap.kTimeoutMs);
 		

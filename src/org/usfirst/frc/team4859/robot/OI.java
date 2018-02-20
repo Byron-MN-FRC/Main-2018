@@ -14,13 +14,11 @@ public class OI {
 	Button shiftDown = new JoystickButton(joystick, 3);
 	
 	Button acquire = new JoystickButton(joystick, 1);
+	
 	Button shoot = new JoystickButton(joystick, 2);
-	Button shootBackward = new JoystickButton(joystick,4);
+	Button shootBackward = new JoystickButton(joystick, 4);
 	
 	Button liftToHeight = new JoystickButton(joystick, 6);
-	
-//	Button turnRight90 = new JoystickButton(joystick, 12);
-//	Button turnLeft90 = new JoystickButton(joystick, 11);
 	
 	// Secondary Driver Buttons
 	Button setLiftSwitch = new JoystickButton(xbox, 5);
@@ -28,17 +26,11 @@ public class OI {
 	Button setLiftScaleNorm = new JoystickButton(xbox, 2);
 	Button setLiftScaleHigh = new JoystickButton(xbox, 4);
 	Button setLiftClimb = new JoystickButton(xbox, 6);
-		
+	
 	// Buttons for mechanism testing
-<<<<<<< Upstream, based on origin/code_refactor
 //	Button liftUp = new JoystickButton(xbox, 5);
 //	Button liftDown = new JoystickButton(xbox, 6);
-
-=======
-	Button liftUp = new JoystickButton(xbox, 5);
-	Button liftDown = new JoystickButton(xbox, 6);
-	
->>>>>>> 2ed34cf Fixed motors spinning wrong directions, tweaked speed values
+//	
 //	Button climbStart = new JoystickButton(joystick, 12);
 //
 //	Button tunnelIntake = new JoystickButton(joystick, 8);
@@ -50,13 +42,11 @@ public class OI {
 		shiftUp.whenPressed(new ShiftUp());
 		shiftDown.whenPressed(new ShiftDown());
 		
-//		turnRight90.whenPressed(new DriveTurnRight90());
-//		turnLeft90.whenPressed(new DriveTurnLeft90());
-		
-		acquire.whenPressed(new Acquire(RobotMap.liftDownSpeed, RobotMap.tunnelIntakeSpeed));
+		acquire.whenPressed(new Acquire());
 		acquire.whenReleased(new AcquireStop("default"));
 		
-		shoot.whenPressed(new Shoot(RobotMap.tunnelShootSpeed));
+		
+		shoot.whenPressed(new Shoot());
 		shoot.whenReleased(new ShootStop());
 		
 		// Secondary Driver Buttons
@@ -69,21 +59,12 @@ public class OI {
 		liftToHeight.whenPressed(new LiftToHeight(RobotMap.liftSetHeight));
 		
 		// Buttons for mechanism testing
-<<<<<<< Upstream, based on origin/code_refactor
 //		liftDown.whenPressed(new LiftDown());
 //		liftDown.whenReleased(new LiftStop());
 //		
 //		liftUp.whenPressed(new LiftUp());
 //		liftUp.whenReleased(new LiftStop());
 //		
-=======
-		liftDown.whenPressed(new LiftDown());
-		liftDown.whenReleased(new LiftStop());
-		
-		liftUp.whenPressed(new LiftUp());
-		liftUp.whenReleased(new LiftStop());
-		
->>>>>>> 2ed34cf Fixed motors spinning wrong directions, tweaked speed values
 //		climbStart.whileHeld(new ClimbUp(RobotMap.climbSpeed));
 //		
 //		tunnelIntake.whenPressed(new TunnelIntake(RobotMap.tunnelIntakeSpeed));

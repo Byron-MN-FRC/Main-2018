@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ClimbStop extends Command {
 	
     public ClimbStop() {
-    	requires(Robot.climber);
+    	requires(Robot.lifter);
     }
 
     protected void initialize() {
@@ -14,7 +14,7 @@ public class ClimbStop extends Command {
     }
 
     protected void execute() {
-    	Robot.climber.climbStop();
+    	Robot.lifter.liftStop();
     }
 
     protected boolean isFinished() {
@@ -22,10 +22,10 @@ public class ClimbStop extends Command {
     }
 
     protected void end() {
-    	Robot.climber.climbStop();
+    	Robot.lifter.liftStop();
     }
 
     protected void interrupted() {
-    	Robot.climber.climbStop();
+    	Robot.lifter.liftStop();
     }
 }

@@ -15,8 +15,10 @@ public class ShiftDown extends Command {
     protected void initialize() {
     	Robot.shifters.pneumaticShiftDown();
 		Drivetrain.motorLeftMaster.configMotionAcceleration(RobotMap.kLowGearAcceleration, RobotMap.kTimeoutMs);
+		Drivetrain.motorRightMaster.configMotionAcceleration(RobotMap.kLowGearAcceleration, RobotMap.kTimeoutMs);
+		Drivetrain.motorLeftMaster.configMotionCruiseVelocity(RobotMap.kLowGearCruiseVelocity, RobotMap.kTimeoutMs);
 		Drivetrain.motorRightMaster.configMotionCruiseVelocity(RobotMap.kLowGearCruiseVelocity, RobotMap.kTimeoutMs);
-		RobotMap.kRampRate = 0.4;
+		RobotMap.kRampRate = RobotMap.kLowGearRampRate;
 		System.out.println("ShiftDown command ran");
 		SmartDashboard.putBoolean("Shifted Up", false);
     }

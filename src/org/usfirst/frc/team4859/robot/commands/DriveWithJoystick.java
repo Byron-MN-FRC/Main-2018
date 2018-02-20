@@ -12,7 +12,7 @@ public class DriveWithJoystick extends Command {
 	protected void initialize() {}
 	
 	protected void execute() {
-		Robot.kDrivetrain.driveWithJoystick(Robot.m_oi.getJoystick());
+		Robot.kDrivetrain.driveWithJoystick(Robot.oi.getJoystick());
 	}
 	
 	protected boolean isFinished() {
