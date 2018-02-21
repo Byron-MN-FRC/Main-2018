@@ -1,22 +1,20 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
+import org.usfirst.frc.team4859.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TunnelShoot extends Command {
 	
-	private double speed = 0;
 	private double time = 0;
 	
-    public TunnelShoot(double inputSpeed) {
+    public TunnelShoot() {
     	requires(Robot.tunnel);
-    	speed = inputSpeed;
     	time = 0;
     }
     
-    public TunnelShoot(double inputSpeed, double inputTime) {
+    public TunnelShoot(double inputTime) {
     	requires(Robot.tunnel);
-    	speed = inputSpeed;
     	time = inputTime;
     }
 
@@ -26,7 +24,7 @@ public class TunnelShoot extends Command {
     }
 
     protected void execute() {
-    	Robot.tunnel.tunnelShoot(speed);
+    	Robot.tunnel.tunnelShoot(RobotMap.kTunnelShootSpeed);
     }
 
     protected boolean isFinished() {

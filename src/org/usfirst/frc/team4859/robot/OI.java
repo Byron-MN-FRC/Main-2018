@@ -14,13 +14,11 @@ public class OI {
 	Button shiftDown = new JoystickButton(joystick, 3);
 	
 	Button acquire = new JoystickButton(joystick, 1);
+	
 	Button shoot = new JoystickButton(joystick, 2);
-	Button shootBackward = new JoystickButton(joystick,4);
+	Button shootBackward = new JoystickButton(joystick, 4);
 	
 	Button liftToHeight = new JoystickButton(joystick, 6);
-	
-//	Button turnRight90 = new JoystickButton(joystick, 12);
-//	Button turnLeft90 = new JoystickButton(joystick, 11);
 	
 	// Secondary Driver Buttons
 	Button setLiftSwitch = new JoystickButton(xbox, 5);
@@ -30,11 +28,8 @@ public class OI {
 	Button setLiftClimb = new JoystickButton(xbox, 6);
 	
 	// Buttons for mechanism testing
-	Button liftUp = new JoystickButton(xbox, 5);
-	Button liftDown = new JoystickButton(xbox, 6);
-	
-//	Button acquireIntake = new JoystickButton(joystick, 7);
-//	Button acquireOuttake = new JoystickButton(joystick, 12);
+//	Button liftUp = new JoystickButton(xbox, 5);
+//	Button liftDown = new JoystickButton(xbox, 6);
 //	
 //	Button climbStart = new JoystickButton(joystick, 12);
 //
@@ -47,11 +42,11 @@ public class OI {
 		shiftUp.whenPressed(new ShiftUp());
 		shiftDown.whenPressed(new ShiftDown());
 		
-//		turnRight90.whenPressed(new DriveTurnRight90());
-//		turnLeft90.whenPressed(new DriveTurnLeft90());
+		acquire.whenPressed(new Acquire());
+		acquire.whenReleased(new AcquireStop("default"));
 		
 		
-		shoot.whenPressed(new Shoot(-1, RobotMap.tunnelShootSpeed));
+		shoot.whenPressed(new Shoot());
 		shoot.whenReleased(new ShootStop());
 		
 		// Secondary Driver Buttons
@@ -64,19 +59,12 @@ public class OI {
 		liftToHeight.whenPressed(new LiftToHeight());
 		
 		// Buttons for mechanism testing
-		liftDown.whenPressed(new LiftDown());
-		liftDown.whenReleased(new LiftStop());
-		
-		liftUp.whenPressed(new LiftUp());
-		liftUp.whenReleased(new LiftStop());
-		
-//		climbStart.whileHeld(new ClimbUp(RobotMap.climbSpeed));
-
-//		acquireIntake.whenPressed(new AcquirerIntake(RobotMap.acquireIntakeSpeed));
-//		acquireIntake.whenReleased(new AcquirerStop());
+//		liftDown.whenPressed(new LiftDown());
+//		liftDown.whenReleased(new LiftStop());
 //		
-//		acquireOuttake.whenPressed(new AcquirerOuttake(RobotMap.acquireShootSpeed));
-//		acquireOuttake.whenReleased(new AcquirerStop());
+//		liftUp.whenPressed(new LiftUp());
+//		
+//		climbStart.whileHeld(new ClimbUp(RobotMap.climbSpeed));
 //		
 //		tunnelIntake.whenPressed(new TunnelIntake(RobotMap.tunnelIntakeSpeed));
 //		tunnelIntake.whenReleased(new TunnelStop());

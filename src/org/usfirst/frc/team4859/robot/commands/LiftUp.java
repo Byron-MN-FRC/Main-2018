@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
+import org.usfirst.frc.team4859.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class LiftUp extends Command {
@@ -14,7 +15,7 @@ public class LiftUp extends Command {
     }
 
     protected void execute() {
-    	Robot.lifter.liftUp(0.3);
+    	Robot.lifter.liftUp(RobotMap.kLiftUpSpeed);
     }
 
     protected boolean isFinished() {

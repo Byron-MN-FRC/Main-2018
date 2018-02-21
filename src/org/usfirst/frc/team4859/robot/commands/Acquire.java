@@ -1,27 +1,23 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
+import org.usfirst.frc.team4859.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Acquire extends Command {
 	
-	private double liftSpeed = 0;
-	private double tunnelSpeed = 0;
 	private double time = 0;
 	
-    public Acquire(double inputLiftSpeed, double inputTunnelSpeed) {
+    public Acquire() {
     	requires(Robot.lifter);
     	requires(Robot.tunnel);
-    	liftSpeed = inputLiftSpeed;
-    	tunnelSpeed = inputTunnelSpeed;
     	time = 0;
     }
     
-    public Acquire(double inputLiftSpeed, double inputTunnelSpeed, double inputTime) {
+    public Acquire(double inputTime) {
     	requires(Robot.lifter);
     	requires(Robot.tunnel);
-    	liftSpeed = inputLiftSpeed;
-    	tunnelSpeed = inputTunnelSpeed;
     	time = inputTime;
     }
 
@@ -31,8 +27,8 @@ public class Acquire extends Command {
     }
 
     protected void execute() {
-    	Robot.tunnel.tunnelIntake(tunnelSpeed);
-    	Robot.lifter.liftDown(liftSpeed);
+    	Robot.tunnel.tunnelIntake(RobotMap.kTunnelIntakeSpeed);
+    	Robot.lifter.liftDown(RobotMap.kLiftDownSpeed);
     }
 
     protected boolean isFinished() {
