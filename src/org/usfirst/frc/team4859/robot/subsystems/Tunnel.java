@@ -17,13 +17,13 @@ public class Tunnel extends Subsystem {
     public void tunnelIntake(double inputSpeed) {
     	motorTunnelLeft.set(inputSpeed);
     	motorTunnelRight.set(-inputSpeed);
-    	motorTunnelTop.set(-inputSpeed);
+    	motorTunnelTop.set(inputSpeed);
     }
     
     public void tunnelShoot(double inputSpeed) {
     	motorTunnelLeft.set(-inputSpeed);
     	motorTunnelRight.set(inputSpeed);
-    	motorTunnelTop.set(inputSpeed);
+    	motorTunnelTop.set(-inputSpeed);
     }
     
     public void tunnelStop() {

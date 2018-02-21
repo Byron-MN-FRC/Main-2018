@@ -9,7 +9,6 @@ package org.usfirst.frc.team4859.robot;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -22,12 +21,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.regex.Pattern;
-
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
-import org.usfirst.frc.team4859.robot.autonomous.DriveStraightDistance;
-import org.usfirst.frc.team4859.robot.commands.Acquire;
-import org.usfirst.frc.team4859.robot.commands.AcquireStop;
-import org.usfirst.frc.team4859.robot.subsystems.Climber;
+import org.usfirst.frc.team4859.robot.autonomous.AutoStraight;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4859.robot.subsystems.Lifter;
 import org.usfirst.frc.team4859.robot.subsystems.SetHeight;
@@ -44,11 +39,10 @@ import org.usfirst.frc.team4859.robot.subsystems.Tunnel;
 public class Robot extends TimedRobot {
 	public static final Drivetrain kDrivetrain = new Drivetrain();
 	public static Shifters shifters = new Shifters();
-	public static Climber climber = new Climber();
 	public static Tunnel tunnel = new Tunnel();
 	public static Lifter lifter = new Lifter();
 	public static SetHeight setHeight = new SetHeight();
-	public static OI m_oi;
+	public static OI oi;
 	
 	public static DigitalInput boxSensor = new DigitalInput(0);
 	public static DigitalOutput boxLED = new DigitalOutput(1);
@@ -63,7 +57,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		m_oi = new OI();
+		oi = new OI();
 		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "C");
 		SmartDashboard.putString("Scale", "N");
 		SmartDashboard.putString("Deliver Cube", "Y");
@@ -104,11 +98,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
 		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
 		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
 		String targetScale = SmartDashboard.getString("Scale", "N");
-		String delivery = SmartDashboard.getString("Deliver Cube", "Y");
+//		String delivery = SmartDashboard.getString("Deliver Cube", "Y");
 		
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
 		
@@ -122,7 +115,7 @@ public class Robot extends TimedRobot {
 		
 		if (!validGameString || !validRobotPos || !validDelay) {
 		 	System.out.println("Gamedata is invalid! Running AutoStraight routine.");
-			m_autonomousCommand = new DriveStraightDistance(96,3);
+			m_autonomousCommand = new AutoStraight();
 			m_autonomousCommand.start();
 		} else {
 			RobotMap.targetSide = gameData.charAt(0); //default to switch side
@@ -139,10 +132,11 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		
-		SmartDashboard.putNumber("Left Position", Drivetrain.motorLeftMaster.getSelectedSensorPosition(0));
-		SmartDashboard.putNumber("Right Position", Drivetrain.motorRightMaster.getSelectedSensorPosition(0));
-		SmartDashboard.putNumber("Left Error", Drivetrain.motorLeftMaster.getClosedLoopError(0));
-		SmartDashboard.putNumber("Right Error", Drivetrain.motorRightMaster.getClosedLoopError(0));
+		// Encoder logging
+//		SmartDashboard.putNumber("Left Position", Drivetrain.motorLeftMaster.getSelectedSensorPosition(0));
+//		SmartDashboard.putNumber("Right Position", Drivetrain.motorRightMaster.getSelectedSensorPosition(0));
+//		SmartDashboard.putNumber("Left Error", Drivetrain.motorLeftMaster.getClosedLoopError(0));
+//		SmartDashboard.putNumber("Right Error", Drivetrain.motorRightMaster.getClosedLoopError(0));
 		
 		if(boxSensor.get()) {
 			RobotMap.isPowerCubeInBox = true;
@@ -152,9 +146,9 @@ public class Robot extends TimedRobot {
 		}
         else RobotMap.isPowerCubeInBox = false;
 		
-		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLimitSwitchTriggered = false;
+		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
 		else{
-			RobotMap.isLimitSwitchTriggered = true;
+			RobotMap.isLiftDown = true;
 			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
@@ -163,13 +157,16 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
-		}
+		/*
+		 *  This makes sure that the autonomous stops running when
+		 *  teleop starts running. If you want the autonomous to
+		 *  continue until interrupted by another command, remove
+		 *  this line or comment it out.
+		 */
+		if (m_autonomousCommand != null) m_autonomousCommand.cancel();
+		
+		Lifter.motorLiftStage1.set(0);
+		Lifter.motorLiftStage2.set(0);
 	}
 
 	/**
@@ -187,17 +184,19 @@ public class Robot extends TimedRobot {
 		}
         else RobotMap.isPowerCubeInBox = false;
 		
-		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLimitSwitchTriggered = false;
-		else{
-			RobotMap.isLimitSwitchTriggered = true;
+		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
+		else {
+			RobotMap.isLiftDown = true;
 			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
+		// SmartDashboard Logging
 //		SmartDashboard.putBoolean("IR", RobotMap.isPowerCubeInBox);
 //		SmartDashboard.putNumber("IR Volt", boxSensor.getVoltage());
-//		SmartDashboard.putBoolean("limit switch", RobotMap.isLimitSwitchTriggered);
-		SmartDashboard.putString("liftSetHeight", RobotMap.liftSetHeight);
+		SmartDashboard.putBoolean("limit switch", RobotMap.isLiftDown);
+		SmartDashboard.putNumber("limit switch volt", liftLimitSwitch.getVoltage());
+//		SmartDashboard.putString("liftSetHeight", RobotMap.liftSetHeight);
 	}
 
 	public static double driveEncoderUnitConversion(double inches) {
