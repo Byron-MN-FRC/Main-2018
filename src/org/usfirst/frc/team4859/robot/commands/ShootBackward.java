@@ -28,7 +28,7 @@ public class ShootBackward extends Command {
     }
 
     protected void execute() {
-        if ((Lifter.motorLiftStage1.getSelectedSensorPosition(0) + Lifter.motorLiftStage2.getSelectedSensorPosition(0)) < 10000);
+        if (Lifter.motorLiftStage1.getSelectedSensorPosition(0) < 10000);
     	else Robot.tunnel.tunnelShoot(-RobotMap.kTunnelShootSpeed);
     }
 

@@ -10,7 +10,6 @@ package org.usfirst.frc.team4859.robot;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
@@ -150,7 +149,7 @@ public class Robot extends TimedRobot {
 		else{
 			RobotMap.isLiftDown = true;
 			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
-			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+//			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
 	}
@@ -166,7 +165,7 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) m_autonomousCommand.cancel();
 		
 		Lifter.motorLiftStage1.set(0);
-		Lifter.motorLiftStage2.set(0);
+//		Lifter.motorLiftStage2.set(0);
 	}
 
 	/**
@@ -188,7 +187,7 @@ public class Robot extends TimedRobot {
 		else {
 			RobotMap.isLiftDown = true;
 			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
-			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+//			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
 		// SmartDashboard Logging
