@@ -14,7 +14,7 @@ public class RobotMap {
 	public static int talonIDLeftFollower = 5;
 	
 	public static int talonIDLiftStage1 = 7;
-	public static int talonIDLiftStage2 = 8;
+//	public static int talonIDLiftStage2 = 8;
 	
 	public static int talonIDTunnelLeft = 3;
 	public static int talonIDTunnelRight = 2;
@@ -35,7 +35,7 @@ public class RobotMap {
         private static final long serialVersionUID = 1L;
 
     {	   //name                      stage1 stage2 (in encoder units)
-        put("acquire",   new Integer[]  { 0		, 0 	} );
+        put("acquire",   new Integer[]  { 0		, 0 	} ); //56200 max
         put("default",   new Integer[]  { 6000  , 0 	} );
         put("switch",    new Integer[]  { 0		, 25500	} );
         put("scaleLow",  new Integer[]  { 33250	, 31250	} );
