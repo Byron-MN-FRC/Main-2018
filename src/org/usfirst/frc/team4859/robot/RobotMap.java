@@ -16,9 +16,9 @@ public class RobotMap {
 	public static int talonIDLiftStage1 = 7;
 //	public static int talonIDLiftStage2 = 8;
 	
-	public static int talonIDTunnelLeft = 3;
-	public static int talonIDTunnelRight = 2;
-	public static int talonIDTunnelTop = 1;
+	public static int talonIDTunnelLeft = 10;
+	public static int talonIDTunnelRight = 11;
+	public static int talonIDTunnelTop = 12;
 	
 	// Command numbers
 	public static double kTunnelIntakeSpeed = 0.4;
