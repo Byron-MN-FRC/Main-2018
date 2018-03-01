@@ -50,16 +50,22 @@ public class RobotMap {
     public static String liftSetHeight = "switch";
     
     public static boolean liftDirectionFront = true;
+    
+    // Drivetrain ramp rates
+    public static double kRampRate = 0.0;
+    public static double kLowGearRampRate = 0.0;
+    public static double kHighGearRampRate = 0.0;
 	
-	// Power cube detection
+	// Lift sensors
 	public static boolean isPowerCubeInBox = false;
 	public static boolean isLiftDown = false;
 	
 	// Current limiting
+	// Drivetrain (CIMs)
 	public static int kDriveContinuousCurrentLimit = 30; // Amps
 	public static int kDriveCurrentPeakDuration = 2000; // Milliseconds
 	
-	// Lift is powered by a CIM
+	// Lift (CIM)
 	public static int kLiftContinuousCurrentLimit = 40;
 	public static int kLiftCurrentPeakDuration = 2000;
 	
@@ -67,7 +73,7 @@ public class RobotMap {
 	public static int kTimeoutMs = 10;
 	public static int kPIDSlot = 0;
 	
-	// Lift values
+	// Lift
 	public static double kLiftP = 1.35;
 	public static double kLiftI = 0.0007;
 	public static double kLiftD = 0.000;
@@ -77,6 +83,7 @@ public class RobotMap {
 	public static int kLiftAcceleration = 12600;
 	public static int kLiftCruiseVelocity = 3150;
 	
+	// Drivetrain
 	public static double kP = 0.24;
 	public static double kI = 0.000174;
 	public static double kD = 0.0;
@@ -88,6 +95,10 @@ public class RobotMap {
 	
 	public static int kLowGearAcceleration = 6000;
 	public static int kLowGearCruiseVelocity = 8500;
+	
+	// Turn Ratio for encoder ticks
+	public static double decoderTurnRatio = 25000 / 90;
+	public static double secondsRatio = 40;
 	
 	// Robot numbers for closed loop (in inches)
 	public static double robotWidth = 27;
@@ -105,8 +116,4 @@ public class RobotMap {
 	public static char targetSide = ' ';
 	public static char oppositeTargetSide = ' ';
 	public static double delayInSeconds = 0;
-	
-	// Turn Ratio for encoder ticks
-	public static double decoderTurnRatio = 25000 / 90;
-	public static double secondsRatio = 40;
 }
