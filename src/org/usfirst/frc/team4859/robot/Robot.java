@@ -148,8 +148,7 @@ public class Robot extends TimedRobot {
 //		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
 //		else{
 //			RobotMap.isLiftDown = true;
-//			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
-////			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+//			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 //		}
 		
 	}
@@ -164,8 +163,7 @@ public class Robot extends TimedRobot {
 		 */
 		if (m_autonomousCommand != null) m_autonomousCommand.cancel();
 		
-		Lifter.motorLiftStage1.set(0);
-//		Lifter.motorLiftStage2.set(0);
+		Lifter.motorLift.set(0);
 	}
 
 	/**
@@ -186,8 +184,7 @@ public class Robot extends TimedRobot {
 //		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
 //		else {
 //			RobotMap.isLiftDown = true;
-//			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
-////			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+//			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 //		}
 //		
 //		// SmartDashboard Logging
