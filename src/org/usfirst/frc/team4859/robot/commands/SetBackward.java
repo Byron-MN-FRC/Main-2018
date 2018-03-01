@@ -4,15 +4,15 @@ import org.usfirst.frc.team4859.robot.Robot;
 import org.usfirst.frc.team4859.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SetLiftScaleLow extends Command {
+public class SetBackward extends Command {
     
-    public SetLiftScaleLow() {
+    public SetBackward() {
     	requires(Robot.set);
     }
 
     protected void initialize() {
-    	RobotMap.liftSetHeight = "scaleLow";
-    	System.out.println("SetLiftHighScale command ran");
+    	RobotMap.liftDirectionFront = false;
+    	System.out.println("SetForward command ran");
     }
 
     protected void execute() {

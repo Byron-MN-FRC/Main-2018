@@ -20,12 +20,17 @@ public class OI {
 	
 	Button liftToHeight = new JoystickButton(joystick, 6);
 	
-	// Secondary Driver Buttons
+	// Secondary Driver Buttons 
+	// Lift heights
 	Button setLiftSwitch = new JoystickButton(xbox, 5);
 	Button setLiftScaleLow = new JoystickButton(xbox, 1);
 	Button setLiftScaleNorm = new JoystickButton(xbox, 2);
 	Button setLiftScaleHigh = new JoystickButton(xbox, 4);
 	Button setLiftClimb = new JoystickButton(xbox, 6);
+	
+	// Direction
+	Button setForward = new JoystickButton(xbox, 9);
+	Button setBackward = new JoystickButton(xbox, 10);
 	
 	// Buttons for mechanism testing
 //	Button liftUp = new JoystickButton(xbox, 5);
@@ -33,7 +38,7 @@ public class OI {
 //	
 //	Button climbStart = new JoystickButton(joystick, 12);
 //
-	Button tunnelIntake = new JoystickButton(joystick, 8);
+//	Button tunnelIntake = new JoystickButton(joystick, 8);
 //	Button tunnelShoot = new JoystickButton(joystick, 11);
  
 	public OI() {
@@ -45,9 +50,10 @@ public class OI {
 		acquire.whenPressed(new Acquire());
 		acquire.whenReleased(new AcquireStop("default"));
 		
-		
 		shoot.whenPressed(new Shoot());
 		shoot.whenReleased(new ShootStop());
+		
+		liftToHeight.whenPressed(new LiftToHeight());
 		
 		// Secondary Driver Buttons
 		setLiftSwitch.whenPressed(new SetLiftSwitch());
@@ -56,7 +62,8 @@ public class OI {
 		setLiftScaleHigh.whenPressed(new SetLiftScaleHigh());
 		setLiftClimb.whenPressed(new SetLiftClimb());
 		
-		liftToHeight.whenPressed(new LiftToHeight());
+		setForward.whenPressed(new SetForward());
+		setBackward.whenPressed(new SetBackward());
 		
 		// Buttons for mechanism testing
 //		liftDown.whenPressed(new LiftDown());
@@ -66,8 +73,8 @@ public class OI {
 //		
 //		climbStart.whileHeld(new ClimbUp(RobotMap.climbSpeed));
 //		
-		tunnelIntake.whenPressed(new TunnelIntake(1));
-		tunnelIntake.whenReleased(new TunnelStop());
+//		tunnelIntake.whenPressed(new TunnelIntake(1));
+//		tunnelIntake.whenReleased(new TunnelStop());
 //		
 //		tunnelShoot.whileHeld(new TunnelShoot(RobotMap.tunnelIntakeSpeed));
 //		tunnelShoot.whenPressed(new TunnelStop());

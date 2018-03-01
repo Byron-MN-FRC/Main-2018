@@ -24,7 +24,7 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraight;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4859.robot.subsystems.Lifter;
-import org.usfirst.frc.team4859.robot.subsystems.SetHeight;
+import org.usfirst.frc.team4859.robot.subsystems.Set;
 import org.usfirst.frc.team4859.robot.subsystems.Shifters;
 import org.usfirst.frc.team4859.robot.subsystems.Tunnel;
 
@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
 	public static Shifters shifters = new Shifters();
 	public static Tunnel tunnel = new Tunnel();
 	public static Lifter lifter = new Lifter();
-	public static SetHeight setHeight = new SetHeight();
+	public static Set set = new Set();
 	public static OI oi;
 	
 //	public static DigitalInput boxSensor = new DigitalInput(0);
