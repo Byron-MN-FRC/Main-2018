@@ -13,20 +13,19 @@ public class RobotMap {
 	public static int talonIDLeftMaster = 4;
 	public static int talonIDLeftFollower = 5;
 	
-	public static int talonIDLiftStage1 = 7;
-//	public static int talonIDLiftStage2 = 8;
+	public static int talonIDLift = 7;
 	
 	public static int talonIDTunnelLeft = 10;
 	public static int talonIDTunnelRight = 11;
 	public static int talonIDTunnelTop = 12;
 	
 	// Command numbers
-	public static double kTunnelIntakeSpeed = 0.75;
+	public static double kTunnelIntakeSpeed = 0.7;
 	public static double kTunnelShootSpeed = 1;
 	
 	public static double kClimbSpeed = 1;
 	
-	public static double kLiftDownSpeed = 0.15;
+	public static double kLiftDownSpeed = 0.2;
 	public static double kLiftUpSpeed = 0.3;
 	
 	// Lifter heights
@@ -34,14 +33,14 @@ public class RobotMap {
 
         private static final long serialVersionUID = 1L;
 
-    {	   //name                      stage1 stage2 (in encoder units)
-        put("acquire",   new Integer[]  { 0		, 0 	} ); //56200 max
-        put("default",   new Integer[]  { 6000  , 0 	} );
-        put("switch",    new Integer[]  { 0		, 25500	} );
-        put("scaleLow",  new Integer[]  { 33250	, 31250	} );
-        put("scaleNorm", new Integer[]  { 44850	, 31250	} );
-        put("scaleHigh", new Integer[]  { 55000	, 31250	} );
-        put("climb",     new Integer[]  { 55000	, 31250	} );
+    {	   //name                      encoder units
+        put("acquire",   new Integer[]  { 0		} );
+        put("default",   new Integer[]  { 3000	} );
+        put("switch",    new Integer[]  { 9000	} );
+        put("scaleLow",  new Integer[]  { 33250	} );
+        put("scaleNorm", new Integer[]  { 44850	} );
+        put("scaleHigh", new Integer[]  { 55000	} );
+        put("climb",     new Integer[]  { 55000	} );
     }};
     
     /* Example of how to get values:
@@ -49,6 +48,8 @@ public class RobotMap {
      */
     
     public static String liftSetHeight = "switch";
+    
+    public static boolean liftDirectionFront = true;
 	
 	// Power cube detection
 	public static boolean isPowerCubeInBox = false;
@@ -58,46 +59,27 @@ public class RobotMap {
 	public static int kDriveContinuousCurrentLimit = 30; // Amps
 	public static int kDriveCurrentPeakDuration = 2000; // Milliseconds
 	
-	// Stage 1 is a Mini CIM
-	public static int kLiftStage1ContinuousCurrentLimit = 40;
-	public static int kLiftStage1CurrentPeakDuration = 2000;
-	
-	// Stage 2 is a BAG Motor
-	public static int kLiftStage2ContinuousCurrentLimit = 30;
-	public static int kLiftStage2CurrentPeakDuration = 2000;
+	// Lift is powered by a CIM
+	public static int kLiftContinuousCurrentLimit = 40;
+	public static int kLiftCurrentPeakDuration = 2000;
 	
 	// Closed loop values
 	public static int kTimeoutMs = 10;
 	public static int kPIDSlot = 0;
 	
 	// Lift values
-	public static double kLiftStage1P = 1.35;
-	public static double kLiftStage1I = 0.0007;
-	public static double kLiftStage1D = 0.000;
-	public static double kLiftStage1F = 0.37;
-	public static int kLiftStage1AllowableError = 90;
+	public static double kLiftP = 1.35;
+	public static double kLiftI = 0.0007;
+	public static double kLiftD = 0.000;
+	public static double kLiftF = 0.37;
+	public static int kLiftAllowableError = 90;
 	
-	public static int kLiftStage1Acceleration = 12600;
-	public static int kLiftStage1CruiseVelocity = 3150;
-	
-	public static double kLiftStage2P = 1.8;
-	public static double kLiftStage2I = 0.0008;
-	public static double kLiftStage2D = 0.000;
-	public static double kLiftStage2F = 0.53;
-	public static int kLiftStage2AllowableError = 75;
-	
-	public static int kLiftStage2Acceleration = 9000;
-	public static int kLiftStage2CruiseVelocity = 2250;
-	
-	// Drivetrain values
-	public static double kRampRate = 0.2; //default
-	
-	public static double kHighGearRampRate = 0.15;
-	public static double kLowGearRampRate = 0.15;
+	public static int kLiftAcceleration = 12600;
+	public static int kLiftCruiseVelocity = 3150;
 	
 	public static double kP = 0.24;
 	public static double kI = 0.000174;
-	public static double kD = 0.00;
+	public static double kD = 0.0;
 	public static double kF = 0.12;
 	public static int kDriveAllowableError = 90;
 	
