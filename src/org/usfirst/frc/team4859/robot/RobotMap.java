@@ -21,7 +21,7 @@ public class RobotMap {
 	public static int talonIDTunnelTop = 12;
 	
 	// Command numbers
-	public static double kTunnelIntakeSpeed = 0.4;
+	public static double kTunnelIntakeSpeed = 0.75;
 	public static double kTunnelShootSpeed = 1;
 	
 	public static double kClimbSpeed = 1;

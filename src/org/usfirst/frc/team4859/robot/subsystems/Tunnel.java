@@ -1,6 +1,8 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
 import org.usfirst.frc.team4859.robot.RobotMap;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -12,15 +14,15 @@ public class Tunnel extends Subsystem {
     public void initDefaultCommand() {}
     
     public void tunnelIntake(double inputSpeed) {
-    	motorTunnelLeft.set(inputSpeed);
-    	motorTunnelRight.set(-inputSpeed);
-    	motorTunnelTop.set(inputSpeed);
+    	motorTunnelLeft.set(ControlMode.PercentOutput, inputSpeed);
+    	motorTunnelRight.set(ControlMode.PercentOutput, inputSpeed);
+    	motorTunnelTop.set(ControlMode.PercentOutput, -inputSpeed);
     }
     
     public void tunnelShoot(double inputSpeed) {
-    	motorTunnelLeft.set(-inputSpeed);
-    	motorTunnelRight.set(inputSpeed);
-    	motorTunnelTop.set(-inputSpeed);
+    	motorTunnelLeft.set(ControlMode.PercentOutput, -inputSpeed);
+    	motorTunnelRight.set(ControlMode.PercentOutput, -inputSpeed);
+    	motorTunnelTop.set(ControlMode.PercentOutput, inputSpeed);
     }
     
     public void tunnelStop() {
