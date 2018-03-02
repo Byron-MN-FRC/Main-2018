@@ -9,6 +9,7 @@ package org.usfirst.frc.team4859.robot;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
+import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -62,10 +63,26 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Deliver Cube", "Y");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 
-		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
-		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
-		UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
-		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
+		RobotMap.cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
+		RobotMap.cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
+		
+  /*  for (int i = 1; i < 20; i++) {
+    	try {
+        	if (i%2 == 0){
+        		RobotMap.cameraBackward.setPixelFormat(PixelFormat.kGray);
+        	    RobotMap.cameraForward.setPixelFormat(PixelFormat.kMJPEG);
+        	}else{
+        		RobotMap.cameraForward.setPixelFormat(PixelFormat.kGray);
+        		RobotMap.cameraBackward.setPixelFormat(PixelFormat.kMJPEG);
+        	}
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+    	}*/
+
 	}
 
 
@@ -172,6 +189,24 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		System.out.println("Brightness =" + RobotMap.cameraForward.getBrightness());
+	    	try {
+	        	if (RobotMap.counter%2 == 0){
+	        	    RobotMap.cameraBackward.setVideoMode(VideoMode.PixelFormat.kGray, 160, 120, 3);
+	        	    RobotMap.cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
+	        	    
+	        	}else{
+	        	    RobotMap.cameraForward.setVideoMode(VideoMode.PixelFormat.kGray, 160, 120, 3);
+	        	    RobotMap.cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
+
+	        	}
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	RobotMap.counter++;
+
 		
 //		if(boxSensor.get()) {
 //			RobotMap.isPowerCubeInBox = true;

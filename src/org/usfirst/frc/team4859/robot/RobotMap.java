@@ -3,6 +3,10 @@ package org.usfirst.frc.team4859.robot;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode;
+import edu.wpi.first.wpilibj.CameraServer;
+
 // IMPORTNANT NOTE: DO NOT MAKE VALUES NEGATIVE. The "down," "reverse," and "intake" variables are positive but are flipped when pushed to the motors
 public class RobotMap {
 	
@@ -116,4 +120,9 @@ public class RobotMap {
 	public static char targetSide = ' ';
 	public static char oppositeTargetSide = ' ';
 	public static double delayInSeconds = 0;
+	
+	public static int counter = 0;
+	
+	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
+	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
 }

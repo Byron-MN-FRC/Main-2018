@@ -5,6 +5,10 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Lifter extends Subsystem {
@@ -19,6 +23,9 @@ public class Lifter extends Subsystem {
     public void liftToHeight(String position) {
     	motorLift.set(ControlMode.MotionMagic, RobotMap.liftPosition.get(position)[0]);
 //    	motorLiftStage2.set(ControlMode.MotionMagic, RobotMap.liftPosition.get(position)[1]);
+    	if(RobotMap.liftDirectionFront) RobotMap.cameraBackward.setVideoMode(VideoMode.PixelFormat.kGray, 160, 120, 3);
+    	else RobotMap.cameraForward.setVideoMode(VideoMode.PixelFormat.kGray, 160, 120, 3);
+    	
     }
     
     public void liftDown(double inputSpeed) {
