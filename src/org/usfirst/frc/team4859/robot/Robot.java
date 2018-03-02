@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
 	
 //	public static DigitalInput boxSensor = new DigitalInput(0);
 //	public static DigitalOutput boxLED = new DigitalOutput(1);
-//	public static AnalogInput liftLimitSwitch = new AnalogInput(2);
+	public static AnalogInput liftLimitSwitch = new AnalogInput(2);
   
 		Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -145,11 +145,11 @@ public class Robot extends TimedRobot {
 //		}
 //        else RobotMap.isPowerCubeInBox = false;
 //		
-//		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
-//		else{
-//			RobotMap.isLiftDown = true;
-//			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
-//		}
+		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
+		else{
+			RobotMap.isLiftDown = true;
+			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+		}
 		
 	}
 
@@ -181,17 +181,17 @@ public class Robot extends TimedRobot {
 //		}
 //        else RobotMap.isPowerCubeInBox = false;
 //		
-//		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
-//		else {
-//			RobotMap.isLiftDown = true;
-//			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
-//		}
+		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
+		else {
+			RobotMap.isLiftDown = true;
+			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+		}
 //		
 //		// SmartDashboard Logging
 ////		SmartDashboard.putBoolean("IR", RobotMap.isPowerCubeInBox);
 ////		SmartDashboard.putNumber("IR Volt", boxSensor.getVoltage());
-//		SmartDashboard.putBoolean("limit switch", RobotMap.isLiftDown);
-//		SmartDashboard.putNumber("limit switch volt", liftLimitSwitch.getVoltage());
+		SmartDashboard.putBoolean("limit switch", RobotMap.isLiftDown);
+		SmartDashboard.putNumber("limit switch volt", liftLimitSwitch.getVoltage());
 ////		SmartDashboard.putString("liftSetHeight", RobotMap.liftSetHeight);
 	}
 
