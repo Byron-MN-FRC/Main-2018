@@ -2,7 +2,6 @@ package org.usfirst.frc.team4859.robot;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -56,9 +55,10 @@ public class RobotMap {
     public static boolean liftDirectionFront = true;
     
     // Drivetrain ramp rates
-    public static double kRampRate = 0.0;
-    public static double kLowGearRampRate = 0.0;
-    public static double kHighGearRampRate = 0.0;
+    public static double kRampRate = 0.125; // TIme to get from 0 to max
+    public static double kRampRateLimit = 0.075; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
+    public static double kLowGearRampRate = 0.1;
+    public static double kHighGearRampRate = 0.15;
 	
 	// Lift sensors
 	public static boolean isPowerCubeInBox = false;
@@ -70,7 +70,7 @@ public class RobotMap {
 	public static int kDriveCurrentPeakDuration = 2000; // Milliseconds
 	
 	// Lift (CIM)
-	public static int kLiftContinuousCurrentLimit = 40;
+	public static int kLiftContinuousCurrentLimit = 45;
 	public static int kLiftCurrentPeakDuration = 2000;
 	
 	// Closed loop values

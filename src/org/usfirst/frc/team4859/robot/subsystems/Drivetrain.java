@@ -14,8 +14,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drivetrain extends Subsystem {
-	
-	
 	public static WPI_TalonSRX motorLeftMaster = new WPI_TalonSRX(RobotMap.talonIDLeftMaster);
 	public static WPI_TalonSRX motorLeftFollower = new WPI_TalonSRX(RobotMap.talonIDLeftFollower);
 	
@@ -26,6 +24,13 @@ public class Drivetrain extends Subsystem {
 	public static SpeedControllerGroup drivetrainRight = new SpeedControllerGroup(motorRightMaster);
 	
 	public static DifferentialDrive drivetrain = new DifferentialDrive(drivetrainLeft, drivetrainRight);
+	
+	private double y = 0;
+	private double twist = 0;
+	private double yChange = 0;
+	private double yLimitedJoystick = 0;
+	private double yLastValue = 0;
+	
 	
 	public Drivetrain() {
 		motorConfig();
@@ -38,18 +43,26 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void driveWithJoystick(Joystick joystickP0) {
-		double y = -joystickP0.getY();
-		double x = -joystickP0.getX();
-		double twist = joystickP0.getTwist();
+		y = -joystickP0.getY();
+		twist = joystickP0.getTwist();
+		
+		// Y Acceleration Limiting
+//		if (y > yLastValue) {
+//			yChange = y - yLimitedJoystick;
+//			if (yChange > RobotMap.kRampRateLimit) yChange = RobotMap.kRampRateLimit;
+//			else if (yChange <= RobotMap.kRampRateLimit) yChange = -RobotMap.kRampRateLimit;
+//			yLimitedJoystick += yChange;
+//			y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", yLimitedJoystick) : ThrottleLookup.calcJoystickCorrection("NormY", yLimitedJoystick);
+//		} else y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);
+//		yLastValue = y;
 		
 		// Apply translations to the values from the controller
 		y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);
-		x = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowX", x) : ThrottleLookup.calcJoystickCorrection("NormX", x);
 		twist = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowT", twist) : ThrottleLookup.calcJoystickCorrection("NormT", twist);
 		
 		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
-		SmartDashboard.putNumber("Forward Backword", y);
-		SmartDashboard.putNumber("Left Right", twist);
+//		SmartDashboard.putNumber("Joystick Y", y);
+//		SmartDashboard.putNumber("Joystick Twist", twist);
 		
 		drivetrain.arcadeDrive(y, twist);
 	}
