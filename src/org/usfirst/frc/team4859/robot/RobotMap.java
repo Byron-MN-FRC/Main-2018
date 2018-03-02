@@ -17,7 +17,7 @@ public class RobotMap {
 	public static int talonIDLeftMaster = 4;
 	public static int talonIDLeftFollower = 5;
 	
-	public static int talonIDLift = 7;
+	public static int talonIDLift = 8;
 	
 	public static int talonIDTunnelLeft = 10;
 	public static int talonIDTunnelRight = 11;
@@ -39,12 +39,12 @@ public class RobotMap {
 
     {	   //name                      encoder units
         put("acquire",   new Integer[]  { 0		} );
-        put("default",   new Integer[]  { 3000	} );
-        put("switch",    new Integer[]  { 9000	} );
-        put("scaleLow",  new Integer[]  { 33250	} );
-        put("scaleNorm", new Integer[]  { 44850	} );
-        put("scaleHigh", new Integer[]  { 55000	} );
-        put("climb",     new Integer[]  { 55000	} );
+        put("default",   new Integer[]  { 7300	} ); // 6
+        put("switch",    new Integer[]  { 26300	} ); // 35
+        put("scaleLow",  new Integer[]  { 39900	} ); // 58
+        put("scaleNorm", new Integer[]  { 47000	} ); // 70
+        put("scaleHigh", new Integer[]  { 55000	} ); // 82
+        put("climb",     new Integer[]  { 55000	} ); // 82
     }};
     
     /* Example of how to get values:
@@ -74,14 +74,14 @@ public class RobotMap {
 	public static int kLiftCurrentPeakDuration = 2000;
 	
 	// Closed loop values
-	public static int kTimeoutMs = 10;
+	public static int kTimeoutMs = 20;
 	public static int kPIDSlot = 0;
 	
 	// Lift
-	public static double kLiftP = 1.35;
-	public static double kLiftI = 0.0007;
+	public static double kLiftP = 1.125;
+	public static double kLiftI = 0.00015;
 	public static double kLiftD = 0.000;
-	public static double kLiftF = 0.37;
+	public static double kLiftF = 0.53;
 	public static int kLiftAllowableError = 90;
 	
 	public static int kLiftAcceleration = 12600;

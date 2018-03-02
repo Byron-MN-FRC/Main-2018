@@ -227,7 +227,8 @@ public class Robot extends TimedRobot {
 ////		SmartDashboard.putNumber("IR Volt", boxSensor.getVoltage());
 		SmartDashboard.putBoolean("limit switch", RobotMap.isLiftDown);
 		SmartDashboard.putNumber("limit switch volt", liftLimitSwitch.getVoltage());
-////		SmartDashboard.putString("liftSetHeight", RobotMap.liftSetHeight);
+		SmartDashboard.putString("liftSetHeight", RobotMap.liftSetHeight);
+		SmartDashboard.putNumber("lifter amps", lifter.motorLift.getOutputCurrent());
 	}
 
 	public static double driveEncoderUnitConversion(double inches) {
