@@ -43,8 +43,8 @@ public class Robot extends TimedRobot {
 	public static Set set = new Set();
 	public static OI oi;
 	
-	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 1);
-	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 0);
+	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
+	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
 	
 //	public static DigitalInput boxSensor = new DigitalInput(0);
 //	public static DigitalOutput boxLED = new DigitalOutput(1);
@@ -65,8 +65,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Deliver Cube", "Y");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 
-		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
-		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
+		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
+		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
 	}
 
 
@@ -185,6 +185,8 @@ public class Robot extends TimedRobot {
 		}
 		
 		// SmartDashboard Logging
+    	SmartDashboard.putBoolean("Front Camera", RobotMap.liftDirectionFront);
+    	SmartDashboard.putBoolean("Back Camera", !RobotMap.liftDirectionFront);
 //		SmartDashboard.putBoolean("IR", RobotMap.isPowerCubeInBox);
 //		SmartDashboard.putNumber("IR Volt", boxSensor.getVoltage());
 //		SmartDashboard.putBoolean("limit switch", RobotMap.isLiftDown);

@@ -64,7 +64,7 @@ public class RobotMap {
 	
 	// Current limiting
 	// Drivetrain (CIMs)
-	public static int kDriveContinuousCurrentLimit = 30; // Amps
+	public static int kDriveContinuousCurrentLimit = 40; // Amps
 	public static int kDriveCurrentPeakDuration = 2000; // Milliseconds
 	
 	// Lift (CIM)

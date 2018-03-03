@@ -24,10 +24,10 @@ public class ShootStop extends Command {
 
     protected void initialize() {
     	setTimeout(time);
-    	Robot.lifter.liftToHeight("default");
+    	Robot.lifter.liftToHeight(RobotMap.liftSetHeight);
     	System.out.println("ShootStop command ran");
-    	Robot.cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
-		Robot.cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
+//    	Robot.cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
+//		Robot.cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
     }
 
     protected void execute() {
