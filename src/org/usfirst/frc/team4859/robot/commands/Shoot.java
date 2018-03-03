@@ -2,6 +2,8 @@ package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
 import org.usfirst.frc.team4859.robot.RobotMap;
+import org.usfirst.frc.team4859.robot.subsystems.Lifter;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Shoot extends Command {
@@ -27,7 +29,11 @@ public class Shoot extends Command {
     }
 
     protected void execute() {
-    	Robot.tunnel.tunnelShoot(RobotMap.kTunnelShootSpeed);
+    	if(RobotMap.liftDirectionFront) Robot.tunnel.tunnelShoot(RobotMap.kTunnelShootSpeed);
+    	else {
+    		if (Lifter.motorLift.getSelectedSensorPosition(0) < 15000);
+        	else Robot.tunnel.tunnelShoot(-RobotMap.kTunnelShootSpeed);
+    	}
     }
 
     protected boolean isFinished() {
@@ -37,11 +43,11 @@ public class Shoot extends Command {
 
     protected void end() {
     	Robot.tunnel.tunnelStop();
-    	Robot.lifter.liftDown(RobotMap.kLiftDownSpeed);
+    	Robot.lifter.liftToHeight("default");
     }
 
     protected void interrupted() {
     	Robot.tunnel.tunnelStop();
-    	Robot.lifter.liftDown(RobotMap.kLiftDownSpeed);
+    	Robot.lifter.liftToHeight("default");
     }
 }

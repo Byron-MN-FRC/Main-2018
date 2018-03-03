@@ -2,6 +2,8 @@ package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
 import org.usfirst.frc.team4859.robot.RobotMap;
+
+import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class LiftToHeight extends Command {
@@ -23,6 +25,14 @@ public class LiftToHeight extends Command {
     protected void initialize() {
     	setTimeout(time);
     	System.out.println("LiftToHeight command ran");
+    	
+    	if(RobotMap.liftDirectionFront) {
+    		Robot.cameraBackward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 3);
+    		Robot.cameraForward.setFPS(20);
+    	} else {
+    		Robot.cameraForward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 3);
+    		Robot.cameraBackward.setFPS(20);
+    	}
     }
 
     protected void execute() {
@@ -38,6 +48,14 @@ public class LiftToHeight extends Command {
     protected void end() {
     	if (time > 0) Robot.lifter.liftToHeight(position);
     	else Robot.lifter.liftToHeight(RobotMap.liftSetHeight);
+    	
+    	if(RobotMap.liftDirectionFront) {
+    		Robot.cameraBackward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 3);
+    		Robot.cameraForward.setFPS(20);
+    	} else {
+    		Robot.cameraForward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 3);
+    		Robot.cameraBackward.setFPS(20);
+    	}
     }
 
     protected void interrupted() {

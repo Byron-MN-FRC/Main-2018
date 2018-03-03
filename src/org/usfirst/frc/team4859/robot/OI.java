@@ -22,15 +22,15 @@ public class OI {
 	
 	// Secondary Driver Buttons 
 	// Lift heights
-	Button setLiftSwitch = new JoystickButton(xbox, 5);
+	Button setLiftSwitch = new JoystickButton(xbox, 3);
 	Button setLiftScaleLow = new JoystickButton(xbox, 1);
 	Button setLiftScaleNorm = new JoystickButton(xbox, 2);
 	Button setLiftScaleHigh = new JoystickButton(xbox, 4);
-	Button setLiftClimb = new JoystickButton(xbox, 6);
+//	Button setLiftClimb = new JoystickButton(xbox, 6);
 	
 	// Direction
-	Button setForward = new JoystickButton(xbox, 9);
-	Button setBackward = new JoystickButton(xbox, 10);
+	Button setForward = new JoystickButton(xbox, 6);
+	Button setBackward = new JoystickButton(xbox, 5);
 	
 	// Buttons for mechanism testing
 //	Button liftUp = new JoystickButton(xbox, 5);
@@ -53,6 +53,9 @@ public class OI {
 		shoot.whenPressed(new Shoot());
 		shoot.whenReleased(new ShootStop());
 		
+		shootBackward.whenPressed(new ShootBackward());
+		shootBackward.whenReleased(new ShootStop());
+		
 		liftToHeight.whenPressed(new LiftToHeight());
 		
 		// Secondary Driver Buttons
@@ -60,7 +63,7 @@ public class OI {
 		setLiftScaleLow.whenPressed(new SetLiftScaleLow());
 		setLiftScaleNorm.whenPressed(new SetLiftScale());
 		setLiftScaleHigh.whenPressed(new SetLiftScaleHigh());
-		setLiftClimb.whenPressed(new SetLiftClimb());
+//		setLiftClimb.whenPressed(new SetLiftClimb());
 		
 		setForward.whenPressed(new SetForward());
 		setBackward.whenPressed(new SetBackward());

@@ -5,10 +5,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoMode;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Lifter extends Subsystem {
@@ -23,9 +19,6 @@ public class Lifter extends Subsystem {
     public void liftToHeight(String position) {
     	motorLift.set(ControlMode.MotionMagic, RobotMap.liftPosition.get(position)[0]);
 //    	motorLiftStage2.set(ControlMode.MotionMagic, RobotMap.liftPosition.get(position)[1]);
-    	if(RobotMap.liftDirectionFront) RobotMap.cameraBackward.setVideoMode(VideoMode.PixelFormat.kGray, 160, 120, 3);
-    	else RobotMap.cameraForward.setVideoMode(VideoMode.PixelFormat.kGray, 160, 120, 3);
-    	
     }
     
     public void liftDown(double inputSpeed) {
@@ -56,9 +49,9 @@ public class Lifter extends Subsystem {
 		motorLift.setSensorPhase(true);
 
 		// Set relevant frame periods to be at least as fast as periodic rate
-		motorLift.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
-		motorLift.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
-		motorLift.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 10, RobotMap.kTimeoutMs);
+		motorLift.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 5, RobotMap.kTimeoutMs);
+		motorLift.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 5, RobotMap.kTimeoutMs);
+		motorLift.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 5, RobotMap.kTimeoutMs);
 
 		// Set closed loop gains in slot 0
 		motorLift.selectProfileSlot(RobotMap.kPIDSlot, 0);

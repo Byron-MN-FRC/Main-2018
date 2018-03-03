@@ -28,8 +28,12 @@ public class ShootBackward extends Command {
     }
 
     protected void execute() {
-        if (Lifter.motorLift.getSelectedSensorPosition(0) < 10000);
-    	else Robot.tunnel.tunnelShoot(-RobotMap.kTunnelShootSpeed);
+    	if(!RobotMap.liftDirectionFront) Robot.tunnel.tunnelShoot(RobotMap.kTunnelShootSpeed);
+    	else {
+    		if (Lifter.motorLift.getSelectedSensorPosition(0) < 15000);
+        	else Robot.tunnel.tunnelShoot(-RobotMap.kTunnelShootSpeed);
+    	}
+        Robot.tunnel.tunnelShoot(-RobotMap.kTunnelShootSpeed);
     }
 
     protected boolean isFinished() {
@@ -39,11 +43,11 @@ public class ShootBackward extends Command {
 
     protected void end() {
     	Robot.tunnel.tunnelStop();
-    	Robot.lifter.liftDown(RobotMap.kLiftDownSpeed);
+    	Robot.lifter.liftToHeight("default");
     }
 
     protected void interrupted() {
     	Robot.tunnel.tunnelStop();
-    	Robot.lifter.liftDown(RobotMap.kLiftDownSpeed);
+    	Robot.lifter.liftToHeight("default");
     }
 }

@@ -9,7 +9,6 @@ package org.usfirst.frc.team4859.robot;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
-import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -44,6 +43,9 @@ public class Robot extends TimedRobot {
 	public static Set set = new Set();
 	public static OI oi;
 	
+	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 1);
+	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 0);
+	
 //	public static DigitalInput boxSensor = new DigitalInput(0);
 //	public static DigitalOutput boxLED = new DigitalOutput(1);
 	public static AnalogInput liftLimitSwitch = new AnalogInput(2);
@@ -63,26 +65,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Deliver Cube", "Y");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 
-		RobotMap.cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
-		RobotMap.cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
-		
-  /*  for (int i = 1; i < 20; i++) {
-    	try {
-        	if (i%2 == 0){
-        		RobotMap.cameraBackward.setPixelFormat(PixelFormat.kGray);
-        	    RobotMap.cameraForward.setPixelFormat(PixelFormat.kMJPEG);
-        	}else{
-        		RobotMap.cameraForward.setPixelFormat(PixelFormat.kGray);
-        		RobotMap.cameraBackward.setPixelFormat(PixelFormat.kMJPEG);
-        	}
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-    	}*/
-
+		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
+		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
 	}
 
 
@@ -189,46 +173,23 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println("Brightness =" + RobotMap.cameraForward.getBrightness());
-	    	try {
-	        	if (RobotMap.counter%2 == 0){
-	        	    RobotMap.cameraBackward.setVideoMode(VideoMode.PixelFormat.kGray, 160, 120, 3);
-	        	    RobotMap.cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
-	        	    
-	        	}else{
-	        	    RobotMap.cameraForward.setVideoMode(VideoMode.PixelFormat.kGray, 160, 120, 3);
-	        	    RobotMap.cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
-
-	        	}
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    	RobotMap.counter++;
-
 		
-//		if(boxSensor.get()) {
-//			RobotMap.isPowerCubeInBox = true;
-//			Tunnel.motorTunnelLeft.set(0);
-//			Tunnel.motorTunnelRight.set(0);
-//			Tunnel.motorTunnelTop.set(0);
-//		}
-//        else RobotMap.isPowerCubeInBox = false;
+//		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
+//      else RobotMap.isPowerCubeInBox = false;
 //		
 		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
 		else {
 			RobotMap.isLiftDown = true;
 			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
-//		
-//		// SmartDashboard Logging
-////		SmartDashboard.putBoolean("IR", RobotMap.isPowerCubeInBox);
-////		SmartDashboard.putNumber("IR Volt", boxSensor.getVoltage());
-		SmartDashboard.putBoolean("limit switch", RobotMap.isLiftDown);
-		SmartDashboard.putNumber("limit switch volt", liftLimitSwitch.getVoltage());
+		
+		// SmartDashboard Logging
+//		SmartDashboard.putBoolean("IR", RobotMap.isPowerCubeInBox);
+//		SmartDashboard.putNumber("IR Volt", boxSensor.getVoltage());
+//		SmartDashboard.putBoolean("limit switch", RobotMap.isLiftDown);
+//		SmartDashboard.putNumber("limit switch volt", liftLimitSwitch.getVoltage());
 		SmartDashboard.putString("liftSetHeight", RobotMap.liftSetHeight);
-		SmartDashboard.putNumber("lifter amps", lifter.motorLift.getOutputCurrent());
+		SmartDashboard.putNumber("lifter amps", Lifter.motorLift.getOutputCurrent());
 	}
 
 	public static double driveEncoderUnitConversion(double inches) {

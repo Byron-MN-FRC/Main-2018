@@ -2,6 +2,8 @@ package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
 import org.usfirst.frc.team4859.robot.RobotMap;
+
+import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ShootStop extends Command {
@@ -22,12 +24,14 @@ public class ShootStop extends Command {
 
     protected void initialize() {
     	setTimeout(time);
+    	Robot.lifter.liftToHeight("default");
     	System.out.println("ShootStop command ran");
+    	Robot.cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
+		Robot.cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
     }
 
     protected void execute() {
     	Robot.tunnel.tunnelStop();
-    	Robot.lifter.liftDown(RobotMap.kLiftDownSpeed);
     }
 
     protected boolean isFinished() {

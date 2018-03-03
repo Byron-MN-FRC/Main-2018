@@ -47,17 +47,17 @@ public class Drivetrain extends Subsystem {
 		twist = joystickP0.getTwist();
 		
 		// Y Acceleration Limiting
-//		if (y > yLastValue) {
-//			yChange = y - yLimitedJoystick;
-//			if (yChange > RobotMap.kRampRateLimit) yChange = RobotMap.kRampRateLimit;
-//			else if (yChange <= RobotMap.kRampRateLimit) yChange = -RobotMap.kRampRateLimit;
-//			yLimitedJoystick += yChange;
-//			y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", yLimitedJoystick) : ThrottleLookup.calcJoystickCorrection("NormY", yLimitedJoystick);
-//		} else y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);
-//		yLastValue = y;
+		if (y > yLastValue) {
+			yChange = y - yLimitedJoystick;
+			if (yChange > RobotMap.kRampRateLimit) yChange = RobotMap.kRampRateLimit;
+			else if (yChange <= RobotMap.kRampRateLimit) yChange = -RobotMap.kRampRateLimit;
+			yLimitedJoystick += yChange;
+			y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", yLimitedJoystick) : ThrottleLookup.calcJoystickCorrection("NormY", yLimitedJoystick);
+		} else y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);
+		yLastValue = y;
 		
 		// Apply translations to the values from the controller
-		y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);
+//		y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);
 		twist = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowT", twist) : ThrottleLookup.calcJoystickCorrection("NormT", twist);
 		
 		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
@@ -125,13 +125,13 @@ public class Drivetrain extends Subsystem {
 		motorRightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
 
 		// Set relevant frame periods to be at least as fast as periodic rate
-		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
-		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
-		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 10, RobotMap.kTimeoutMs);
+		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 5, RobotMap.kTimeoutMs);
+		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 5, RobotMap.kTimeoutMs);
+		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 5, RobotMap.kTimeoutMs);
 		
-		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
-		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
-		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 10, RobotMap.kTimeoutMs);
+		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 5, RobotMap.kTimeoutMs);
+		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 5, RobotMap.kTimeoutMs);
+		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 5, RobotMap.kTimeoutMs);
 
 		// Set closed loop gains in slot 0
 		motorLeftMaster.selectProfileSlot(RobotMap.kPIDSlot, 0);

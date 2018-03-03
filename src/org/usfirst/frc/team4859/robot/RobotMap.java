@@ -2,9 +2,6 @@ package org.usfirst.frc.team4859.robot;
 
 import java.util.HashMap;
 import java.util.Map;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoMode;
-import edu.wpi.first.wpilibj.CameraServer;
 
 // IMPORTNANT NOTE: DO NOT MAKE VALUES NEGATIVE. The "down," "reverse," and "intake" variables are positive but are flipped when pushed to the motors
 public class RobotMap {
@@ -28,7 +25,7 @@ public class RobotMap {
 	
 	public static double kClimbSpeed = 1;
 	
-	public static double kLiftDownSpeed = 0.2;
+	public static double kLiftDownSpeed = 0.6;
 	public static double kLiftUpSpeed = 0.3;
 	
 	// Lifter heights
@@ -39,7 +36,7 @@ public class RobotMap {
     {	   //name                      encoder units
         put("acquire",   new Integer[]  { 0		} );
         put("default",   new Integer[]  { 7300	} ); // 6
-        put("switch",    new Integer[]  { 26300	} ); // 35
+        put("switch",    new Integer[]  { 22000	} ); // 35
         put("scaleLow",  new Integer[]  { 39900	} ); // 58
         put("scaleNorm", new Integer[]  { 47000	} ); // 70
         put("scaleHigh", new Integer[]  { 55000	} ); // 82
@@ -56,7 +53,7 @@ public class RobotMap {
     
     // Drivetrain ramp rates
     public static double kRampRate = 0.125; // TIme to get from 0 to max
-    public static double kRampRateLimit = 0.075; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
+    public static double kRampRateLimit = 0.02; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
     public static double kLowGearRampRate = 0.1;
     public static double kHighGearRampRate = 0.15;
 	
@@ -70,7 +67,7 @@ public class RobotMap {
 	public static int kDriveCurrentPeakDuration = 2000; // Milliseconds
 	
 	// Lift (CIM)
-	public static int kLiftContinuousCurrentLimit = 45;
+	public static int kLiftContinuousCurrentLimit = 40;
 	public static int kLiftCurrentPeakDuration = 2000;
 	
 	// Closed loop values
@@ -78,21 +75,21 @@ public class RobotMap {
 	public static int kPIDSlot = 0;
 	
 	// Lift
-	public static double kLiftP = 1.125;
+	public static double kLiftP = 1.3;
 	public static double kLiftI = 0.00015;
 	public static double kLiftD = 0.000;
-	public static double kLiftF = 0.53;
-	public static int kLiftAllowableError = 90;
+	public static double kLiftF = 0.52;
+	public static int kLiftAllowableError = 100;
 	
-	public static int kLiftAcceleration = 12600;
-	public static int kLiftCruiseVelocity = 3150;
+	public static int kLiftAcceleration = 8000;
+	public static int kLiftCruiseVelocity = 2000;
 	
 	// Drivetrain
 	public static double kP = 0.24;
 	public static double kI = 0.000174;
 	public static double kD = 0.0;
 	public static double kF = 0.12;
-	public static int kDriveAllowableError = 90;
+	public static int kDriveAllowableError = 100;
 	
 	public static int kHighGearAcceleration = 6000;
 	public static int kHighGearCruiseVelocity = 8500;
@@ -120,9 +117,4 @@ public class RobotMap {
 	public static char targetSide = ' ';
 	public static char oppositeTargetSide = ' ';
 	public static double delayInSeconds = 0;
-	
-	public static int counter = 0;
-	
-	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
-	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
 }
