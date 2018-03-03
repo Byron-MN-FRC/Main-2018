@@ -9,6 +9,7 @@ package org.usfirst.frc.team4859.robot;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -46,6 +47,7 @@ public class Robot extends TimedRobot {
 	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
 	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
 	
+	public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 //	public static DigitalInput boxSensor = new DigitalInput(0);
 //	public static DigitalOutput boxLED = new DigitalOutput(1);
 	public static AnalogInput liftLimitSwitch = new AnalogInput(2);
@@ -60,11 +62,12 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "C");
-		SmartDashboard.putString("Scale", "N");
-		SmartDashboard.putString("Deliver Cube", "Y");
+		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "Put letter here");
+		SmartDashboard.putString("Scale", "Put Y or N here");
+		SmartDashboard.putString("Deliver Cube", "Put Y or N here");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 
+		gyro.calibrate();
 		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
 		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
 	}
@@ -103,6 +106,7 @@ public class Robot extends TimedRobot {
 		String targetScale = SmartDashboard.getString("Scale", "N");
 //		String delivery = SmartDashboard.getString("Deliver Cube", "Y");
 		
+		gyro.reset();
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
 		
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -152,6 +156,7 @@ public class Robot extends TimedRobot {
 			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
+		RobotMap.gyroCorrection = gyro.getAngle()*15;
 	}
 
 	@Override

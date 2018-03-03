@@ -91,12 +91,13 @@ public class RobotMap {
 	public static double kD = 0.0;
 	public static double kF = 0.12;
 	public static int kDriveAllowableError = 100;
+	public static double gyroCorrection = 0;
 	
 	public static int kHighGearAcceleration = 6000;
-	public static int kHighGearCruiseVelocity = 8500;
+	public static int kHighGearCruiseVelocity = 7500;
 	
 	public static int kLowGearAcceleration = 6000;
-	public static int kLowGearCruiseVelocity = 8500;
+	public static int kLowGearCruiseVelocity = 7500;
 	
 	// Turn Ratio for encoder ticks
 	public static double decoderTurnRatio = 25000 / 90;
