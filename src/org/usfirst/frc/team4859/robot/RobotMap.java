@@ -64,7 +64,7 @@ public class RobotMap {
 	
 	// Current limiting
 	// Drivetrain (CIMs)
-	public static int kDriveContinuousCurrentLimit = 30; // Amps
+	public static int kDriveContinuousCurrentLimit = 40; // Amps
 	public static int kDriveCurrentPeakDuration = 2000; // Milliseconds
 	
 	// Lift (CIM)
@@ -87,16 +87,16 @@ public class RobotMap {
 	
 	// Drivetrain
 	public static double kP = 0.24;
-	public static double kI = 0.000174;
+	public static double kI = 0.000178;
 	public static double kD = 0.0;
 	public static double kF = 0.12;
 	public static int kDriveAllowableError = 100;
 	
-	public static int kHighGearAcceleration = 6000;
-	public static int kHighGearCruiseVelocity = 8500;
+	public static int kHighGearAcceleration = 5000;
+	public static int kHighGearCruiseVelocity = 5000;
 	
-	public static int kLowGearAcceleration = 6000;
-	public static int kLowGearCruiseVelocity = 8500;
+	public static int kLowGearAcceleration = 5000;
+	public static int kLowGearCruiseVelocity = 5000;
 	
 	// Turn Ratio for encoder ticks
 	public static double decoderTurnRatio = 25000 / 90;

@@ -132,13 +132,13 @@ public class Drivetrain extends Subsystem {
 		motorRightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
 
 		// Set relevant frame periods to be at least as fast as periodic rate
-		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 5, RobotMap.kTimeoutMs);
-		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 5, RobotMap.kTimeoutMs);
-		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 5, RobotMap.kTimeoutMs);
+		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 2, RobotMap.kTimeoutMs);
+		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 2, RobotMap.kTimeoutMs);
+		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 2, RobotMap.kTimeoutMs);
 		
-		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 5, RobotMap.kTimeoutMs);
-		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 5, RobotMap.kTimeoutMs);
-		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 5, RobotMap.kTimeoutMs);
+		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 2, RobotMap.kTimeoutMs);
+		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 2, RobotMap.kTimeoutMs);
+		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 2, RobotMap.kTimeoutMs);
 
 		// Set closed loop gains in slot 0
 		motorLeftMaster.selectProfileSlot(RobotMap.kPIDSlot, 0);
