@@ -25,7 +25,7 @@ public class RobotMap {
 	
 	public static double kClimbSpeed = 1;
 	
-	public static double kLiftDownSpeed = 0.6;
+	public static double kLiftDownSpeed = 0.7;
 	public static double kLiftUpSpeed = 0.3;
 	
 	// Lifter heights
@@ -39,8 +39,8 @@ public class RobotMap {
         put("switch",    new Integer[]  { 22000	} ); // 35
         put("scaleLow",  new Integer[]  { 39900	} ); // 58
         put("scaleNorm", new Integer[]  { 47000	} ); // 70
-        put("scaleHigh", new Integer[]  { 55000	} ); // 82
-        put("climb",     new Integer[]  { 55000	} ); // 82
+        put("scaleHigh", new Integer[]  { 52000	} ); // 82
+        put("climb",     new Integer[]  { 52000	} ); // 82
     }};
     
     /* Example of how to get values:
@@ -54,6 +54,7 @@ public class RobotMap {
     // Drivetrain ramp rates
     public static double kRampRate = 0.125; // TIme to get from 0 to max
     public static double kRampRateLimit = 0.02; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
+    public static double kRampRateTipLimit = 0.00025;
     public static double kLowGearRampRate = 0.1;
     public static double kHighGearRampRate = 0.15;
 	

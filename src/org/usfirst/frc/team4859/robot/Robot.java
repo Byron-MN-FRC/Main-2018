@@ -174,6 +174,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
+		SmartDashboard.putNumber("vel", Drivetrain.motorLeftMaster.getSelectedSensorVelocity(0));
 //		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
 //      else RobotMap.isPowerCubeInBox = false;
 //		

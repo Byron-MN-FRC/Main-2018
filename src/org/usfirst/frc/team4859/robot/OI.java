@@ -32,9 +32,13 @@ public class OI {
 	Button setForward = new JoystickButton(xbox, 6);
 	Button setBackward = new JoystickButton(xbox, 5);
 	
+	// Lift control
+	Button liftDefault = new JoystickButton(xbox, 10);
+	Button liftStop = new JoystickButton (xbox, 9);
+	
 	// Buttons for mechanism testing
 //	Button liftUp = new JoystickButton(xbox, 5);
-//	Button liftDown = new JoystickButton(xbox, 6);
+	
 //	
 //	Button climbStart = new JoystickButton(joystick, 12);
 //
@@ -68,9 +72,11 @@ public class OI {
 		setForward.whenPressed(new SetForward());
 		setBackward.whenPressed(new SetBackward());
 		
+		// Lift control
+		liftDefault.whenPressed(new LiftDefault());
+		liftStop.whenPressed(new LiftStop());
+		
 		// Buttons for mechanism testing
-//		liftDown.whenPressed(new LiftDown());
-//		liftDown.whenReleased(new LiftStop());
 //		
 //		liftUp.whenPressed(new LiftUp());
 //		

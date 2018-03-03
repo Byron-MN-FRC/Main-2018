@@ -43,11 +43,11 @@ public class Shoot extends Command {
 
     protected void end() {
     	Robot.tunnel.tunnelStop();
-    	Robot.lifter.liftToHeight("default");
+    	Robot.lifter.liftToHeight(RobotMap.liftSetHeight);
     }
 
     protected void interrupted() {
     	Robot.tunnel.tunnelStop();
-    	Robot.lifter.liftToHeight("default");
+    	Robot.lifter.liftToHeight(RobotMap.liftSetHeight);
     }
 }

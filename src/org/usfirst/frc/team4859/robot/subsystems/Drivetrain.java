@@ -48,10 +48,17 @@ public class Drivetrain extends Subsystem {
 		
 		// Y Acceleration Limiting
 		if (y > yLastValue) {
-			yChange = y - yLimitedJoystick;
-			if (yChange > RobotMap.kRampRateLimit) yChange = RobotMap.kRampRateLimit;
-			else if (yChange <= RobotMap.kRampRateLimit) yChange = -RobotMap.kRampRateLimit;
-			yLimitedJoystick += yChange;
+			if (motorLeftMaster.getSelectedSensorVelocity(0) < 0) {
+				yChange = y - yLimitedJoystick;
+				if (yChange > RobotMap.kRampRateTipLimit) yChange = RobotMap.kRampRateTipLimit;
+				else if (yChange <= RobotMap.kRampRateTipLimit) yChange = -RobotMap.kRampRateTipLimit;
+				yLimitedJoystick += yChange;
+			} else {
+				yChange = y - yLimitedJoystick;
+				if (yChange > RobotMap.kRampRateLimit) yChange = RobotMap.kRampRateLimit;
+				else if (yChange <= RobotMap.kRampRateLimit) yChange = -RobotMap.kRampRateLimit;
+				yLimitedJoystick += yChange;
+			}
 			y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", yLimitedJoystick) : ThrottleLookup.calcJoystickCorrection("NormY", yLimitedJoystick);
 		} else y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);
 		yLastValue = y;

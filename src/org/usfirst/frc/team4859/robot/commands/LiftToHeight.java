@@ -28,10 +28,10 @@ public class LiftToHeight extends Command {
     	
     	if(RobotMap.liftDirectionFront) {
     		Robot.cameraBackward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 3);
-    		Robot.cameraForward.setFPS(20);
+    		Robot.cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 30);
     	} else {
     		Robot.cameraForward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 3);
-    		Robot.cameraBackward.setFPS(20);
+    		Robot.cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 30);
     	}
     }
 
@@ -49,13 +49,6 @@ public class LiftToHeight extends Command {
     	if (time > 0) Robot.lifter.liftToHeight(position);
     	else Robot.lifter.liftToHeight(RobotMap.liftSetHeight);
     	
-    	if(RobotMap.liftDirectionFront) {
-    		Robot.cameraBackward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 3);
-    		Robot.cameraForward.setFPS(20);
-    	} else {
-    		Robot.cameraForward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 3);
-    		Robot.cameraBackward.setFPS(20);
-    	}
     }
 
     protected void interrupted() {

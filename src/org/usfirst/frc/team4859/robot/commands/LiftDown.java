@@ -23,7 +23,7 @@ public class LiftDown extends Command {
     }
 
     protected void end() {
-    	Robot.lifter.liftStop();
+    	Robot.lifter.liftDown(RobotMap.kLiftDownSpeed);
     }
 
     protected void interrupted() {
