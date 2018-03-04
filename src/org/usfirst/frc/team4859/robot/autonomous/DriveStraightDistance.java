@@ -22,6 +22,7 @@ public class DriveStraightDistance extends Command {
     	setTimeout(time);
 		Drivetrain.motorLeftMaster.setSelectedSensorPosition(0, RobotMap.kPIDSlot, RobotMap.kTimeoutMs);
 		Drivetrain.motorRightMaster.setSelectedSensorPosition(0, RobotMap.kPIDSlot, RobotMap.kTimeoutMs);
+		Robot.gyro.reset();
     	Robot.kDrivetrain.driveStraightDistance(distance);
     }
 
