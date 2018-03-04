@@ -34,7 +34,8 @@ public class OI {
 	
 	// Lift control
 	Button liftDefault = new JoystickButton(xbox, 10);
-	Button liftStop = new JoystickButton (xbox, 9);
+	Button liftStop = new JoystickButton(xbox, 9);
+	Button liftPMode = new JoystickButton(xbox, 7);
 	
 	// Buttons for mechanism testing
 //	Button liftUp = new JoystickButton(xbox, 5);
@@ -75,6 +76,7 @@ public class OI {
 		// Lift control
 		liftDefault.whenPressed(new LiftDefault());
 		liftStop.whenPressed(new LiftStop());
+		liftPMode.toggleWhenPressed(new LiftPrecisionMode());
 		
 		// Buttons for mechanism testing
 //		

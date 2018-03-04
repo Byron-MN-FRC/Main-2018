@@ -9,6 +9,7 @@ package org.usfirst.frc.team4859.robot;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -43,9 +44,10 @@ public class Robot extends TimedRobot {
 	public static Set set = new Set();
 	public static OI oi;
 	
-	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 1);
-	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 0);
+	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
+	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
 	
+	public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 //	public static DigitalInput boxSensor = new DigitalInput(0);
 //	public static DigitalOutput boxLED = new DigitalOutput(1);
 	public static AnalogInput liftLimitSwitch = new AnalogInput(2);
@@ -60,13 +62,14 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "C");
-		SmartDashboard.putString("Scale", "N");
-		SmartDashboard.putString("Deliver Cube", "Y");
+		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "Put letter here");
+		SmartDashboard.putString("Scale", "Put Y or N here");
+		SmartDashboard.putString("Deliver Cube", "Put Y or N here");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 
-		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
-		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
+		//gyro.calibrate();
+		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
+		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
 	}
 
 
@@ -103,6 +106,7 @@ public class Robot extends TimedRobot {
 		String targetScale = SmartDashboard.getString("Scale", "N");
 //		String delivery = SmartDashboard.getString("Deliver Cube", "Y");
 		
+		gyro.reset();
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
 		
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -152,6 +156,7 @@ public class Robot extends TimedRobot {
 			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
+		RobotMap.gyroCorrection = gyro.getAngle()*120;
 	}
 
 	@Override
@@ -164,6 +169,7 @@ public class Robot extends TimedRobot {
 		 */
 		if (m_autonomousCommand != null) m_autonomousCommand.cancel();
 		
+		gyro.reset();
 		Lifter.motorLift.set(0);
 	}
 
@@ -174,7 +180,6 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-		SmartDashboard.putNumber("vel", Drivetrain.motorLeftMaster.getSelectedSensorVelocity(0));
 //		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
 //      else RobotMap.isPowerCubeInBox = false;
 //		
@@ -185,6 +190,10 @@ public class Robot extends TimedRobot {
 		}
 		
 		// SmartDashboard Logging
+		SmartDashboard.putNumber("gyro", gyro.getAngle());
+//		SmartDashboard.putNumber("vel", Drivetrain.motorLeftMaster.getSelectedSensorVelocity(0));
+    	SmartDashboard.putBoolean("Front Camera", RobotMap.liftDirectionFront);
+    	SmartDashboard.putBoolean("Back Camera", !RobotMap.liftDirectionFront);
 //		SmartDashboard.putBoolean("IR", RobotMap.isPowerCubeInBox);
 //		SmartDashboard.putNumber("IR Volt", boxSensor.getVoltage());
 //		SmartDashboard.putBoolean("limit switch", RobotMap.isLiftDown);
