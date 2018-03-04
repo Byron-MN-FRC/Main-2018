@@ -189,6 +189,9 @@ public class Robot extends TimedRobot {
 			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
+		if(Lifter.motorLift.getSelectedSensorPosition(RobotMap.kPIDSlot) > 38000) RobotMap.pMode = true;
+		else RobotMap.pMode = false;
+		
 		// SmartDashboard Logging
 		SmartDashboard.putNumber("gyro", gyro.getAngle());
 //		SmartDashboard.putNumber("vel", Drivetrain.motorLeftMaster.getSelectedSensorVelocity(0));

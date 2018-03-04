@@ -56,7 +56,7 @@ public class RobotMap {
     public static double kRampRateLimit = 0.02; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
     public static double kRampRateTipLimit = 0.00025;
     public static double kLowGearRampRate = 0.1;
-    public static double kHighGearRampRate = 0.15;
+    public static double kHighGearRampRate = 0.1;
 	
 	// Lift sensors
 	public static boolean isPowerCubeInBox = false;

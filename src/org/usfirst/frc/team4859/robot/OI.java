@@ -75,6 +75,7 @@ public class OI {
 		
 		// Lift control
 		liftDefault.whenPressed(new LiftDefault());
+		liftDefault.whenReleased(new LiftToHeight("default", 0));
 		liftStop.whenPressed(new LiftStop());
 		liftPMode.toggleWhenPressed(new LiftPrecisionMode());
 		

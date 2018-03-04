@@ -41,7 +41,7 @@ public class ShootStop extends Command {
 
     protected void end() {
     	Robot.tunnel.tunnelStop();
-    	Robot.lifter.liftToHeight(RobotMap.liftSetHeight);
+    	Robot.lifter.liftStop();
     }
 
     protected void interrupted() {
