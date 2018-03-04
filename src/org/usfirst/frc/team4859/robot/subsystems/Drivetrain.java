@@ -29,8 +29,10 @@ public class Drivetrain extends Subsystem {
 	private double twist = 0;
 	private double yChange = 0;
 	private double yLimitedJoystick = 0;
-	private double yLastValue = 0;
-	
+	private double encoderVelocityL = 0;
+	private double encoderVelocityR = 0;
+	private double encoderLastVelocityL = 0;
+	private double encoderLastVelocityR = 0;
 	
 	public Drivetrain() {
 		motorConfig();
@@ -47,8 +49,11 @@ public class Drivetrain extends Subsystem {
 		twist = joystickP0.getTwist();
 		
 		// Y Acceleration Limiting
-		if (y > yLastValue) {
-			if (motorLeftMaster.getSelectedSensorVelocity(0) < 0) {
+		encoderVelocityL = motorLeftMaster.getSelectedSensorVelocity(RobotMap.kPIDSlot);
+		encoderVelocityR = motorRightMaster.getSelectedSensorVelocity(RobotMap.kPIDSlot);
+		
+		if ((encoderVelocityL > (encoderLastVelocityL + 1)) && (encoderVelocityR > (encoderLastVelocityR + 1))) {
+			if ((motorLeftMaster.getSelectedSensorVelocity(0) + motorRightMaster.getSelectedSensorVelocity(0))/2 < 0) {
 				yChange = y - yLimitedJoystick;
 				if (yChange > RobotMap.kRampRateTipLimit) yChange = RobotMap.kRampRateTipLimit;
 				else if (yChange <= RobotMap.kRampRateTipLimit) yChange = -RobotMap.kRampRateTipLimit;
@@ -61,7 +66,8 @@ public class Drivetrain extends Subsystem {
 			}
 			y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", yLimitedJoystick) : ThrottleLookup.calcJoystickCorrection("NormY", yLimitedJoystick);
 		} else y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);
-		yLastValue = y;
+		encoderLastVelocityL = encoderVelocityL;
+		encoderLastVelocityR = encoderVelocityR;
 		
 		// Apply translations to the values from the controller
 //		y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);

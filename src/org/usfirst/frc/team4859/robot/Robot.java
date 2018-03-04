@@ -21,6 +21,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.regex.Pattern;
+
+import org.usfirst.frc.team4859.robot.ThrottleLookup.MiniPID;
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraight;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
@@ -43,6 +45,8 @@ public class Robot extends TimedRobot {
 	public static Lifter lifter = new Lifter();
 	public static Set set = new Set();
 	public static OI oi;
+	
+	MiniPID miniPID = new MiniPID(120, 1, 10);
 	
 	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
 	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
@@ -156,7 +160,9 @@ public class Robot extends TimedRobot {
 			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
-		RobotMap.gyroCorrection = gyro.getAngle()*120;
+		RobotMap.gyroCorrection = miniPID.getOutput(gyro.getAngle(), 0);
+		SmartDashboard.putNumber("PID", miniPID.getOutput(gyro.getAngle(), 0));
+//		RobotMap.gyroCorrection = gyro.getAngle()*120;
 	}
 
 	@Override
