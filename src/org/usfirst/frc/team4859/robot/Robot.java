@@ -12,8 +12,6 @@ import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,7 +19,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.regex.Pattern;
-
 import org.usfirst.frc.team4859.robot.ThrottleLookup.MiniPID;
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraight;
@@ -46,7 +43,7 @@ public class Robot extends TimedRobot {
 	public static Set set = new Set();
 	public static OI oi;
 	
-	MiniPID miniPID = new MiniPID(120, 1, 10);
+	MiniPID miniPID = new MiniPID(RobotMap.kGyroP, RobotMap.kGyroI, RobotMap.kGyroD);
 	
 	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
 	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
@@ -66,10 +63,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "Put letter here");
-		SmartDashboard.putString("Scale", "Put Y or N here");
-		SmartDashboard.putString("Deliver Cube", "Put Y or N here");
-		SmartDashboard.putNumber("Auton Delay", 0.0);
+		SmartDashboard.putString("Robot Start Pos (L/R/C)", "Z");
+		SmartDashboard.putString("Scale (Y/N)", "Z");
+//		SmartDashboard.putString("Deliver Cube (Y/N)", "Y");
+		SmartDashboard.putNumber("Auton Delay", 0);
 
 		//gyro.calibrate();
 		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
@@ -109,10 +106,7 @@ public class Robot extends TimedRobot {
 		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
 		String targetScale = SmartDashboard.getString("Scale", "N");
 //		String delivery = SmartDashboard.getString("Deliver Cube", "Y");
-		
-		gyro.reset();
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
-		
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		boolean validGameString = Pattern.matches("[LR]{3}", gameData.toUpperCase());
@@ -140,42 +134,31 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		
-		// Encoder logging
+		// Encoder/gyro logging
 //		SmartDashboard.putNumber("Left Position", Drivetrain.motorLeftMaster.getSelectedSensorPosition(0));
 //		SmartDashboard.putNumber("Right Position", Drivetrain.motorRightMaster.getSelectedSensorPosition(0));
 //		SmartDashboard.putNumber("Left Error", Drivetrain.motorLeftMaster.getClosedLoopError(0));
 //		SmartDashboard.putNumber("Right Error", Drivetrain.motorRightMaster.getClosedLoopError(0));
+//		SmartDashboard.putNumber("PID", miniPID.getOutput(gyro.getAngle(), 0));
 		
-//		if(boxSensor.get()) {
-//			RobotMap.isPowerCubeInBox = true;
-//			Tunnel.motorTunnelLeft.set(0);
-//			Tunnel.motorTunnelRight.set(0);
-//			Tunnel.motorTunnelTop.set(0);
-//		}
-//        else RobotMap.isPowerCubeInBox = false;
+//		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
+//      else RobotMap.isPowerCubeInBox = false;
 //		
 		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
-		else{
+		else {
 			RobotMap.isLiftDown = true;
 			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
 		RobotMap.gyroCorrection = miniPID.getOutput(gyro.getAngle(), 0);
-		SmartDashboard.putNumber("PID", miniPID.getOutput(gyro.getAngle(), 0));
 //		RobotMap.gyroCorrection = gyro.getAngle()*120;
 	}
 
 	@Override
 	public void teleopInit() {
-		/*
-		 *  This makes sure that the autonomous stops running when
-		 *  teleop starts running. If you want the autonomous to
-		 *  continue until interrupted by another command, remove
-		 *  this line or comment it out.
-		 */
-		if (m_autonomousCommand != null) m_autonomousCommand.cancel();
-		
-		gyro.reset();
+		// Put this line in if the auto command should cancel when teleop starts
+//		if (m_autonomousCommand != null) m_autonomousCommand.cancel();
+
 		Lifter.motorLift.set(0);
 	}
 
@@ -188,7 +171,7 @@ public class Robot extends TimedRobot {
 		
 //		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
 //      else RobotMap.isPowerCubeInBox = false;
-//		
+		
 		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
 		else {
 			RobotMap.isLiftDown = true;
@@ -199,26 +182,22 @@ public class Robot extends TimedRobot {
 		else RobotMap.pMode = false;
 		
 		// SmartDashboard Logging
-		SmartDashboard.putNumber("gyro", gyro.getAngle());
-//		SmartDashboard.putNumber("vel", Drivetrain.motorLeftMaster.getSelectedSensorVelocity(0));
-    	SmartDashboard.putBoolean("Front Camera", RobotMap.liftDirectionFront);
+		SmartDashboard.putBoolean("Front Camera", RobotMap.liftDirectionFront);
     	SmartDashboard.putBoolean("Back Camera", !RobotMap.liftDirectionFront);
+		SmartDashboard.putString("Set Height", RobotMap.liftSetHeight);
+		SmartDashboard.putBoolean("Lift PMode", RobotMap.liftPrecisionMode);
+//		SmartDashboard.putNumber("gyro", gyro.getAngle());
+//		SmartDashboard.putNumber("vel", Drivetrain.motorLeftMaster.getSelectedSensorVelocity(0));
 //		SmartDashboard.putBoolean("IR", RobotMap.isPowerCubeInBox);
 //		SmartDashboard.putNumber("IR Volt", boxSensor.getVoltage());
 //		SmartDashboard.putBoolean("limit switch", RobotMap.isLiftDown);
 //		SmartDashboard.putNumber("limit switch volt", liftLimitSwitch.getVoltage());
-		SmartDashboard.putString("liftSetHeight", RobotMap.liftSetHeight);
-		SmartDashboard.putNumber("lifter amps", Lifter.motorLift.getOutputCurrent());
+//		SmartDashboard.putNumber("lifter amps", Lifter.motorLift.getOutputCurrent());
 	}
 
 	public static double driveEncoderUnitConversion(double inches) {
 		double encoderUnits = inches * RobotMap.driveEncoderUnitsPerInch;
 		return encoderUnits;
-	}
-	
-	public static double angleToDistance(double angle) {
-		double arcLength = (Math.PI * RobotMap.robotWidth) * (angle/360);
-		return driveEncoderUnitConversion(arcLength);
 	}
 	
 	/**

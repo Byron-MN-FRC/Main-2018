@@ -16,7 +16,7 @@ public class OI {
 	Button acquire = new JoystickButton(joystick, 1);
 	
 	Button shoot = new JoystickButton(joystick, 2);
-	Button shootBackward = new JoystickButton(joystick, 4);
+	Button shootOpposite = new JoystickButton(joystick, 4);
 	
 	Button liftToHeight = new JoystickButton(joystick, 6);
 	
@@ -26,7 +26,6 @@ public class OI {
 	Button setLiftScaleLow = new JoystickButton(xbox, 1);
 	Button setLiftScaleNorm = new JoystickButton(xbox, 2);
 	Button setLiftScaleHigh = new JoystickButton(xbox, 4);
-//	Button setLiftClimb = new JoystickButton(xbox, 6);
 	
 	// Direction
 	Button setForward = new JoystickButton(xbox, 6);
@@ -39,7 +38,7 @@ public class OI {
 	
 	// Buttons for mechanism testing
 //	Button liftUp = new JoystickButton(xbox, 5);
-	
+//	Button liftDown = new JoystickButton(xbox, 5);
 //	
 //	Button climbStart = new JoystickButton(joystick, 12);
 //
@@ -58,8 +57,8 @@ public class OI {
 		shoot.whenPressed(new Shoot());
 		shoot.whenReleased(new ShootStop());
 		
-		shootBackward.whenPressed(new ShootBackward());
-		shootBackward.whenReleased(new ShootStop());
+		shootOpposite.whenPressed(new ShootOpposite());
+		shootOpposite.whenReleased(new ShootStop());
 		
 		liftToHeight.whenPressed(new LiftToHeight());
 		
@@ -82,6 +81,7 @@ public class OI {
 		// Buttons for mechanism testing
 //		
 //		liftUp.whenPressed(new LiftUp());
+//		liftDown.whenPressed(new LiftDown());
 //		
 //		climbStart.whileHeld(new ClimbUp(RobotMap.climbSpeed));
 //		
