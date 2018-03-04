@@ -87,7 +87,7 @@ public class RobotMap {
 	
 	// Drivetrain
 	public static double kP = 0.24;
-	public static double kI = 0.000174;
+	public static double kI = 0.000178;
 	public static double kD = 0.0;
 	public static double kF = 0.12;
 	public static int kDriveAllowableError = 100;

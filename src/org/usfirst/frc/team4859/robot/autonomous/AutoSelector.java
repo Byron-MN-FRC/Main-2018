@@ -6,6 +6,8 @@ import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.commands.LiftToHeight;
 import org.usfirst.frc.team4859.robot.commands.ShiftDown;
 import org.usfirst.frc.team4859.robot.commands.Shoot;
+import org.usfirst.frc.team4859.robot.commands.ShootBackward;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoSelector extends CommandGroup {
@@ -28,7 +30,7 @@ public class AutoSelector extends CommandGroup {
 		// Drive to same side target (scale is 2x distance of switch & 1/2 distance in)
 		double multiplier = RobotMap.targetScale ? 1.5 : 1 ; 
 		// Driving forward from wall in all conditions
-		addSequential(new DriveStraightDistance(45, 45/RobotMap.secondsRatio));
+		addSequential(new DriveStraightDistance(45, 2));
 		turn(targetSide, 90);
 		addSequential(new DriveStraightDistance(65*multiplier, 65/RobotMap.secondsRatio*multiplier)); // toward outside wall
 		if (targetSide == 'L') turn('R', 90);
@@ -52,11 +54,11 @@ public class AutoSelector extends CommandGroup {
 	public void driveSameSide() {
 		if (RobotMap.targetScale) {
 			System.out.println("Lift to scale height");
-			addSequential(new DriveStraightDistance(280, 280/RobotMap.secondsRatio));
-			addParallel(new LiftToHeight("scaleNorm", 2));
-			addSequential(new DriveStop(0.5));
+			addSequential(new DriveStraightDistance(297, 8));
+			addParallel(new LiftToHeight("scaleHigh", 4));
+			addSequential(new DriveStop(1));
 			turn(oppositeSide, 90);
-			addSequential(new DriveStraightDistance(10, 10/RobotMap.secondsRatio));
+			addSequential(new DriveStraightDistance(17, 17/RobotMap.secondsRatio));
 		} else {
 			System.out.println("Lift to switch height");
 			addSequential(new DriveStraightDistance(150, 150/RobotMap.secondsRatio));
