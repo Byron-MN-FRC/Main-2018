@@ -131,9 +131,11 @@ public class AutoSelector extends CommandGroup {
 			else driveOppositeSide();
 			deliverCube();
 			break;
+		case 'S':
+			addSequential(new DriveStraightDistance(296,7));
 		default:
 			System.out.println("SHOULD NOT EVER GET HERE:Drive Forward");
-			addSequential(new DriveStraightDistance(108, 5));
+			addSequential(new DriveStraightDistance(296, 7));
 			break;
 		} 		
 	}

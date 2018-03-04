@@ -25,6 +25,8 @@ import java.util.regex.Pattern;
 import org.usfirst.frc.team4859.robot.ThrottleLookup.MiniPID;
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraight;
+import org.usfirst.frc.team4859.robot.autonomous.DriveStraightDistance;
+import org.usfirst.frc.team4859.robot.commands.LiftToHeight;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4859.robot.subsystems.Lifter;
 import org.usfirst.frc.team4859.robot.subsystems.Set;
@@ -46,7 +48,7 @@ public class Robot extends TimedRobot {
 	public static Set set = new Set();
 	public static OI oi;
 	
-	MiniPID miniPID = new MiniPID(120, 1, 10);
+	MiniPID miniPID = new MiniPID(135, 1.2, 15);
 	
 	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
 	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
@@ -105,6 +107,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		m_autonomousCommand = new LiftToHeight("default",4);
+		m_autonomousCommand.start();
 		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
 		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
 		String targetScale = SmartDashboard.getString("Scale", "N");
@@ -123,7 +127,7 @@ public class Robot extends TimedRobot {
 		
 		if (!validGameString || !validRobotPos || !validDelay) {
 		 	System.out.println("Gamedata is invalid! Running AutoStraight routine.");
-			m_autonomousCommand = new AutoStraight();
+			m_autonomousCommand = new DriveStraightDistance(296,7);
 			m_autonomousCommand.start();
 		} else {
 			RobotMap.targetSide = gameData.charAt(0); //default to switch side
