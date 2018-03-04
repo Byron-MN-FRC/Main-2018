@@ -94,10 +94,10 @@ public class RobotMap {
 	public static double gyroCorrection = 0;
 	
 	public static int kHighGearAcceleration = 6000;
-	public static int kHighGearCruiseVelocity = 7500;
+	public static int kHighGearCruiseVelocity = 8000;
 	
 	public static int kLowGearAcceleration = 6000;
-	public static int kLowGearCruiseVelocity = 7500;
+	public static int kLowGearCruiseVelocity = 8000;
 	
 	// Turn Ratio for encoder ticks
 	public static double decoderTurnRatio = 25000 / 90;

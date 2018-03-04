@@ -26,8 +26,8 @@ public class DriveStraightDistance extends Command {
     }
 
     protected void execute() {
-    		Drivetrain.motorLeftMaster.configMotionCruiseVelocity(RobotMap.kLowGearCruiseVelocity + (int)RobotMap.gyroCorrection, RobotMap.kTimeoutMs);
-    		Drivetrain.motorRightMaster.configMotionCruiseVelocity(RobotMap.kLowGearCruiseVelocity - (int)RobotMap.gyroCorrection, RobotMap.kTimeoutMs);
+    		Drivetrain.motorLeftMaster.configMotionCruiseVelocity(RobotMap.kLowGearCruiseVelocity - (int)RobotMap.gyroCorrection, RobotMap.kTimeoutMs);
+    		Drivetrain.motorRightMaster.configMotionCruiseVelocity(RobotMap.kLowGearCruiseVelocity + (int)RobotMap.gyroCorrection, RobotMap.kTimeoutMs);
     }
 
     protected boolean isFinished() {

@@ -67,7 +67,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Deliver Cube", "Put Y or N here");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 
-		gyro.calibrate();
+		//gyro.calibrate();
 		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
 		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
 	}
@@ -156,7 +156,7 @@ public class Robot extends TimedRobot {
 			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
-		RobotMap.gyroCorrection = gyro.getAngle()*15;
+		RobotMap.gyroCorrection = gyro.getAngle()*120;
 	}
 
 	@Override
@@ -169,6 +169,7 @@ public class Robot extends TimedRobot {
 		 */
 		if (m_autonomousCommand != null) m_autonomousCommand.cancel();
 		
+		gyro.reset();
 		Lifter.motorLift.set(0);
 	}
 
@@ -179,7 +180,6 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-		SmartDashboard.putNumber("vel", Drivetrain.motorLeftMaster.getSelectedSensorVelocity(0));
 //		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
 //      else RobotMap.isPowerCubeInBox = false;
 //		
@@ -190,6 +190,8 @@ public class Robot extends TimedRobot {
 		}
 		
 		// SmartDashboard Logging
+		SmartDashboard.putNumber("gyro", gyro.getAngle());
+//		SmartDashboard.putNumber("vel", Drivetrain.motorLeftMaster.getSelectedSensorVelocity(0));
     	SmartDashboard.putBoolean("Front Camera", RobotMap.liftDirectionFront);
     	SmartDashboard.putBoolean("Back Camera", !RobotMap.liftDirectionFront);
 //		SmartDashboard.putBoolean("IR", RobotMap.isPowerCubeInBox);
