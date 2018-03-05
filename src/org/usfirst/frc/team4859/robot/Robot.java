@@ -153,7 +153,13 @@ public class Robot extends TimedRobot {
 			if (targetScale.equalsIgnoreCase("Y")) { 
 				RobotMap.targetScale = true; 
 				RobotMap.targetSide = gameData.charAt(1);
-			} 
+			}
+			
+			if (gameData.toUpperCase().charAt(0) == location.charAt(0)) RobotMap.switchSameSide = true;
+			else RobotMap.switchSameSide = false;
+			
+			if (gameData.toUpperCase().charAt(1) == location.charAt(0)) RobotMap.scaleSameSide = true;
+			else RobotMap.scaleSameSide = false;
 			
 			m_autonomousCommand = new AutoSelector();
 			m_autonomousCommand.start();

@@ -112,6 +112,9 @@ public class RobotMap {
 	public static boolean pMode = false;
 	
 	// Autonomous selector variables
+	public static boolean switchSameSide = true;
+	public static boolean scaleSameSide = true;
+	
 	public static boolean targetScale = false;
 	
 	public static char location = ' ';

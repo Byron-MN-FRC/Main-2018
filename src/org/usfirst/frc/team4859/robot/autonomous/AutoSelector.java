@@ -83,7 +83,11 @@ public class AutoSelector extends CommandGroup {
 	
 	public void driveOppositeSide() {
 		// Drive past switch
-		addSequential(new DriveStraightDistance(206, 5));
+		
+		// If the scale is on the same side don't push the cubes to the other side
+		if(RobotMap.scaleSameSide && !RobotMap.switchSameSide) addSequential(new DriveStraightDistance(216, 5));
+		else addSequential(new DriveStraightDistance(206, 5));
+		
 		turn(oppositeSide,90); // Turn away from starting side
 		// Cross the field
 		
@@ -97,12 +101,22 @@ public class AutoSelector extends CommandGroup {
 			addSequential(new DriveStraightDistance(45, 2));
 			addSequential(new DriveStop(1));
 		} else {
-			addSequential(new DriveStraightDistance(213, 5.50));
-			System.out.println("lift to switch height");
-			addParallel(new LiftToHeight("switch", 2));
-			addSequential(new DriveStop(0.5));
-			turn(oppositeSide,145);
-			addSequential(new DriveStraightDistance(8,.5));
+			// If the cubes aren't being pushed, then don't overshoot and turn backwards to shoot
+			if(RobotMap.scaleSameSide && !RobotMap.switchSameSide) {
+				addSequential(new DriveStraightDistance(185, 5.50));
+				System.out.println("lift to switch height");
+				addParallel(new LiftToHeight("switch", 2));
+				addSequential(new DriveStop(0.5));
+				turn(oppositeSide,90);
+				addSequential(new DriveStraightDistance(8,.5));
+			} else {
+				addSequential(new DriveStraightDistance(213, 5.50));
+				System.out.println("lift to switch height");
+				addParallel(new LiftToHeight("switch", 2));
+				addSequential(new DriveStop(0.5));
+				turn(oppositeSide,145);
+				addSequential(new DriveStraightDistance(8,.5));
+			}
 		}
 	}
 	
