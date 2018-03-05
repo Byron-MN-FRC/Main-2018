@@ -26,6 +26,7 @@ import org.usfirst.frc.team4859.robot.ThrottleLookup.MiniPID;
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraight;
 import org.usfirst.frc.team4859.robot.autonomous.DriveStraightDistance;
+import org.usfirst.frc.team4859.robot.autonomous.RobotTurnDegrees;
 import org.usfirst.frc.team4859.robot.commands.LiftToHeight;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4859.robot.subsystems.Lifter;
@@ -48,7 +49,8 @@ public class Robot extends TimedRobot {
 	public static Set set = new Set();
 	public static OI oi;
 	
-	MiniPID miniPID = new MiniPID(135, 1.2, 15);
+	//MiniPID miniPID = new MiniPID(135, 1.2, 15);
+	MiniPID miniPID;
 	
 	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
 	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
@@ -58,7 +60,7 @@ public class Robot extends TimedRobot {
 //	public static DigitalOutput boxLED = new DigitalOutput(1);
 	public static AnalogInput liftLimitSwitch = new AnalogInput(2);
   
-		Command m_autonomousCommand;
+	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
@@ -70,14 +72,18 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "Put letter here");
 		SmartDashboard.putString("Scale", "Put Y or N here");
-		SmartDashboard.putString("Deliver Cube", "Put Y or N here");
+		SmartDashboard.putString("Shoot Cube", "Y");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 
 		//gyro.calibrate();
 		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
 		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
+		
+		SmartDashboard.putNumber("Auton P-value", 170.0);
+		SmartDashboard.putNumber("Auton I-Value", 1.95);
+		SmartDashboard.putNumber("Auton D-Value", 0);
+		
 	}
-
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -107,12 +113,24 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		// Initially lift the cage up
 		m_autonomousCommand = new LiftToHeight("default",4);
 		m_autonomousCommand.start();
+		
 		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
 		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
 		String targetScale = SmartDashboard.getString("Scale", "N");
-//		String delivery = SmartDashboard.getString("Deliver Cube", "Y");
+		String shootCubeStr = SmartDashboard.getString("Shoot Cube", "Y").toUpperCase();
+		RobotMap.shootCubeAuton = (shootCubeStr.equals("Y"));
+		SmartDashboard.putString("xxxxxx", shootCubeStr);
+		String shoot = RobotMap.shootCubeAuton ? "Cube will be delivered.%n" : "Cube will not be delivered.%n";
+		System.out.printf(shoot);
+
+		//Allow selection of MiniPID tuning values on drive station
+		double p = SmartDashboard.getNumber("Auton P-value", 170.0);
+		double i = SmartDashboard.getNumber("Auton I-Value", 1.95);
+		double d = SmartDashboard.getNumber("Auton D-Value", 0.0);
+		miniPID = new MiniPID(p, i, d);
 		
 		gyro.reset();
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
@@ -127,37 +145,24 @@ public class Robot extends TimedRobot {
 		
 		if (!validGameString || !validRobotPos || !validDelay) {
 		 	System.out.println("Gamedata is invalid! Running AutoStraight routine.");
-			m_autonomousCommand = new DriveStraightDistance(296,7);
-			m_autonomousCommand.start();
+		 	HandleBadData(location);
 		} else {
 			RobotMap.targetSide = gameData.charAt(0); //default to switch side
 			RobotMap.location = location.charAt(0);
+			RobotMap.targetScale = false;
 			if (targetScale.equalsIgnoreCase("Y")) { 
 				RobotMap.targetScale = true; 
 				RobotMap.targetSide = gameData.charAt(1);
-			}
+			} 
 			
 			m_autonomousCommand = new AutoSelector();
 			m_autonomousCommand.start();
-		}
+		}		
 	}
+
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		
-		// Encoder logging
-//		SmartDashboard.putNumber("Left Position", Drivetrain.motorLeftMaster.getSelectedSensorPosition(0));
-//		SmartDashboard.putNumber("Right Position", Drivetrain.motorRightMaster.getSelectedSensorPosition(0));
-//		SmartDashboard.putNumber("Left Error", Drivetrain.motorLeftMaster.getClosedLoopError(0));
-//		SmartDashboard.putNumber("Right Error", Drivetrain.motorRightMaster.getClosedLoopError(0));
-		
-//		if(boxSensor.get()) {
-//			RobotMap.isPowerCubeInBox = true;
-//			Tunnel.motorTunnelLeft.set(0);
-//			Tunnel.motorTunnelRight.set(0);
-//			Tunnel.motorTunnelTop.set(0);
-//		}
-//        else RobotMap.isPowerCubeInBox = false;
-//		
 		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
 		else{
 			RobotMap.isLiftDown = true;
@@ -230,5 +235,24 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+	}
+
+	public void HandleBadData(String location) {
+		switch (location)
+		{
+		     case "S":
+		 		m_autonomousCommand = new DriveStraightDistance(296,7);
+		 		break;
+		     case "9":
+		    	 m_autonomousCommand = new RobotTurnDegrees(90);
+		    	 break;
+		     case "4":
+		    	 m_autonomousCommand = new RobotTurnDegrees(45);
+		    	 break;
+		     default:
+		    	 m_autonomousCommand = new AutoStraight();
+		    	 break;
+		}
+		m_autonomousCommand.start();
 	}
 }

@@ -16,7 +16,7 @@ public class RobotTurnDegrees extends Command {
     }
 
     protected void initialize() {
-    	setTimeout(1.2);
+    	setTimeout(1.3);
     	Drivetrain.motorLeftMaster.setSelectedSensorPosition(0, 0, 10);
 		Drivetrain.motorRightMaster.setSelectedSensorPosition(0, 0, 10);
     	Robot.kDrivetrain.driveTurnDistance(degrees * RobotMap.decoderTurnRatio);

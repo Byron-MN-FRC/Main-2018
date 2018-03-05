@@ -101,12 +101,11 @@ public class RobotMap {
 	
 	// Turn Ratio for encoder ticks
 	public static double decoderTurnRatio = 34000 / 90;
-	public static double secondsRatio = 40;
 	
 	// Robot numbers for closed loop (in inches)
 	public static double robotWidth = 27;
 
-	//			   				wheel diameter * pi / encoder units per revolution / 2 (sprocket 2:1 reduction) * magic number = 1264.77
+	//wheel diameter * pi / encoder units per revolution / 2 (sprocket 2:1 reduction) * magic number = 1264.77
 	public static double driveEncoderUnitsPerInch = 1 / (6 * Math.PI) * 4096 * 2 * 2.9102;
 	
 	// Precision mode
@@ -119,4 +118,5 @@ public class RobotMap {
 	public static char targetSide = ' ';
 	public static char oppositeTargetSide = ' ';
 	public static double delayInSeconds = 0;
+	public static boolean shootCubeAuton = false;
 }
