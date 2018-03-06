@@ -167,7 +167,8 @@ public class Robot extends TimedRobot {
 		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
 		else {
 			RobotMap.isLiftDown = true;
-			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+//			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
 //		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
@@ -189,7 +190,8 @@ public class Robot extends TimedRobot {
 		 */
 		if (m_autonomousCommand != null) m_autonomousCommand.cancel();
 		
-		Lifter.motorLift.set(0);
+		Lifter.motorLiftStage1.set(0);
+//		Lifter.motorLiftStage2.set(0);
 	}
 
 	/**
@@ -205,10 +207,12 @@ public class Robot extends TimedRobot {
 		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
 		else {
 			RobotMap.isLiftDown = true;
-			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+//			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
-		if(Lifter.motorLift.getSelectedSensorPosition(RobotMap.kPIDSlot) > 38000) RobotMap.pMode = true;
+//		if(Lifter.motorLiftStage1.getSelectedSensorPosition(RobotMap.kPIDSlot) + Lifter.motorLiftStage2.getSelectedSensorPosition(RobotMap.kPIDSlot) > 38000) RobotMap.pMode = true;
+		if(Lifter.motorLiftStage1.getSelectedSensorPosition(RobotMap.kPIDSlot) > 38000) RobotMap.pMode = true;
 		else RobotMap.pMode = false;
 		
 		// SmartDashboard Logging

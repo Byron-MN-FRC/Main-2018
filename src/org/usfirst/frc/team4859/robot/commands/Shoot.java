@@ -31,7 +31,7 @@ public class Shoot extends Command {
     protected void execute() {
     	if(RobotMap.liftDirectionFront) Robot.tunnel.tunnelShoot(RobotMap.kTunnelShootSpeed);
     	else {
-    		if (Lifter.motorLift.getSelectedSensorPosition(0) < 15000);
+    		if (Lifter.motorLiftStage1.getSelectedSensorPosition(0) < 15000);
         	else Robot.tunnel.tunnelShoot(-RobotMap.kTunnelShootSpeed);
     	}
     }

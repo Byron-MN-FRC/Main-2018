@@ -24,14 +24,6 @@ public class LiftToHeight extends Command {
     protected void initialize() {
     	setTimeout(time);
     	System.out.println("LiftToHeight command ran");
-    	
-//    	if(RobotMap.liftDirectionFront) {
-//    		Robot.cameraBackward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 3);
-//    		Robot.cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 30);
-//    	} else {
-//    		Robot.cameraForward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 3);
-//    		Robot.cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 30);
-//    	}
     }
 
     protected void execute() {

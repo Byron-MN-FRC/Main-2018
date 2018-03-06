@@ -13,7 +13,8 @@ public class RobotMap {
 	public static int talonIDLeftMaster = 4;
 	public static int talonIDLeftFollower = 5;
 	
-	public static int talonIDLift = 8;
+	public static int talonIDLiftStage1 = 8;
+	public static int talonIDLiftStage2 = 7;
 	
 	public static int talonIDTunnelLeft = 10;
 	public static int talonIDTunnelRight = 11;
@@ -69,22 +70,34 @@ public class RobotMap {
 	public static int kDriveCurrentPeakDuration = 2000; // Milliseconds
 	
 	// Lift (CIM)
-	public static int kLiftContinuousCurrentLimit = 40;
-	public static int kLiftCurrentPeakDuration = 2000;
+	public static int kLiftStage1ContinuousCurrentLimit = 40;
+	public static int kLiftStage1CurrentPeakDuration = 2000;
+	
+//	public static int kLiftStage2ContinuousCurrentLimit = 30;
+//	public static int kLiftStage2CurrentPeakDuration = 2000;
 	
 	// Closed loop values
 	public static int kTimeoutMs = 20;
 	public static int kPIDSlot = 0;
 	
 	// Lift
-	public static double kLiftP = 1.25;
-	public static double kLiftI = 0.0001;
-	public static double kLiftD = 0.0;
-	public static double kLiftF = 0.262;
-	public static int kLiftAllowableError = 50;
+	public static double kLiftStage1P = 1.25;
+	public static double kLiftStage1I = 0.0001;
+	public static double kLiftStage1D = 0.0;
+	public static double kLiftStage1F = 0.262;
+	public static int kLiftStage1AllowableError = 50;
 	
-	public static int kLiftAcceleration = 20000;
-	public static int kLiftCruiseVelocity = 4500;
+	public static double kLiftStage2P = 1.25;
+	public static double kLiftStage2I = 0.0001;
+	public static double kLiftStage2D = 0.0;
+	public static double kLiftStage2F = 0.262;
+	public static int kLiftStage2AllowableError = 50;
+	
+	public static int kLiftStage1Acceleration = 20000;
+	public static int kLiftStage1CruiseVelocity = 4500;
+	
+	public static int kLiftStage2Acceleration = 20000;
+	public static int kLiftStage2CruiseVelocity = 4500;
 	
 	// Drivetrain
 	public static double kP = 0.24;
