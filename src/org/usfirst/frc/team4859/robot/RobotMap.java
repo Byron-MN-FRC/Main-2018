@@ -25,7 +25,7 @@ public class RobotMap {
 	
 	public static double kClimbSpeed = 1;
 	
-	public static double kLiftDownSpeed = 0.7;
+	public static double kLiftDownSpeed = 0.5;
 	public static double kLiftUpSpeed = 0.3;
 	
 	// Lifter heights
