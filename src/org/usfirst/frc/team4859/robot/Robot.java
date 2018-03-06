@@ -73,6 +73,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "Put letter here");
 		SmartDashboard.putString("Scale", "Put Y or N here");
 		SmartDashboard.putString("Shoot Cube", "Y");
+		SmartDashboard.putString("Optimal Path", "N");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 
 		//gyro.calibrate();
@@ -121,6 +122,7 @@ public class Robot extends TimedRobot {
 		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
 		String targetScale = SmartDashboard.getString("Scale", "N");
 		String shootCubeStr = SmartDashboard.getString("Shoot Cube", "Y").toUpperCase();
+		String optimalPath = SmartDashboard.getString("Optimal Path", "N");
 		RobotMap.shootCubeAuton = (shootCubeStr.equals("Y"));
 		SmartDashboard.putString("xxxxxx", shootCubeStr);
 		String shoot = RobotMap.shootCubeAuton ? "Cube will be delivered.%n" : "Cube will not be delivered.%n";
@@ -150,15 +152,19 @@ public class Robot extends TimedRobot {
 			RobotMap.targetSide = gameData.charAt(0); //default to switch side
 			RobotMap.location = location.charAt(0);
 			RobotMap.targetScale = false;
+			
 			if (targetScale.equalsIgnoreCase("Y")) { 
 				RobotMap.targetScale = true; 
 				RobotMap.targetSide = gameData.charAt(1);
 			}
 			
-			if (gameData.toUpperCase().charAt(0) == location.charAt(0)) RobotMap.switchSameSide = true;
+			if (optimalPath.toUpperCase().charAt(0) == 'Y') RobotMap.optimalPath = true;
+			else RobotMap.optimalPath = false;
+			
+			if (gameData.toUpperCase().charAt(0) == location.toUpperCase().charAt(0)) RobotMap.switchSameSide = true;
 			else RobotMap.switchSameSide = false;
 			
-			if (gameData.toUpperCase().charAt(1) == location.charAt(0)) RobotMap.scaleSameSide = true;
+			if (gameData.toUpperCase().charAt(1) == location.toUpperCase().charAt(0)) RobotMap.scaleSameSide = true;
 			else RobotMap.scaleSameSide = false;
 			
 			m_autonomousCommand = new AutoSelector();

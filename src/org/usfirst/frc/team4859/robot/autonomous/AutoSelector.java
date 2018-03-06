@@ -128,27 +128,86 @@ public class AutoSelector extends CommandGroup {
 		System.out.printf("%s Autonomous--> [Location=%c] [Scale=%b] [Target Side=%c]%n", 
 				new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()),
 				location, RobotMap.targetScale, targetSide);
-
-		// Determine path to target based on starting position of robot
-		switch(location) {
-		case 'C':
-			driveFromCenter();
-			if (RobotMap.shootCubeAuton) { deliverCube(); }
-			break;
-		case 'L':
-			if (targetSide == 'L') driveSameSide();
-			else driveOppositeSide();
-			if (RobotMap.shootCubeAuton) { deliverCube(); }
-			break;
-		case 'R':
-			if (targetSide == 'R') driveSameSide();
-			else driveOppositeSide();
-			if (RobotMap.shootCubeAuton) { deliverCube(); }
-			break;
-		default:
-			System.out.println("SHOULD NOT EVER GET HERE:Drive Forward");
-			addSequential(new DriveStraightDistance(296, 7));
-			break;
-		} 		
+		
+		if(!RobotMap.optimalPath) {
+			// Determine path to target based on starting position of robot
+			switch(location) {
+			case 'C':
+				driveFromCenter();
+				if (RobotMap.shootCubeAuton) { deliverCube(); }
+				break;
+			case 'L':
+				if (targetSide == 'L') driveSameSide();
+				else driveOppositeSide();
+				if (RobotMap.shootCubeAuton) { deliverCube(); }
+				break;
+			case 'R':
+				if (targetSide == 'R') driveSameSide();
+				else driveOppositeSide();
+				if (RobotMap.shootCubeAuton) { deliverCube(); }
+				break;
+			default:
+				System.out.println("SHOULD NOT EVER GET HERE:Drive Forward");
+				addSequential(new DriveStraightDistance(296, 7));
+				break;
+			}
+		} else {
+			// Determine path to target based on starting position of robot
+			switch(location) {
+			case 'C':
+				driveFromCenter();
+				if (RobotMap.shootCubeAuton) { deliverCube(); }
+				break;
+			case 'L':
+				if(RobotMap.targetScale) {
+					if(RobotMap.scaleSameSide) driveScaleOptimal();
+					else if(RobotMap.switchSameSide) driveSwitchOptimal();
+				}
+				else if(!RobotMap.targetScale) {
+					if(RobotMap.switchSameSide) driveSwitchOptimal();
+					else if(RobotMap.scaleSameSide) driveScaleOptimal();
+				}
+				else driveOppositeSide();
+				
+				if (RobotMap.shootCubeAuton) deliverCube();
+				break;
+			case 'R':
+				if(RobotMap.targetScale) {
+					if(RobotMap.scaleSameSide) driveScaleOptimal();
+					else if(RobotMap.switchSameSide) driveSwitchOptimal();
+				}
+				else if(!RobotMap.targetScale) {
+					if(RobotMap.switchSameSide) driveSwitchOptimal();
+					else if(RobotMap.scaleSameSide) driveScaleOptimal();
+				}
+				else driveOppositeSide();
+				
+				if (RobotMap.shootCubeAuton) deliverCube();
+				break;
+			default:
+				System.out.println("SHOULD NOT EVER GET HERE:Drive Forward");
+				addSequential(new DriveStraightDistance(296, 7));
+				break;
+			}
+		}
+	}
+	
+	public void driveScaleOptimal() {
+		System.out.println("Lift to scale height");
+		//addSequential(new DriveStraightDistance(297, 8));
+		addSequential(new DriveStraightDistance(258, 7));
+		addParallel(new LiftToHeight("scaleHigh", 4));
+		addSequential(new DriveStop(1));
+		turn(oppositeSide, 45);
+		addSequential(new DriveStraightDistance(13, 1));
+    }
+	
+	public void driveSwitchOptimal() {
+		System.out.println("Lift to switch height");
+		addSequential(new DriveStraightDistance(148, 4.75));
+		addParallel(new LiftToHeight("switch", 2));
+		//addSequential(new DriveStop(0.5));
+		turn(oppositeSide, 90);
+		addSequential(new DriveStraightDistance(18, 5));
 	}
 }

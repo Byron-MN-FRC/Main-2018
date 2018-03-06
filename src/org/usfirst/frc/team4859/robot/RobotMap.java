@@ -115,6 +115,7 @@ public class RobotMap {
 	public static boolean switchSameSide = true;
 	public static boolean scaleSameSide = true;
 	
+	public static boolean optimalPath = false;
 	public static boolean targetScale = false;
 	
 	public static char location = ' ';
