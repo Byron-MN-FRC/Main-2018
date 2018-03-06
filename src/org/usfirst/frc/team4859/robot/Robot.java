@@ -12,8 +12,6 @@ import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,7 +19,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.regex.Pattern;
-
 import org.usfirst.frc.team4859.robot.ThrottleLookup.MiniPID;
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraight;
@@ -70,18 +67,17 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "Put letter here");
-		SmartDashboard.putString("Scale", "Put Y or N here");
-		SmartDashboard.putString("Shoot Cube", "Y");
+		SmartDashboard.putString("Robot Start Pos (L, R, or C)", "z");
+		SmartDashboard.putString("Scale (Y/N)", "z");
+		SmartDashboard.putString("Shoot Cube (Y/N)", "Y");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 
-		//gyro.calibrate();
 		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
 		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
 		
 		SmartDashboard.putNumber("Auton P-value", 170.0);
 		SmartDashboard.putNumber("Auton I-Value", 1.95);
-		SmartDashboard.putNumber("Auton D-Value", 0);
+		SmartDashboard.putNumber("Auton I-Max", 100);
 		
 	}
 
@@ -112,11 +108,7 @@ public class Robot extends TimedRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	@Override
-	public void autonomousInit() {
-		// Initially lift the cage up
-		m_autonomousCommand = new LiftToHeight("default",4);
-		m_autonomousCommand.start();
-		
+	public void autonomousInit() {		
 		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
 		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
 		String targetScale = SmartDashboard.getString("Scale", "N");
@@ -129,9 +121,9 @@ public class Robot extends TimedRobot {
 		//Allow selection of MiniPID tuning values on drive station
 		double p = SmartDashboard.getNumber("Auton P-value", 170.0);
 		double i = SmartDashboard.getNumber("Auton I-Value", 1.95);
-		double d = SmartDashboard.getNumber("Auton D-Value", 0.0);
-		miniPID = new MiniPID(p, i, d);
-		miniPID.setMaxIOutput(100);
+		double maxI = SmartDashboard.getNumber("Auton I-Max", 100);
+		miniPID = new MiniPID(p, i, 0);
+		miniPID.setMaxIOutput(maxI);
 		
 		gyro.reset();
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
@@ -171,14 +163,16 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		
 		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
-		else{
+		else {
 			RobotMap.isLiftDown = true;
 			Lifter.motorLift.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
+//		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
+//		else RobotMap.isPowerCubeInBox = false;
+		
 		RobotMap.gyroCorrection = miniPID.getOutput(gyro.getAngle(), 0);
 		SmartDashboard.putNumber("PID", miniPID.getOutput(gyro.getAngle(), 0));
-//		RobotMap.gyroCorrection = gyro.getAngle()*120;
 	}
 
 	@Override
@@ -191,7 +185,6 @@ public class Robot extends TimedRobot {
 		 */
 		if (m_autonomousCommand != null) m_autonomousCommand.cancel();
 		
-		gyro.reset();
 		Lifter.motorLift.set(0);
 	}
 
@@ -204,7 +197,7 @@ public class Robot extends TimedRobot {
 		
 //		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
 //      else RobotMap.isPowerCubeInBox = false;
-//		
+		
 		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
 		else {
 			RobotMap.isLiftDown = true;
@@ -216,25 +209,20 @@ public class Robot extends TimedRobot {
 		
 		// SmartDashboard Logging
 		SmartDashboard.putNumber("gyro", gyro.getAngle());
-//		SmartDashboard.putNumber("vel", Drivetrain.motorLeftMaster.getSelectedSensorVelocity(0));
     	SmartDashboard.putBoolean("Front Camera", RobotMap.liftDirectionFront);
     	SmartDashboard.putBoolean("Back Camera", !RobotMap.liftDirectionFront);
+		SmartDashboard.putString("liftSetHeight", RobotMap.liftSetHeight);
+		SmartDashboard.putBoolean("Lift PMode", RobotMap.liftPrecisionMode);
 //		SmartDashboard.putBoolean("IR", RobotMap.isPowerCubeInBox);
 //		SmartDashboard.putNumber("IR Volt", boxSensor.getVoltage());
 //		SmartDashboard.putBoolean("limit switch", RobotMap.isLiftDown);
 //		SmartDashboard.putNumber("limit switch volt", liftLimitSwitch.getVoltage());
-		SmartDashboard.putString("liftSetHeight", RobotMap.liftSetHeight);
-		SmartDashboard.putNumber("lifter amps", Lifter.motorLift.getOutputCurrent());
+//		SmartDashboard.putNumber("lifter amps", Lifter.motorLift.getOutputCurrent());
 	}
 
 	public static double driveEncoderUnitConversion(double inches) {
 		double encoderUnits = inches * RobotMap.driveEncoderUnitsPerInch;
 		return encoderUnits;
-	}
-	
-	public static double angleToDistance(double angle) {
-		double arcLength = (Math.PI * RobotMap.robotWidth) * (angle/360);
-		return driveEncoderUnitConversion(arcLength);
 	}
 	
 	/**

@@ -7,6 +7,7 @@ public class LiftPrecisionMode extends Command {
     
 	protected void initialize() {
 		RobotMap.kTunnelShootSpeed = 0.5;
+		RobotMap.liftPrecisionMode = true;
 	}
 	
 	protected void execute() {}
@@ -17,9 +18,11 @@ public class LiftPrecisionMode extends Command {
 	
 	protected void end() {
 		RobotMap.kTunnelShootSpeed = 1;
+		RobotMap.liftPrecisionMode = false;
 	}
 	
 	protected void interrupted() {
 		RobotMap.kTunnelShootSpeed = 1;
+		RobotMap.liftPrecisionMode = false;
 	}
 }

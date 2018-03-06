@@ -52,15 +52,16 @@ public class RobotMap {
     public static boolean liftDirectionFront = true;
     
     // Drivetrain ramp rates
-    public static double kRampRate = 0.125; // Time to get from 0 to max
+    public static double kRampRate = 0.05; // Time to get from 0 to max
     public static double kRampRateLimit = 0.025; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
     public static double kRampRateTipLimit = 0.005;
-    public static double kLowGearRampRate = 0.1;
-    public static double kHighGearRampRate = 0.1;
+    public static double kLowGearRampRate = 0.05;
+    public static double kHighGearRampRate = 0.05;
 	
 	// Lift sensors
 	public static boolean isPowerCubeInBox = false;
 	public static boolean isLiftDown = false;
+	public static boolean liftPrecisionMode = false;
 	
 	// Current limiting
 	// Drivetrain (CIMs)

@@ -6,8 +6,6 @@ import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.commands.LiftToHeight;
 import org.usfirst.frc.team4859.robot.commands.ShiftDown;
 import org.usfirst.frc.team4859.robot.commands.Shoot;
-import org.usfirst.frc.team4859.robot.commands.ShootBackward;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoSelector extends CommandGroup {
@@ -79,6 +77,7 @@ public class AutoSelector extends CommandGroup {
 	public void deliverCube () {
 		System.out.println("Shoot cube out front");
 		addSequential(new Shoot(1));
+		addSequential(new LiftToHeight("default", 1));
 	}
 	
 	public void driveOppositeSide() {

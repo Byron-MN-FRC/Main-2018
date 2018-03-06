@@ -5,17 +5,17 @@ import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.subsystems.Lifter;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ShootBackward extends Command {
+public class ShootOpposite extends Command {
 	
 	private double time = 0;
 	
-    public ShootBackward() {
+    public ShootOpposite() {
     	requires(Robot.tunnel);
     	requires(Robot.lifter);
     	time = 0;
     }
     
-    public ShootBackward(double inputTime) {
+    public ShootOpposite(double inputTime) {
     	requires(Robot.tunnel);
     	requires(Robot.lifter);
     	time = inputTime;
