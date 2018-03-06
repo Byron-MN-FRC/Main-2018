@@ -20,10 +20,10 @@ public class DriveStraightDistance extends Command {
 
     protected void initialize() {
     	setTimeout(time);
+//    	Robot.navX.reset();
     	Robot.gyro.reset();
 		Drivetrain.motorLeftMaster.setSelectedSensorPosition(0, RobotMap.kPIDSlot, RobotMap.kTimeoutMs);
 		Drivetrain.motorRightMaster.setSelectedSensorPosition(0, RobotMap.kPIDSlot, RobotMap.kTimeoutMs);
-		Robot.gyro.reset();
     	Robot.kDrivetrain.driveStraightDistance(distance);
     }
 

@@ -24,7 +24,6 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraight;
 import org.usfirst.frc.team4859.robot.autonomous.DriveStraightDistance;
 import org.usfirst.frc.team4859.robot.autonomous.RobotTurnDegrees;
-import org.usfirst.frc.team4859.robot.commands.LiftToHeight;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4859.robot.subsystems.Lifter;
 import org.usfirst.frc.team4859.robot.subsystems.Set;
@@ -46,13 +45,14 @@ public class Robot extends TimedRobot {
 	public static Set set = new Set();
 	public static OI oi;
 	
-	//MiniPID miniPID = new MiniPID(135, 1.2, 15);
+	//MiniPID miniPID = new MiniPID(135, 1.2, 0);
 	MiniPID miniPID;
 	
 	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
 	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
 	
 	public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+//	public static AHRS navX = new AHRS(SerialPort.Port.kUSB);
 //	public static DigitalInput boxSensor = new DigitalInput(0);
 //	public static DigitalOutput boxLED = new DigitalOutput(1);
 	public static AnalogInput liftLimitSwitch = new AnalogInput(2);
@@ -125,7 +125,9 @@ public class Robot extends TimedRobot {
 		miniPID = new MiniPID(p, i, 0);
 		miniPID.setMaxIOutput(maxI);
 		
+//		navX.reset();
 		gyro.reset();
+		
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
 		
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -171,6 +173,8 @@ public class Robot extends TimedRobot {
 //		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
 //		else RobotMap.isPowerCubeInBox = false;
 		
+//		RobotMap.gyroCorrection = miniPID.getOutput(navX.pidGet(), 0);
+//		SmartDashboard.putNumber("PID", miniPID.getOutput(navX.pidGet(), 0));
 		RobotMap.gyroCorrection = miniPID.getOutput(gyro.getAngle(), 0);
 		SmartDashboard.putNumber("PID", miniPID.getOutput(gyro.getAngle(), 0));
 	}
@@ -208,6 +212,7 @@ public class Robot extends TimedRobot {
 		else RobotMap.pMode = false;
 		
 		// SmartDashboard Logging
+//		SmartDashboard.putNumber("gyro", navX.pidGet());
 		SmartDashboard.putNumber("gyro", gyro.getAngle());
     	SmartDashboard.putBoolean("Front Camera", RobotMap.liftDirectionFront);
     	SmartDashboard.putBoolean("Back Camera", !RobotMap.liftDirectionFront);
