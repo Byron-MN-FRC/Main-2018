@@ -18,7 +18,6 @@ public class RobotMap {
 	
 	public static int talonIDTunnelLeft = 10;
 	public static int talonIDTunnelRight = 11;
-	public static int talonIDTunnelTop = 12;
 	
 	// Command numbers
 	public static double kTunnelIntakeSpeed = 0.7;
@@ -40,8 +39,8 @@ public class RobotMap {
         put("switch",    new Integer[]  { 22000	} ); // 35
         put("scaleLow",  new Integer[]  { 39900	} ); // 58
         put("scaleNorm", new Integer[]  { 47000	} ); // 70
-        put("scaleHigh", new Integer[]  { 52000	} ); // 82
-        put("climb",     new Integer[]  { 52000	} ); // 82
+        put("scaleHigh", new Integer[]  { 51000	} ); // 82
+        put("climb",     new Integer[]  { 51000	} ); // 82
     }};
     
     /* Example of how to get values:
