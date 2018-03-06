@@ -131,6 +131,7 @@ public class Robot extends TimedRobot {
 		double i = SmartDashboard.getNumber("Auton I-Value", 1.95);
 		double d = SmartDashboard.getNumber("Auton D-Value", 0.0);
 		miniPID = new MiniPID(p, i, d);
+		miniPID.setMaxIOutput(100);
 		
 		gyro.reset();
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);

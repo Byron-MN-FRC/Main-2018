@@ -76,14 +76,14 @@ public class RobotMap {
 	public static int kPIDSlot = 0;
 	
 	// Lift
-	public static double kLiftP = 1.3;
-	public static double kLiftI = 0.00015;
-	public static double kLiftD = 0.000;
-	public static double kLiftF = 0.52;
-	public static int kLiftAllowableError = 100;
+	public static double kLiftP = 1.25;
+	public static double kLiftI = 0.0001;
+	public static double kLiftD = 0.0;
+	public static double kLiftF = 0.262;
+	public static int kLiftAllowableError = 50;
 	
-	public static int kLiftAcceleration = 8000;
-	public static int kLiftCruiseVelocity = 2000;
+	public static int kLiftAcceleration = 20000;
+	public static int kLiftCruiseVelocity = 4500;
 	
 	// Drivetrain
 	public static double kP = 0.24;
