@@ -72,8 +72,8 @@ public class RobotMap {
 	public static int kLiftStage1ContinuousCurrentLimit = 40;
 	public static int kLiftStage1CurrentPeakDuration = 2000;
 	
-//	public static int kLiftStage2ContinuousCurrentLimit = 30;
-//	public static int kLiftStage2CurrentPeakDuration = 2000;
+	public static int kLiftStage2ContinuousCurrentLimit = 30;
+	public static int kLiftStage2CurrentPeakDuration = 2000;
 	
 	// Closed loop values
 	public static int kTimeoutMs = 20;

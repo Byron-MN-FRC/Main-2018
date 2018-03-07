@@ -168,7 +168,7 @@ public class Robot extends TimedRobot {
 		else {
 			RobotMap.isLiftDown = true;
 			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
-//			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
 //		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
@@ -191,7 +191,7 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) m_autonomousCommand.cancel();
 		
 		Lifter.motorLiftStage1.set(0);
-//		Lifter.motorLiftStage2.set(0);
+		Lifter.motorLiftStage2.set(0);
 	}
 
 	/**
@@ -208,7 +208,7 @@ public class Robot extends TimedRobot {
 		else {
 			RobotMap.isLiftDown = true;
 			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
-//			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
 //		if(Lifter.motorLiftStage1.getSelectedSensorPosition(RobotMap.kPIDSlot) + Lifter.motorLiftStage2.getSelectedSensorPosition(RobotMap.kPIDSlot) > 38000) RobotMap.pMode = true;

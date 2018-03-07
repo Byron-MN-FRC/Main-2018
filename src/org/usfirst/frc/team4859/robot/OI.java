@@ -22,10 +22,10 @@ public class OI {
 	
 	// Secondary Driver Buttons 
 	// Lift heights
-	Button setLiftSwitch = new JoystickButton(xbox, 3);
+	//Button setLiftSwitch = new JoystickButton(xbox, 3);
 	Button setLiftScaleLow = new JoystickButton(xbox, 1);
 	Button setLiftScaleNorm = new JoystickButton(xbox, 2);
-	Button setLiftScaleHigh = new JoystickButton(xbox, 4);
+	//Button setLiftScaleHigh = new JoystickButton(xbox, 4);
 	
 	// Direction
 	Button setForward = new JoystickButton(xbox, 6);
@@ -37,8 +37,8 @@ public class OI {
 	Button liftPMode = new JoystickButton(xbox, 7);
 	
 	// Buttons for mechanism testing
-//	Button liftUp = new JoystickButton(xbox, 5);
-//	Button liftDown = new JoystickButton(xbox, 5);
+	Button liftUp = new JoystickButton(xbox, 4);
+	Button liftDown = new JoystickButton(xbox, 3);
 //	
 //	Button climbStart = new JoystickButton(joystick, 12);
 //
@@ -63,10 +63,10 @@ public class OI {
 		liftToHeight.whenPressed(new LiftToHeight());
 		
 		// Secondary Driver Buttons
-		setLiftSwitch.whenPressed(new SetLiftSwitch());
+		//setLiftSwitch.whenPressed(new SetLiftSwitch());
 		setLiftScaleLow.whenPressed(new SetLiftScaleLow());
 		setLiftScaleNorm.whenPressed(new SetLiftScale());
-		setLiftScaleHigh.whenPressed(new SetLiftScaleHigh());
+		//setLiftScaleHigh.whenPressed(new SetLiftScaleHigh());
 		
 		setForward.whenPressed(new SetForward());
 		setBackward.whenPressed(new SetBackward());
@@ -79,8 +79,8 @@ public class OI {
 		
 		// Buttons for mechanism testing
 //		
-//		liftUp.whenPressed(new LiftUp());
-//		liftDown.whenPressed(new LiftDown());
+		liftUp.whenPressed(new LiftUp());
+		liftDown.whenPressed(new LiftDown());
 //		
 //		climbStart.whileHeld(new ClimbUp(RobotMap.climbSpeed));
 //		
