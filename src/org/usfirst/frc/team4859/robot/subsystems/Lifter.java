@@ -34,7 +34,7 @@ public class Lifter extends Subsystem {
 
     public void liftUp(double inputSpeed) {
     	motorLiftStage1.set(inputSpeed);
-    	motorLiftStage2.set(inputSpeed);
+    	motorLiftStage2.set(-inputSpeed);
     }
     
     public void liftStop() {

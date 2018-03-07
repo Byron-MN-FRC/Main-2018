@@ -34,13 +34,13 @@ public class RobotMap {
         private static final long serialVersionUID = 1L;
 
     {	   //name                      encoder units
-        put("acquire",   new Integer[]  { 0		} );
-        put("default",   new Integer[]  { 7300	} ); // 6
-        put("switch",    new Integer[]  { 22000	} ); // 35
-        put("scaleLow",  new Integer[]  { 39900	} ); // 58
-        put("scaleNorm", new Integer[]  { 47000	} ); // 70
-        put("scaleHigh", new Integer[]  { 51000	} ); // 82
-        put("climb",     new Integer[]  { 51000	} ); // 82
+        put("acquire",   new Integer[]  { 0	, 0	} );
+        put("default",   new Integer[]  { 7300 , 0	} ); // 6
+        put("switch",    new Integer[]  { 0,22000} ); // 35
+        put("scaleLow",  new Integer[]  { 39900	, 31250} ); // 58
+        put("scaleNorm", new Integer[]  { 47000	, 31250} ); // 70
+        put("scaleHigh", new Integer[]  { 51000	, 31250} ); // 82
+        put("climb",     new Integer[]  { 51000	, 31250} ); // 82
     }};
     
     /* Example of how to get values:
