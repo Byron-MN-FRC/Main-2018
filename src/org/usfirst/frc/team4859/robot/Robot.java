@@ -67,9 +67,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		SmartDashboard.putString("Robot Start Pos (L, R, or C)", "z");
-		SmartDashboard.putString("Scale (Y/N)", "z");
-		SmartDashboard.putString("Shoot Cube (Y/N)", "Y");
+		SmartDashboard.putString("Robot Start", "C");
+		SmartDashboard.putString("Scale", "N");
+		SmartDashboard.putString("Shoot", "Y");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 
 		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
@@ -109,12 +109,11 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {		
-		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
+		String robotPos = SmartDashboard.getString("Robot Start", "z");
 		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
 		String targetScale = SmartDashboard.getString("Scale", "N");
-		String shootCubeStr = SmartDashboard.getString("Shoot Cube", "Y").toUpperCase();
+		String shootCubeStr = SmartDashboard.getString("Shoot", "Y").toUpperCase();
 		RobotMap.shootCubeAuton = (shootCubeStr.equals("Y"));
-		SmartDashboard.putString("xxxxxx", shootCubeStr);
 		String shoot = RobotMap.shootCubeAuton ? "Cube will be delivered.%n" : "Cube will not be delivered.%n";
 		System.out.printf(shoot);
 
@@ -140,6 +139,9 @@ public class Robot extends TimedRobot {
 		
 		if (!validGameString || !validRobotPos || !validDelay) {
 		 	System.out.println("Gamedata is invalid! Running AutoStraight routine.");
+		 	System.out.println("gamedata=" + gameData);
+		 	System.out.println("location=" + location);
+		 	System.out.println("delay=" + RobotMap.delayInSeconds);
 		 	HandleBadData(location);
 		} else {
 			RobotMap.targetSide = gameData.charAt(0); //default to switch side
