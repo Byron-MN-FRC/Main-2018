@@ -13,11 +13,11 @@ public class RobotMap {
 	public static int talonIDLeftMaster = 4;
 	public static int talonIDLeftFollower = 5;
 	
-	public static int talonIDLiftStage1 = 8;
-	public static int talonIDLiftStage2 = 7;
+	public static int talonIDLiftStage1 = 7;
+	public static int talonIDLiftStage2 = 8;
 	
-	public static int talonIDTunnelLeft = 10;
-	public static int talonIDTunnelRight = 11;
+	public static int talonIDTunnelLeft = 2;
+	public static int talonIDTunnelRight = 3;
 	
 	// Command numbers
 	public static double kTunnelIntakeSpeed = 0.7;
@@ -25,7 +25,8 @@ public class RobotMap {
 	
 	public static double kClimbSpeed = 1;
 	
-	public static double kLiftDownSpeed = 0.5;
+	public static double kLiftStage1DownSpeed = 0.4;
+	public static double kLiftStage2DownSpeed = 0.4;
 	public static double kLiftUpSpeed = 0.3;
 	
 	// Lifter heights
@@ -36,16 +37,19 @@ public class RobotMap {
     {	   //name                      encoder units
         put("acquire",   new Integer[]  { 0	, 0	} );
         put("default",   new Integer[]  { 7300 , 0	} ); // 6
-        put("switch",    new Integer[]  { 0,22000} ); // 35
-        put("scaleLow",  new Integer[]  { 39900	, 31250} ); // 58
-        put("scaleNorm", new Integer[]  { 47000	, 31250} ); // 70
-        put("scaleHigh", new Integer[]  { 51000	, 31250} ); // 82
-        put("climb",     new Integer[]  { 51000	, 31250} ); // 82
+        put("switch",    new Integer[]  { 23000 , 9000} ); // 35
+        put("scaleLow",  new Integer[]  { 48000	, 28000} ); // 58
+        put("scaleNorm", new Integer[]  { 48000	, 30000} ); // 70
+        put("scaleHigh", new Integer[]  { 48000	, 30800} ); // 82
+        put("climb",     new Integer[]  { 48000	, 30800} ); // 82
     }};
     
     /* Example of how to get values:
      * liftPosition.get("switch")[0];
      */
+    
+    //Stage 2 30600 max
+    //Stage 1 47900 max
     
     public static String liftSetHeight = "switch";
     
@@ -53,14 +57,15 @@ public class RobotMap {
     
     // Drivetrain ramp rates
     public static double kRampRate = 0.05; // Time to get from 0 to max
-    public static double kRampRateLimit = 0.025; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
-    public static double kRampRateTipLimit = 0.005;
+    public static double kRampRateLimit = 0.015; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
+    public static double kRampRateTipLimit = 0.003;
     public static double kLowGearRampRate = 0.05;
     public static double kHighGearRampRate = 0.05;
 	
 	// Lift sensors
 	public static boolean isPowerCubeInBox = false;
-	public static boolean isLiftDown = false;
+	public static boolean isLiftStage1Down = false;
+	public static boolean isLiftStage2Down = false;
 	public static boolean liftPrecisionMode = false;
 	
 	// Current limiting
@@ -69,11 +74,13 @@ public class RobotMap {
 	public static int kDriveCurrentPeakDuration = 2000; // Milliseconds
 	
 	// Lift (CIM)
-	public static int kLiftStage1ContinuousCurrentLimit = 40;
+	public static int kLiftStage1PeakLimit = 60;
+	public static int kLiftStage1ContinuousCurrentLimit = 30;
 	public static int kLiftStage1CurrentPeakDuration = 2000;
 	
-	public static int kLiftStage2ContinuousCurrentLimit = 30;
-	public static int kLiftStage2CurrentPeakDuration = 2000;
+	public static int kLiftStage2PeakLimit = 30;
+	public static int kLiftStage2ContinuousCurrentLimit = 20;
+	public static int kLiftStage2CurrentPeakDuration = 1000;
 	
 	// Closed loop values
 	public static int kTimeoutMs = 20;
@@ -86,17 +93,17 @@ public class RobotMap {
 	public static double kLiftStage1F = 0.262;
 	public static int kLiftStage1AllowableError = 50;
 	
-	public static double kLiftStage2P = 1.25;
-	public static double kLiftStage2I = 0.0001;
+	public static double kLiftStage2P = 0.8;
+	public static double kLiftStage2I = 0.0003;
 	public static double kLiftStage2D = 0.0;
-	public static double kLiftStage2F = 0.262;
+	public static double kLiftStage2F = 1.5;
 	public static int kLiftStage2AllowableError = 50;
 	
 	public static int kLiftStage1Acceleration = 20000;
 	public static int kLiftStage1CruiseVelocity = 4500;
 	
-	public static int kLiftStage2Acceleration = 20000;
-	public static int kLiftStage2CruiseVelocity = 4500;
+	public static int kLiftStage2Acceleration = 10000;
+	public static int kLiftStage2CruiseVelocity = 1500;
 	
 	// Drivetrain
 	public static double kP = 0.24;

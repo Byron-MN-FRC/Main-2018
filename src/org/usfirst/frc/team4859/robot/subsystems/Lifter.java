@@ -23,13 +23,11 @@ public class Lifter extends Subsystem {
     }
     
     public void liftDown(double inputSpeed) {
-    	if(!RobotMap.isLiftDown) {
-    		motorLiftStage1.set(-inputSpeed);
-        	motorLiftStage2.set(-inputSpeed);
-    	} else {
-    		motorLiftStage1.set(0);
-        	motorLiftStage2.set(0);
-    	}
+    	if(!RobotMap.isLiftStage1Down) motorLiftStage1.set(-RobotMap.kLiftStage1DownSpeed);
+        else motorLiftStage1.set(0);
+    	
+    	if(!RobotMap.isLiftStage2Down) motorLiftStage2.set(-RobotMap.kLiftStage2DownSpeed);
+    	else motorLiftStage2.set(0);
     }
 
     public void liftUp(double inputSpeed) {
@@ -77,8 +75,10 @@ public class Lifter extends Subsystem {
 		//Current limiting
 		motorLiftStage1.configContinuousCurrentLimit(RobotMap.kLiftStage1ContinuousCurrentLimit, RobotMap.kTimeoutMs);
 		motorLiftStage1.configPeakCurrentDuration(RobotMap.kLiftStage1CurrentPeakDuration, RobotMap.kTimeoutMs);
+		motorLiftStage1.configPeakCurrentLimit(RobotMap.kLiftStage1PeakLimit, RobotMap.kTimeoutMs);
 		motorLiftStage2.configContinuousCurrentLimit(RobotMap.kLiftStage2ContinuousCurrentLimit, RobotMap.kTimeoutMs);
 		motorLiftStage2.configPeakCurrentDuration(RobotMap.kLiftStage2CurrentPeakDuration, RobotMap.kTimeoutMs);
+		motorLiftStage2.configPeakCurrentLimit(RobotMap.kLiftStage2PeakLimit, RobotMap.kTimeoutMs);
 		
 		motorLiftStage1.enableCurrentLimit(true);
 		motorLiftStage2.enableCurrentLimit(true);

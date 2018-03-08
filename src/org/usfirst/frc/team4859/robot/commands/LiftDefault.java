@@ -14,12 +14,10 @@ public class LiftDefault extends Command {
 
     protected void initialize() {
     	System.out.println("LiftDown command ran");
-    	Robot.cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
-		Robot.cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
     }
 
     protected void execute() {
-    	Robot.lifter.liftDown(RobotMap.kLiftDownSpeed);
+    	Robot.lifter.liftDown(RobotMap.kLiftStage1DownSpeed);
     }
 
     protected boolean isFinished() {
@@ -27,7 +25,7 @@ public class LiftDefault extends Command {
     }
 
     protected void end() {
-    	Robot.lifter.liftToHeight("default");
+    	Robot.lifter.liftStop();
     }
 
     protected void interrupted() {

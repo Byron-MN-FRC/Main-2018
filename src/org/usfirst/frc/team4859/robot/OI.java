@@ -63,17 +63,17 @@ public class OI {
 		liftToHeight.whenPressed(new LiftToHeight());
 		
 		// Secondary Driver Buttons
-		//setLiftSwitch.whenPressed(new SetLiftSwitch());
+		setLiftSwitch.whenPressed(new SetLiftSwitch());
 		setLiftScaleLow.whenPressed(new SetLiftScaleLow());
 		setLiftScaleNorm.whenPressed(new SetLiftScale());
-		//setLiftScaleHigh.whenPressed(new SetLiftScaleHigh());
+		setLiftScaleHigh.whenPressed(new SetLiftScaleHigh());
 		
 		setForward.whenPressed(new SetForward());
 		setBackward.whenPressed(new SetBackward());
 		
 		// Lift control
 		liftDefault.whenPressed(new LiftDefault());
-		liftDefault.whenReleased(new LiftToHeight("default", 0));
+		liftDefault.whenReleased(new LiftToHeight("default", 0.1));
 		liftStop.whenPressed(new LiftStop());
 		liftPMode.toggleWhenPressed(new LiftPrecisionMode());
 		

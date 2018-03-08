@@ -15,7 +15,7 @@ public class LiftDown extends Command {
     }
 
     protected void execute() {
-    	Robot.lifter.liftDown(RobotMap.kLiftDownSpeed);
+    	Robot.lifter.liftDown(RobotMap.kLiftStage1DownSpeed);
     }
 
     protected boolean isFinished() {
@@ -23,7 +23,7 @@ public class LiftDown extends Command {
     }
 
     protected void end() {
-    	Robot.lifter.liftDown(RobotMap.kLiftDownSpeed);
+    	Robot.lifter.liftDown(RobotMap.kLiftStage1DownSpeed);
     }
 
     protected void interrupted() {

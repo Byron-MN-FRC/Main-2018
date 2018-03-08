@@ -48,6 +48,6 @@ public class ShootOpposite extends Command {
 
     protected void interrupted() {
     	Robot.tunnel.tunnelStop();
-    	Robot.lifter.liftToHeight(RobotMap.liftSetHeight);
+    	Robot.lifter.liftStop();
     }
 }
