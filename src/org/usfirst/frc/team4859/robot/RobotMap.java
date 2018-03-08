@@ -21,12 +21,14 @@ public class RobotMap {
 	
 	// Command numbers
 	public static double kTunnelIntakeSpeed = 0.7;
+	public static double kTunnelRightIntakeSpeed = 0.7;
+	public static double kTunnelLeftIntakeSpeed = 0.5;
 	public static double kTunnelShootSpeed = 1;
 	
 	public static double kClimbSpeed = 1;
 	
-	public static double kLiftStage1DownSpeed = 0.4;
-	public static double kLiftStage2DownSpeed = 0.4;
+	public static double kLiftStage1DownSpeed = 0.5;
+	public static double kLiftStage2DownSpeed = 0.3;
 	public static double kLiftUpSpeed = 0.3;
 	
 	// Lifter heights
