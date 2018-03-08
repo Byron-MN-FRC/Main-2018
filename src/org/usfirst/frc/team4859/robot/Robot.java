@@ -9,10 +9,13 @@ package org.usfirst.frc.team4859.robot;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+//import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -29,6 +32,7 @@ import org.usfirst.frc.team4859.robot.subsystems.Lifter;
 import org.usfirst.frc.team4859.robot.subsystems.Set;
 import org.usfirst.frc.team4859.robot.subsystems.Shifters;
 import org.usfirst.frc.team4859.robot.subsystems.Tunnel;
+import com.kauailabs.navx.frc.AHRS;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -51,10 +55,10 @@ public class Robot extends TimedRobot {
 	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
 	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
 	
-	public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
-//	public static AHRS navX = new AHRS(SerialPort.Port.kUSB);
-//	public static DigitalInput boxSensor = new DigitalInput(0);
-//	public static DigitalOutput boxLED = new DigitalOutput(1);
+//	public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+	public static AHRS navX = new AHRS(SerialPort.Port.kUSB);
+	public static DigitalInput boxSensor = new DigitalInput(0);
+	public static DigitalOutput boxLED = new DigitalOutput(1);
 	public static AnalogInput liftLimitSwitch = new AnalogInput(2);
   
 	Command m_autonomousCommand;
@@ -124,8 +128,8 @@ public class Robot extends TimedRobot {
 		miniPID = new MiniPID(p, i, 0);
 		miniPID.setMaxIOutput(maxI);
 		
-//		navX.reset();
-		gyro.reset();
+		navX.reset();
+//		gyro.reset();
 		
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
 		
@@ -173,13 +177,13 @@ public class Robot extends TimedRobot {
 			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
-//		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
-//		else RobotMap.isPowerCubeInBox = false;
+		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
+		else RobotMap.isPowerCubeInBox = false;
 		
-//		RobotMap.gyroCorrection = miniPID.getOutput(navX.pidGet(), 0);
-//		SmartDashboard.putNumber("PID", miniPID.getOutput(navX.pidGet(), 0));
-		RobotMap.gyroCorrection = miniPID.getOutput(gyro.getAngle(), 0);
-		SmartDashboard.putNumber("PID", miniPID.getOutput(gyro.getAngle(), 0));
+		RobotMap.gyroCorrection = miniPID.getOutput(navX.pidGet(), 0);
+		SmartDashboard.putNumber("PID", miniPID.getOutput(navX.pidGet(), 0));
+//		RobotMap.gyroCorrection = miniPID.getOutput(gyro.getAngle(), 0);
+//		SmartDashboard.putNumber("PID", miniPID.getOutput(gyro.getAngle(), 0));
 	}
 
 	@Override
@@ -203,8 +207,12 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-//		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
-//      else RobotMap.isPowerCubeInBox = false;
+		if(boxSensor.get()){
+			RobotMap.isPowerCubeInBox = true;
+			Tunnel.motorTunnelLeft.setSelectedSensorPosition(0,0,RobotMap.kTimeoutMs);
+			Tunnel.motorTunnelRight.setSelectedSensorPosition(0,0,RobotMap.kTimeoutMs);
+		}
+      else RobotMap.isPowerCubeInBox = false;
 		
 		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
 		else {
@@ -218,13 +226,14 @@ public class Robot extends TimedRobot {
 		else RobotMap.pMode = false;
 		
 		// SmartDashboard Logging
-//		SmartDashboard.putNumber("gyro", navX.pidGet());
-		SmartDashboard.putNumber("gyro", gyro.getAngle());
+		SmartDashboard.putNumber("gyro", navX.pidGet());
+		SmartDashboard.putNumber("gyro", navX.getPitch());
+//		SmartDashboard.putNumber("gyro", gyro.getAngle());
     	SmartDashboard.putBoolean("Front Camera", RobotMap.liftDirectionFront);
     	SmartDashboard.putBoolean("Back Camera", !RobotMap.liftDirectionFront);
 		SmartDashboard.putString("liftSetHeight", RobotMap.liftSetHeight);
 		SmartDashboard.putBoolean("Lift PMode", RobotMap.liftPrecisionMode);
-//		SmartDashboard.putBoolean("IR", RobotMap.isPowerCubeInBox);
+		SmartDashboard.putBoolean("IR", RobotMap.isPowerCubeInBox);
 //		SmartDashboard.putNumber("IR Volt", boxSensor.getVoltage());
 //		SmartDashboard.putBoolean("limit switch", RobotMap.isLiftDown);
 //		SmartDashboard.putNumber("limit switch volt", liftLimitSwitch.getVoltage());
