@@ -28,8 +28,8 @@ public class OI {
 	Button setLiftScaleHigh = new JoystickButton(xbox, 4);
 	
 	// Direction
-	Button setForward = new JoystickButton(xbox, 6);
-	Button setBackward = new JoystickButton(xbox, 5);
+	Button setForward = new JoystickButton(xbox, 5);
+	Button setBackward = new JoystickButton(xbox, 6);
 	
 	// Lift control
 	Button liftDefault = new JoystickButton(xbox, 10);

@@ -11,8 +11,14 @@ public class Tunnel extends Subsystem {
     public void initDefaultCommand() {}
     
     public void tunnelIntake(double inputSpeed) {
-    	motorTunnelLeft.set(-inputSpeed);
-    	motorTunnelRight.set(-inputSpeed);
+    	if(RobotMap.isPowerCubeInBox) {
+    		motorTunnelLeft.set(0);
+        	motorTunnelRight.set(0);
+    	} else {
+    		motorTunnelLeft.set(-inputSpeed);
+        	motorTunnelRight.set(-inputSpeed);
+    	}
+    	
     }
     
     public void tunnelShoot(double inputSpeed) {

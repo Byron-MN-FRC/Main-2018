@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Shoot extends Command {
 	
+	private String position = "";
 	private double time = 0;
 	
     public Shoot() {
@@ -16,19 +17,22 @@ public class Shoot extends Command {
     	time = 0;
     }
     
-    public Shoot(double inputTime) {
+    public Shoot(String inputPosition, double inputTime) {
     	requires(Robot.tunnel);
     	requires(Robot.lifter);
+    	position = inputPosition;
     	time = inputTime;
     }
 
     protected void initialize() {
     	setTimeout(time);
-    	Robot.lifter.liftToHeight(RobotMap.liftSetHeight);
+    	if (time > 0) Robot.lifter.liftToHeight(position);
+    	else Robot.lifter.liftToHeight(RobotMap.liftSetHeight);
     	System.out.println("Shoot command ran");
     }
 
     protected void execute() {
+    	
     	if(RobotMap.liftDirectionFront) Robot.tunnel.tunnelShoot(RobotMap.kTunnelShootSpeed);
     	else {
     		if (Lifter.motorLiftStage1.getSelectedSensorPosition(0) < 15000);
@@ -43,7 +47,8 @@ public class Shoot extends Command {
 
     protected void end() {
     	Robot.tunnel.tunnelStop();
-    	Robot.lifter.liftToHeight(RobotMap.liftSetHeight);
+    	if (time > 0) Robot.lifter.liftToHeight(position);
+    	else Robot.lifter.liftToHeight(RobotMap.liftSetHeight);
     }
 
     protected void interrupted() {
