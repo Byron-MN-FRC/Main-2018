@@ -54,7 +54,6 @@ public class AutoSelector extends CommandGroup {
 			//addSequential(new DriveStraightDistance(297, 8));
 			addSequential(new DriveStraightDistance(258, 7));
 			addParallel(new LiftToHeight("scaleHigh", 4));
-			addSequential(new DriveStop(1));
 			turn(oppositeSide, 45);
 			addSequential(new DriveStraightDistance(13, 1));
 		} else {

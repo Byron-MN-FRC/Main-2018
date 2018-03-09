@@ -115,8 +115,8 @@ public class RobotMap {
 	public static int kDriveAllowableError = 100;
 	public static double gyroCorrection = 0;
 	
-	public static int kHighGearAcceleration = 6000;
-	public static int kHighGearCruiseVelocity = 8500;
+	public static int kHighGearAcceleration = 7000;
+	public static int kHighGearCruiseVelocity = 8750;
 	
 	public static int kLowGearAcceleration = 6000;
 	public static int kLowGearCruiseVelocity = 8500;
