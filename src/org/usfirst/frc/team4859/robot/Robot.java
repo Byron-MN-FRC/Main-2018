@@ -74,7 +74,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Robot Start", "Z");
 		SmartDashboard.putString("Scale", "Z");
 		SmartDashboard.putString("Shoot", "Y");
-		SmartDashboard.putString("Optimal Path", "N");
+//		SmartDashboard.putString("Optimal Path", "N");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 		
 		SmartDashboard.putBoolean("Front Camera", RobotMap.liftDirectionFront);
@@ -129,7 +129,7 @@ public class Robot extends TimedRobot {
 		String targetScale = SmartDashboard.getString("Scale", "N");
 		String shootCubeStr = SmartDashboard.getString("Shoot", "Y").toUpperCase();
 		RobotMap.shootCubeAuton = (shootCubeStr.equals("Y"));
-		String optimalPath = SmartDashboard.getString("Optimal Path", "N");
+//		String optimalPath = SmartDashboard.getString("Optimal Path", "N");
 		String shoot = RobotMap.shootCubeAuton ? "Cube will be delivered.%n" : "Cube will not be delivered.%n";
 		System.out.printf(shoot);
 
@@ -168,8 +168,8 @@ public class Robot extends TimedRobot {
 				RobotMap.targetSide = gameData.charAt(1);
 			}
 			
-			if (optimalPath.toUpperCase().charAt(0) == 'Y') RobotMap.optimalPath = true;
-			else RobotMap.optimalPath = false;
+//			if (optimalPath.toUpperCase().charAt(0) == 'Y') RobotMap.optimalPath = true;
+//			else RobotMap.optimalPath = false;
 			
 			if (gameData.toUpperCase().charAt(0) == location.charAt(0)) RobotMap.switchSameSide = true;
 			else RobotMap.switchSameSide = false;
