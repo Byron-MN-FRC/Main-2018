@@ -74,6 +74,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Robot Start", "Z");
 		SmartDashboard.putString("Scale", "Z");
 		SmartDashboard.putString("Shoot", "Y");
+		SmartDashboard.getString("Optimal Path", "N");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
 		
 		SmartDashboard.putBoolean("Front Camera", RobotMap.liftDirectionFront);
