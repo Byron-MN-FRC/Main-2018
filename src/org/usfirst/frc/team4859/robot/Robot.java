@@ -181,7 +181,7 @@ public class Robot extends TimedRobot {
 				else if(RobotMap.targetScale && !RobotMap.scaleSameSide && RobotMap.switchSameSide) RobotMap.targetScale = false;
 				else if(!RobotMap.targetScale && !RobotMap.switchSameSide && RobotMap.scaleSameSide) RobotMap.targetScale = true;
 				else if(!RobotMap.scaleSameSide && !RobotMap.switchSameSide) location = "O";
-				else HandleBadData("S"); // Should not get here, drive straight
+				else location = "S"; // Should not get here, drive straight
 			}
 			
 			m_autonomousCommand = new AutoSelector();
