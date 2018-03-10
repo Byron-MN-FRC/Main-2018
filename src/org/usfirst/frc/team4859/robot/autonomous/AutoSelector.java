@@ -122,6 +122,12 @@ public class AutoSelector extends CommandGroup {
 		}
 	}
 	
+	public void driveCrossField() {
+		addSequential(new DriveStraightDistance(224, 5));
+		turn(oppositeSide, 90);
+		addSequential(new DriveStraightDistance(185, 5));
+	}
+	
 	public void driveToTarget() {
 		// Delay start based on drive team input
 		addParallel(new ShiftDown());
@@ -150,9 +156,15 @@ public class AutoSelector extends CommandGroup {
 			if (RobotMap.shootCubeAuton && RobotMap.targetScale) { deliverCubeScale(); }
 			else if (RobotMap.shootCubeAuton && !RobotMap.targetScale) { deliverCubeSwitch(); }
 			break;
+		case 'O':
+			driveCrossField();
+			break;
+		case 'S':
+			addSequential(new DriveStraightDistance(230, 6));
+			break;
 		default:
 			System.out.println("SHOULD NOT EVER GET HERE:Drive Forward");
-			addSequential(new DriveStraightDistance(296, 7));
+			addSequential(new DriveStraightDistance(230, 6));
 			break;
 		} 		
 	}

@@ -128,6 +128,7 @@ public class Robot extends TimedRobot {
 		String targetScale = SmartDashboard.getString("Scale", "N");
 		String shootCubeStr = SmartDashboard.getString("Shoot", "Y").toUpperCase();
 		RobotMap.shootCubeAuton = (shootCubeStr.equals("Y"));
+		String optimalPath = SmartDashboard.getString("Optimal Path", "N");
 		String shoot = RobotMap.shootCubeAuton ? "Cube will be delivered.%n" : "Cube will not be delivered.%n";
 		System.out.printf(shoot);
 
@@ -166,11 +167,22 @@ public class Robot extends TimedRobot {
 				RobotMap.targetSide = gameData.charAt(1);
 			}
 			
+			if (optimalPath.toUpperCase().charAt(0) == 'Y') RobotMap.optimalPath = true;
+			else RobotMap.optimalPath = false;
+			
 			if (gameData.toUpperCase().charAt(0) == location.charAt(0)) RobotMap.switchSameSide = true;
 			else RobotMap.switchSameSide = false;
 			
 			if (gameData.toUpperCase().charAt(1) == location.charAt(0)) RobotMap.scaleSameSide = true;
 			else RobotMap.scaleSameSide = false;
+			
+			if(RobotMap.optimalPath) {
+				if(RobotMap.scaleSameSide && RobotMap.switchSameSide);
+				else if(RobotMap.targetScale && !RobotMap.scaleSameSide && RobotMap.switchSameSide) RobotMap.targetScale = false;
+				else if(!RobotMap.targetScale && !RobotMap.switchSameSide && RobotMap.scaleSameSide) RobotMap.targetScale = true;
+				else if(!RobotMap.scaleSameSide && !RobotMap.switchSameSide) location = "O";
+				else HandleBadData("S"); // Should not get here, drive straight
+			}
 			
 			m_autonomousCommand = new AutoSelector();
 			m_autonomousCommand.start();
