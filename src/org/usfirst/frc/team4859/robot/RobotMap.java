@@ -61,6 +61,11 @@ public class RobotMap {
     public static double kRampRate = 0.05; // Time to get from 0 to max
     public static double kRampRateLimit = 0.01; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
     public static double kRampRateTipLimit = 0.003;
+    
+    public static double kRampRateLowLimit = 0.01; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
+    public static double kRampRateTipLowLimit = 0.003;
+    public static double kRampRateHighLimit = 0.0075; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
+    public static double kRampRateTipHighLimit = 0.00225;
     public static double kLowGearRampRate = 0.05;
     public static double kHighGearRampRate = 0.05;
 	
@@ -118,8 +123,8 @@ public class RobotMap {
 	public static int kHighGearAcceleration = 7000;
 	public static int kHighGearCruiseVelocity = 8750;
 	
-	public static int kLowGearAcceleration = 6000;
-	public static int kLowGearCruiseVelocity = 8500;
+	public static int kLowGearAcceleration = 7000;
+	public static int kLowGearCruiseVelocity = 8750;
 	
 	// Turn Ratio for encoder ticks
 	public static double decoderTurnRatio = 32000 / 90;

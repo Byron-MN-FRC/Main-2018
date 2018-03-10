@@ -28,13 +28,14 @@ public class AutoSelector extends CommandGroup {
 		// Drive to same side target (scale is 2x distance of switch & 1/2 distance in)
 		double multiplier = RobotMap.targetScale ? 1.9 : 1 ; 
 		// Driving forward from wall in all conditions
-		addSequential(new DriveStraightDistance(45, 2.5));
+		addSequential(new DriveStraightDistance(45, 2));
 		turn(targetSide, 90);
-		addSequential(new DriveStraightDistance(62*multiplier, 3.5*multiplier)); // toward outside wall
-		if (targetSide == 'L') turn('R', 90);
-		else turn('L', 90);
+		
 		if(RobotMap.targetScale) {
 			System.out.println("lift to scale height");
+			addSequential(new DriveStraightDistance(118, 5.5)); // toward outside wall
+			if (targetSide == 'L') turn('R', 90);
+			else turn('L', 90);
 			addSequential(new DriveStraightDistance(213, 6));
 			addParallel(new LiftToHeight("scaleNorm", 2));
 			addSequential(new DriveStop(0.5));
@@ -43,8 +44,11 @@ public class AutoSelector extends CommandGroup {
 			
 		} else {
 			System.out.println("lift to switch height");
+			addSequential(new DriveStraightDistance(62, 1.5)); // toward outside wall
+			if (targetSide == 'L') turn('R', 90);
+			else turn('L', 90);
 			addParallel(new LiftToHeight("switch", 2));
-			addSequential(new DriveStraightDistance(80, 3.5));
+			addSequential(new DriveStraightDistance(70, 2));
 		}
 	}
 	
@@ -105,7 +109,7 @@ public class AutoSelector extends CommandGroup {
 			addParallel(new LiftToHeight("scaleHigh", 4));
 			turn(location, 90);
 			System.out.println("lift to scale height");
-			addSequential(new DriveStraightDistance(45, 2));
+			addSequential(new DriveStraightDistance(35, 2));
 			addSequential(new DriveStop(1));
 		} else {
 			// If the cubes aren't being pushed, then don't overshoot and turn backwards to shoot
@@ -114,7 +118,7 @@ public class AutoSelector extends CommandGroup {
 			addParallel(new LiftToHeight("switch", 2));
 			addSequential(new DriveStop(0.5));
 			turn(oppositeSide,90);
-			addSequential(new DriveStraightDistance(8,.5));
+			addSequential(new DriveStraightDistance(18,.5));
 		}
 	}
 	
