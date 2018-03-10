@@ -66,7 +66,7 @@ public class AutoSelector extends CommandGroup {
 			addParallel(new LiftToHeight("switch", 2));
 			//addSequential(new DriveStop(0.5));
 			turn(oppositeSide, 90);
-			addSequential(new DriveStraightDistance(30, 3));
+			addSequential(new DriveStraightDistance(45, 2.5));
 		}
     }
 	
