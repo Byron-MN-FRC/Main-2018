@@ -23,11 +23,19 @@ public class Lifter extends Subsystem {
     }
     
     public void liftDown(double inputSpeed) {
+    	
+    	
     	if(!RobotMap.isLiftStage1Down) motorLiftStage1.set(-RobotMap.kLiftStage1DownSpeed);
         else motorLiftStage1.set(0);
     	
-    	if(!RobotMap.isLiftStage2Down) motorLiftStage2.set(-RobotMap.kLiftStage2DownSpeed);
-    	else motorLiftStage2.set(0);
+    	if(motorLiftStage2.getSelectedSensorPosition(RobotMap.kPIDSlot) < 2000) {
+    		if(!RobotMap.isLiftStage2Down) motorLiftStage2.set(-RobotMap.kLiftStage2DownSpeed*0.6);
+        	else motorLiftStage2.set(0);
+    	} else {
+    		if(!RobotMap.isLiftStage2Down) motorLiftStage2.set(-RobotMap.kLiftStage2DownSpeed);
+        	else motorLiftStage2.set(0);
+    	}
+    	
     }
 
     public void liftUp(double inputSpeed) {
