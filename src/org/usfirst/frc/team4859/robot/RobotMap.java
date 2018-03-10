@@ -59,13 +59,13 @@ public class RobotMap {
     
     // Drivetrain ramp rates
     public static double kRampRate = 0.05; // Time to get from 0 to max
-    public static double kRampRateLimit = 0.01; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
-    public static double kRampRateTipLimit = 0.003;
+    public static double kRampRateForwardLimit = 0.01; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
+    public static double kRampRateBackwardLimit = 0.003;
     
-    public static double kRampRateLowLimit = 0.01; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
-    public static double kRampRateTipLowLimit = 0.003;
-    public static double kRampRateHighLimit = 0.0075; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
-    public static double kRampRateTipHighLimit = 0.00225;
+    public static double kRampRateForwardLowGearLimit = 0.01; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
+    public static double kRampRateBackwardLowGearLimit = 0.003;
+    public static double kRampRateForwardHighGearLimit = 0.0075; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
+    public static double kRampRateBackwardHighGearLimit = 0.00225;
     public static double kLowGearRampRate = 0.05;
     public static double kHighGearRampRate = 0.05;
 	
@@ -86,7 +86,7 @@ public class RobotMap {
 	public static int kLiftStage1CurrentPeakDuration = 2000;
 	
 	public static int kLiftStage2PeakLimit = 30;
-	public static int kLiftStage2ContinuousCurrentLimit = 20;
+	public static int kLiftStage2ContinuousCurrentLimit = 25;
 	public static int kLiftStage2CurrentPeakDuration = 1000;
 	
 	// Closed loop values

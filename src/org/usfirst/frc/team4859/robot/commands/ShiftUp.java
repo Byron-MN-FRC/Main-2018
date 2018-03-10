@@ -19,6 +19,8 @@ public class ShiftUp extends Command {
 		Drivetrain.motorLeftMaster.configMotionCruiseVelocity(RobotMap.kHighGearCruiseVelocity, RobotMap.kTimeoutMs);
 		Drivetrain.motorRightMaster.configMotionCruiseVelocity(RobotMap.kHighGearCruiseVelocity, RobotMap.kTimeoutMs);
 		RobotMap.kRampRate = RobotMap.kHighGearRampRate;
+		RobotMap.kRampRateForwardLimit = RobotMap.kRampRateForwardHighGearLimit;
+		RobotMap.kRampRateBackwardLimit = RobotMap.kRampRateBackwardHighGearLimit;
 		System.out.println("ShiftUp command ran");
 		SmartDashboard.putBoolean("Shifted Up", true);
     }

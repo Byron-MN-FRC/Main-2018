@@ -55,13 +55,13 @@ public class Drivetrain extends Subsystem {
 		if ((encoderVelocityL > (encoderLastVelocityL + 1)) && (encoderVelocityR > (encoderLastVelocityR + 1))) {
 			if ((motorLeftMaster.getSelectedSensorVelocity(0) + motorRightMaster.getSelectedSensorVelocity(0))/2 < 0) {
 				yChange = y - yLimitedJoystick;
-				if (yChange > RobotMap.kRampRateTipLimit) yChange = RobotMap.kRampRateTipLimit;
-				else if (yChange <= RobotMap.kRampRateTipLimit) yChange = -RobotMap.kRampRateTipLimit;
+				if (yChange > RobotMap.kRampRateBackwardLimit) yChange = RobotMap.kRampRateBackwardLimit;
+				else if (yChange <= RobotMap.kRampRateBackwardLimit) yChange = -RobotMap.kRampRateBackwardLimit;
 				yLimitedJoystick += yChange;
 			} else {
 				yChange = y - yLimitedJoystick;
-				if (yChange > RobotMap.kRampRateLimit) yChange = RobotMap.kRampRateLimit;
-				else if (yChange <= RobotMap.kRampRateLimit) yChange = -RobotMap.kRampRateLimit;
+				if (yChange > RobotMap.kRampRateForwardLimit) yChange = RobotMap.kRampRateForwardLimit;
+				else if (yChange <= RobotMap.kRampRateForwardLimit) yChange = -RobotMap.kRampRateForwardLimit;
 				yLimitedJoystick += yChange;
 			}
 			y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", yLimitedJoystick) : ThrottleLookup.calcJoystickCorrection("NormY", yLimitedJoystick);

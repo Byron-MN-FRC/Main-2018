@@ -19,6 +19,8 @@ public class ShiftDown extends Command {
 		Drivetrain.motorLeftMaster.configMotionCruiseVelocity(RobotMap.kLowGearCruiseVelocity, RobotMap.kTimeoutMs);
 		Drivetrain.motorRightMaster.configMotionCruiseVelocity(RobotMap.kLowGearCruiseVelocity, RobotMap.kTimeoutMs);
 		RobotMap.kRampRate = RobotMap.kLowGearRampRate;
+		RobotMap.kRampRateForwardLimit = RobotMap.kRampRateForwardLowGearLimit;
+		RobotMap.kRampRateBackwardLimit = RobotMap.kRampRateBackwardLowGearLimit;
 		System.out.println("ShiftDown command ran");
 		SmartDashboard.putBoolean("Shifted Up", false);
     }

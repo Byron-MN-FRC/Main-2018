@@ -26,7 +26,7 @@ public class AutoSelector extends CommandGroup {
 	
 	public void driveFromCenter() {
 		// Drive to same side target (scale is 2x distance of switch & 1/2 distance in)
-		double multiplier = RobotMap.targetScale ? 1.9 : 1 ; 
+//		double multiplier = RobotMap.targetScale ? 1.9 : 1 ; 
 		// Driving forward from wall in all conditions
 		addSequential(new DriveStraightDistance(45, 2));
 		turn(targetSide, 90);
