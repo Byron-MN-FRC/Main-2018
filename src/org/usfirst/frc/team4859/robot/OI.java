@@ -22,6 +22,7 @@ public class OI {
 	
 	// Secondary Driver Buttons 
 	// Lift heights
+	Button setLiftVault = new JoystickButton(xbox, 8);
 	Button setLiftSwitch = new JoystickButton(xbox, 3);
 	Button setLiftScaleLow = new JoystickButton(xbox, 1);
 	Button setLiftScaleNorm = new JoystickButton(xbox, 2);
@@ -63,6 +64,7 @@ public class OI {
 		liftToHeight.whenPressed(new LiftToHeight());
 		
 		// Secondary Driver Buttons
+		setLiftVault.whenPressed(new SetLiftVault());
 		setLiftSwitch.whenPressed(new SetLiftSwitch());
 		setLiftScaleLow.whenPressed(new SetLiftScaleLow());
 		setLiftScaleNorm.whenPressed(new SetLiftScale());

@@ -97,7 +97,7 @@ public class AutoSelector extends CommandGroup {
 		// If the scale is on the same side don't push the cubes to the other side
 //		if(RobotMap.scaleSameSide && !RobotMap.switchSameSide) addSequential(new DriveStraightDistance(216, 5));
 //		else addSequential(new DriveStraightDistance(206, 5));
-		addSequential(new DriveStraightDistance(224, 5));
+		addSequential(new DriveStraightDistance(220, 5));
 		
 		turn(oppositeSide,90); // Turn away from starting side
 		// Cross the field
@@ -123,7 +123,7 @@ public class AutoSelector extends CommandGroup {
 	}
 	
 	public void driveCrossField() {
-		addSequential(new DriveStraightDistance(224, 5));
+		addSequential(new DriveStraightDistance(220, 5));
 		turn(oppositeSide, 90);
 		addSequential(new DriveStraightDistance(185, 5));
 	}

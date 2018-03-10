@@ -38,6 +38,7 @@ public class RobotMap {
 
     {	   //name                      encoder units
         put("acquire",   new Integer[]  { 0	, 0	} );
+        put("vault",  	 new Integer[]  { 2000	, 0	} );
         put("default",   new Integer[]  { 7300 , 0	} ); // 6
         put("switch",    new Integer[]  { 23000 , 9000} ); // 35
         put("scaleLow",  new Integer[]  { 48000	, 28000} ); // 58
