@@ -177,13 +177,13 @@ public class Robot extends TimedRobot {
 			if (gameData.toUpperCase().charAt(1) == location.charAt(0)) RobotMap.scaleSameSide = true;
 			else RobotMap.scaleSameSide = false;
 			
-			if(RobotMap.optimalPath) {
-				if(RobotMap.scaleSameSide && RobotMap.switchSameSide);
-				else if(RobotMap.targetScale && !RobotMap.scaleSameSide && RobotMap.switchSameSide) RobotMap.targetScale = false;
-				else if(!RobotMap.targetScale && !RobotMap.switchSameSide && RobotMap.scaleSameSide) RobotMap.targetScale = true;
-				else if(!RobotMap.scaleSameSide && !RobotMap.switchSameSide) location = "O";
-				else location = "S"; // Should not get here, drive straight
-			}
+//			if(RobotMap.optimalPath) {
+//				if(RobotMap.scaleSameSide && RobotMap.switchSameSide);
+//				else if(RobotMap.targetScale && !RobotMap.scaleSameSide && RobotMap.switchSameSide) RobotMap.targetScale = false;
+//				else if(!RobotMap.targetScale && !RobotMap.switchSameSide && RobotMap.scaleSameSide) RobotMap.targetScale = true;
+//				else if(!RobotMap.scaleSameSide && !RobotMap.switchSameSide) location = "O";
+//				else location = "S"; // Should not get here, drive straight
+//			}
 			
 			m_autonomousCommand = new AutoSelector();
 			m_autonomousCommand.start();

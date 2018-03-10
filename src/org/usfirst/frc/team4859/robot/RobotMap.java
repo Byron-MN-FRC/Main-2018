@@ -63,10 +63,10 @@ public class RobotMap {
     public static double kRampRateForwardLimit = 0.01; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
     public static double kRampRateBackwardLimit = 0.003;
     
-    public static double kRampRateForwardLowGearLimit = 0.01; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
-    public static double kRampRateBackwardLowGearLimit = 0.003;
-    public static double kRampRateForwardHighGearLimit = 0.0075; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
-    public static double kRampRateBackwardHighGearLimit = 0.00225;
+//    public static double kRampRateForwardLowGearLimit = 0.01; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
+//    public static double kRampRateBackwardLowGearLimit = 0.003;
+//    public static double kRampRateForwardHighGearLimit = 0.0075; // Joystick increment for y limiting (this is the rate of change in 1/20 seconds)
+//    public static double kRampRateBackwardHighGearLimit = 0.00225;
     public static double kLowGearRampRate = 0.05;
     public static double kHighGearRampRate = 0.05;
 	

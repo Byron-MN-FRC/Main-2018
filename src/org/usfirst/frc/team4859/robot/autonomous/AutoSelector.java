@@ -28,7 +28,7 @@ public class AutoSelector extends CommandGroup {
 		// Drive to same side target (scale is 2x distance of switch & 1/2 distance in)
 //		double multiplier = RobotMap.targetScale ? 1.9 : 1 ; 
 		// Driving forward from wall in all conditions
-		addSequential(new DriveStraightDistance(45, 2));
+		addSequential(new DriveStraightDistance(45, 2.5));
 		turn(targetSide, 90);
 		
 		if(RobotMap.targetScale) {
@@ -44,11 +44,11 @@ public class AutoSelector extends CommandGroup {
 			
 		} else {
 			System.out.println("lift to switch height");
-			addSequential(new DriveStraightDistance(62, 1.5)); // toward outside wall
+			addSequential(new DriveStraightDistance(62, 3.5)); // toward outside wall
 			if (targetSide == 'L') turn('R', 90);
 			else turn('L', 90);
 			addParallel(new LiftToHeight("switch", 2));
-			addSequential(new DriveStraightDistance(70, 2));
+			addSequential(new DriveStraightDistance(80, 3.5));
 		}
 	}
 	
