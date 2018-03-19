@@ -99,33 +99,33 @@ public class AutoSelector extends CommandGroup {
 //		else addSequential(new DriveStraightDistance(206, 5));
 		addSequential(new DriveStraightDistance(220, 5));
 		
-		turn(oppositeSide,90); // Turn away from starting side
+		turn(oppositeSide, 95); // Turn away from starting side
 		// Cross the field
 		
-		
+//		addSequential(new DriveStraightDistance(185, 5));
+		RobotMap.shootCubeAuton = false;
 		// Go to scale or switch 
-		if(RobotMap.targetScale) {
-			addSequential(new DriveStraightDistance(194, 5));
-			addParallel(new LiftToHeight("scaleHigh", 4));
-			turn(location, 90);
-			System.out.println("lift to scale height");
-			addSequential(new DriveStraightDistance(35, 2));
-			addSequential(new DriveStop(1));
-		} else {
-			// If the cubes aren't being pushed, then don't overshoot and turn backwards to shoot
-			addSequential(new DriveStraightDistance(185, 5.50));
-			System.out.println("lift to switch height");
-			addParallel(new LiftToHeight("switch", 2));
-			addSequential(new DriveStop(0.5));
-			turn(oppositeSide,90);
-			addSequential(new DriveStraightDistance(18,.5));
-		}
+//		if(RobotMap.targetScale) {
+//			addSequential(new DriveStraightDistance(194, 5));
+//			addParallel(new LiftToHeight("scaleHigh", 4));
+//			turn(location, 90);
+//			System.out.println("lift to scale height");
+//			addSequential(new DriveStraightDistance(35, 2));
+//			addSequential(new DriveStop(1));
+//		} else {
+//			// If the cubes aren't being pushed, then don't overshoot and turn backwards to shoot
+//			addSequential(new DriveStraightDistance(185, 5.50));
+//			System.out.println("lift to switch height");
+//			addParallel(new LiftToHeight("switch", 2));
+//			addSequential(new DriveStop(0.5));
+//			turn(oppositeSide,90);
+//			addSequential(new DriveStraightDistance(18,.5));
+//		}
 	}
 	
 	public void driveCrossField() {
 		addSequential(new DriveStraightDistance(220, 5));
 		turn(oppositeSide, 90);
-		addSequential(new DriveStraightDistance(185, 5));
 	}
 	
 	public void driveToTarget() {

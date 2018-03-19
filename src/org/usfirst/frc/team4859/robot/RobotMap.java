@@ -28,7 +28,7 @@ public class RobotMap {
 	public static double kClimbSpeed = 1;
 	
 	public static double kLiftStage1DownSpeed = 0.5;
-	public static double kLiftStage2DownSpeed = 0.3;
+	public static double kLiftStage2DownSpeed = -0.4;
 	public static double kLiftUpSpeed = 0.3;
 	
 	// Lifter heights
@@ -40,11 +40,11 @@ public class RobotMap {
         put("acquire",   new Integer[]  { 0	, 0	} );
         put("vault",  	 new Integer[]  { 2000	, 0	} );
         put("default",   new Integer[]  { 7300 , 0	} ); // 6
-        put("switch",    new Integer[]  { 23000 , 9000} ); // 35
-        put("scaleLow",  new Integer[]  { 48000	, 28000} ); // 58
-        put("scaleNorm", new Integer[]  { 48000	, 30000} ); // 70
-        put("scaleHigh", new Integer[]  { 48000	, 30800} ); // 82
-        put("climb",     new Integer[]  { 48000	, 30800} ); // 82
+        put("switch",    new Integer[]  { 20000 , -11000} ); // 35
+        put("scaleLow",  new Integer[]  { 42000	, -23000} ); // 58
+        put("scaleNorm", new Integer[]  { 45000	, -29200} ); // 70
+        put("scaleHigh", new Integer[]  { 49000	, -29200} ); // 82
+        put("climb",     new Integer[]  { 49000	, -29200} ); // 82
     }};
     
     /* Example of how to get values:
@@ -86,9 +86,9 @@ public class RobotMap {
 	public static int kLiftStage1ContinuousCurrentLimit = 30;
 	public static int kLiftStage1CurrentPeakDuration = 2000;
 	
-	public static int kLiftStage2PeakLimit = 30;
+	public static int kLiftStage2PeakLimit = 40;
 	public static int kLiftStage2ContinuousCurrentLimit = 25;
-	public static int kLiftStage2CurrentPeakDuration = 1000;
+	public static int kLiftStage2CurrentPeakDuration = 2000;
 	
 	// Closed loop values
 	public static int kTimeoutMs = 20;
@@ -101,17 +101,17 @@ public class RobotMap {
 	public static double kLiftStage1F = 0.262;
 	public static int kLiftStage1AllowableError = 50;
 	
-	public static double kLiftStage2P = 0.8;
-	public static double kLiftStage2I = 0.0003;
+	public static double kLiftStage2P = 1.35;
+	public static double kLiftStage2I = 0.00015;
 	public static double kLiftStage2D = 0.0;
-	public static double kLiftStage2F = 1.5;
+	public static double kLiftStage2F = 0.46;
 	public static int kLiftStage2AllowableError = 50;
 	
 	public static int kLiftStage1Acceleration = 20000;
 	public static int kLiftStage1CruiseVelocity = 4500;
 	
-	public static int kLiftStage2Acceleration = 10000;
-	public static int kLiftStage2CruiseVelocity = 1500;
+	public static int kLiftStage2Acceleration = 15000;
+	public static int kLiftStage2CruiseVelocity = 2200;
 	
 	// Drivetrain
 	public static double kP = 0.24;

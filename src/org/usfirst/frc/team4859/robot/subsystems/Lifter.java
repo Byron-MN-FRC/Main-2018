@@ -28,7 +28,7 @@ public class Lifter extends Subsystem {
     	if(!RobotMap.isLiftStage1Down) motorLiftStage1.set(-RobotMap.kLiftStage1DownSpeed);
         else motorLiftStage1.set(0);
     	
-    	if(motorLiftStage2.getSelectedSensorPosition(RobotMap.kPIDSlot) < 2000) {
+    	if(motorLiftStage2.getSelectedSensorPosition(RobotMap.kPIDSlot) > -2000) {
     		if(!RobotMap.isLiftStage2Down) motorLiftStage2.set(-RobotMap.kLiftStage2DownSpeed*0.6);
         	else motorLiftStage2.set(0);
     	} else {
@@ -55,6 +55,7 @@ public class Lifter extends Subsystem {
 		
 		// Make sure stage 1 sensors reads in the correct direction
 		motorLiftStage1.setSensorPhase(true);
+		motorLiftStage2.setSensorPhase(true);
 
 		// Set relevant frame periods to be at least as fast as periodic rate
 		motorLiftStage1.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 5, RobotMap.kTimeoutMs);
