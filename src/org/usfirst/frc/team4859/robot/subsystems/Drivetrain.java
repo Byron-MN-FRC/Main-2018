@@ -14,8 +14,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drivetrain extends Subsystem {
-	
-	
 	public static WPI_TalonSRX motorLeftMaster = new WPI_TalonSRX(RobotMap.talonIDLeftMaster);
 	public static WPI_TalonSRX motorLeftFollower = new WPI_TalonSRX(RobotMap.talonIDLeftFollower);
 	
@@ -26,6 +24,15 @@ public class Drivetrain extends Subsystem {
 	public static SpeedControllerGroup drivetrainRight = new SpeedControllerGroup(motorRightMaster);
 	
 	public static DifferentialDrive drivetrain = new DifferentialDrive(drivetrainLeft, drivetrainRight);
+	
+	private double y = 0;
+	private double twist = 0;
+	private double yChange = 0;
+	private double yLimitedJoystick = 0;
+	private double encoderVelocityL = 0;
+	private double encoderVelocityR = 0;
+	private double encoderLastVelocityL = 0;
+	private double encoderLastVelocityR = 0;
 	
 	public Drivetrain() {
 		motorConfig();
@@ -38,18 +45,37 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void driveWithJoystick(Joystick joystickP0) {
-		double y = -joystickP0.getY();
-		double x = -joystickP0.getX();
-		double twist = joystickP0.getTwist();
+		y = -joystickP0.getY();
+		twist = joystickP0.getTwist();
+		
+		// Y Acceleration Limiting
+		encoderVelocityL = motorLeftMaster.getSelectedSensorVelocity(RobotMap.kPIDSlot);
+		encoderVelocityR = motorRightMaster.getSelectedSensorVelocity(RobotMap.kPIDSlot);
+		
+		if ((encoderVelocityL > (encoderLastVelocityL + 1)) && (encoderVelocityR > (encoderLastVelocityR + 1))) {
+			if ((motorLeftMaster.getSelectedSensorVelocity(0) + motorRightMaster.getSelectedSensorVelocity(0))/2 < 0) {
+				yChange = y - yLimitedJoystick;
+				if (yChange > RobotMap.kRampRateBackwardLimit) yChange = RobotMap.kRampRateBackwardLimit;
+				else if (yChange <= RobotMap.kRampRateBackwardLimit) yChange = -RobotMap.kRampRateBackwardLimit;
+				yLimitedJoystick += yChange;
+			} else {
+				yChange = y - yLimitedJoystick;
+				if (yChange > RobotMap.kRampRateForwardLimit) yChange = RobotMap.kRampRateForwardLimit;
+				else if (yChange <= RobotMap.kRampRateForwardLimit) yChange = -RobotMap.kRampRateForwardLimit;
+				yLimitedJoystick += yChange;
+			}
+			y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", yLimitedJoystick) : ThrottleLookup.calcJoystickCorrection("NormY", yLimitedJoystick);
+		} else y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);
+		encoderLastVelocityL = encoderVelocityL;
+		encoderLastVelocityR = encoderVelocityR;
 		
 		// Apply translations to the values from the controller
-		y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);
-		x = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowX", x) : ThrottleLookup.calcJoystickCorrection("NormX", x);
+//		y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);
 		twist = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowT", twist) : ThrottleLookup.calcJoystickCorrection("NormT", twist);
 		
 		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
-		SmartDashboard.putNumber("Forward Backword", y);
-		SmartDashboard.putNumber("Left Right", twist);
+//		SmartDashboard.putNumber("Joystick Y", y);
+//		SmartDashboard.putNumber("Joystick Twist", twist);
 		
 		drivetrain.arcadeDrive(y, twist);
 	}
@@ -112,13 +138,13 @@ public class Drivetrain extends Subsystem {
 		motorRightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
 
 		// Set relevant frame periods to be at least as fast as periodic rate
-		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
-		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
-		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 10, RobotMap.kTimeoutMs);
+		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 2, RobotMap.kTimeoutMs);
+		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 2, RobotMap.kTimeoutMs);
+		motorLeftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 2, RobotMap.kTimeoutMs);
 		
-		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
-		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
-		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 10, RobotMap.kTimeoutMs);
+		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 2, RobotMap.kTimeoutMs);
+		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 2, RobotMap.kTimeoutMs);
+		motorRightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_9_MotProfBuffer, 2, RobotMap.kTimeoutMs);
 
 		// Set closed loop gains in slot 0
 		motorLeftMaster.selectProfileSlot(RobotMap.kPIDSlot, 0);

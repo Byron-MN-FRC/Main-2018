@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SetLiftScale extends Command {
     
     public SetLiftScale() {
-    	requires(Robot.setHeight);
+    	requires(Robot.set);
     }
 
     protected void initialize() {

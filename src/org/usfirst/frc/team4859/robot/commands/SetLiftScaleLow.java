@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SetLiftScaleLow extends Command {
     
     public SetLiftScaleLow() {
-    	requires(Robot.setHeight);
+    	requires(Robot.set);
     }
 
     protected void initialize() {
     	RobotMap.liftSetHeight = "scaleLow";
-    	System.out.println("SetLiftHighScale command ran");
+    	System.out.println("SetLiftLowScale command ran");
     }
 
     protected void execute() {

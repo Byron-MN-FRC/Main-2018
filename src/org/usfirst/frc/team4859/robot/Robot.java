@@ -14,19 +14,24 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.regex.Pattern;
+import org.usfirst.frc.team4859.robot.ThrottleLookup.MiniPID;
 import org.usfirst.frc.team4859.robot.autonomous.AutoSelector;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraight;
+import org.usfirst.frc.team4859.robot.autonomous.DriveStraightDistance;
+import org.usfirst.frc.team4859.robot.autonomous.RobotTurnDegrees;
 import org.usfirst.frc.team4859.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4859.robot.subsystems.Lifter;
-import org.usfirst.frc.team4859.robot.subsystems.SetHeight;
+import org.usfirst.frc.team4859.robot.subsystems.Set;
 import org.usfirst.frc.team4859.robot.subsystems.Shifters;
 import org.usfirst.frc.team4859.robot.subsystems.Tunnel;
+import com.kauailabs.navx.frc.AHRS;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -40,14 +45,23 @@ public class Robot extends TimedRobot {
 	public static Shifters shifters = new Shifters();
 	public static Tunnel tunnel = new Tunnel();
 	public static Lifter lifter = new Lifter();
-	public static SetHeight setHeight = new SetHeight();
+	public static Set set = new Set();
 	public static OI oi;
 	
-	public static DigitalInput boxSensor = new DigitalInput(0);
-	public static DigitalOutput boxLED = new DigitalOutput(1);
-	public static AnalogInput liftLimitSwitch = new AnalogInput(2);
+	//MiniPID miniPID = new MiniPID(135, 1.2, 0);
+	MiniPID miniPID;
+	
+	public static AHRS navX = new AHRS(SerialPort.Port.kUSB1);
+	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 1);
+	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 0);
+	
+//	public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+	public static DigitalInput boxSensor = new DigitalInput(8);
+	public static DigitalOutput boxLED = new DigitalOutput(7);
+	public static AnalogInput liftStage1LimitSwitch = new AnalogInput(2);
+	public static AnalogInput liftStage2LimitSwitch = new AnalogInput(3);
   
-		Command m_autonomousCommand;
+	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
@@ -57,17 +71,28 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		SmartDashboard.putString("Robot Start Pos (L,R, or C)", "C");
-		SmartDashboard.putString("Scale", "N");
-		SmartDashboard.putString("Deliver Cube", "Y");
+		SmartDashboard.putString("Robot Start", "Z");
+		SmartDashboard.putString("Scale", "Z");
+		SmartDashboard.putString("Shoot", "Y");
+		SmartDashboard.putString("Optimal Path", "N");
 		SmartDashboard.putNumber("Auton Delay", 0.0);
+		
+		SmartDashboard.putBoolean("Front Camera", RobotMap.liftDirectionFront);
+    	SmartDashboard.putBoolean("Back Camera", !RobotMap.liftDirectionFront);
+		SmartDashboard.putString("liftSetHeight", RobotMap.liftSetHeight);
+		SmartDashboard.putBoolean("Lift PMode", RobotMap.liftPrecisionMode);
 
-		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
 		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
-		UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
 		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
+		
+		cameraBackward.setExposureManual(70);
+		cameraForward.setExposureManual(50);
+		
+//		SmartDashboard.putNumber("Auton P-value", 170.0);
+//		SmartDashboard.putNumber("Auton I-Value", 1.95);
+//		SmartDashboard.putNumber("Auton I-Max", 100);
+		
 	}
-
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -96,11 +121,27 @@ public class Robot extends TimedRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	@Override
-	public void autonomousInit() {
-		String robotPos = SmartDashboard.getString("Robot Start Pos (L,R, or C)", "Non Received");
+	public void autonomousInit() {		
+		Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+		Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+		String robotPos = SmartDashboard.getString("Robot Start", "z");
 		String location = String.valueOf(robotPos.toUpperCase().charAt(0));
 		String targetScale = SmartDashboard.getString("Scale", "N");
-//		String delivery = SmartDashboard.getString("Deliver Cube", "Y");
+		String shootCubeStr = SmartDashboard.getString("Shoot", "Y").toUpperCase();
+		RobotMap.shootCubeAuton = (shootCubeStr.equals("Y"));
+		String optimalPath = SmartDashboard.getString("Optimal Path", "N");
+		String shoot = RobotMap.shootCubeAuton ? "Cube will be delivered.%n" : "Cube will not be delivered.%n";
+		System.out.printf(shoot);
+
+		//Allow selection of MiniPID tuning values on drive station
+//		double p = SmartDashboard.getNumber("Auton P-value", 170.0);
+//		double i = SmartDashboard.getNumber("Auton I-Value", 1.95);
+//		double maxI = SmartDashboard.getNumber("Auton I-Max", 100);
+		miniPID = new MiniPID(170, 1.95, 0);
+		miniPID.setMaxIOutput(300);
+		
+		navX.reset();
+//		gyro.reset();
 		
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
 		
@@ -114,44 +155,63 @@ public class Robot extends TimedRobot {
 		
 		if (!validGameString || !validRobotPos || !validDelay) {
 		 	System.out.println("Gamedata is invalid! Running AutoStraight routine.");
-			m_autonomousCommand = new AutoStraight();
-			m_autonomousCommand.start();
+		 	System.out.println("gamedata=" + gameData);
+		 	System.out.println("location=" + location);
+		 	System.out.println("delay=" + RobotMap.delayInSeconds);
+		 	HandleBadData(location);
 		} else {
 			RobotMap.targetSide = gameData.charAt(0); //default to switch side
 			RobotMap.location = location.charAt(0);
+			RobotMap.targetScale = false;
 			if (targetScale.equalsIgnoreCase("Y")) { 
 				RobotMap.targetScale = true; 
 				RobotMap.targetSide = gameData.charAt(1);
 			}
 			
+			if (optimalPath.toUpperCase().charAt(0) == 'Y') RobotMap.optimalPath = true;
+			else RobotMap.optimalPath = false;
+			
+			if (gameData.toUpperCase().charAt(0) == location.charAt(0)) RobotMap.switchSameSide = true;
+			else RobotMap.switchSameSide = false;
+			
+			if (gameData.toUpperCase().charAt(1) == location.charAt(0)) RobotMap.scaleSameSide = true;
+			else RobotMap.scaleSameSide = false;
+			
+			if(RobotMap.optimalPath) {
+				if(RobotMap.scaleSameSide && RobotMap.switchSameSide);
+				else if(RobotMap.targetScale && !RobotMap.scaleSameSide && RobotMap.switchSameSide) RobotMap.targetScale = false;
+				else if(!RobotMap.targetScale && !RobotMap.switchSameSide && RobotMap.scaleSameSide) RobotMap.targetScale = true;
+				else if(!RobotMap.scaleSameSide && !RobotMap.switchSameSide) location = "O";
+				else location = "S"; // Should not get here, drive straight
+			}
+			
 			m_autonomousCommand = new AutoSelector();
 			m_autonomousCommand.start();
-		}
+		}		
 	}
+
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		
-		// Encoder logging
-//		SmartDashboard.putNumber("Left Position", Drivetrain.motorLeftMaster.getSelectedSensorPosition(0));
-//		SmartDashboard.putNumber("Right Position", Drivetrain.motorRightMaster.getSelectedSensorPosition(0));
-//		SmartDashboard.putNumber("Left Error", Drivetrain.motorLeftMaster.getClosedLoopError(0));
-//		SmartDashboard.putNumber("Right Error", Drivetrain.motorRightMaster.getClosedLoopError(0));
-		
-		if(boxSensor.get()) {
-			RobotMap.isPowerCubeInBox = true;
-			Tunnel.motorTunnelLeft.set(0);
-			Tunnel.motorTunnelRight.set(0);
-			Tunnel.motorTunnelTop.set(0);
-		}
-        else RobotMap.isPowerCubeInBox = false;
-		
-		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
-		else{
-			RobotMap.isLiftDown = true;
+		if(liftStage1LimitSwitch.getVoltage() < 2) RobotMap.isLiftStage1Down = false;
+		else {
+			RobotMap.isLiftStage1Down = true;
 			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
-//			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
+		if(liftStage2LimitSwitch.getVoltage() < 2) RobotMap.isLiftStage2Down = false;
+		else {
+			RobotMap.isLiftStage2Down = true;
+			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+		}
+		
+		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
+		else RobotMap.isPowerCubeInBox = false;
+		
+		RobotMap.gyroCorrection = miniPID.getOutput(navX.pidGet(), 0);
+		SmartDashboard.putNumber("PID", miniPID.getOutput(navX.pidGet(), 0));
+//		RobotMap.gyroCorrection = miniPID.getOutput(gyro.getAngle(), 0);
+//		SmartDashboard.putNumber("PID", miniPID.getOutput(gyro.getAngle(), 0));
 	}
 
 	@Override
@@ -165,7 +225,9 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) m_autonomousCommand.cancel();
 		
 		Lifter.motorLiftStage1.set(0);
-//		Lifter.motorLiftStage2.set(0);
+		Lifter.motorLiftStage2.set(0);
+		
+		navX.reset();
 	}
 
 	/**
@@ -175,27 +237,38 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-		if(boxSensor.get()) {
-			RobotMap.isPowerCubeInBox = true;
-			Tunnel.motorTunnelLeft.set(0);
-			Tunnel.motorTunnelRight.set(0);
-			Tunnel.motorTunnelTop.set(0);
-		}
-        else RobotMap.isPowerCubeInBox = false;
+		if(boxSensor.get()) RobotMap.isPowerCubeInBox = false;
+		else RobotMap.isPowerCubeInBox = true;
 		
-		if (liftLimitSwitch.getVoltage() < 2) RobotMap.isLiftDown = false;
+		if(liftStage1LimitSwitch.getVoltage() < 2) RobotMap.isLiftStage1Down = false;
 		else {
-			RobotMap.isLiftDown = true;
+			RobotMap.isLiftStage1Down = true;
 			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
-//			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
+		
+		if(liftStage2LimitSwitch.getVoltage() < 2) RobotMap.isLiftStage2Down = false;
+		else {
+			RobotMap.isLiftStage2Down = true;
+			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+		}
+		
+		if(Lifter.motorLiftStage1.getSelectedSensorPosition(RobotMap.kPIDSlot) + Lifter.motorLiftStage2.getSelectedSensorPosition(RobotMap.kPIDSlot) > 38000) RobotMap.pMode = true;
+//		if(Lifter.motorLiftStage1.getSelectedSensorPosition(RobotMap.kPIDSlot) > 38000) RobotMap.pMode = true;
+		else RobotMap.pMode = false;
 		
 		// SmartDashboard Logging
-//		SmartDashboard.putBoolean("IR", RobotMap.isPowerCubeInBox);
+    	SmartDashboard.putBoolean("Front Camera", RobotMap.liftDirectionFront);
+    	SmartDashboard.putBoolean("Back Camera", !RobotMap.liftDirectionFront);
+		SmartDashboard.putString("liftSetHeight", RobotMap.liftSetHeight);
+		SmartDashboard.putBoolean("Lift PMode", RobotMap.liftPrecisionMode);
+		SmartDashboard.putBoolean("IR", RobotMap.isPowerCubeInBox);
+//		SmartDashboard.putNumber("gyro", navX.pidGet());
+//		SmartDashboard.putNumber("PID", miniPID.getOutput(navX.pidGet(), 0));
 //		SmartDashboard.putNumber("IR Volt", boxSensor.getVoltage());
-		SmartDashboard.putBoolean("limit switch", RobotMap.isLiftDown);
-		SmartDashboard.putNumber("limit switch volt", liftLimitSwitch.getVoltage());
-//		SmartDashboard.putString("liftSetHeight", RobotMap.liftSetHeight);
+//		SmartDashboard.putBoolean("limit switch stage1", RobotMap.isLiftStage1Down);
+//		SmartDashboard.putBoolean("limit switch stage2", RobotMap.isLiftStage2Down);
+//		SmartDashboard.putNumber("limit switch volt", liftLimitSwitch.getVoltage());
+//		SmartDashboard.putNumber("lifter amps", Lifter.motorLift.getOutputCurrent());
 	}
 
 	public static double driveEncoderUnitConversion(double inches) {
@@ -203,15 +276,29 @@ public class Robot extends TimedRobot {
 		return encoderUnits;
 	}
 	
-	public static double angleToDistance(double angle) {
-		double arcLength = (Math.PI * RobotMap.robotWidth) * (angle/360);
-		return driveEncoderUnitConversion(arcLength);
-	}
-	
 	/**
 	 * This function is called periodically during test mode.
 	 */
 	@Override
 	public void testPeriodic() {
+	}
+
+	public void HandleBadData(String location) {
+		switch (location)
+		{
+		     case "S":
+		 		m_autonomousCommand = new DriveStraightDistance(296,7);
+		 		break;
+		     case "9":
+		    	 m_autonomousCommand = new RobotTurnDegrees(90);
+		    	 break;
+		     case "4":
+		    	 m_autonomousCommand = new RobotTurnDegrees(45);
+		    	 break;
+		     default:
+		    	 m_autonomousCommand = new AutoStraight();
+		    	 break;
+		}
+		m_autonomousCommand.start();
 	}
 }

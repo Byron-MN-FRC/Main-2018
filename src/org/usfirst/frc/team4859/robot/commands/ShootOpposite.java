@@ -5,17 +5,17 @@ import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.subsystems.Lifter;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ShootBackward extends Command {
+public class ShootOpposite extends Command {
 	
 	private double time = 0;
 	
-    public ShootBackward() {
+    public ShootOpposite() {
     	requires(Robot.tunnel);
     	requires(Robot.lifter);
     	time = 0;
     }
     
-    public ShootBackward(double inputTime) {
+    public ShootOpposite(double inputTime) {
     	requires(Robot.tunnel);
     	requires(Robot.lifter);
     	time = inputTime;
@@ -28,8 +28,12 @@ public class ShootBackward extends Command {
     }
 
     protected void execute() {
-        if (Lifter.motorLiftStage1.getSelectedSensorPosition(0) < 10000);
-    	else Robot.tunnel.tunnelShoot(-RobotMap.kTunnelShootSpeed);
+    	if(!RobotMap.liftDirectionFront) Robot.tunnel.tunnelShoot(RobotMap.kTunnelShootSpeed);
+    	else {
+    		if (Lifter.motorLiftStage1.getSelectedSensorPosition(0) < 15000);
+        	else Robot.tunnel.tunnelShoot(-RobotMap.kTunnelShootSpeed);
+    	}
+        Robot.tunnel.tunnelShoot(-RobotMap.kTunnelShootSpeed);
     }
 
     protected boolean isFinished() {
@@ -39,11 +43,11 @@ public class ShootBackward extends Command {
 
     protected void end() {
     	Robot.tunnel.tunnelStop();
-    	Robot.lifter.liftDown(RobotMap.kLiftDownSpeed);
+    	Robot.lifter.liftToHeight(RobotMap.liftSetHeight);
     }
 
     protected void interrupted() {
     	Robot.tunnel.tunnelStop();
-    	Robot.lifter.liftDown(RobotMap.kLiftDownSpeed);
+    	Robot.lifter.liftStop();
     }
 }

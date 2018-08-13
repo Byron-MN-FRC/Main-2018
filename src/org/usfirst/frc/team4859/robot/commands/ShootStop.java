@@ -22,12 +22,14 @@ public class ShootStop extends Command {
 
     protected void initialize() {
     	setTimeout(time);
+    	Robot.lifter.liftToHeight(RobotMap.liftSetHeight);
     	System.out.println("ShootStop command ran");
+//    	Robot.cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
+//		Robot.cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
     }
 
     protected void execute() {
     	Robot.tunnel.tunnelStop();
-    	Robot.lifter.liftDown(RobotMap.kLiftDownSpeed);
     }
 
     protected boolean isFinished() {
@@ -37,7 +39,7 @@ public class ShootStop extends Command {
 
     protected void end() {
     	Robot.tunnel.tunnelStop();
-    	Robot.lifter.liftDown(RobotMap.kLiftDownSpeed);
+    	Robot.lifter.liftStop();
     }
 
     protected void interrupted() {

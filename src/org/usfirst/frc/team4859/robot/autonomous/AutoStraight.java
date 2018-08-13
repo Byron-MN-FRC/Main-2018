@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoStraight extends CommandGroup {
 	
     public  AutoStraight() {
-		System.out.printf("AutoStraight called%s");
+		System.out.printf("AutoStraight called");
 		
 		addParallel(new ShiftDown());
 		addParallel(new LiftToHeight("default", 1));

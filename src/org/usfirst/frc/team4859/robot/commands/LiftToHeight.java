@@ -9,15 +9,16 @@ public class LiftToHeight extends Command {
 	private String position = "";
 	private double time = 0;
 	
-    public LiftToHeight() {
-    	requires(Robot.lifter);
-    	time = 0;
-    }
-    
-    public LiftToHeight(String inputPosition, double inputTime) {
+	public LiftToHeight(String inputPosition, double inputTime) {
     	requires(Robot.lifter);
     	position = inputPosition;
     	time = inputTime;
+    	RobotMap.liftSetHeight = position;
+    }
+	
+	public LiftToHeight() {
+    	requires(Robot.lifter);
+    	time = 0;
     }
 
     protected void initialize() {

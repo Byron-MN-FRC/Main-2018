@@ -28,7 +28,7 @@ public class Acquire extends Command {
 
     protected void execute() {
     	Robot.tunnel.tunnelIntake(RobotMap.kTunnelIntakeSpeed);
-    	Robot.lifter.liftDown(RobotMap.kLiftDownSpeed);
+    	Robot.lifter.liftDown(RobotMap.kLiftStage1DownSpeed);
     }
 
     protected boolean isFinished() {
