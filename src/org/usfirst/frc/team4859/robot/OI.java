@@ -10,32 +10,32 @@ public class OI {
 	private final Joystick xbox = new Joystick(1);
 	
 	// Main Driver Buttons
-	Button shiftUp = new JoystickButton(joystick, 5);
-	Button shiftDown = new JoystickButton(joystick, 3);
+	protected Button shiftUp = new JoystickButton(joystick, 5);
+	protected Button shiftDown = new JoystickButton(joystick, 3);
 	
-	Button acquire = new JoystickButton(joystick, 1);
+	protected Button acquire = new JoystickButton(joystick, 1);
 	
-	Button shoot = new JoystickButton(joystick, 2);
-	Button shootOpposite = new JoystickButton(joystick, 4);
+	protected Button shoot = new JoystickButton(joystick, 2);
+	protected Button shootOpposite = new JoystickButton(joystick, 4);
 	
-	Button liftToHeight = new JoystickButton(joystick, 6);
+	protected Button liftToHeight = new JoystickButton(joystick, 6);
 	
 	// Secondary Driver Buttons 
 	// Lift heights
-	Button setLiftVault = new JoystickButton(xbox, 8);
-	Button setLiftSwitch = new JoystickButton(xbox, 3);
-	Button setLiftScaleLow = new JoystickButton(xbox, 1);
-	Button setLiftScaleNorm = new JoystickButton(xbox, 2);
-	Button setLiftScaleHigh = new JoystickButton(xbox, 4);
+	protected Button setLiftVault = new JoystickButton(xbox, 8);
+	protected Button setLiftSwitch = new JoystickButton(xbox, 3);
+	protected Button setLiftScaleLow = new JoystickButton(xbox, 1);
+	protected Button setLiftScaleNorm = new JoystickButton(xbox, 2);
+	protected Button setLiftScaleHigh = new JoystickButton(xbox, 4);
 	
 	// Direction
-	Button setForward = new JoystickButton(xbox, 5);
-	Button setBackward = new JoystickButton(xbox, 6);
+	protected Button setForward = new JoystickButton(xbox, 5);
+	protected Button setBackward = new JoystickButton(xbox, 6);
 	
 	// Lift control
-	Button liftDefault = new JoystickButton(xbox, 10);
-	Button liftStop = new JoystickButton(xbox, 9);
-	Button liftPMode = new JoystickButton(xbox, 7);
+	protected Button liftDefault = new JoystickButton(xbox, 10);
+	protected Button liftStop = new JoystickButton(xbox, 9);
+	protected Button liftPMode = new JoystickButton(xbox, 7);
 	
 	// Buttons for mechanism testing
 //	Button liftUp = new JoystickButton(xbox, 4);
