@@ -31,7 +31,7 @@ import org.usfirst.frc.team4859.robot.subsystems.Lifter;
 import org.usfirst.frc.team4859.robot.subsystems.Set;
 import org.usfirst.frc.team4859.robot.subsystems.Shifters;
 import org.usfirst.frc.team4859.robot.subsystems.Tunnel;
-import com.kauailabs.navx.frc.AHRS;
+//import com.kauailabs.navx.frc.AHRS;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -51,7 +51,7 @@ public class Robot extends TimedRobot {
 	//MiniPID miniPID = new MiniPID(135, 1.2, 0);
 	MiniPID miniPID;
 	
-	public static AHRS navX = new AHRS(SerialPort.Port.kUSB1);
+	//public static AHRS navX = new AHRS(SerialPort.Port.kUSB1);
 	public static UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 1);
 	public static UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 0);
 	
@@ -140,7 +140,7 @@ public class Robot extends TimedRobot {
 		miniPID = new MiniPID(170, 1.95, 0);
 		miniPID.setMaxIOutput(300);
 		
-		navX.reset();
+	//	navX.reset();
 //		gyro.reset();
 		
 		RobotMap.delayInSeconds = SmartDashboard.getNumber("Auton Delay", 0);
@@ -199,7 +199,7 @@ public class Robot extends TimedRobot {
 			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
-		if(liftStage2LimitSwitch.getVoltage() < 2) RobotMap.isLiftStage2Down = false;
+		if(liftStage2LimitSwitch.getVoltage() > 3) RobotMap.isLiftStage2Down = false;
 		else {
 			RobotMap.isLiftStage2Down = true;
 			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
@@ -208,8 +208,8 @@ public class Robot extends TimedRobot {
 		if(boxSensor.get()) RobotMap.isPowerCubeInBox = true;
 		else RobotMap.isPowerCubeInBox = false;
 		
-		RobotMap.gyroCorrection = miniPID.getOutput(navX.pidGet(), 0);
-		SmartDashboard.putNumber("PID", miniPID.getOutput(navX.pidGet(), 0));
+//		RobotMap.gyroCorrection = miniPID.getOutput(navX.pidGet(), 0);
+	//	SmartDashboard.putNumber("PID", miniPID.getOutput(navX.pidGet(), 0));
 //		RobotMap.gyroCorrection = miniPID.getOutput(gyro.getAngle(), 0);
 //		SmartDashboard.putNumber("PID", miniPID.getOutput(gyro.getAngle(), 0));
 	}
@@ -224,10 +224,13 @@ public class Robot extends TimedRobot {
 		 */
 		if (m_autonomousCommand != null) m_autonomousCommand.cancel();
 		
+		SmartDashboard.putData("lift2", liftStage2LimitSwitch);
+		SmartDashboard.putData("lift1", liftStage1LimitSwitch);
+		
 		Lifter.motorLiftStage1.set(0);
 		Lifter.motorLiftStage2.set(0);
 		
-		navX.reset();
+		//navX.reset();
 	}
 
 	/**
@@ -246,7 +249,7 @@ public class Robot extends TimedRobot {
 			Lifter.motorLiftStage1.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		}
 		
-		if(liftStage2LimitSwitch.getVoltage() < 2) RobotMap.isLiftStage2Down = false;
+		if(liftStage2LimitSwitch.getVoltage() > 3) RobotMap.isLiftStage2Down = false;
 		else {
 			RobotMap.isLiftStage2Down = true;
 			Lifter.motorLiftStage2.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);

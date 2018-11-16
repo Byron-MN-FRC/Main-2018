@@ -33,7 +33,8 @@ public class RobotMap {
 	
 	// Lifter heights
 	public static final Map<String, Integer[]> liftPosition = new HashMap<String, Integer[]> () {
-
+// actual values
+		/*
         private static final long serialVersionUID = 1L;
 
     {	   //name                      encoder units
@@ -46,7 +47,20 @@ public class RobotMap {
         put("scaleHigh", new Integer[]  { 49000	, -29200} ); // 82
         put("climb",     new Integer[]  { 49000	, -29200} ); // 82
     }};
-    
+    */
+		//el janko solution
+	     private static final long serialVersionUID = 1L;
+
+	     {	   //name                      encoder units
+	         put("acquire",   new Integer[]  { 0	, 0	} );
+	         put("vault",  	 new Integer[]  { 2000	, 0	} );
+	         put("default",   new Integer[]  { 7300 , 0	} ); // 6
+	         put("switch",    new Integer[]  { 23000 , -16800} ); // 35
+	         put("scaleLow",  new Integer[]  { 45000	, -28800} ); // 58
+	         put("scaleNorm", new Integer[]  { 48000	, -35000} ); // 70
+	         put("scaleHigh", new Integer[]  { 52000	, -35000} ); // 82
+	         put("climb",     new Integer[]  { 49000	, -29200} ); // 82
+	     }};
     /* Example of how to get values:
      * liftPosition.get("switch")[0];
      */
